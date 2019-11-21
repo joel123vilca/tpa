@@ -23,35 +23,7 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <p>¿Está seguro de Eliminar el usuario?</p>
-
-        <template v-if="currentUser">
-          <ul>
-            <li><strong>Nombre: </strong></li>
-            <li><strong>Correo electrónico: </strong></li>
-          </ul>
-          <v-img
-            v-if="currentUser.image_path"
-            :src="currentUser.image_path"
-            :lazy-src="currentUser.image_path"
-            max-height="320"
-            contain
-            class="grey lighten-2 mt-3"
-          >
-            <v-layout
-              slot="placeholder"
-              fill-height
-              align-center
-              justify-center
-              ma-0
-            >
-              <v-progress-circular
-                indeterminate
-                color="grey lighten-5"
-              />
-            </v-layout>
-          </v-img>
-        </template>
+        <p>¿Está seguro de Eliminar los {{selected.length}} usuarios seleccionados ?</p>
       </v-card-text>
       <v-divider />
       <div class="my-3 text-xs-center">
@@ -59,7 +31,7 @@
           :disabled="processingDelete"
           :loading="processingDelete"
           color="error"
-          @click="launchDelete"
+          @click="deleteUsers()"
         >
           Eliminar
         </v-btn>
@@ -83,18 +55,20 @@ export default {
       processingDelete: false
     }
   },
-
+  props:{
+    selected: Array
+  },
   computed: {
     ...mapState({
       showModalDeleteUser: state => state.users.showModalDeleteUser,
-      currentUser: state => state.users.currentUser
+      currentUsers: state => state.users.currentUsers
     })
   },
 
   watch: {
     showModalDeleteUser (newValue, oldValue) {
       if (!newValue) {
-        this.replaceCurrentUser({ user: null })
+        this.replaceCurrentUser({ users: null })
         return false
       }
     }
@@ -107,10 +81,9 @@ export default {
       deleteUser: 'users/deleteUser',
       getUsers: 'users/getUsers'
     }),
-
-    delete () {
+    deleteUsers () {
       this.processingDelete = true
-      this.deleteUser({ userId: this.currentUser.id })
+      this.deleteUser({ users: this.selected })
         .then(response => {
           this.processingDelete = false
           this.replaceShowModalDeleteUser({ status: false })

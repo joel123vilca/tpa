@@ -8,7 +8,7 @@
     <template v-else>
       <Breadcrumbs
         :routes="[
-          { name: 'Inicio', to: { name:'preinscritos' } },
+          { name: 'Inicio', to: { name:'sgcUsersList' } },
           { name: 'Usuarios' },
           { name: 'Listado' }
         ]"
@@ -39,7 +39,7 @@
             <v-flex
               sm6
             >
-              <v-btn v-if="selected.length > 0"  small color="error" dark  @click="deleteUsers()">Eliminar Seleccionados</v-btn>
+              <v-btn v-if="selected.length > 0"  small color="error" dark  @click="openModalDeleteUser(selected)">Eliminar Seleccionados</v-btn>
             </v-flex>
             <v-flex
               v-if="users.length"
@@ -120,6 +120,7 @@
           </v-layout>
         </v-container>
       </v-card>
+      <ModalDeleteUser :selected="selected"/>
     </template>
   </v-container>
 </template>
@@ -129,14 +130,14 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   middleware: 'auth',
-
   metaInfo () {
     return { title: 'Listado de Usuarios' }
   },
 
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+     ModalDeleteUser: () => import('@/views/users/ModalDeleteUser')
   },
 
   data () {
@@ -170,21 +171,8 @@ export default {
       replaceUsers: 'users/replaceUsers'
     }),
 
-    openModalDeleteUser (user) {
-      this.replaceCurrentUser({ user })
+    openModalDeleteUser () {
       this.replaceShowModalDeleteUser({ status: true })
-    },
-    deleteUsers () {
-      this.processingDelete = true
-
-      this.deleteUser({ users: this.selected })
-        .then(response => {
-          this.processingDelete = false
-          this.getUsers()
-        })
-        .catch(() => {
-          this.processingDelete = false
-        })
     }
   }
 }

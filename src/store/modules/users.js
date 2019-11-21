@@ -4,7 +4,8 @@ import userAPI from '@/api/user'
 export const state = {
   users: [],
   loadingUsers: false,
-  currentUser: null
+  currentUser: null,
+  showModalDeleteUser:false,
 }
 
 export const actions = {
@@ -60,7 +61,9 @@ export const actions = {
   replaceCurrentUser ({ commit }, payload) {
     commit(types.REPLACE_CURRENT_USER, payload)
   },
-
+  replaceShowModalDeleteUser ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_DELETE_USER, payload)
+  },
   updateUser ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       userAPI.put(payload)
@@ -137,5 +140,8 @@ export const mutations = {
   },
   [types.REPLACE_CURRENT_USER] (state, { user }) {
     state.currentUser = user
-  }
+  },
+  [types.REPLACE_SHOW_MODAL_DELETE_USER] (state, { status }) {
+    state.showModalDeleteUser = status
+  },
 }

@@ -8,7 +8,7 @@
     <template v-else>
       <Breadcrumbs
         :routes="[
-          { name: 'Inicio', to: { name: 'estudiantes' } },
+          { name: 'Inicio', to: { name: 'sgcUsersList' } },
           { name: 'Nuevo usuario' }
         ]"
       />
