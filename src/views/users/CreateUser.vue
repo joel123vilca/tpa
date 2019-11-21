@@ -91,7 +91,7 @@
                         clearable
                         small-chips
                         label="Seleccionar tipo de usuario"
-                        item-text="title"
+                        item-text="name"
                         item-value="id"
                         :disabled="processingForm"
                         :error="!!formErrors.type_user_id"

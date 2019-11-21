@@ -37,9 +37,13 @@
             wrap
           >
             <v-flex
+              sm6
+            >
+              <v-btn v-if="selected.length > 0"  small color="error" dark  @click="deleteUsers()">Eliminar Seleccionados</v-btn>
+            </v-flex>
+            <v-flex
               v-if="users.length"
               sm6
-              offset-sm6
             >
               <v-text-field
                 v-model="searchUsers"
@@ -54,6 +58,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
+                  {text: '', value:''},
                   { text: 'Nombres', value: 'name' },
                   { text: 'Correo electrónico', value: 'email' },
                   { text: 'Tipo', value: 'typeUser' },
@@ -68,6 +73,9 @@
                   slot="items"
                   slot-scope="props"
                 >
+                  <td class="px-3">
+                    <v-checkbox v-model="selected"  :value="props.item.id"></v-checkbox>
+                  </td>
                   <td class="px-3">
                     {{ props.item.name }}
                   </td>
@@ -133,7 +141,8 @@ export default {
 
   data () {
     return {
-      searchUsers: ''
+      searchUsers: '',
+      selected: [],
     }
   },
 
@@ -157,14 +166,26 @@ export default {
       getUsers: 'users/getUsers',
       replaceShowModalDeleteUser: 'users/replaceShowModalDeleteUser',
       replaceCurrentUser: 'users/replaceCurrentUser',
+      deleteUser: 'users/deleteUser',
       replaceUsers: 'users/replaceUsers'
     }),
 
     openModalDeleteUser (user) {
       this.replaceCurrentUser({ user })
       this.replaceShowModalDeleteUser({ status: true })
-    }
+    },
+    deleteUsers () {
+      this.processingDelete = true
 
+      this.deleteUser({ users: this.selected })
+        .then(response => {
+          this.processingDelete = false
+          this.getUsers()
+        })
+        .catch(() => {
+          this.processingDelete = false
+        })
+    }
   }
 }
 </script>

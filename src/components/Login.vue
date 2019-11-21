@@ -157,7 +157,7 @@ export default {
   },
 
   created () {
-    if (this.authenticated) this.$router.push({ name: 'estudiantes' })
+    if (this.authenticated) this.$router.push({ name: 'sgcUsersList' })
   },
 
   methods: {

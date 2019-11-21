@@ -27,8 +27,8 @@
 
         <template v-if="currentUser">
           <ul>
-            <li><strong>Nombre: </strong>{{ currentUser.name }}</li>
-            <li><strong>Correo electrónico: </strong>{{ currentUser.email }}</li>
+            <li><strong>Nombre: </strong></li>
+            <li><strong>Correo electrónico: </strong></li>
           </ul>
           <v-img
             v-if="currentUser.image_path"
@@ -108,9 +108,8 @@ export default {
       getUsers: 'users/getUsers'
     }),
 
-    launchDelete () {
+    delete () {
       this.processingDelete = true
-
       this.deleteUser({ userId: this.currentUser.id })
         .then(response => {
           this.processingDelete = false

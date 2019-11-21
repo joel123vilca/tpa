@@ -42,7 +42,21 @@ export const actions = {
         })
     })
   },
-
+  deleteUser ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      userAPI.delete(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: 'GoPlay',
+            message: 'Los Usuarios han sido eliminado con éxito.'
+          })
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
   replaceCurrentUser ({ commit }, payload) {
     commit(types.REPLACE_CURRENT_USER, payload)
   },
@@ -105,17 +119,6 @@ export const actions = {
             title: 'USER',
             message: 'Su contraseña han sido actualizada con éxito.'
           })
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-  getReportExcel ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      userAPI.getReportExcel(payload)
-        .then(response => {
           resolve(response)
         })
         .catch(error => {
