@@ -43,6 +43,7 @@
             </v-flex>
             <v-flex xs12>
               <v-data-table
+                v-model="selected"
                 :headers="[
                   { text: '', value: '' },
                   { text: 'Nombres', value: 'name' },
@@ -50,9 +51,12 @@
                   { text: 'Tipo', value: 'typeUser' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
+                :single-select="singleSelect"
                 :items="users"
                 :search="searchUsers"
                 :loading="loadingUsers"
+                item-key="id"
+                show-select
                 class="elevation-1"
               >
                 <tr slot="items" slot-scope="props">
@@ -67,15 +71,15 @@
                   </td>
                   <td class="px-3">
                     <v-chip
-                      v-if="props.item.typeUser.title === 'Administrador'"
+                      v-if="props.item.typeUser.name === 'Administrador'"
                       small
                       color="primary"
                       text-color="white"
                     >
-                      {{ props.item.typeUser.title }}
+                      {{ props.item.typeUser.name }}
                     </v-chip>
-                    <v-chip v-else-if="props.item.typeUser.title === 'Registrador'" small>
-                      {{ props.item.typeUser.title }}
+                    <v-chip v-else-if="props.item.typeUser.name === 'Usuario'" small>
+                      {{ props.item.typeUser.name }}
                     </v-chip>
                   </td>
                   <td class="text-xs-center px-3">
@@ -123,7 +127,8 @@ export default {
   data() {
     return {
       searchUsers: "",
-      selected: []
+      singleSelect: false,
+      selected: [],
     };
   },
 
@@ -145,15 +150,15 @@ export default {
     ...mapActions({
       getUsers: "users/getUsers",
       replaceShowModalDeleteUser: "users/replaceShowModalDeleteUser",
-      replaceCurrentUser: "users/replaceCurrentUser",
-      deleteUser: "users/deleteUser",
-      replaceUsers: "users/replaceUsers"
+      replaceCurrentUser: 'users/replaceCurrentUser',
+      deleteUser: 'users/deleteUser',
+      replaceUsers: 'users/replaceUsers',
     }),
 
     openModalDeleteUser() {
-      this.replaceShowModalDeleteUser({ status: true });
-    }
-  }
+      this.replaceShowModalDeleteUser({ status: true});
+    },
+  },
 };
 </script>
 

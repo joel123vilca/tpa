@@ -70,6 +70,7 @@ export default {
         .then(response => {
           this.processingDelete = false;
           this.replaceShowModalDeleteUser({ status: false });
+          this.selected=[];
           this.getUsers();
         })
         .catch(() => {
