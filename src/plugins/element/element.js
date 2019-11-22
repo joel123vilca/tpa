@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Element from 'element-ui'
-import './main.scss'
+import Vue from "vue";
+import Element from "element-ui";
+import "./main.scss";
 
-Vue.use(Element)
+Vue.use(Element);

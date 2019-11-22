@@ -1,101 +1,100 @@
-import axios from 'axios'
-import { baseUrlAPI } from '@/config/api'
+import axios from "axios";
+import { baseUrlAPI } from "@/config/api";
 
-const HOST = baseUrlAPI
+const HOST = baseUrlAPI;
 
 export default {
-  get (payload = {}) {
-    const params = payload.params || {}
+  get(payload = {}) {
+    const params = payload.params || {};
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users`,
-        method: 'get',
+        method: "get",
         params
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
 
-  getById (payload = {}) {
-    const userId = payload.userId || ''
+  getById(payload = {}) {
+    const userId = payload.userId || "";
 
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users/${userId}`,
-        method: 'get'
+        method: "get"
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
 
-  put (payload = {}) {
-    const userId = payload.userId
-    const data = payload.data || {}
+  put(payload = {}) {
+    const userId = payload.userId;
+    const data = payload.data || {};
 
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users/${userId}`,
-        method: 'put',
+        method: "put",
         data
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
 
-  post (payload = {}) {
-    const data = payload.data || {}
+  post(payload = {}) {
+    const data = payload.data || {};
 
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users`,
-        method: 'post',
+        method: "post",
         data
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
-  delete (payload = {}) {
-    const data = payload.users
+  delete(payload = {}) {
+    const data = payload.users;
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users`,
-        method: 'delete',
+        method: "delete",
         data
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
-  sendTokenForResetPassword (payload = {}) {
-    const data = payload.data || {}
+  sendTokenForResetPassword(payload = {}) {
+    const data = payload.data || {};
 
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/password/email`,
-        method: 'post',
+        method: "post",
         data
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
 
-  resetPassword (payload = {}) {
-    const data = payload.data || {}
+  resetPassword(payload = {}) {
+    const data = payload.data || {};
 
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/password/reset`,
-        method: 'post',
+        method: "post",
         data
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   }
-
-}
+};

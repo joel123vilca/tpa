@@ -1,50 +1,36 @@
 <template>
-  <v-container
-    fluid
-    grid-list-lg
-  >
+  <v-container fluid grid-list-lg>
     <NotPermission v-if="!$can('list', 'Users')" />
 
     <template v-else>
       <Breadcrumbs
         :routes="[
-          { name: 'Inicio', to: { name:'sgcUsersList' } },
+          { name: 'Inicio', to: { name: 'sgcUsersList' } },
           { name: 'Usuarios' },
           { name: 'Listado' }
         ]"
       />
       <v-card>
-        <v-toolbar
-          color="grey darken-4"
-          dark
-          card
-        >
+        <v-toolbar color="grey darken-4" dark card>
           <v-toolbar-title>Usuarios</v-toolbar-title>
           <v-spacer />
-          <v-btn
-            :to="{ name: 'sgcUsersCreate' }"
-            color="success"
-          >
+          <v-btn :to="{ name: 'sgcUsersCreate' }" color="success">
             Agregar Usuario
           </v-btn>
         </v-toolbar>
-        <v-container
-          fluid
-          grid-list-lg
-        >
-          <v-layout
-            row
-            wrap
-          >
-            <v-flex
-              sm6
-            >
-              <v-btn v-if="selected.length > 0"  small color="error" dark  @click="openModalDeleteUser(selected)">Eliminar Seleccionados</v-btn>
+        <v-container fluid grid-list-lg>
+          <v-layout row wrap>
+            <v-flex sm6>
+              <v-btn
+                v-if="selected.length > 0"
+                small
+                color="error"
+                dark
+                @click="openModalDeleteUser(selected)"
+                >Eliminar Seleccionados</v-btn
+              >
             </v-flex>
-            <v-flex
-              v-if="users.length"
-              sm6
-            >
+            <v-flex v-if="users.length" sm6>
               <v-text-field
                 v-model="searchUsers"
                 :disabled="loadingUsers"
@@ -58,7 +44,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  {text: '', value:''},
+                  { text: '', value: '' },
                   { text: 'Nombres', value: 'name' },
                   { text: 'Correo electrónico', value: 'email' },
                   { text: 'Tipo', value: 'typeUser' },
@@ -69,12 +55,9 @@
                 :loading="loadingUsers"
                 class="elevation-1"
               >
-                <tr
-                  slot="items"
-                  slot-scope="props"
-                >
+                <tr slot="items" slot-scope="props">
                   <td class="px-3">
-                    <v-checkbox v-model="selected"  :value="props.item.id"></v-checkbox>
+                    <v-checkbox v-model="selected" :value="props.item.id"></v-checkbox>
                   </td>
                   <td class="px-3">
                     {{ props.item.name }}
@@ -91,10 +74,7 @@
                     >
                       {{ props.item.typeUser.title }}
                     </v-chip>
-                    <v-chip
-                      v-else-if="props.item.typeUser.title === 'Registrador'"
-                      small
-                    >
+                    <v-chip v-else-if="props.item.typeUser.title === 'Registrador'" small>
                       {{ props.item.typeUser.title }}
                     </v-chip>
                   </td>
@@ -120,31 +100,31 @@
           </v-layout>
         </v-container>
       </v-card>
-      <ModalDeleteUser :selected="selected"/>
+      <ModalDeleteUser :selected="selected" />
     </template>
   </v-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
-  middleware: 'auth',
-  metaInfo () {
-    return { title: 'Listado de Usuarios' }
+  middleware: "auth",
+  metaInfo() {
+    return { title: "Listado de Usuarios" };
   },
 
   components: {
-    NotPermission: () => import('@/views/errors/NotPermission'),
-    Breadcrumbs: () => import('@/components/Breadcrumbs'),
-     ModalDeleteUser: () => import('@/views/users/ModalDeleteUser')
+    NotPermission: () => import("@/views/errors/NotPermission"),
+    Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    ModalDeleteUser: () => import("@/views/users/ModalDeleteUser")
   },
 
-  data () {
+  data() {
     return {
-      searchUsers: '',
-      selected: [],
-    }
+      searchUsers: "",
+      selected: []
+    };
   },
 
   computed: {
@@ -154,30 +134,27 @@ export default {
     })
   },
 
-  watch: {
-  },
+  watch: {},
 
-  created () {
-    if (!this.$can('list', 'Users')) return false
-    this.getUsers()
+  created() {
+    if (!this.$can("list", "Users")) return false;
+    this.getUsers();
   },
 
   methods: {
     ...mapActions({
-      getUsers: 'users/getUsers',
-      replaceShowModalDeleteUser: 'users/replaceShowModalDeleteUser',
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      deleteUser: 'users/deleteUser',
-      replaceUsers: 'users/replaceUsers'
+      getUsers: "users/getUsers",
+      replaceShowModalDeleteUser: "users/replaceShowModalDeleteUser",
+      replaceCurrentUser: "users/replaceCurrentUser",
+      deleteUser: "users/deleteUser",
+      replaceUsers: "users/replaceUsers"
     }),
 
-    openModalDeleteUser () {
-      this.replaceShowModalDeleteUser({ status: true })
+    openModalDeleteUser() {
+      this.replaceShowModalDeleteUser({ status: true });
     }
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

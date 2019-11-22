@@ -1,42 +1,42 @@
-import axios from 'axios'
-import { baseUrlAPI } from '@/config/api'
+import axios from "axios";
+import { baseUrlAPI } from "@/config/api";
 
-const HOST = baseUrlAPI
+const HOST = baseUrlAPI;
 
 export default {
-  login (payload = {}) {
-    const params = payload.params || {}
+  login(payload = {}) {
+    const params = payload.params || {};
 
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/login`,
-        method: 'post',
+        method: "post",
         params
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
 
-  logout (payload = {}) {
+  logout(payload = {}) {
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/logout`,
-        method: 'post'
+        method: "post"
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
 
-  user (payload = {}) {
+  user(payload = {}) {
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/user`,
-        method: 'get'
+        method: "get"
       })
         .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   }
-}
+};

@@ -10,10 +10,7 @@
     app
     class="pa-4"
   >
-    <v-list
-      v-if="authenticated"
-      class="mb-4"
-    >
+    <v-list v-if="authenticated" class="mb-4">
       <v-list-tile
         v-if="primaryDrawer.mini"
         color="yellow"
@@ -25,28 +22,12 @@
         </v-list-tile-action>
       </v-list-tile>
 
-      <v-list-tile
-        avatar
-        tag="div"
-      >
+      <v-list-tile avatar tag="div">
         <v-list-tile-avatar>
           <template v-if="user && user.image_path">
-            <v-img
-              :src="user.image_path"
-              :lazy-src="user.image_path"
-              contain
-            >
-              <v-layout
-                slot="placeholder"
-                fill-height
-                align-center
-                justify-center
-                ma-0
-              >
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                />
+            <v-img :src="user.image_path" :lazy-src="user.image_path" contain>
+              <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="grey lighten-5" />
               </v-layout>
             </v-img>
           </template>
@@ -78,9 +59,7 @@
           :to="item.to"
           :disabled="!item.to"
         >
-          <v-list-tile-action
-            v-if="item.icon"
-          >
+          <v-list-tile-action v-if="item.icon">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
@@ -111,17 +90,8 @@
         max-height="31"
         class="mt-5"
       >
-        <v-layout
-          slot="placeholder"
-          fill-height
-          align-center
-          justify-center
-          ma-0
-        >
-          <v-progress-circular
-            indeterminate
-            color="grey lighten-5"
-          />
+        <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+          <v-progress-circular indeterminate color="grey lighten-5" />
         </v-layout>
       </v-img>
     </v-list>
@@ -129,12 +99,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
   computed: {
     ...mapState({
@@ -142,26 +111,26 @@ export default {
     }),
 
     ...mapGetters({
-      authenticated: 'auth/check',
-      user: 'auth/user',
-      sidebarItems: 'layout/sidebarItems'
+      authenticated: "auth/check",
+      user: "auth/user",
+      sidebarItems: "layout/sidebarItems"
     })
   },
 
   methods: {
     ...mapActions({
-      replacePrimaryDrawer: 'layout/replacePrimaryDrawer',
-      logout: 'auth/logout'
+      replacePrimaryDrawer: "layout/replacePrimaryDrawer",
+      logout: "auth/logout"
     }),
 
-    replacePrimaryDrawerMini () {
-      let primaryDrawer = this.primaryDrawer
-      primaryDrawer.mini = !primaryDrawer.mini
+    replacePrimaryDrawerMini() {
+      let primaryDrawer = this.primaryDrawer;
+      primaryDrawer.mini = !primaryDrawer.mini;
 
-      this.replacePrimaryDrawer({ primaryDrawer })
+      this.replacePrimaryDrawer({ primaryDrawer });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -174,5 +143,4 @@ export default {
     background: #74ba1a !important;
   }
 }
-
 </style>

@@ -1,44 +1,26 @@
 <template>
-  <v-container
-    fluid
-    grid-list-lg
-  >
+  <v-container fluid grid-list-lg>
     <NotPermission v-if="!$can('create', 'Users')" />
 
     <template v-else>
       <Breadcrumbs
-        :routes="[
-          { name: 'Inicio', to: { name: 'sgcUsersList' } },
-          { name: 'Nuevo usuario' }
-        ]"
+        :routes="[{ name: 'Inicio', to: { name: 'sgcUsersList' } }, { name: 'Nuevo usuario' }]"
       />
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          md6
-          sm6
-          xs12
-        >
+      <v-layout row wrap>
+        <v-flex md6 sm6 xs12>
           <v-card>
             <v-card-title primary-title>
               <span class="success--text font-weight-bold headline">Registrar Usuario</span>
             </v-card-title>
             <v-divider />
-            <v-card-text
-              class="pa-0"
-            >
+            <v-card-text class="pa-0">
               <v-form
                 ref="form"
                 v-model="validForm"
                 lazy-validation
                 @submit.prevent="submitCreateUser"
               >
-                <v-container
-                  fluid
-                  grid-list-lg
-                >
+                <v-container fluid grid-list-lg>
                   <v-text-field
                     v-model="form.email"
                     :disabled="processingForm"
@@ -46,10 +28,12 @@
                     :rules="rules.email"
                     :error="!!formErrors.email"
                     :error-messages="formErrors.email"
-                    @keyup="() => {
-                      formErrors.email = undefined
-                      delete formErrors.email
-                    }"
+                    @keyup="
+                      () => {
+                        formErrors.email = undefined;
+                        delete formErrors.email;
+                      }
+                    "
                   />
                   <v-text-field
                     v-model="form.name"
@@ -57,10 +41,12 @@
                     label="Nombre"
                     :error="!!formErrors.name"
                     :error-messages="formErrors.name"
-                    @keyup="() => {
-                      formErrors.name = undefined
-                      delete formErrors.name
-                    }"
+                    @keyup="
+                      () => {
+                        formErrors.name = undefined;
+                        delete formErrors.name;
+                      }
+                    "
                   />
                   <v-text-field
                     v-model="form.password"
@@ -70,19 +56,15 @@
                     :rules="rules.password"
                     :error="!!formErrors.password"
                     :error-messages="formErrors.password"
-                    @keyup="() => {
-                      formErrors.password = undefined
-                      delete formErrors.password
-                    }"
+                    @keyup="
+                      () => {
+                        formErrors.password = undefined;
+                        delete formErrors.password;
+                      }
+                    "
                   />
-                  <v-layout
-                    row
-                    wrap
-                  >
-                    <v-flex
-                      sm6
-                      xs12
-                    >
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
                       <v-autocomplete
                         v-model="form.type_user_id"
                         :items="typeUsers"
@@ -96,10 +78,12 @@
                         :disabled="processingForm"
                         :error="!!formErrors.type_user_id"
                         :error-messages="formErrors.type_user_id"
-                        @change="() => {
-                          formErrors.type_user_id = undefined
-                          delete formErrors.type_user_id
-                        }"
+                        @change="
+                          () => {
+                            formErrors.type_user_id = undefined;
+                            delete formErrors.type_user_id;
+                          }
+                        "
                       />
                     </v-flex>
                   </v-layout>
@@ -128,29 +112,29 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
-  middleware: 'auth',
+  middleware: "auth",
 
-  metaInfo () {
-    return { title: 'Nuevo Usuario' }
+  metaInfo() {
+    return { title: "Nuevo Usuario" };
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    NotPermission: () => import('@/views/errors/NotPermission')
+    Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    NotPermission: () => import("@/views/errors/NotPermission")
   },
 
-  data () {
+  data() {
     return {
-      imageUrl: '',
+      imageUrl: "",
       formErrors: {},
 
       form: {
-        email: '',
-        password: '',
-        name: '',
+        email: "",
+        password: "",
+        name: "",
         type_user_id: 0
       },
 
@@ -158,19 +142,18 @@ export default {
       processingForm: false,
 
       rules: {
-        name: [
-          v => !!v || 'El nombre es requerido'
-        ],
+        name: [v => !!v || "El nombre es requerido"],
         email: [
-          v => !!v || 'El correo electrónico es requerido',
+          v => !!v || "El correo electrónico es requerido",
           // eslint-disable-next-line no-useless-escape
-          v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
+          v =>
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+              v
+            ) || "El correo electrónico debe ser válido"
         ],
-        password: [
-          v => !!v || 'La contraseña es requerida'
-        ]
+        password: [v => !!v || "La contraseña es requerida"]
       }
-    }
+    };
   },
 
   computed: {
@@ -181,35 +164,33 @@ export default {
     })
   },
 
-  created () {
-    if (!this.$can('create', 'Users')) return false
-    this.getTypeUsers()
+  created() {
+    if (!this.$can("create", "Users")) return false;
+    this.getTypeUsers();
   },
 
   methods: {
     ...mapActions({
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      getTypeUsers: 'typeUsers/getTypeUsers',
-      createUser: 'users/createUser',
-      getUsers: 'users/getUsers'
-
+      replaceCurrentUser: "users/replaceCurrentUser",
+      getTypeUsers: "typeUsers/getTypeUsers",
+      createUser: "users/createUser",
+      getUsers: "users/getUsers"
     }),
 
-    submitCreateUser () {
-      if (!this.$refs.form.validate()) return false
+    submitCreateUser() {
+      if (!this.$refs.form.validate()) return false;
 
-      this.processingForm = true
+      this.processingForm = true;
       this.createUser({ data: this.form })
         .then(response => {
-          this.processingForm = false
-          this.$router.push({ name: 'sgcUsersList' })
+          this.processingForm = false;
+          this.$router.push({ name: "sgcUsersList" });
         })
-        .catch((error) => {
-          this.processingForm = false
-          this.formErrors = error.response.data.errors || {}
-        })
+        .catch(error => {
+          this.processingForm = false;
+          this.formErrors = error.response.data.errors || {};
+        });
     }
   }
-
-}
+};
 </script>

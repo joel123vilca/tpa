@@ -1,22 +1,8 @@
-
 <template>
-  <v-footer
-    dark
-    height="auto"
-    class="black"
-  >
-    <v-container
-      fluid
-      grid-list-lg
-    >
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          sm4
-          offset-sm1
-        >
+  <v-footer dark height="auto" class="black">
+    <v-container fluid grid-list-lg>
+      <v-layout row wrap>
+        <v-flex sm4 offset-sm1>
           <h3 class="title">
             Acerca de users
           </h3>
@@ -25,9 +11,7 @@
           <p>Normativas</p>
         </v-flex>
 
-        <v-flex
-          sm3
-        >
+        <v-flex sm3>
           <h3 class="title">
             Atención al Cliente
           </h3>
@@ -36,28 +20,17 @@
           <p>Contacto</p>
           <p>Preguntas frecuentes</p>
         </v-flex>
-        <v-flex
-          sm3
-          class="text-xs-center"
-        >
-          <v-layout
-            align-center
-            justify-space-around
-            column
-            fill-height
-          >
+        <v-flex sm3 class="text-xs-center">
+          <v-layout align-center justify-space-around column fill-height>
             <div>
-              <img :src="require('@/assets/logo.png')">
+              <img :src="require('@/assets/logo.png')" />
             </div>
             <div>
               <p class="caption">
                 Síguenos
               </p>
-              <img
-                src="@/assets/facebook-icon.png"
-                style="margin-right: 10px"
-              >
-              <img src="@/assets/instagram-icon.png">
+              <img src="@/assets/facebook-icon.png" style="margin-right: 10px" />
+              <img src="@/assets/instagram-icon.png" />
               <p class="py-2 text-xs-center caption">
                 © 2019 users | Todos los derechos reservados.
               </p>
@@ -70,15 +43,14 @@
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style scoped>
-  .underline {
-    width: 20px;
-    height: 3px;
-    background: white;
-    margin: 20px 0;
-  }
+.underline {
+  width: 20px;
+  height: 3px;
+  background: white;
+  margin: 20px 0;
+}
 </style>

@@ -1,147 +1,154 @@
-import * as types from '../mutation-types'
-import userAPI from '@/api/user'
+import * as types from "../mutation-types";
+import userAPI from "@/api/user";
 
 export const state = {
   users: [],
   loadingUsers: false,
   currentUser: null,
-  showModalDeleteUser:false,
-}
+  showModalDeleteUser: false
+};
 
 export const actions = {
-  getUsers ({ commit }, payload) {
-    commit(types.REPLACE_LOADING_USERS, { status: true })
+  getUsers({ commit }, payload) {
+    commit(types.REPLACE_LOADING_USERS, { status: true });
     return new Promise((resolve, reject) => {
-      userAPI.get(payload)
+      userAPI
+        .get(payload)
         .then(response => {
-          const users = response.data.data
+          const users = response.data.data;
 
-          commit(types.REPLACE_LOADING_USERS, { status: false })
-          commit(types.REPLACE_USERS, { users })
+          commit(types.REPLACE_LOADING_USERS, { status: false });
+          commit(types.REPLACE_USERS, { users });
 
-          resolve(response)
+          resolve(response);
         })
         .catch(error => {
-          commit(types.REPLACE_LOADING_USERS, { status: false })
-          reject(error)
-        })
-    })
+          commit(types.REPLACE_LOADING_USERS, { status: false });
+          reject(error);
+        });
+    });
   },
 
-  getUser ({ commit }, payload) {
+  getUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.getById(payload)
+      userAPI
+        .getById(payload)
         .then(response => {
-          const user = response.data.data
+          const user = response.data.data;
 
-          commit(types.REPLACE_CURRENT_USER, { user })
+          commit(types.REPLACE_CURRENT_USER, { user });
 
-          resolve(response)
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
-        })
-    })
+          reject(error);
+        });
+    });
   },
-  deleteUser ({ commit }, payload) {
+  deleteUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.delete(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: 'GoPlay',
-            message: 'Los Usuarios han sido eliminado con éxito.'
-          })
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-  replaceCurrentUser ({ commit }, payload) {
-    commit(types.REPLACE_CURRENT_USER, payload)
-  },
-  replaceShowModalDeleteUser ({ commit }, payload) {
-    commit(types.REPLACE_SHOW_MODAL_DELETE_USER, payload)
-  },
-  updateUser ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      userAPI.put(payload)
+      userAPI
+        .delete(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'USERS',
-            message: 'El usuario ha sido actualizado con éxito.'
-          })
-
-          resolve(response)
+            title: "GoPlay",
+            message: "Los Usuarios han sido eliminado con éxito."
+          });
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
-        })
-    })
+          reject(error);
+        });
+    });
   },
-
-  createUser ({ commit }, payload) {
+  replaceCurrentUser({ commit }, payload) {
+    commit(types.REPLACE_CURRENT_USER, payload);
+  },
+  replaceShowModalDeleteUser({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_DELETE_USER, payload);
+  },
+  updateUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.post(payload)
+      userAPI
+        .put(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'USERS',
-            message: 'El usuario ha sido creado con éxito.'
-          })
+            title: "USERS",
+            message: "El usuario ha sido actualizado con éxito."
+          });
 
-          resolve(response)
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
-        })
-    })
+          reject(error);
+        });
+    });
   },
 
-  sendTokenForResetPassword ({ commit }, payload) {
+  createUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.sendTokenForResetPassword(payload)
+      userAPI
+        .post(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'USERS',
-            message: 'Le hemos enviado un correo de cambio de contraseña!'
-          })
-          resolve(response)
+            title: "USERS",
+            message: "El usuario ha sido creado con éxito."
+          });
+
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
-        })
-    })
+          reject(error);
+        });
+    });
   },
 
-  resetPassword ({ commit }, payload) {
+  sendTokenForResetPassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.resetPassword(payload)
+      userAPI
+        .sendTokenForResetPassword(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'USER',
-            message: 'Su contraseña han sido actualizada con éxito.'
-          })
-          resolve(response)
+            title: "USERS",
+            message: "Le hemos enviado un correo de cambio de contraseña!"
+          });
+          resolve(response);
         })
         .catch(error => {
-          reject(error)
+          reject(error);
+        });
+    });
+  },
+
+  resetPassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      userAPI
+        .resetPassword(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "USER",
+            message: "Su contraseña han sido actualizada con éxito."
+          });
+          resolve(response);
         })
-    })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
-}
+};
 
 export const mutations = {
-  [types.REPLACE_LOADING_USERS] (state, { status }) {
-    state.loadingUsers = status
+  [types.REPLACE_LOADING_USERS](state, { status }) {
+    state.loadingUsers = status;
   },
-  [types.REPLACE_USERS] (state, { users }) {
-    state.users = users
+  [types.REPLACE_USERS](state, { users }) {
+    state.users = users;
   },
-  [types.REPLACE_CURRENT_USER] (state, { user }) {
-    state.currentUser = user
+  [types.REPLACE_CURRENT_USER](state, { user }) {
+    state.currentUser = user;
   },
-  [types.REPLACE_SHOW_MODAL_DELETE_USER] (state, { status }) {
-    state.showModalDeleteUser = status
-  },
-}
+  [types.REPLACE_SHOW_MODAL_DELETE_USER](state, { status }) {
+    state.showModalDeleteUser = status;
+  }
+};

@@ -14,10 +14,7 @@
       />
 
       <v-spacer />
-      <img
-        style="max-height:50px;width:50px;"
-        :src="require('@/assets/logo.png')"
-      >
+      <img style="max-height:50px;width:50px;" :src="require('@/assets/logo.png')" />
       <v-toolbar-title class="scoped-toolbar-title ma-0 pa-0">
         <h4>GESTION DE USUARIOS</h4>
       </v-toolbar-title>
@@ -34,8 +31,8 @@
             @click="logout({ router: $router })"
           >
             <v-icon left>
-              power_settings_new
-            </v-icon>Cerrar sesión
+              power_settings_new </v-icon
+            >Cerrar sesión
           </v-btn>
         </template>
       </v-toolbar-items>
@@ -44,15 +41,13 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
+  components: {},
 
-  components: {
-  },
-
-  data () {
-    return {}
+  data() {
+    return {};
   },
 
   computed: {
@@ -61,26 +56,26 @@ export default {
     }),
 
     ...mapGetters({
-      authenticated: 'auth/check',
-      user: 'auth/user',
-      userIsClient: 'auth/userIsClient'
+      authenticated: "auth/check",
+      user: "auth/user",
+      userIsClient: "auth/userIsClient"
     })
   },
 
   methods: {
     ...mapActions({
-      replacePrimaryDrawer: 'layout/replacePrimaryDrawer',
-      logout: 'auth/logout'
+      replacePrimaryDrawer: "layout/replacePrimaryDrawer",
+      logout: "auth/logout"
     }),
 
-    replacePrimaryDrawerModel () {
-      let primaryDrawer = this.primaryDrawer
-      primaryDrawer.model = !primaryDrawer.model
+    replacePrimaryDrawerModel() {
+      let primaryDrawer = this.primaryDrawer;
+      primaryDrawer.model = !primaryDrawer.model;
 
-      this.replacePrimaryDrawer({ primaryDrawer })
+      this.replacePrimaryDrawer({ primaryDrawer });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -111,7 +106,7 @@ export default {
     text-transform: capitalize;
     font-size: 1.25rem;
 
-    &:hover::before{
+    &:hover::before {
       background-color: transparent !important;
       // background: lighten(black, 1%) !important;
     }
@@ -127,5 +122,4 @@ export default {
 .scoped-btn-active {
   background: #74ba1a !important;
 }
-
 </style>
