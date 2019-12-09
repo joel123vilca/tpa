@@ -1,17 +1,17 @@
 <template>
-  <v-app id="login" class="teal darken-1">
+  <v-app id="login" class="fondo">
     <v-container fluid fill-height>
       <template v-if="!authenticated">
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4 lg4>
-            <v-card class="elevation-1 pa-3">
+            <v-card class="teal accent-4">
+              <h3 class="login-title">Bienvenido a Plataforma Personas</h3>
+              <hr class="line"/>
               <v-card-title>
                 <div class="layout column align-center">
-                  <img src="@/assets/logo.png" alt="logo" width="200" height="200" />
+                  <img src="@/assets/logo.png" alt="logo" class="login-image" />
                 </div>
               </v-card-title>
-              <h4>LOGIN</h4>
-              <v-divider />
               <v-card-text class="pa-0">
                 <v-form v-model="validForm" lazy-validation @submit.prevent="lauchLogin">
                   <v-container fluid class="pb-0" grid-list-lg>
@@ -54,17 +54,13 @@
                     <div class="text-xs-center ">
                       <v-btn
                         type="submit"
-                        color="primary"
+                        color="black"
+                        class="ma-2 white--text"
                         :disabled="!validForm || processingForm"
                         :loading="processingForm"
                       >
                         Iniciar sesión
                       </v-btn>
-                      <p class="mb-0">
-                        <a>
-                          ¿Olvidaste tu contraseña?
-                        </a>
-                      </p>
                     </div>
                   </v-container>
                 </v-form>
@@ -186,12 +182,29 @@ export default {
 </script>
 <style scoped lang="css">
 #login {
-  height: 50%;
+  height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   content: "";
   z-index: 0;
+}
+.fondo{
+  background-image: url('../assets/puerto.jpg');
+  background-size: cover;
+}
+.login-title{
+  color:white;
+  font-size: 24px;
+  font-family: inherit;
+}
+.login-image{
+  margin: 20px auto 20px auto;
+  max-width: 200px;
+  border-radius: 10px
+}
+.line{
+  border-color:black;
 }
 </style>
