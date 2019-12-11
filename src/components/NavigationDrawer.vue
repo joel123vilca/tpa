@@ -8,8 +8,9 @@
     :mini-variant="primaryDrawer.mini"
     fixed
     app
-    class="pa-4"
+    class="drawer"
   >
+    <img style="height:65px;width:300px;" :src="require('@/assets/logo.png')"/>
     <v-list v-if="authenticated" class="mb-4">
       <v-list-tile
         v-if="primaryDrawer.mini"
@@ -20,30 +21,6 @@
         <v-list-tile-action>
           <v-icon>chevron_right</v-icon>
         </v-list-tile-action>
-      </v-list-tile>
-
-      <v-list-tile avatar tag="div">
-        <v-list-tile-avatar>
-          <template v-if="user && user.image_path">
-            <v-img :src="user.image_path" :lazy-src="user.image_path" contain>
-              <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                <v-progress-circular indeterminate color="grey lighten-5" />
-              </v-layout>
-            </v-img>
-          </template>
-
-          <template v-else>
-            <v-icon>
-              person
-            </v-icon>
-          </template>
-        </v-list-tile-avatar>
-
-        <v-list-tile-content>
-          <v-list-tile-title>{{ user.name }}</v-list-tile-title>
-        </v-list-tile-content>
-
-        <v-list-tile-action />
       </v-list-tile>
     </v-list>
 
@@ -67,33 +44,6 @@
           </v-list-tile-content>
         </v-list-tile>
       </template>
-
-      <template>
-        <v-list-tile
-          v-if="authenticated"
-          exact
-          ripple
-          active-class="accent"
-          class="scoped-list-tile mb-1"
-          @click="logout({ router: $router })"
-        >
-          <v-list-tile-action>
-            <v-icon>power_settings_new</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
-        </v-list-tile>
-      </template>
-      <v-img
-        :src="require('@/assets/logo.png')"
-        :lazy-src="require('@/assets/logo.png')"
-        contain
-        max-height="31"
-        class="mt-5"
-      >
-        <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-          <v-progress-circular indeterminate color="grey lighten-5" />
-        </v-layout>
-      </v-img>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -134,13 +84,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.drawer{
+  background-color: #283848 !important;
+  color: white !important;
+}
 .scoped-list-tile {
-  border-radius: 8px !important;
   overflow: hidden !important;
 
   &:hover {
     color: white !important;
-    background: #74ba1a !important;
+    background: #44b5ba !important;
   }
 }
 </style>

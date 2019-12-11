@@ -22,16 +22,28 @@ export const getters = {
       items.push({
         name: "Personal",
         to: { name: "sgcUsersList" }
-      });
+      },
+      {
+        name:"Perfil",
+        to:{name:"sgcUserList"}
+      }
+
+      );
 
       return items;
     }
 
     if (rootGetters["auth/userIsAdmin"]) {
-      items.push({
-        name: "Personal",
-        to: { name: "sgcUsersList" }
-      });
+      items.push(
+        {
+          name: "Personal",
+          to: { name: "sgcUsersList" },
+        },
+        {
+          name:"Perfil",
+          to:{name:"sgcUserList"}
+        }
+      );
       return items;
     }
 

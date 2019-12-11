@@ -2,10 +2,10 @@
   <div>
     <v-toolbar
       v-if="authenticated"
-      height="65"
+      height="54"
       :clipped-left="primaryDrawer.clipped"
       app
-      class="teal darken-1"
+      class="toolbar"
       center
     >
       <v-toolbar-side-icon
@@ -14,28 +14,75 @@
       />
 
       <v-spacer />
-      <img style="max-height:50px;width:50px;" :src="require('@/assets/logo.png')" />
-      <v-toolbar-title class="scoped-toolbar-title ma-0 pa-0">
-        <h4>GESTION DE USUARIOS</h4>
-      </v-toolbar-title>
-
       <v-spacer />
-
-      <v-toolbar-items class="scoped-toolbar-items hidden-sm-and-down">
         <template v-if="authenticated">
-          <v-btn
-            depressed
-            class=" transparent scoped-toolbar-item"
-            active-class="scoped-btn-active"
-            :ripple="false"
-            @click="logout({ router: $router })"
+           <v-menu
+          bottom
+          content-class="dropdown-menu"
+          offset-y
+          transition="slide-y-transition">
+          <router-link
+            v-ripple
+            slot="activator"
+            class="toolbar-items"
+            to="/users"
           >
-            <v-icon left>
-              power_settings_new </v-icon
-            >Cerrar sesión
-          </v-btn>
+            <v-badge
+              color="success"
+              overlap
+            >
+              <template slot="badge">
+                {{ notifications.length }}
+              </template>
+              <v-icon color="tertiary">add_alert</v-icon>
+            </v-badge>
+          </router-link>
+          <v-card>
+            <v-list dense>
+              <v-list-tile
+                v-for="notification in notifications"
+                :key="notification"
+                @click="onClick"
+              >
+                <v-list-tile-title
+                  v-text="notification"
+                />
+              </v-list-tile>
+            </v-list>
+          </v-card>
+        </v-menu>
+          <v-menu offset-y>
+      <template v-slot:activator="{ on }">
+          <v-avatar size="36px" v-on="on">
+              <img
+                src="https://cdn.vuetifyjs.com/images/john.jpg"
+                alt="John"
+              >
+            </v-avatar>
+      </template>
+      <v-list>
+        <v-list-tile
+          v-if="authenticated"
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+        >
+          <v-list-tile-content>Perfil</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile
+          v-if="authenticated"
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+          @click="logout({ router: $router })"
+        >
+          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
         </template>
-      </v-toolbar-items>
     </v-toolbar>
   </div>
 </template>
@@ -47,7 +94,21 @@ export default {
   components: {},
 
   data() {
-    return {};
+    return {
+      notifications: [
+      'Mike, John responded to your email',
+      'You have 5 new tasks',
+      'You\'re now a friend with Andrew',
+      'Another Notification',
+      'Another One'
+    ],
+    items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ],
+    };
   },
 
   computed: {
@@ -79,14 +140,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// .v-toolbar {
-//   font-weight: 300;
-//   background-color: rgba(0, 0, 0, 0.86);
-//   box-shadow: 0px 9px 31px 0px rgba(0, 0, 0, 0.7);
-//   background-repeat: repeat-x;
-//   background-image: url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/ironpatern.png);
-// }
-
+.toolbar{
+  background-color: #44b5ba;
+}
 .scoped-toolbar-title {
   display: flex;
   filter: opacity(70%);
