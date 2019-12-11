@@ -4,8 +4,13 @@
       <template v-if="!authenticated">
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4 lg4>
-            <v-card class="teal accent-4">
-              <h3 class="login-title">Bienvenido a Plataforma Personas</h3>
+            <v-card class="login-card">
+              <div class="layout column align-center">
+              <Typography variant="subtitle1" class="login-title" gutterBottom>
+                Bienvenido a Plataforma Personas
+              </Typography>
+              <br>
+              </div>
               <hr class="line"/>
               <v-card-title>
                 <div class="layout column align-center">
@@ -15,39 +20,9 @@
               <v-card-text class="pa-0">
                 <v-form v-model="validForm" lazy-validation @submit.prevent="lauchLogin">
                   <v-container fluid class="pb-0" grid-list-lg>
-                    <v-text-field
-                      v-model="form.username"
-                      :disabled="processingForm"
-                      :error="!!validationErrors.username"
-                      :error-messages="validationErrors.username"
-                      autofocus
-                      outline
-                      prepend-inner-icon="email"
-                      label="Correo electrónico"
-                      @keyup="
-                        () => {
-                          validationErrors.username = undefined;
-                          delete validationErrors.username;
-                        }
-                      "
-                    />
-
-                    <v-text-field
-                      v-model="form.password"
-                      :disabled="processingForm"
-                      :error="!!validationErrors.password"
-                      :error-messages="validationErrors.password"
-                      type="password"
-                      outline
-                      prepend-inner-icon="lock"
-                      label="Contraseña"
-                      @keyup="
-                        () => {
-                          validationErrors.password = undefined;
-                          delete validationErrors.password;
-                        }
-                      "
-                    />
+                    <input class="login-input" v-model="form.username" placeholder="Rut" name="email" type="email" autofocus style="background-color: white; color: #283848;">
+                    <br><br>
+                    <input class="login-input" v-model="form.password" placeholder="Contraseña" name="password" type="password" value="" style="background-color: white; color: #283848; ">
                   </v-container>
                   <v-divider />
                   <v-container fluid grid-list-lg>
@@ -194,15 +169,31 @@ export default {
   background-image: url('../assets/puerto.jpg');
   background-size: cover;
 }
+.login-card{
+  background-color: #44b5ba;
+  width: 550px;
+}
 .login-title{
   color:white;
   font-size: 24px;
-  font-family: inherit;
+  font-family: 'Montserrat', sans-serif !important;
+  margin-top:20px;
 }
 .login-image{
   margin: 20px auto 20px auto;
   max-width: 200px;
   border-radius: 10px
+}
+.login-input{
+  background-color: #fff;
+  height: 52px;
+  width: 510px;
+  font-size: 16px;
+  border-radius: 1px;
+  border: #2b3c4e;
+  transition-duration:0.15s, 0.15s;
+  padding-left:12px;
+  padding-right:12px;
 }
 .line{
   border-color:black;

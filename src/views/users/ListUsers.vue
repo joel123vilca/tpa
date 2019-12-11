@@ -1,15 +1,50 @@
 <template>
   <v-container fluid grid-list-lg>
     <NotPermission v-if="!$can('list', 'Users')" />
-
     <template v-else>
-      <Breadcrumbs
+      <v-card-title class="white cyan--text headline">
+        Mi Perfil
+        <v-spacer />
+        <v-spacer />
+        <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'sgcUsersList' } },
-          { name: 'Usuarios' },
-          { name: 'Listado' }
+          { name: 'Mi Perfil' },
+          { name: 'Datos Generales' }
         ]"
       />
+      </v-card-title>
+      <div class="text-center">
+        <button
+          class="list-buttons"
+        >
+          <h3 class="title-button">
+            Datos Generales
+          </h3>
+        </button>
+        <button
+          class="list-buttons"
+        >
+          <h3 class="title-button">
+            Desarrollo
+            Organizacional
+          </h3>
+        </button>
+        <button
+          class="list-buttons"
+        >
+          <h3 class="title-button">
+            Capacitación
+          </h3>
+        </button>
+        <button
+          class="list-buttons"
+        >
+          <h3 class="title-button">
+            Hoja de vida
+          </h3>
+        </button>
+      </div>
       <v-card>
         <v-toolbar color="grey darken-4" dark card>
           <v-toolbar-title>Usuarios</v-toolbar-title>
@@ -161,5 +196,27 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
+<style scoped>
+.list-buttons{
+  color:white;
+  background: #283848;
+  line-height: 1.1;
+  text-align: center;
+  font-size: 20px;
+  padding: 8px 0 0 10px;
+  vertical-align: middle;
+  width: 230px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+.title-button{
+  font-family: inherit;
+}
+.list-buttons:hover {
+    color: white !important;
+    background: #44b5ba !important;
+  }
+</style>
