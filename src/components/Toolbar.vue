@@ -16,41 +16,43 @@
       <v-spacer />
       <v-spacer />
         <template v-if="authenticated">
-           <v-menu
-          bottom
-          content-class="dropdown-menu"
-          offset-y
-          transition="slide-y-transition">
-          <router-link
-            v-ripple
-            slot="activator"
-            class="toolbar-items"
-            to="/users"
-          >
-            <v-badge
+          <v-btn icon>
+          <v-menu offset-y>
+      <template v-slot:activator="{ on }">
+          <v-badge
               color="success"
               overlap
             >
               <template slot="badge">
                 {{ notifications.length }}
               </template>
-              <v-icon color="tertiary">add_alert</v-icon>
+              <v-icon color="white"  v-on="on">add_alert</v-icon>
             </v-badge>
-          </router-link>
-          <v-card>
-            <v-list dense>
-              <v-list-tile
-                v-for="notification in notifications"
-                :key="notification"
-                @click="onClick"
-              >
-                <v-list-tile-title
-                  v-text="notification"
-                />
-              </v-list-tile>
-            </v-list>
-          </v-card>
-        </v-menu>
+      </template>
+      <v-list>
+        <v-subheader>Encuestas</v-subheader><v-spacer/>3
+        <v-list-tile
+          v-if="authenticated"
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+        >
+          <v-list-tile-content>Perfil</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile
+          v-if="authenticated"
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+        >
+          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+        </v-btn>
+        <v-btn icon>
           <v-menu offset-y>
       <template v-slot:activator="{ on }">
           <v-avatar size="36px" v-on="on">
@@ -82,16 +84,18 @@
         </v-list-tile>
       </v-list>
     </v-menu>
+        </v-btn>
         </template>
     </v-toolbar>
+
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-
 export default {
-  components: {},
+  components: {
+  },
 
   data() {
     return {
@@ -103,10 +107,36 @@ export default {
       'Another One'
     ],
     items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
+        { header: 'Today' },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+          title: 'Brunch this weekend?',
+          subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+          subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          title: 'Oui oui',
+          subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+          title: 'Birthday gift',
+          subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: 'Recipe to try',
+          subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
+        },
       ],
     };
   },
@@ -178,4 +208,5 @@ export default {
 .scoped-btn-active {
   background: #74ba1a !important;
 }
+
 </style>

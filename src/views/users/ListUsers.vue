@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-lg>
+  <v-container>
     <NotPermission v-if="!$can('list', 'Users')" />
     <template v-else>
       <v-card-title class="white cyan--text headline">
@@ -14,37 +14,33 @@
         ]"
       />
       </v-card-title>
-      <div class="text-center">
-        <button
-          class="list-buttons"
-        >
+      <v-tabs
+        fixed-tabs
+        color="#283848"
+        dark
+      >
+        <v-tabs-slider color="#44b5ba"></v-tabs-slider>
+        <v-tab class="tab">
+          <h3 class="title-button">Datos Generales</h3>
+        </v-tab>
+        <v-tab class="tab">
           <h3 class="title-button">
-            Datos Generales
+          Desarrollo Organizacional
           </h3>
-        </button>
-        <button
-          class="list-buttons"
-        >
+        </v-tab>
+        <v-tab class="tab">
           <h3 class="title-button">
-            Desarrollo
-            Organizacional
+            Capacitacion
           </h3>
-        </button>
-        <button
-          class="list-buttons"
-        >
+        </v-tab>
+        <v-tab class="tab">
           <h3 class="title-button">
-            Capacitación
+            Hoja de Vida
           </h3>
-        </button>
-        <button
-          class="list-buttons"
-        >
-          <h3 class="title-button">
-            Hoja de vida
-          </h3>
-        </button>
-      </div>
+        </v-tab>
+      </v-tabs>
+
+      <br>
       <v-card>
         <v-toolbar color="grey darken-4" dark card>
           <v-toolbar-title>Usuarios</v-toolbar-title>
@@ -164,6 +160,7 @@ export default {
       searchUsers: "",
       singleSelect: false,
       selected: [],
+       bottomNav: 'recent'
     };
   },
 
@@ -215,7 +212,7 @@ export default {
 .title-button{
   font-family: inherit;
 }
-.list-buttons:hover {
+.tab:hover {
     color: white !important;
     background: #44b5ba !important;
   }
