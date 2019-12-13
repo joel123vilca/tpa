@@ -23,6 +23,10 @@ export const getters = {
         name: "Personal",
         to: { name: "sgcUsersList" }
       },
+      {
+        name:"Perfil",
+        to:{name:"perfil"}
+      }
       );
 
       return items;

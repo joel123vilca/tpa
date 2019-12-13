@@ -27,4 +27,9 @@ export default [
     name: 'sgcUsersEdit',
     component: () => import('@/views/users/EditUser.vue'),
   },
+  {
+    path: '/Perfil',
+    name: 'perfil',
+    component: () => import('@/views/users/Profile.vue'),
+  }
 ];

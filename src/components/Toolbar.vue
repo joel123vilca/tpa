@@ -26,7 +26,7 @@
               <template slot="badge">
                 {{ notifications.length }}
               </template>
-              <v-icon color="white"  v-on="on">add_alert</v-icon>
+              <v-icon color="white" v-on="on">notifications</v-icon>
             </v-badge>
       </template>
       <v-layout row>
