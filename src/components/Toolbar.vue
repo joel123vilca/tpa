@@ -29,27 +29,48 @@
               <v-icon color="white"  v-on="on">add_alert</v-icon>
             </v-badge>
       </template>
-      <v-list>
-        <v-subheader>Encuestas</v-subheader><v-spacer/>3
-        <v-list-tile
-          v-if="authenticated"
-          exact
-          ripple
-          active-class="accent"
-          class="scoped-list-tile mb-1"
-        >
-          <v-list-tile-content>Perfil</v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile
-          v-if="authenticated"
-          exact
-          ripple
-          active-class="accent"
-          class="scoped-list-tile mb-1"
-        >
-          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
-        </v-list-tile>
-      </v-list>
+      <v-layout row>
+    <v-flex>
+      <v-card>
+        <v-list two-line>
+          <template v-for="(item, index) in items">
+            <v-subheader
+              v-if="item.header"
+              :key="item.header"
+            >
+              {{ item.header }}
+               <v-spacer></v-spacer>
+              <span class="span-notification">4 pendientes</span>
+            </v-subheader>
+
+            <v-divider
+              v-else-if="item.divider"
+              :key="index"
+              :inset="item.inset"
+            ></v-divider>
+
+            <v-list-tile
+              v-else
+              :key="item.title"
+              avatar
+            >
+              <v-list-tile-avatar>
+                <img :src="item.avatar">
+              </v-list-tile-avatar>
+
+              <v-list-tile-content>
+                <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+          <center>
+            <v-list-tile-title> Ver Todas></v-list-tile-title>
+          </center>
+        </v-list>
+      </v-card>
+    </v-flex>
+  </v-layout>
     </v-menu>
         </v-btn>
         <v-btn icon>
@@ -107,36 +128,19 @@ export default {
       'Another One'
     ],
     items: [
-        { header: 'Today' },
+        { header: 'Encuestas' },
         {
           avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-          title: 'Brunch this weekend?',
-          subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+          title: 'Encuesta Clima Laboral. (Pendiente)',
+          subtitle: "Hace 2 Meses",
         },
         { divider: true, inset: true },
         {
           avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-          subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
+          title: 'Encuesta Colaboradores 2018',
+          subtitle: "Hace 2 dias",
         },
         { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-          title: 'Oui oui',
-          subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-          title: 'Birthday gift',
-          subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-          title: 'Recipe to try',
-          subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-        },
       ],
     };
   },
@@ -208,5 +212,8 @@ export default {
 .scoped-btn-active {
   background: #74ba1a !important;
 }
-
+.span-notification{
+  background: #74ba1a !important;
+  color:white;
+}
 </style>
