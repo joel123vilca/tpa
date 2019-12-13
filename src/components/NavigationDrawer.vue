@@ -44,30 +44,39 @@
         </v-list-tile>
       </template>
     </v-list>
-    <v-list>
-      <v-list-group
-        v-for="item in items"
-        :key="item.title"
-        v-model="item.active"
-        :prepend-icon="item.action"
-        no-action
-      >
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title"></v-list-item-title>
-          </v-list-item-content>
-        </template>
+     <v-layout row>
+    <v-flex xs12 sm12>
+        <v-list>
+          <v-list-group
+            v-for="item in items"
+            :key="item.title"
+            v-model="item.active"
+            no-action
+          >
+            <template v-slot:activator class="scoped-list-tile">
+              <v-list-tile class="scoped-list-tile">
+                <v-list-tile-content>
+                  <v-list-tile-title class="white--text">{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </template>
 
-        <v-list-item
-          v-for="subItem in item.items"
-          :key="subItem.title"
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="subItem.title"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-group>
-    </v-list>
+            <v-list-tile
+              v-for="subItem in item.items"
+              :key="subItem.title"
+              class="scoped-list-tile"
+            >
+              <v-list-tile-content>
+                <v-list-tile-title class="white--text">{{ subItem.title }}</v-list-tile-title>
+              </v-list-tile-content>
+              <v-list-tile-action class="scoped-list-tile">
+                <v-icon color="white">{{ subItem.action }}</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list-group>
+        </v-list>
+    </v-flex>
+  </v-layout>
   </v-navigation-drawer>
 </template>
 
@@ -79,57 +88,35 @@ export default {
     return {
        items: [
           {
-            action: 'local_activity',
-            title: 'Attractions',
+            title: 'Perfil',
             items: [
-              { title: 'List Item' },
+              { title: 'Datos Generales' },
+              { title: 'Desarrollo Organizacional' },
+              { title: 'Capacitaciòn' },
             ],
           },
           {
-            action: 'restaurant',
-            title: 'Dining',
-            active: true,
+            title: 'Gerencia Personas',
             items: [
-              { title: 'Breakfast & brunch' },
-              { title: 'New American' },
-              { title: 'Sushi' },
+              { title: 'Adm. De Personas' },
+              { title: 'DO y Capacitaciòn' },
+              { title: 'Bienestar' },
+              { title: 'Comunicaciones' },
+              { title: 'RSE' },
             ],
           },
           {
-            action: 'school',
-            title: 'Education',
+            title: 'Colaboradores',
             items: [
-              { title: 'List Item' },
+              { title: 'Ranking TPA' },
             ],
           },
           {
-            action: 'directions_run',
-            title: 'Family',
+            title: 'Cerrar Sesion',
             items: [
               { title: 'List Item' },
             ],
-          },
-          {
-            action: 'healing',
-            title: 'Health',
-            items: [
-              { title: 'List Item' },
-            ],
-          },
-          {
-            action: 'content_cut',
-            title: 'Office',
-            items: [
-              { title: 'List Item' },
-            ],
-          },
-          {
-            action: 'local_offer',
-            title: 'Promotions',
-            items: [
-              { title: 'List Item' },
-            ],
-          },
+          }
         ],
     };
   },
@@ -163,6 +150,10 @@ export default {
 
 <style lang="scss" scoped>
 .drawer{
+  background-color: #283848 !important;
+  color: white !important;
+}
+.menu-expand{
   background-color: #283848 !important;
   color: white !important;
 }
