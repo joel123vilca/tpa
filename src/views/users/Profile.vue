@@ -78,6 +78,135 @@
             <v-card>
             <v-card-title primary-title>
               <span class="headline">Información General</span>
+              <v-spacer></v-spacer>
+              <v-btn  @click="isDisabled = !isDisabled" color="info">Editar</v-btn>
+              <v-btn fab>
+              <v-icon large color="green darken-2">save</v-icon>
+              </v-btn>
+            </v-card-title>
+            <v-divider />
+            <v-card-text class="pa-0">
+
+                <v-container fluid grid-list-lg>
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Nombre"
+                      outline
+
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Nivel de educación"
+                      outline
+
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Rut"
+                      outline
+
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Nacional"
+                      outline
+
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Dirección"
+                      outline
+
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Estado Civil"
+                      outline
+
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Correo"
+                      outline
+
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Sexo"
+                      outline
+
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Celular / anexo"
+                      outline
+                      persistent-hint
+
+                      />
+                    </v-flex>
+                    <v-flex sm6 xs12>
+                      <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      :disabled="isDisabled"
+                      label="Fecha de Nacimiento"
+                      outline
+
+                      />
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+                <v-divider class="mb-3" />
+            </v-card-text>
+          </v-card>
+          <br>
+          <v-card>
+            <v-card-title primary-title>
+              <span class="headline">Indumentaria Trabajador</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -93,36 +222,18 @@
                       <v-text-field
                       v-model="form.password"
                       type="password"
-                      :disabled="processingForm"
-                      label="Nombre"
+                      :disabled="isDisabled"
+                      label="Talla de Zapato"
                       outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
                       />
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
                       v-model="form.password"
                       type="password"
-                      :disabled="processingForm"
-                      label="Nivel de educación"
+                      :disabled="isDisabled"
+                      label="Talla de Zapato"
                       outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
                       />
                     </v-flex>
                   </v-layout>
@@ -131,151 +242,19 @@
                       <v-text-field
                       v-model="form.password"
                       type="password"
-                      :disabled="processingForm"
-                      label="Rut"
+                      :disabled="isDisabled"
+                      label="Talla de Zapato"
                       outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
                       />
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-text-field
                       v-model="form.password"
                       type="password"
-                      :disabled="processingForm"
-                      label="Nacional"
+                      :disabled="isDisabled"
+                      filled
+                      label="Talla de Zapato"
                       outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
-                      />
-                    </v-flex>
-                  </v-layout>
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                      v-model="form.password"
-                      type="password"
-                      :disabled="processingForm"
-                      label="Dirección"
-                      outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                      v-model="form.password"
-                      type="password"
-                      :disabled="processingForm"
-                      label="Estado Civil"
-                      outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
-                      />
-                    </v-flex>
-                  </v-layout>
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                      v-model="form.password"
-                      type="password"
-                      :disabled="processingForm"
-                      label="Correo"
-                      outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                      v-model="form.password"
-                      type="password"
-                      :disabled="processingForm"
-                      label="Sexo"
-                      outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
-                      />
-                    </v-flex>
-                  </v-layout>
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                      v-model="form.password"
-                      type="password"
-                      :disabled="processingForm"
-                      label="Celular / anexo"
-                      outline
-                      persistent-hint
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-text-field
-                      v-model="form.password"
-                      type="password"
-                      :disabled="processingForm"
-                      label="Fecha de Nacimiento"
-                      outline
-                      :rules="rules.password"
-                      :error="!!formErrors.password"
-                      :error-messages="formErrors.password"
-                      @keyup="
-                      () => {
-                        formErrors.password = undefined;
-                        delete formErrors.password;
-                        }
-                      "
                       />
                     </v-flex>
                   </v-layout>
@@ -377,16 +356,14 @@ export default {
   },
   data() {
     return {
-      imageUrl: "",
-      formErrors: {},
-
+      isDisabled:true,
       form: {
         email: "",
         password: "",
         name: "",
-        type_user_id: 0
+        type_user_id: 0,
+        processingForm: false,
       },
-
       validForm: true,
       processingForm: false,
 
@@ -408,6 +385,9 @@ export default {
     Breadcrumbs: () => import("@/components/Breadcrumbs"),
     NotPermission: () => import("@/views/errors/NotPermission")
   },
+  methods: {
+
+  }
 }
 </script>
 <style>
