@@ -65,7 +65,7 @@
             </v-list-tile>
           </template>
           <center>
-            <v-list-tile-title> Ver Todas></v-list-tile-title>
+            <a>Ver Todas</a>
           </center>
         </v-list>
       </v-card>
@@ -215,5 +215,9 @@ export default {
 .span-notification{
   background: #74ba1a !important;
   color:white;
+  width: 110px;
+  height: 25px;
+  text-align: center;
+  align-self: center;
 }
 </style>

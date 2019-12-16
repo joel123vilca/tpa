@@ -19,14 +19,61 @@ export const getters = {
     let items = [];
 
     if (rootGetters["auth/userIsClient"]) {
-      items.push({
-        name: "Personal",
-        to: { name: "sgcUsersList" }
-      },
-      {
-        name:"Perfil",
-        to:{name:"perfil"}
-      }
+      items.push(
+        {
+          name: "Perfil",
+          items: [
+            {
+              name: "Datos Generales",
+              to: { name: "perfil" }
+            },
+            {
+              name: "Desarrollo Organizacional",
+              to: { name: "sgcUsersList" }
+            },
+            {
+              name: "Capacitacion",
+              to: { name: "sgcUsersList" }
+            },
+          ],
+        },
+        {
+          name: "Gerencia Personas",
+          items: [
+            {
+              name: "Adm. de Personas",
+              to: { name: "sgcUsersList" }
+            },
+            {
+              name: "DO y Capacitacion",
+              to: { name: "sgcUsersList" }
+            },
+            {
+              name: "Bienestar",
+              to: { name: "sgcUsersList" }
+            },
+            {
+              name: "Comunicaciones",
+              to: { name: "sgcUsersList" }
+            },
+            {
+              name: "RSE",
+              to: { name: "sgcUsersList" }
+            },
+          ],
+        },
+        {
+          name: "Colaboradores",
+          items: [
+            {
+              name: "Ranking TPA",
+              to: { name: "sgcUsersList" }
+            },
+          ],
+        },
+        {
+          name: "Cerrar Sesion",
+        },
       );
 
       return items;
@@ -36,7 +83,13 @@ export const getters = {
       items.push(
         {
           name: "Personal",
-          to: { name: "sgcUsersList" },
+          items:[
+            {
+              name:"Perfil",
+              to:{name:"sgcUserList"}
+            }
+          ]
+
         },
         {
           name:"Perfil",
