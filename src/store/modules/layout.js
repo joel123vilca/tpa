@@ -67,7 +67,7 @@ export const getters = {
           items: [
             {
               name: "Ranking TPA",
-              to: { name: "sgcUsersList" }
+              to: { name: "colaboradores" }
             },
           ],
         },

@@ -123,10 +123,9 @@ export default {
 }
 .scoped-list-tile {
   overflow: hidden !important;
-
-  &:hover {
+}
+.scoped-list-tile:hover {
     color: white !important;
     background: #44b5ba !important;
   }
-}
 </style>

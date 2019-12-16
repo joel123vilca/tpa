@@ -31,5 +31,10 @@ export default [
     path: '/Perfil',
     name: 'perfil',
     component: () => import('@/views/users/Profile.vue'),
+  },
+  {
+    path: '/Colaboradores',
+    name: 'colaboradores',
+    component: () => import('@/views/users/Collaborators.vue'),
   }
 ];
