@@ -19,6 +19,7 @@
         fixed-tabs
         color="#283848"
         dark
+        class="hidden-sm-and-down"
       >
         <v-tabs-slider color="#44b5ba"></v-tabs-slider>
         <v-tab class="tab">
@@ -41,11 +42,11 @@
         </v-tab>
       </v-tabs>
       <br>
-      <v-layout row>
-      <v-flex xs8>
+      <v-layout row wrap>
+      <v-flex xs12 md8 sm12 >
             <v-card  class="black--text">
-              <v-layout>
-                <v-flex xs3>
+              <v-layout row wrap>
+                <v-flex xs12  md3>
                   <center>
                   <v-img
                     :src="require('@/assets/user-1.jpg')"
@@ -56,21 +57,23 @@
                   ></v-img>
                   </center>
                 </v-flex>
-                <v-flex xs5>
-                  <v-card-title primary-title>
-                    <div>
+                <v-flex xs12  md5>
+                  <center>
+                    <div style="margin-top:15px;">
                       <h3 class="profile-dates">Nombre: FELIPE BRICEÑO</h3>
                       <br>
                       <div class="profile-dates">Gerencia: Gerencia de Personas</div>
                       <br>
                       <div class="profile-dates">Cargo: Gerente de Personas</div>
                     </div>
-                  </v-card-title>
+                  </center>
                 </v-flex>
-                <v-flex xs4>
+                <v-flex xs12  md4>
+                  <center>
                   <div class="profile-description"><v-icon color="yellow">star_border</v-icon>Relator Interno</div>
                   <div class="profile-description"><v-icon color="yellow">star_border</v-icon>Monitor Pausa Activa</div>
                   <div class="profile-description"><v-icon color="yellow">star_border</v-icon>Auditor Interno</div>
+                  </center>
                 </v-flex>
               </v-layout>
             </v-card>
@@ -79,10 +82,22 @@
             <v-card-title primary-title>
               <span class="headline">Información General</span>
               <v-spacer></v-spacer>
-              <v-btn  @click="isDisabled = !isDisabled" color="info">Editar</v-btn>
-              <v-btn fab>
-              <v-icon large color="green darken-2">save</v-icon>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn flat icon  v-on="on"  @click="isDisabled = !isDisabled" >
+                  <v-icon large color="info">edit</v-icon>
+                  </v-btn>
+                </template>
+                <span>Editar Formulario</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn flat icon  v-on="on" >
+                  <v-icon large color="green darken-2">save</v-icon>
+                  </v-btn>
+                </template>
+                <span>Guardar Cambios</span>
+              </v-tooltip>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -264,7 +279,7 @@
             </v-card-text>
           </v-card>
           </v-flex>
-          <v-flex xs4>
+          <v-flex xs12 md4 sm12>
             <v-card>
               <v-list
                 subheader
@@ -434,4 +449,5 @@ export default {
   min-width: 110px;
   font-weight: 400;
 }
+
 </style>
