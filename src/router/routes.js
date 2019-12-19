@@ -33,6 +33,11 @@ export default [
     component: () => import('@/views/users/Profile.vue'),
   },
   {
+    path: '/grafico',
+    name:'grafico',
+    component: () => import('@/views/users/graficos.vue'),
+  },
+  {
     path: '/Colaboradores',
     name: 'colaboradores',
     component: () => import('@/views/users/Collaborators.vue'),

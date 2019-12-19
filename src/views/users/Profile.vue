@@ -1,8 +1,7 @@
 <template>
   <v-container fluid grid-list-lg>
-    <NotPermission v-if="!$can('create', 'Users')" />
 
-    <template v-else>
+    <template >
       <v-card-title class="white cyan--text headline">
         Mi Perfil
         <v-spacer />
