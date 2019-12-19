@@ -15,26 +15,26 @@
     <v-flex xs12 sm12>
         <v-list>
           <v-list-group
-            v-for="item in sidebarItems"
-            :key="item.name"
+            v-for="item in items"
+            :key="item.title"
             v-model="item.active"
             no-action
           >
             <template v-slot:activator class="scoped-list-tile" color="white">
               <v-list-tile class="scoped-list-tile">
                 <v-list-tile-content class="scoped-list-tile">
-                  <v-list-tile-title class="white--text">{{ item.name }}</v-list-tile-title>
+                  <v-list-tile-title class="white--text">{{ item.title }}</v-list-tile-title>
                 </v-list-tile-content>
               </v-list-tile>
             </template>
             <v-list-tile
               v-for="subItem in item.items"
-              :key="subItem.name"
+              :key="subItem.title"
               class="scoped-list-tile"
               :to="subItem.to"
             >
               <v-list-tile-content>
-                <v-list-tile-title class="white--text">{{ subItem.name }}</v-list-tile-title>
+                <v-list-tile-title class="white--text">{{ subItem.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>

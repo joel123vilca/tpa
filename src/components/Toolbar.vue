@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar
-      v-if="authenticated"
+
       height="64"
       :clipped-left="primaryDrawer.clipped"
       app
@@ -9,13 +9,13 @@
       center
     >
       <v-toolbar-side-icon
-        v-if="authenticated && primaryDrawer.type !== 'permanent'"
+
         @click.stop="replacePrimaryDrawerModel"
       />
 
       <v-spacer />
       <v-spacer />
-        <template v-if="authenticated">
+        <template>
           <v-btn icon>
           <v-menu offset-y>
       <template v-slot:activator="{ on }">
