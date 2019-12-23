@@ -1,8 +1,7 @@
 <template>
   <v-container fluid grid-list-lg>
-    <NotPermission v-if="!$can('create', 'Users')" />
 
-    <template v-else>
+    <template>
       <v-card-title class="white cyan--text headline">
         Graficos
         <v-spacer />
@@ -16,7 +15,50 @@
       </v-card-title>
       <br>
       <v-layout row wrap>
-        <v-flex xs4>
+      <v-flex xs12 md8 sm12>
+      <v-card  class="black--text">
+        <v-layout row wrap>
+          <v-flex xs12  md3>
+            <center>
+              <v-img
+                :src="require('@/assets/user-1.jpg')"
+                height="130px"
+                width="140px"
+                class="profile-image"
+                contain
+              ></v-img>
+            </center>
+          </v-flex>
+          <v-flex xs12  md5>
+            <center>
+              <div style="margin-top:15px;">
+                <h3 class="profile-dates">Nombre: FELIPE BRICEÑO</h3>
+                <br>
+                <div class="profile-dates">Gerencia: Gerencia de Personas</div>
+                <br>
+                <div class="profile-dates">Cargo: Gerente de Personas</div>
+              </div>
+            </center>
+          </v-flex>
+          <v-flex xs12  md4>
+            <center>
+              <div class="profile-description"><v-icon color="yellow">star_border</v-icon>Relator Interno</div>
+              <div class="profile-description"><v-icon color="yellow">star_border</v-icon>Monitor Pausa Activa</div>
+              <div class="profile-description"><v-icon color="yellow">star_border</v-icon>Auditor Interno</div>
+            </center>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      </v-flex>
+      <v-flex xs12 md4 sm12>
+        <v-card>
+          <h3>descargar</h3>
+        </v-card>
+      </v-flex>
+      </v-layout>
+      <br><br>
+      <v-layout row wrap>
+        <v-flex xs12 md4 sm12>
         <v-hover>
         <v-card
           slot-scope="{ hover }"
@@ -24,10 +66,10 @@
         >
         <div class="titulo-grafico">cliente interno global</div>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill1"
             color="blue-grey"
@@ -41,10 +83,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill2"
             color="blue-grey"
@@ -58,10 +100,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill3"
             color="blue-grey"
@@ -77,7 +119,7 @@
         </v-card>
         </v-hover>
         </v-flex>
-        <v-flex xs4 >
+        <v-flex xs12 md4 sm12 >
         <v-hover>
         <v-card
           slot-scope="{ hover }"
@@ -85,17 +127,17 @@
         >
         <div class="titulo-grafico">cliente interno global</div>
           <v-layout row wrap>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
             <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
             <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
           </v-flex>
           </v-layout>
         </v-card>
         </v-hover>
         </v-flex>
-        <v-flex  xs4>
+        <v-flex  xs12 md4 sm12>
         <v-hover>
         <v-card
           slot-scope="{ hover }"
@@ -103,10 +145,10 @@
         >
         <div class="titulo-grafico">cliente interno global</div>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill1"
             color="blue-grey"
@@ -120,10 +162,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill2"
             color="blue-grey"
@@ -137,10 +179,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill3"
             color="blue-grey"
@@ -158,7 +200,7 @@
         </v-flex>
       </v-layout>
       <v-layout row wrap>
-        <v-flex xs4>
+        <v-flex xs12 md4 sm12>
         <v-hover>
         <v-card
           slot-scope="{ hover }"
@@ -166,10 +208,10 @@
         >
         <div class="titulo-grafico">cliente interno global</div>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill1"
             color="blue-grey"
@@ -183,10 +225,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill2"
             color="blue-grey"
@@ -200,10 +242,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill3"
             color="blue-grey"
@@ -219,7 +261,7 @@
         </v-card>
         </v-hover>
         </v-flex>
-        <v-flex xs4 >
+        <v-flex xs12 md4 sm12 >
         <v-hover>
         <v-card
           slot-scope="{ hover }"
@@ -227,10 +269,10 @@
         >
         <div class="titulo-grafico">cliente interno global</div>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill1"
             color="blue-grey"
@@ -244,10 +286,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill2"
             color="blue-grey"
@@ -261,10 +303,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill3"
             color="blue-grey"
@@ -280,7 +322,7 @@
         </v-card>
         </v-hover>
         </v-flex>
-        <v-flex  xs4>
+        <v-flex  xs12 md4 sm12>
         <v-hover>
         <v-card
           slot-scope="{ hover }"
@@ -288,10 +330,10 @@
         >
         <div class="titulo-grafico">cliente interno global</div>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill1"
             color="blue-grey"
@@ -305,10 +347,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill2"
             color="blue-grey"
@@ -322,10 +364,10 @@
           </v-flex>
           </v-layout>
           <v-layout row wrap>
-          <v-flex xs5>
+          <v-flex xs12 md5 sm12>
           <p class="label--grafico">cliente interno 2016</p>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs12 md6 sm12>
           <v-progress-linear
             v-model="skill3"
             color="blue-grey"
@@ -379,6 +421,7 @@ export default {
 }
 </script>
 <style>
+@import "./style.css";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
 
 

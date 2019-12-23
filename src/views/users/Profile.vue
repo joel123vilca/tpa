@@ -405,48 +405,6 @@ export default {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
-.profile-description{
-  background-color: #44b5ba;
-  color:white;
-  height: 26px;
-  width: 200px;
-  border-radius: 4px;
-  font-family: 'Montserrat', sans-serif;
-  margin-top: 15px;
-  font-size: 1em;
-  padding: 0 0 0 10px;
-  font-weight: 400;
-}
-.tab:hover {
-    color: white !important;
-    background: #44b5ba !important;
-}
-.profile-dates{
-  color:#67757c;
-  text-decoration: none;
-  font-size:15px;
-  line-height: 1.3;
-  font-weight: 500;
-  font-family: 'Montserrat', sans-serif;
-}
-.profile-image{
-  border:6px solid #44b5ba;
-  border-radius: 4px;
-}
-.link-encuestas{
-  color:#455a64;
-  font-weight: 400;
-  font-size: 18px;
-}
-.ver-datos{
-  color:white;
-  background-color: #0fb76b;
-  border-radius: 50px;
-  font-size: 12px;
-  padding: 6px 20px;
-  min-width: 110px;
-  font-weight: 400;
-}
+@import "./style.css";
 
 </style>
