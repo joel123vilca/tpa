@@ -41,5 +41,10 @@ export default [
     path: '/Colaboradores',
     name: 'colaboradores',
     component: () => import('@/views/users/Collaborators.vue'),
+  },
+  {
+    path: '/crearcurso',
+    name:'CreateCourse',
+    component: () => import('@/views/courses/Create.vue'),
   }
 ];
