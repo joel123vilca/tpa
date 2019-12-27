@@ -46,5 +46,15 @@ export default [
     path: '/crearcurso',
     name:'CreateCourse',
     component: () => import('@/views/courses/Create.vue'),
+  },
+  {
+    path: '/listadecursos',
+    name:'ListCourse',
+    component: () => import('@/views/courses/List.vue'),
+  },
+  {
+    path: '/curso/:id',
+    name:'courseEdit',
+    component: () => import('@/views/courses/Edit.vue'),
   }
 ];

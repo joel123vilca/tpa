@@ -4,6 +4,47 @@ import { baseUrlAPI } from "@/config/api";
 const HOST = baseUrlAPI;
 
 export default {
+  get(payload = {}) {
+    const params = payload.params || {};
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cursos`,
+        method: "get",
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+
+  getById(payload = {}) {
+    const cursoId = payload.cursoId || "";
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cursos/${cursoId}`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+
+  put(payload = {}) {
+    const cursoId = payload.cursoId;
+    const data = payload.data || {};
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cursos/${cursoId}`,
+        method: "put",
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+
   post(payload = {}) {
     const data = payload.data || {};
 
@@ -17,4 +58,17 @@ export default {
         .catch(error => reject(error));
     });
   },
-}
+  delete(payload = {}) {
+    const cursoId = payload.cursoId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cursos/${cursoId}`,
+        method: "delete",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+
+};
+
