@@ -56,5 +56,10 @@ export default [
     path: '/curso/:id',
     name:'courseEdit',
     component: () => import('@/views/courses/Edit.vue'),
+  },
+  {
+    path: '/crea-colaborador',
+    name:'colaborador',
+    component: () => import('@/views/admin/FormColaborador.vue'),
   }
 ];

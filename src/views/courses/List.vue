@@ -17,7 +17,7 @@
       <br>
       <v-card>
         <v-toolbar color="grey darken-4" dark card>
-          <v-toolbar-title>Usuarios</v-toolbar-title>
+          <v-toolbar-title>Cursos</v-toolbar-title>
           <v-spacer />
           <v-btn :to="{ name: 'CreateCourse' }" color="success">
             Agregar Curso
@@ -112,7 +112,9 @@ export default {
       searchCourses: "",
     };
   },
-
+  created() {
+    this.getCourses();
+  },
   computed: {
     ...mapState({
       courses: state => state.courses.courses,
