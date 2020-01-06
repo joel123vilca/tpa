@@ -1,8 +1,21 @@
 <template>
-
+  <v-container fluid grid-list-lg>
+  <v-card-title class="white cyan--text headline">
+        Ingresar Colaborador
+        <v-spacer />
+        <v-spacer />
+        <Breadcrumbs
+        :routes="[
+          { name: 'Inicio'},
+          { name: 'Colaboradores' },
+          { name: 'Ingresar Colaborador'}
+        ]"
+        />
+  </v-card-title>
+  <br>
   <v-stepper v-model="e1">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Paso 1: </v-stepper-step>
+      <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales </v-stepper-step>
 
       <v-divider></v-divider>
 
@@ -14,6 +27,12 @@
     </v-stepper-header>
 
     <v-stepper-items>
+      <v-form
+        ref="form"
+        v-model="validForm"
+        lazy-validation
+        @submit.prevent="submitCreateColaborador"
+      >
       <v-stepper-content step="1">
         <h3>Información General</h3>
         <br>
@@ -22,36 +41,42 @@
           <v-layout row wrap>
             <v-flex xs12  md12>
               <v-text-field
+                v-model="form.rut"
                 label="RUT"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex xs12  md6>
               <v-text-field
+                v-model="form.primer_nombre"
                 label="Primer Nombre"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex xs12 md6>
               <v-text-field
+                v-model="form.segundo_nombre"
                 label="Segundo Nombre"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-text-field
+                v-model="form.apellido_paterno"
                 label="Apellido Paterno"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-text-field
+                v-model="form.apellido_materno"
                 label="Apellido Materno"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex xs12 sm12 md12>
               <v-text-field
+                v-model="form.domicilio"
                 label="Domicilio"
                 outline
               ></v-text-field>
@@ -61,20 +86,19 @@
                 v-model="form.sexo"
                 :items="genero"
                 label="Sexo"
-                item-text="nombre"
-                item-value="id"
                 outline
               />
             </v-flex>
             <v-flex xs12 sm4 md4>
               <v-text-field
+                v-model="form.nacionalidad"
                 label="Nacionalidad"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex sm4 xs12>
               <v-autocomplete
-                v-model="form.civilstate"
+                v-model="form.estado_civil_id"
                 :items="estados"
                 label="Estado Civil"
                 item-text="nombre"
@@ -84,6 +108,7 @@
             </v-flex>
             <v-flex xs12 sm4 md4>
               <v-text-field
+                v-model="form.edad"
                 label="Edad"
                 type="number"
                 outline
@@ -120,7 +145,7 @@
                     </v-flex>
             <v-flex sm4 xs12>
               <v-autocomplete
-                v-model="form.educacion"
+                v-model="form.nivel_educacion_id"
                 :items="niveles"
                 label="Nivel de Educación"
                 item-text="nombre"
@@ -130,12 +155,14 @@
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-text-field
+                v-model="form.contacto_emergencia_nombre"
                 label="Contacto de Emergencia"
                 outline
               ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-text-field
+                v-model="form.contacto_emergencia_telefono"
                 label="Teléfono Contacto de Emergencia"
                 outline
               ></v-text-field>
@@ -164,6 +191,7 @@
           </v-flex>
           <v-flex xs12 sm4 md4>
             <v-text-field
+              v-model="form.estado"
               label="Estado"
               outline
             ></v-text-field>
@@ -228,25 +256,28 @@
           </v-flex>
           <v-flex xs12 sm4 md4>
             <v-text-field
+              v-model="form.email"
               label="E-mail"
               outline
             ></v-text-field>
           </v-flex>
           <v-flex xs12 sm4 md4>
             <v-text-field
+              v-model="form.telefono"
               label="Teléfono"
               outline
             ></v-text-field>
           </v-flex>
           <v-flex xs12 sm4 md4>
             <v-text-field
+              v-model="form.anexo"
               label="Anexo"
               outline
             ></v-text-field>
           </v-flex>
           <v-flex sm12 xs12>
             <v-autocomplete
-              v-model="form.etiquetas"
+              v-model="form.tags"
               :items="skills"
               dense
               clearable
@@ -260,7 +291,7 @@
           </v-flex>
           <v-flex sm6 xs12>
             <v-autocomplete
-              v-model="form.licenciab"
+              v-model="form.licencia_b"
               :items="licencias"
               dense
               clearable
@@ -302,14 +333,12 @@
           </v-flex>
           <v-flex sm6 xs12>
             <v-autocomplete
-              v-model="form.licenciad"
+              v-model="form.licencia_d"
               :items="licencias"
               dense
               clearable
               small-chips
               label="Licencia D"
-              item-text="nombre"
-              item-value="id"
               outline
             />
           </v-flex>
@@ -344,14 +373,12 @@
           </v-flex>
           <v-flex sm6 xs12>
             <v-autocomplete
-              v-model="form.canet"
+              v-model="form.canet_portuario"
               :items="licencias"
               dense
               clearable
               small-chips
               label="Carnet Portuario"
-              item-text="nombre"
-              item-value="id"
               outline
             />
           </v-flex>
@@ -386,24 +413,28 @@
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field
+              v-model="form.talla_calzado"
               label="Talla Calzado"
               outline
             ></v-text-field>
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field
+              v-model="form.talla_chaleco"
               label="Talla Chaleco"
               outline
             ></v-text-field>
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field
+              v-model="form.talla_polera"
               label="Talla Polera"
               outline
             ></v-text-field>
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field
+              v-model="form.talla_pantalon"
               label="Talla Pantalón"
               outline
             ></v-text-field>
@@ -432,82 +463,128 @@
     prepend-icon="mdi-camera"
   ></v-file-input>
         <v-btn
+          type="submit"
           color="success"
-          @click="e1 = 1"
+          :loading="processingForm"
         >
           Siguiente
         </v-btn>
 
         <v-btn color="error">Volver</v-btn>
       </v-stepper-content>
+       </v-form>
     </v-stepper-items>
   </v-stepper>
+  </v-container>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        targetIssueDate: false,
-        e1: 0,
-        date: new Date().toISOString().substr(0, 10),
-        menu: false,
-        menu2:false,
-        menu3:false,
-        menu4:false,
-        menu5:false,
-        files: [],
-        form:{
-          sexo:0,
-          civilstate:0,
-          educacion:0,
-          birth_date: '',
-          etiquetas:[],
-          licenciab:0,
-          licenciad:0,
-          carnet:0,
-        },
-        genero: [
-        {id:0, nombre:'Femenino'},
-        {id:1, nombre:'Masculino'}
-        ],
-        estados: [
-        {id:0, nombre:'Soltero (a)'},
-        {id:1, nombre:'Casado (a)'},
-        {id:2, nombre:'viudo (a)'},
+
+import { mapState, mapActions } from 'vuex'
+
+export default {
+  data () {
+    return {
+      targetIssueDate: false,
+      e1: 0,
+      date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      menu2: false,
+      menu3: false,
+      menu4: false,
+      menu5: false,
+      files: [],
+      form: {
+        rut: '',
+        usuario: '',
+        password: '',
+        primer_nombre: '',
+        segundo_nombre: '',
+        apellido_paterno: '',
+        apellido_materno: '',
+        sexo: '',
+        nacionalidad: '',
+        fecha_nacimiento: '',
+        edad: 0,
+        email: '',
+        domicilio: '',
+        licencia_b: '',
+        vencimiento_licencia_b: '',
+        licencia_d: '',
+        vencimiento_licencia_d: '',
+        carnet_portuario: '',
+        vencimiento_carnet_portuario: '',
+        talla_calzado: '',
+        talla_chaleco: '',
+        talla_polera: '',
+        talla_pantalon: '',
+        fecha_ingreso: '',
+        telefono: '',
+        celular: '',
+        anexo: '',
+        contacto_emergencia_nombre: '',
+        contacto_emergencia_telefono: '',
+        estado: '',
+        fecha_inactividad: '',
+        nivel_educacion_id: 0,
+        estado_civil_id: 0,
+        imagen: '',
+        tags: [],
+      },
+      validForm: true,
+      processingForm: false,
+      genero: [ 'Masculino', 'Femenino'],
+      estados: [
+        { id: 0, nombre: 'Soltero (a)' },
+        { id: 1, nombre: 'Casado (a)' },
+        { id: 2, nombre: 'viudo (a)' },
       ],
-       niveles: [
-        {id:0, nombre:'Tecnico'},
-        {id:1, nombre:'Universitario'},
+      niveles: [
+        { id: 0, nombre: 'Tecnico' },
+        { id: 1, nombre: 'Universitario' },
       ],
       skills: [
-        {id:0, nombre:'Auditor Interno'},
-        {id:1, nombre:'Monitor Pausa Activa'},
-        {id:2, nombre:'Relator Intero'},
-        {id:3, nombre:'Otro'},
+        { id: 0, nombre: 'Auditor Interno' },
+        { id: 1, nombre: 'Monitor Pausa Activa' },
+        { id: 2, nombre: 'Relator Intero' },
+        { id: 3, nombre: 'Otro' },
       ],
-      licencias: [
-        {id:0, nombre:'Si'},
-        {id:1, nombre:'No'},
-        {id:2, nombre:'N/A'},
+      licencias: ['SI','NO','N/A'
       ],
-      }
+    }
+  },
+  components: {
+    Breadcrumbs: () => import("@/components/Breadcrumbs"),
+  },
+  watch: {
+    targetIssueDate (val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
     },
-    watch: {
-      targetIssueDate (val) {
-        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-      },
-      targetIssueDateYear (val) {
-        val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
-      },
+    targetIssueDateYear (val) {
+      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+    },
   },
 
-      methods: {
-       formatDate (date) {
+  methods: {
+    ...mapActions({
+      createColaborador: 'colaboradores/createColaborador',
+    }),
+    formatDate (date) {
       if (!date) return null
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
     },
-
+    submitCreateColaborador(){
+      this.processingForm = true
+      console.log(this.form)
+      this.createColaborador({ data: this.form })
+      .then(response => {
+        this.processingForm = false
+        this.e1 = 1
+      })
+      .catch((error) => {
+          this.processingForm = false
+      })
     }
   }
+}
 </script>
