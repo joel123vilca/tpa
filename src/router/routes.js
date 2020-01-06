@@ -59,7 +59,12 @@ export default [
   },
   {
     path: '/crea-colaborador',
-    name:'colaborador',
+    name: 'colaborador',
     component: () => import('@/views/admin/FormColaborador.vue'),
+  },
+  {
+    path: '/lista-colaboradores',
+    name: 'listacolaboradores',
+    component: () => import('@/views/admin/ListColaboradores.vue'),
   }
 ];
