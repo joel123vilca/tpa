@@ -99,9 +99,9 @@
             <v-flex sm4 xs12>
               <v-autocomplete
                 v-model="form.estado_civil_id"
-                :items="estados"
+                :items="estadoCiviles"
                 label="Estado Civil"
-                item-text="nombre"
+                item-text="tipo"
                 item-value="id"
                 outline
               />
@@ -457,11 +457,18 @@
 
       <v-stepper-content step="3">
         <br>
-        <v-file-input
-    label="File input"
-    filled
-    prepend-icon="mdi-camera"
-  ></v-file-input>
+        <img :src="imageUrl" height="150" v-if="imageUrl"/>
+					<v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+					<input
+            id="file"
+						type="file"
+						style="display: none"
+            ref="image"
+            name="image"
+						accept="image/*"
+						@change="onFilePicked"
+					>
+        <br><br>
         <v-btn
           type="submit"
           color="success"
@@ -493,6 +500,10 @@ export default {
       menu4: false,
       menu5: false,
       files: [],
+      imageName: '',
+      imageUrl: '',
+      imageFile: '',
+      file:'',
       form: {
         rut: '',
         usuario: '',
@@ -563,11 +574,44 @@ export default {
       val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
     },
   },
-
+  computed: {
+    ...mapState({
+      estadoCiviles: state => state.estadoCiviles.estadoCiviles,
+      loadingEstadoCiviles: state => state.estadoCiviles.loadingEstadoCiviles,
+    })
+  },
+  created() {
+    this.getEstadoCiviles();
+  },
   methods: {
     ...mapActions({
       createColaborador: 'colaboradores/createColaborador',
+      getEstadoCiviles: 'estadoCiviles/getEstadoCiviles',
     }),
+    pickFile () {
+            this.$refs.image.click ()
+        },
+    onFilePicked (e) {
+      const files = e.target.files
+      let formData = new FormData()
+      formData.append('file', files[0])
+			if(files[0] !== undefined) {
+				this.imageName = files[0].name
+				if(this.imageName.lastIndexOf('.') <= 0) {
+					return
+				}
+				const fr = new FileReader ()
+				fr.readAsDataURL(files[0])
+				fr.addEventListener('load', () => {
+					this.imageUrl = fr.result
+          this.imageFile = files[0]
+				})
+			} else {
+				this.imageName = ''
+				this.imageFile = ''
+				this.imageUrl = ''
+			}
+		},
     formatDate (date) {
       if (!date) return null
       const [year, month, day] = date.split('-')

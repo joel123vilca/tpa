@@ -3,23 +3,21 @@
     fluid
     grid-list-lg
   >
-    <template>
-      <Breadcrumbs
+    <v-card-title class="white cyan--text headline">
+        Listado de Colaboradores
+        <v-spacer />
+        <v-spacer />
+        <Breadcrumbs
         :routes="[
-          { name: 'Inicio' },
+          { name: 'Inicio'},
           { name: 'Colaboradores' },
-          { name: 'Listado' }
+          { name: 'Listado'}
         ]"
-      />
+        />
+    </v-card-title>
+    <br>
+    <template>
       <v-card>
-        <v-toolbar
-          color="grey darken-4"
-          dark
-          card
-        >
-          <v-toolbar-title>Preinscritos</v-toolbar-title>
-          <v-spacer />
-        </v-toolbar>
         <v-container
           fluid
           grid-list-lg
@@ -38,7 +36,7 @@
                 :disabled="loadingRegistereds"
                 box
                 append-icon="search"
-                label="Buscar por dni o apellido"
+                label="Buscar Nombre"
                 clearable
                 hide-details
               />
@@ -46,12 +44,13 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombre', value: 'Nombre' },
+                  { text: 'Nombre', value: 'Nombre', color: 'red'},
                   { text: 'Cargo'},
                   { text: 'Editar informacion'},
                   { text: 'Editar Movilidad'},
                   { text: 'Editar Cargas' },
-                  { text: 'Editar Hoja de vida'}
+                  { text: 'Editar Hoja de vida'},
+                  { text: 'Cursos'}
                 ]"
                 :items="listado"
                 :search="searchUsers"
@@ -63,25 +62,25 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    hola
-                  </td>
-                  <td class="px-3">
                     {{ props.item.nombre }}
                   </td>
                   <td class="px-3">
-                    button
+                    cargo
                   </td>
                   <td class="px-3">
-                    button
+                    <v-btn small color="success">Informacion</v-btn>
                   </td>
                   <td class="px-3">
-                    button
+                    <v-btn small color="success">Movilidad</v-btn>
+                  </td>
+                  <td class="px-3">
+                    <v-btn small color="success">Cargas</v-btn>
                   </td>
                   <td>
-                    button
+                    <v-btn small color="success">Hoja de Vida</v-btn>
                   </td>
                   <td class="text-xs-center px-3">
-                   button
+                    <v-btn small color="success">Cursos</v-btn>
                   </td>
                 </tr>
               </v-data-table>
@@ -120,3 +119,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.colorHeader{
+  color: aliceblue;
+  background:teal;
+}
+</style>
