@@ -146,9 +146,9 @@
             <v-flex sm4 xs12>
               <v-autocomplete
                 v-model="form.nivel_educacion_id"
-                :items="niveles"
+                :items="nivelesEducacion"
                 label="Nivel de Educación"
-                item-text="nombre"
+                item-text="nivel_tipo"
                 item-value="id"
                 outline
               />
@@ -278,7 +278,7 @@
           <v-flex sm12 xs12>
             <v-autocomplete
               v-model="form.tags"
-              :items="skills"
+              :items="tags"
               dense
               clearable
               small-chips
@@ -458,16 +458,15 @@
       <v-stepper-content step="3">
         <br>
         <img :src="imageUrl" height="150" v-if="imageUrl"/>
-					<v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
-					<input
-            id="file"
-						type="file"
-						style="display: none"
-            ref="image"
-            name="image"
-						accept="image/*"
-						@change="onFilePicked"
-					>
+       <!-- <v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field> -->
+        <input
+          id="file"
+          type="file"
+          ref="image"
+          name="image"
+          accept="image/*"
+          @change="onFilePicked"
+        >
         <br><br>
         <v-btn
           type="submit"
@@ -503,7 +502,7 @@ export default {
       imageName: '',
       imageUrl: '',
       imageFile: '',
-      file:'',
+      file: '',
       form: {
         rut: '',
         usuario: '',
@@ -578,41 +577,51 @@ export default {
     ...mapState({
       estadoCiviles: state => state.estadoCiviles.estadoCiviles,
       loadingEstadoCiviles: state => state.estadoCiviles.loadingEstadoCiviles,
+      nivelesEducacion: state => state.nivelesEducacion.nivelesEducacion,
+      loadingNivelesEducacion: state => state.nivelesEducacion.loadingNivelesEducacion,
+      tags: state => state.tags.tags,
+      loadingTags: state => state.tags.loadingTags,
     })
   },
   created() {
     this.getEstadoCiviles();
+    this.getNivelesEducacion();
+    this.getTags();
   },
   methods: {
     ...mapActions({
       createColaborador: 'colaboradores/createColaborador',
       getEstadoCiviles: 'estadoCiviles/getEstadoCiviles',
+      getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
+      getTags: 'tags/getTags',
     }),
-    pickFile () {
-            this.$refs.image.click ()
-        },
+    pickFile() {
+      this.$refs.image.click()
+    },
     onFilePicked (e) {
-      const files = e.target.files
-      let formData = new FormData()
-      formData.append('file', files[0])
+      const files = e.target.files;
+      this.form.imagen = btoa(files[0]);
+      const formData = new FormData();
+      formData.append('file', this.form.imagen);
+      console.log(this.file);
 			if(files[0] !== undefined) {
-				this.imageName = files[0].name
+        this.imageName = files[0].name
 				if(this.imageName.lastIndexOf('.') <= 0) {
 					return
 				}
-				const fr = new FileReader ()
+				const fr = new FileReader()
 				fr.readAsDataURL(files[0])
 				fr.addEventListener('load', () => {
-					this.imageUrl = fr.result
+          this.imageUrl = fr.result
           this.imageFile = files[0]
 				})
 			} else {
-				this.imageName = ''
-				this.imageFile = ''
-				this.imageUrl = ''
+				this.imageName = '';
+				this.imageFile = '';
+				this.imageUrl = '';
 			}
 		},
-    formatDate (date) {
+    formatDate(date) {
       if (!date) return null
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`

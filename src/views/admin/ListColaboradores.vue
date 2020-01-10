@@ -27,13 +27,13 @@
             wrap
           >
             <v-flex
-              v-if="listado.length"
+              v-if="colaboradores.length"
               sm6
               offset-sm6
             >
               <v-text-field
                 v-model="searchUsers"
-                :disabled="loadingRegistereds"
+                :disabled="loadingColaboradores"
                 box
                 append-icon="search"
                 label="Buscar Nombre"
@@ -52,9 +52,9 @@
                   { text: 'Editar Hoja de vida'},
                   { text: 'Cursos'}
                 ]"
-                :items="listado"
+                :items="colaboradores"
                 :search="searchUsers"
-                :loading="loadingRegistereds"
+                :loading="loadingColaboradores"
                 class="elevation-1"
               >
                 <tr
@@ -62,7 +62,7 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.nombre }}
+                    {{ props.item.primer_nombre }}
                   </td>
                   <td class="px-3">
                     cargo
@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
 
 export default {
 
@@ -102,19 +102,21 @@ export default {
   },
   data () {
     return {
-      listado:[
-        {id:1, nombre:'joel'},
-        {id:2, nombre:'alberto'},
-      ]
+      searchUsers: "",
     }
   },
   computed: {
+    ...mapState({
+      colaboradores: state => state.colaboradores.colaboradores,
+      loadingColaboradores: state => state.colaboradores.loadingColaboradores,
+    })
   },
   created () {
+    this.getColaboradores();
   },
   methods: {
     ...mapActions({
-
+      getColaboradores: 'colaboradores/getColaboradores',
     })
   }
 }

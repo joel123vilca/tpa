@@ -17,4 +17,14 @@ export default {
         .catch(error => reject(error));
     });
   },
+  get(payload = {}) {
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  }
 }

@@ -38,7 +38,6 @@
                       <v-autocomplete
                         v-model="form.tipo"
                         :items="tipos"
-                        :loading="loadingTipeUsers"
                         dense
                         clearable
                         small-chips
@@ -60,7 +59,6 @@
                       <v-autocomplete
                         v-model="form.estado"
                         :items="estados"
-                        :loading="loadingTipeUsers"
                         dense
                         clearable
                         small-chips

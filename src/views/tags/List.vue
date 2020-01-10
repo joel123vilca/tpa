@@ -16,13 +16,13 @@
           dark
           card
         >
-          <v-toolbar-title>Cursos</v-toolbar-title>
+          <v-toolbar-title>Tags</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'sgcUsersCreate' }"
             color="success"
           >
-            Agregar Curso
+            Agregar Tag
           </v-btn>
         </v-toolbar>
         <v-container
@@ -37,12 +37,12 @@
               <v-data-table
                 :headers="[
                   { text: 'Nombres', value: 'nombre' },
-                  { text: 'Tipo' },
+                  { text: 'Descripcion' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"
-                :items="courses"
-                :loading="loadingCourses"
+                :items="tags"
+                :loading="loadingTags"
                 class="elevation-1"
               >
                 <tr
@@ -53,7 +53,7 @@
                     {{ props.item.nombre }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.tipo }}
+                    {{ props.item.descripcion }}
                   </td>
                   <td class="px-3">
                   </td>
@@ -74,7 +74,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
 
   metaInfo () {
-    return { title: 'Listado de cursos' }
+    return { title: 'Listado de tags' }
   },
 
   components: {
@@ -88,17 +88,17 @@ export default {
 
   computed: {
     ...mapState({
-      courses: state => state.courses.courses,
-      loadingCourses: state => state.courses.loadingCourses,
+      tags: state => state.tags.tags,
+      loadingTags: state => state.tags.loadingTags,
     })
   },
   created () {
-    this.getCourses();
+    this.getTags();
   },
 
   methods: {
     ...mapActions({
-      getCourses: 'courses/getCourses',
+      getTags: 'tags/getTags',
     }),
   }
 }

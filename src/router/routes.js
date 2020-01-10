@@ -43,12 +43,12 @@ export default [
     component: () => import('@/views/users/Collaborators.vue'),
   },
   {
-    path: '/crearcurso',
+    path: '/crear-curso',
     name:'CreateCourse',
     component: () => import('@/views/courses/Create.vue'),
   },
   {
-    path: '/listadecursos',
+    path: '/lista-cursos',
     name:'ListCourse',
     component: () => import('@/views/courses/List.vue'),
   },
@@ -66,5 +66,10 @@ export default [
     path: '/lista-colaboradores',
     name: 'listacolaboradores',
     component: () => import('@/views/admin/ListColaboradores.vue'),
-  }
+  },
+  {
+    path: '/lista-tags',
+    name: 'listatags',
+    component: () => import('@/views/tags/List.vue'),
+  },
 ];
