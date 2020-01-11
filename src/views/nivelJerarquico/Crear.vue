@@ -2,18 +2,13 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[
-          { name: 'Inicio', to: { name: 'sgcUsersList' } },
-          { name: 'Cursos', to: { name: 'sgcUsersList' } },
-          { name: 'Editar curso' }
-        ]"
+        :routes="[{ name: 'Inicio', to: { name: 'sgcUsersList' } }, { name: 'Crear nivel jerarquico' }]"
       />
-
       <v-layout row wrap>
-        <v-flex md6 sm6 xs12>
+        <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Editar Curso</span>
+              <span class="success--text font-weight-bold headline">Crear Nivel Jerarquico</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -21,49 +16,26 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitUpdateCourse"
+                @submit.prevent="submitCreateCourse"
               >
                 <v-container fluid grid-list-lg>
                   <v-text-field
-                    v-model="form.nombre"
+                    v-model="form.nivel_nombre"
                     :disabled="processingForm"
-                    label="Nombre"
+                    label="nombre"
                     outline
-                    :rules="rules.nombre"
-                    :error="!!formErrors.nombre"
-                    :error-messages="formErrors.nombre"
+                    :rules="rules.nivel_nombre"
+                    :error="!!formErrors.nivel_nombre"
+                    :error-messages="formErrors.nivel_nombre"
                     @keyup="
                       () => {
-                        formErrors.nombre = undefined;
-                        delete formErrors.nombre;
+                        formErrors.nivel_nombre = undefined;
+                        delete formErrors.nivel_nombre;
                       }
                     "
                   />
-
                   <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-autocomplete
-                        v-model="form.tipo"
-                        :items="tipos"
-                        dense
-                        outline
-                        clearable
-                        small-chips
-                        label="Seleccionar tipo"
-                        item-text="nombre"
-                        item-value="id"
-                        :disabled="processingForm"
-                        :error="!!formErrors.tipo"
-                        :error-messages="formErrors.tipo"
-                        @change="
-                          () => {
-                            formErrors.tipo = undefined;
-                            delete formErrors.tipo;
-                          }
-                        "
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
+                    <v-flex sm12 xs12>
                       <v-autocomplete
                         v-model="form.estado"
                         :items="estados"
@@ -71,7 +43,7 @@
                         outline
                         clearable
                         small-chips
-                        label="Seleccionar estado"
+                        label="Seleccionar Estado"
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
@@ -97,7 +69,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'ListCourse' })">
+                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -114,9 +86,10 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
+  middleware: "auth",
 
   metaInfo() {
-    return { title: "Editar Curso" };
+    return { title: "Nuevo nivel jerarquico" };
   },
 
   components: {
@@ -125,71 +98,36 @@ export default {
 
   data() {
     return {
-      imageUrl: "",
-
       formErrors: {},
 
       form: {
-        nombre: "",
-        tipo: '',
-        estado: '',
+        nivel_nombre: '',
+        estado: 0,
       },
-      tipos: [
-        {id:0, nombre:'externo'},
-        {id:1, nombre:'interno'}
-      ],
       estados: [
-        {id:0, nombre:'inactivo'},
-        {id:1, nombre:'activo'}
+        { id: 0, nombre: 'inactivo' },
+        { id: 1, nombre: 'activo' },
       ],
-
       validForm: true,
       processingForm: false,
-
       rules: {
-        nombre: [v => !!v || "El nombre es requerido"],
+        nivel_nombre: [v => !!v || "El nombre es requerido"],
       }
     };
   },
 
-  computed: {
-    ...mapState({
-      currentCourse: state => state.courses.currentCourse,
-    })
-  },
-
-  created() {
-
-    this.getCourse({ cursoId: this.$route.params.id }).then(response => {
-      const courseInfo = response.data.data;
-      this.setForm(courseInfo);
-    });
-  },
-
   methods: {
     ...mapActions({
-      replaceCurrentCourse: "courses/replaceCurrentCourse",
-      updateCourse: "courses/updateCourse",
-      getCourse: "courses/getCourse"
+      createNivelJerarquico: "nivelesJerarquico/createNivelJerarquico"
     }),
 
-    setForm(course) {
-      this.form.nombre = course.nombre;
-      this.form.tipo = course.tipo;
-      this.form.estado = course.estado;
-    },
-
-    submitUpdateCourse() {
+    submitCreateCourse() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.updateCourse({
-        cursoId: this.$route.params.id,
-        data: this.form
-      })
+      this.createNivelJerarquico({ data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "ListCourse" });
         })
         .catch(error => {
           this.processingForm = false;

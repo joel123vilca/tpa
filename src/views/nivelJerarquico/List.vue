@@ -27,13 +27,13 @@
             wrap
           >
             <v-flex
-              v-if="colaboradores.length"
+              v-if="nivelesJerarquico.length"
               sm6
               offset-sm6
             >
               <v-text-field
-                v-model="searchUsers"
-                :disabled="loadingColaboradores"
+                v-model="searchJerarquico"
+                :disabled="loadingNivelesJerarquico"
                 box
                 append-icon="search"
                 label="Buscar Nombre"
@@ -44,17 +44,13 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombre', value: 'Nombre', color: 'red'},
-                  { text: 'Cargo'},
-                  { text: 'Editar informacion'},
-                  { text: 'Editar Movilidad'},
-                  { text: 'Editar Cargas' },
-                  { text: 'Editar Hoja de vida'},
-                  { text: 'Cursos'}
+                  { text: 'Nombre', value: 'nivel_nombre'},
+                  { text: 'Estado'},
+                  { text: 'Acciones'},
                 ]"
-                :items="colaboradores"
-                :search="searchUsers"
-                :loading="loadingColaboradores"
+                :items="nivelesJerarquico"
+                :search="searchJerarquico"
+                :loading="loadingNivelesJerarquico"
                 class="elevation-1"
               >
                 <tr
@@ -62,25 +58,24 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.primer_nombre }}
+                    {{ props.item.nivel_nombre }}
                   </td>
                   <td class="px-3">
-                    cargo
+                    {{ props.item.estado }}
                   </td>
                   <td class="px-3">
-                    <v-btn small color="success">Informacion</v-btn>
-                  </td>
-                  <td class="px-3">
-                    <v-btn small color="success">Movilidad</v-btn>
-                  </td>
-                  <td class="px-3">
-                    <v-btn small color="success">Cargas</v-btn>
-                  </td>
-                  <td>
-                    <v-btn small color="success">Hoja de Vida</v-btn>
-                  </td>
-                  <td class="text-xs-center px-3">
-                    <v-btn small color="success">Cursos</v-btn>
+                    <v-btn
+                        class="ma-0"
+                        :to="{ name: 'editniveljerarquico', params: { id: props.item.id } }"
+                        small
+                        icon
+                        flat
+                        color="info"
+                      >
+                        <v-icon small>
+                          edit
+                        </v-icon>
+                      </v-btn>
                   </td>
                 </tr>
               </v-data-table>
@@ -98,28 +93,28 @@ import { mapState, mapActions } from 'vuex';
 export default {
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
   },
-  data () {
+  data() {
     return {
-      searchUsers: "",
-    }
+      searchJerarquico: '',
+    };
   },
   computed: {
     ...mapState({
-      colaboradores: state => state.colaboradores.colaboradores,
-      loadingColaboradores: state => state.colaboradores.loadingColaboradores,
-    })
+      nivelesJerarquico: state => state.nivelesJerarquico.nivelesJerarquico,
+      loadingNivelesJerarquico: state => state.nivelesJerarquico.loadingNivelesJerarquico,
+    }),
   },
-  created () {
-    this.getColaboradores();
+  created() {
+    this.getNivelesJerarquico();
   },
   methods: {
     ...mapActions({
-      getColaboradores: 'colaboradores/getColaboradores',
-    })
-  }
-}
+      getNivelesJerarquico: 'nivelesJerarquico/getNivelesJerarquico',
+    }),
+  },
+};
 </script>
 <style scoped>
 .colorHeader{

@@ -36,7 +36,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombres', value: 'nombre' },
+                  { text: 'Nombres'},
                   { text: 'Tipo' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
@@ -53,7 +53,6 @@
                     {{ props.item.nombre }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.tipo }}
                   </td>
                   <td class="px-3">
                   </td>

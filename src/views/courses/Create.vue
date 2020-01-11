@@ -23,6 +23,7 @@
                     v-model="form.nombre"
                     :disabled="processingForm"
                     label="nombre"
+                    outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
                     :error-messages="formErrors.nombre"
@@ -39,6 +40,7 @@
                         v-model="form.tipo"
                         :items="tipos"
                         dense
+                        outline
                         clearable
                         small-chips
                         label="Seleccionar tipo de curso"
@@ -60,6 +62,7 @@
                         v-model="form.estado"
                         :items="estados"
                         dense
+                        outline
                         clearable
                         small-chips
                         label="Seleccionar Estado"

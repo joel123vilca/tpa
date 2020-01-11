@@ -49,7 +49,7 @@ export default [
   },
   {
     path: '/lista-cursos',
-    name:'ListCourse',
+    name: 'ListCourse',
     component: () => import('@/views/courses/List.vue'),
   },
   {
@@ -71,5 +71,20 @@ export default [
     path: '/lista-tags',
     name: 'listatags',
     component: () => import('@/views/tags/List.vue'),
+  },
+  {
+    path: '/crear-nivel-jerarquico',
+    name: 'niveljerarquico',
+    component: () => import('@/views/nivelJerarquico/Crear.vue'),
+  },
+  {
+    path: '/lista-nivel-jerarquico',
+    name: 'listaniveljerarquico',
+    component: () => import('@/views/nivelJerarquico/List.vue'),
+  },
+  {
+    path: '/nivel-jerarquico/:id',
+    name: 'editniveljerarquico',
+    component: () => import('@/views/nivelJerarquico/Edit.vue'),
   },
 ];

@@ -598,12 +598,11 @@ export default {
     pickFile() {
       this.$refs.image.click()
     },
-    onFilePicked (e) {
+    onFilePicked(e) {
       const files = e.target.files;
-      this.form.imagen = btoa(files[0]);
-      const formData = new FormData();
-      formData.append('file', this.form.imagen);
-      console.log(this.file);
+      this.form.imagen = files[0];
+      // const formData = new FormData();
+      // formData.append('file', this.form.imagen);
 			if(files[0] !== undefined) {
         this.imageName = files[0].name
 				if(this.imageName.lastIndexOf('.') <= 0) {
