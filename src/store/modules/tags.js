@@ -25,7 +25,24 @@ export const actions = {
           reject(error);
         });
     });
-  }
+  },
+  createTag({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      tagAPI
+        .post(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "TAG",
+            message: "El tag ha sido creado con éxito."
+          });
+
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
 };
 
 export const mutations = {

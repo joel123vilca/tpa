@@ -73,6 +73,11 @@ export default [
     component: () => import('@/views/tags/List.vue'),
   },
   {
+    path: '/crear-tags',
+    name: 'creartags',
+    component: () => import('@/views/tags/Create.vue'),
+  },
+  {
     path: '/crear-nivel-jerarquico',
     name: 'niveljerarquico',
     component: () => import('@/views/nivelJerarquico/Crear.vue'),
