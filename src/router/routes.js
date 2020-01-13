@@ -43,6 +43,11 @@ export default [
     component: () => import('@/views/users/Collaborators.vue'),
   },
   {
+    path: '/Colaborador/:id/agregar-carga-familiar',
+    name: 'agregarCargaFamiliar',
+    component: () => import('@/views/admin/AgregarCargaFamiliar.vue'),
+  },
+  {
     path: '/crear-curso',
     name:'CreateCourse',
     component: () => import('@/views/courses/Create.vue'),
@@ -54,7 +59,7 @@ export default [
   },
   {
     path: '/curso/:id',
-    name:'courseEdit',
+    name: 'courseEdit',
     component: () => import('@/views/courses/Edit.vue'),
   },
   {
@@ -76,6 +81,11 @@ export default [
     path: '/crear-tags',
     name: 'creartags',
     component: () => import('@/views/tags/Create.vue'),
+  },
+  {
+    path: '/tag/:id',
+    name: 'edittag',
+    component: () => import('@/views/tags/Edit.vue'),
   },
   {
     path: '/crear-nivel-jerarquico',

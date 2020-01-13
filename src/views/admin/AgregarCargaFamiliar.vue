@@ -2,18 +2,13 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[
-          { name: 'Inicio'},
-          { name: 'Tags'},
-          { name: 'Editar Tag' }
-        ]"
+        :routes="[{ name: 'Inicio' }, { name: 'Colaborador' }, {name: 'Agregar Carga Familiar'}]"
       />
-
       <v-layout row wrap>
-        <v-flex md12 sm12 xs12>
+        <v-flex md6 sm6 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Editar Tag</span>
+              <span class="success--text font-weight-bold headline">Agregar Carga Familiar</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -21,56 +16,69 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitUpdateTag"
+                @submit.prevent="submitCreateCargaFamiliar"
               >
                 <v-container fluid grid-list-lg>
                   <v-text-field
-                   <v-text-field
-                    v-model="form.nombre"
+                    v-model="form.rut"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Rut"
                     outline
-                    :rules="rules.nombre"
-                    :error="!!formErrors.nombre"
-                    :error-messages="formErrors.nombre"
+                    :rules="rules.rut"
+                    :error="!!formErrors.rut"
+                    :error-messages="formErrors.rut"
                     @keyup="
                       () => {
-                        formErrors.nombre = undefined;
-                        delete formErrors.nombre;
+                        formErrors.rut = undefined;
+                        delete formErrors.rut;
                       }
                     "
                   />
                   <v-text-field
-                    v-model="form.descripcion"
+                    v-model="form.nombres"
                     :disabled="processingForm"
-                    label="Descripcion"
+                    label="nombres"
                     outline
-                    :rules="rules.descripcion"
-                    :error="!!formErrors.descripcion"
-                    :error-messages="formErrors.descripcion"
+                    :rules="rules.nombres"
+                    :error="!!formErrors.nombres"
+                    :error-messages="formErrors.nombres"
                     @keyup="
                       () => {
-                        formErrors.descripcion = undefined;
-                        delete formErrors.descripcion;
+                        formErrors.nombres = undefined;
+                        delete formErrors.nombres;
                       }
                     "
                   />
                   <v-text-field
-                    v-model="form.permisos"
+                    v-model="form.apellidos"
                     :disabled="processingForm"
-                    label="Permisos"
+                    label="Apellidos"
                     outline
-                    :rules="rules.permisos"
-                    :error="!!formErrors.permisos"
-                    :error-messages="formErrors.permisos"
+                    :rules="rules.apellidos"
+                    :error="!!formErrors.apellidos"
+                    :error-messages="formErrors.apellidos"
                     @keyup="
                       () => {
-                        formErrors.permisos = undefined;
-                        delete formErrors.permisos;
+                        formErrors.apellidos = undefined;
+                        delete formErrors.apellidos;
                       }
                     "
                   />
-
+                  <v-text-field
+                    v-model="form.fecha_nacimiento"
+                    :disabled="processingForm"
+                    label="Fecha de nacimiento"
+                    outline
+                    :rules="rules.fecha_nacimiento"
+                    :error="!!formErrors.fecha_nacimiento"
+                    :error-messages="formErrors.fecha_nacimiento"
+                    @keyup="
+                      () => {
+                        formErrors.fecha_nacimiento = undefined;
+                        delete formErrors.fecha_nacimiento;
+                      }
+                    "
+                  />
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-autocomplete
@@ -80,7 +88,9 @@
                         outline
                         clearable
                         small-chips
-                        label="Seleccionar tipo de curso"
+                        label="Seleccionar tipo de Carga Familiar"
+                        item-text="tipo"
+                        item-value="id"
                         :disabled="processingForm"
                         :error="!!formErrors.tipo"
                         :error-messages="formErrors.tipo"
@@ -126,7 +136,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'listatags' })">
+                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -143,9 +153,8 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-
   metaInfo() {
-    return { title: "Editar Tag" };
+    return { title: "Nuevo tag" };
   },
 
   components: {
@@ -157,66 +166,53 @@ export default {
       formErrors: {},
 
       form: {
-        nombre: '',
-        descripcion: '',
-        permisos: '',
-        tipo: 0,
+        rut: '',
+        nombres: '',
+        apellidos: '',
+        fecha_nacimiento: '2020-01-13',
+        tipo_carga_id: 1,
         estado: 0,
       },
-      tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [
-        { id: 0, nombre: 'inactivo' },
-        { id: 1, nombre: 'activo' },
+        {id:0, nombre:'inactivo'},
+        {id:1, nombre:'activo'}
       ],
-
+      tipos: [
+        {id:1, tipo:'papa'},
+        {id:2, tipo:'mama'}
+      ],
       validForm: true,
       processingForm: false,
 
       rules: {
-        nombre: [v => !!v || "El nombre es requerido"],
+        rut: [v => !!v || "El rut es requerido"],
       }
     };
   },
-
   computed: {
     ...mapState({
-      currentTag: state => state.tags.currentTag,
+      tiposCarga: state => state.colaboradores.tiposCarga,
+      loadingTiposCarga: state => state.colaboradores.loadingTiposCarga,
     }),
   },
-
   created() {
-    this.getTag({ tagId: this.$route.params.id }).then(response => {
-      const tagInfo = response.data.data;
-      this.setForm(tagInfo);
-    });
+    this.getTiposCarga();
   },
-
   methods: {
     ...mapActions({
-      replaceCurrentTag: "tags/replaceCurrentTag",
-      updateTag: "tags/updateTag",
-      getTag: "tags/getTag"
+      postFamily: "colaboradores/postFamily",
+      getTiposCarga: "colaboradores/getTiposCarga",
     }),
 
-    setForm(tag) {
-      this.form.nombre = tag.nombre;
-      this.form.descripcion = tag.descripcion;
-      this.form.permisos = tag.permisos;
-      this.form.estado = tag.estado;
-      this.form.tipo = tag.tipo;
-    },
-
-    submitUpdateTag() {
+    submitCreateCargaFamiliar() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.updateTag({
-        tagId: this.$route.params.id,
-        data: this.form,
-      })
+      this.postFamily({
+        colaboradorId: this.$route.params.id,
+        data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "listatags" });
         })
         .catch(error => {
           this.processingForm = false;

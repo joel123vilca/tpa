@@ -2,7 +2,7 @@ import * as types from "../mutation-types";
 import courseAPI from "@/api/course";
 
 export const state = {
-  cuoses: [],
+  courses: [],
   loadingCourses: false,
   currentCourse: null,
   showModalDeleteCourse: false

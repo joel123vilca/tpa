@@ -3,7 +3,9 @@ import colaboradorAPI from "@/api/colaborador";
 
 export const state = {
   colaboradores: [],
-  loadingColaboradores: false
+  loadingColaboradores: false,
+  tiposCarga: [],
+  loadingTiposCarga: false,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -41,7 +43,43 @@ export const actions = {
           reject(error);
         });
     });
-  }
+  },
+  postFamily({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .postFamily(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "Colaborador",
+            message: "Se agrego Carga Familiar con éxito."
+          });
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  getTiposCarga({ commit }, payload) {
+    commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: true });
+
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getCarga(payload)
+        .then(response => {
+          const tiposCarga = response.data.data
+          console.log(tiposCarga);
+          commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: false });
+          commit(types.REPLACE_TIPOS_CARGA, { tiposCarga });
+
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: false });
+          reject(error);
+        });
+    });
+  },
 }
 
 export const mutations = {
@@ -50,5 +88,11 @@ export const mutations = {
   },
   [types.REPLACE_COLABORADORES](state, { colaboradores }) {
     state.colaboradores = colaboradores;
-  }
+  },
+  [types.REPLACE_LOADING_TIPOS_CARGA](state, { status }) {
+    state.loadingTiposCarga = status;
+  },
+  [types.REPLACE_TIPOS_CARGA](state, { tiposCarga }) {
+    state.tiposCarga = tiposCarga;
+  },
 };

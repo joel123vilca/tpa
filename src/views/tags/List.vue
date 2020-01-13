@@ -58,6 +58,18 @@
                   <td class="px-3">
                   </td>
                   <td class="text-xs-center px-3">
+                    <v-btn
+                        class="ma-0"
+                        :to="{ name: 'edittag', params: { id: props.item.id } }"
+                        small
+                        icon
+                        flat
+                        color="info"
+                      >
+                        <v-icon small>
+                          edit
+                        </v-icon>
+                      </v-btn>
                   </td>
                 </tr>
               </v-data-table>

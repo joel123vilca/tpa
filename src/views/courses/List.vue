@@ -36,7 +36,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombres'},
+                  { text: 'Nombre'},
                   { text: 'Tipo' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
