@@ -6,12 +6,12 @@ const HOST = baseUrlAPI;
 export default {
   post(payload = {}) {
     const data = payload.data || {};
-
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/colaboradores`,
         method: "post",
-        data
+        data,
+        headers: {'Content-Type': 'multipart/form-data' },
       })
         .then(response => resolve(response))
         .catch(error => reject(error));
@@ -43,7 +43,7 @@ export default {
   getCarga(payload = {}) {
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/tipos-carga`,
+        url: `${HOST}/tipo-cargas`,
         method: "get"
       })
         .then(response => resolve(response))

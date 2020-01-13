@@ -83,7 +83,7 @@
                     <v-flex sm6 xs12>
                       <v-autocomplete
                         v-model="form.tipo"
-                        :items="tipos"
+                        :items="tiposCarga"
                         dense
                         outline
                         clearable

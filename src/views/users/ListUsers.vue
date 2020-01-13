@@ -160,7 +160,7 @@ export default {
       searchUsers: "",
       singleSelect: false,
       selected: [],
-       bottomNav: 'recent'
+      bottomNav: 'recent'
     };
   },
 

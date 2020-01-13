@@ -64,20 +64,22 @@
           </v-layout>
         </v-container>
       </v-card>
+      <ModalDelete/>
   </v-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
 
 export default {
 
-  metaInfo () {
+  metaInfo() {
     return { title: 'Listado de cursos' }
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    ModalDelete: () => import("@/views/courses/ModalDelete")
   },
 
   data () {
@@ -91,14 +93,21 @@ export default {
       loadingCourses: state => state.courses.loadingCourses,
     })
   },
-  created () {
+  created() {
     this.getCourses();
   },
 
   methods: {
     ...mapActions({
       getCourses: 'courses/getCourses',
+      replaceShowModalDeleteCourse: 'courses/replaceShowModalDeleteCourse',
+      replaceCurrentCourse: 'courses/replaceCurrentCourse',
+      deleteCourse: 'courses/deleteCourse',
+      replaceCourses: 'courses/replaceCourses',
     }),
+    openModalDeleteCourse() {
+      this.replaceShowModalDeleteCourse({ status: true});
+    },
   }
 }
 </script>

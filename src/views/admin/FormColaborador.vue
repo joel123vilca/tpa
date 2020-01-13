@@ -458,12 +458,13 @@
       <v-stepper-content step="3">
         <br>
         <img :src="imageUrl" height="150" v-if="imageUrl"/>
-       <!-- <v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field> -->
+          <v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
         <input
           id="file"
           type="file"
           ref="image"
           name="image"
+          style="none"
           accept="image/*"
           @change="onFilePicked"
         >
@@ -601,8 +602,6 @@ export default {
     onFilePicked(e) {
       const files = e.target.files;
       this.form.imagen = files[0];
-      // const formData = new FormData();
-      // formData.append('file', this.form.imagen);
 			if(files[0] !== undefined) {
         this.imageName = files[0].name
 				if(this.imageName.lastIndexOf('.') <= 0) {
@@ -627,8 +626,7 @@ export default {
     },
     submitCreateColaborador(){
       this.processingForm = true
-      console.log(this.form)
-      this.createColaborador({ data: this.form })
+      this.createColaborador({ data: formData})
       .then(response => {
         this.processingForm = false
         this.e1 = 1
@@ -636,7 +634,7 @@ export default {
       .catch((error) => {
           this.processingForm = false
       })
-    }
+    },
   }
 }
 </script>
