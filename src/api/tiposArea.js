@@ -8,7 +8,7 @@ export default {
     const params = payload.params || {};
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/tags`,
+        url: `${HOST}/tipos-area`,
         method: "get",
         params
       })
@@ -18,11 +18,11 @@ export default {
   },
 
   getById(payload = {}) {
-    const tagId = payload.tagId || "";
+    const tipoAreaId = payload.tipoAreaId || "";
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/tags/${tagId}`,
+        url: `${HOST}/tipos-area/${tipoAreaId}`,
         method: "get"
       })
         .then(response => resolve(response))
@@ -31,12 +31,12 @@ export default {
   },
 
   put(payload = {}) {
-    const tagId = payload.tagId;
+    const tipoAreaId = payload.tipoAreaId;
     const data = payload.data || {};
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/tags/${tagId}`,
+        url: `${HOST}/tipos-area/${tipoAreaId}`,
         method: "put",
         data
       })
@@ -50,7 +50,7 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/tags`,
+        url: `${HOST}/tipos-area`,
         method: "post",
         data
       })
@@ -59,10 +59,10 @@ export default {
     });
   },
   delete(payload = {}) {
-    const tagId = payload.tagId;
+    const tipoAreaId = payload.tipoAreaId;
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/tags/${tagId}`,
+        url: `${HOST}/tipos-area/${tipoAreaId}`,
         method: "delete",
       })
         .then(response => resolve(response))

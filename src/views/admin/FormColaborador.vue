@@ -626,6 +626,21 @@ export default {
     },
     submitCreateColaborador(){
       this.processingForm = true
+      var tags = JSON.stringify(this.form.tags);
+      var formData = new FormData();
+      for (var i = 0; i < this.form.tags.length; i++)
+      { formData.append('tags[]', this.form.tags[i]);
+        console.log(this.form.tags[i]);
+      }
+      formData.append("rut", this.form.rut);
+      formData.append("primer_nombre", this.form.primer_nombre);
+      formData.append("segundo_nombre", this.form.segundo_nombre);
+      formData.append("apellido_paterno", this.form.apellido_paterno);
+      formData.append("apellido_materno", this.form.apellido_materno);
+      formData.append("sexo", this.form.sexo);
+      formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
+      formData.append("estado_civil_id", this.form.estado_civil_id);
+      formData.append("imagen", this.form.imagen);
       this.createColaborador({ data: formData})
       .then(response => {
         this.processingForm = false

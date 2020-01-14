@@ -102,4 +102,19 @@ export default [
     name: 'editniveljerarquico',
     component: () => import('@/views/nivelJerarquico/Edit.vue'),
   },
+  {
+    path: '/crea-tipos-area',
+    name: 'creartipoarea',
+    component: () => import('@/views/tiposArea/Create.vue'),
+  },
+  {
+    path: '/lista-tipos-area',
+    name: 'listatipoarea',
+    component: () => import('@/views/tiposArea/List.vue'),
+  },
+  {
+    path: '/tipo-area/:id',
+    name: 'edittipoarea',
+    component: () => import('@/views/tiposArea/Edit.vue'),
+  },
 ];
