@@ -33,7 +33,7 @@ export default {
   put(payload = {}) {
     const tipoAreaId = payload.tipoAreaId;
     const data = payload.data || {};
-
+    console.log(data);
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/tipos-area/${tipoAreaId}`,

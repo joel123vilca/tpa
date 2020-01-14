@@ -2,18 +2,13 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[
-          { name: 'Inicio'},
-          { name: 'Tipos Area'},
-          { name: 'Editar Tipos' }
-        ]"
+        :routes="[{ name: 'Inicio' }, { name: 'Nuevo Area' }]"
       />
-
       <v-layout row wrap>
-        <v-flex md12 sm12 xs12>
+        <v-flex md6 sm6 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Editar Tipos Area</span>
+              <span class="success--text font-weight-bold headline">Crear Area</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -21,26 +16,47 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitUpdateTipoArea"
+                @submit.prevent="submitCreateArea"
               >
                 <v-container fluid grid-list-lg>
                   <v-text-field
-                    v-model="form.tipo_nombre"
+                    v-model="form.nombre"
                     :disabled="processingForm"
                     label="nombre"
                     outline
-                    :rules="rules.tipo_nombre"
-                    :error="!!formErrors.tipo_nombre"
-                    :error-messages="formErrors.tipo_nombre"
+                    :rules="rules.nombre"
+                    :error="!!formErrors.nombre"
+                    :error-messages="formErrors.nombre"
                     @keyup="
                       () => {
-                        formErrors.tipo_nombre = undefined;
-                        delete formErrors.tipo_nombre;
+                        formErrors.nombre = undefined;
+                        delete formErrors.nombre;
                       }
                     "
                   />
-
                   <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                      <v-autocomplete
+                        v-model="form.tipo_area_id"
+                        :items="tiposArea"
+                        dense
+                        outline
+                        clearable
+                        small-chips
+                        label="Seleccionar tipo de curso"
+                        item-text="tipo_nombre"
+                        item-value="id"
+                        :disabled="processingForm"
+                        :error="!!formErrors.tipo_area_id"
+                        :error-messages="formErrors.tipo_area_id"
+                        @change="
+                          () => {
+                            formErrors.tipo_area_id = undefined;
+                            delete formErrors.tipo_area_id;
+                          }
+                        "
+                      />
+                    </v-flex>
                     <v-flex sm6 xs12>
                       <v-autocomplete
                         v-model="form.estado"
@@ -75,7 +91,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'listatipoarea' })">
+                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -92,9 +108,8 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-
   metaInfo() {
-    return { title: "Editar Tipos Area" };
+    return { title: "Nuevo Area" };
   },
 
   components: {
@@ -106,64 +121,53 @@ export default {
       formErrors: {},
 
       form: {
-        tipo_nombre: '',
+        nombre: '',
+        padre_id: 1,
+        tipo_area_id: 0,
         estado: 0,
       },
+      tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [
-        { id: 0, nombre: 'inactivo' },
-        { id: 1, nombre: 'activo' },
+        {id:0, nombre:'inactivo'},
+        {id:1, nombre:'activo'}
       ],
-
       validForm: true,
       processingForm: false,
 
       rules: {
-        tipo_nombre: [v => !!v || "El tipo nombre es requerido"],
+        nombre: [v => !!v || "El nombre es requerido"],
       }
     };
   },
-
-  computed: {
+    computed: {
     ...mapState({
-      currentTipoArea: state => state.tipoArea.currentTipoArea,
-    }),
+      tiposArea: state => state.tiposArea.tiposArea,
+      loadingTiposArea: state => state.tiposArea.loadingTiposArea,
+    })
   },
-
-  created() {
-    this.getTipoArea({ tipoAreaId: this.$route.params.id }).then(response => {
-      const tipoAreaInfo = response.data.data;
-      this.setForm(tipoAreaInfo);
-    });
+  created(){
+    this.getTiposArea();
   },
-
   methods: {
     ...mapActions({
-      replaceCurrentTipoArea: "tiposArea/replaceCurrentTipoArea",
-      updateTipoArea: "tiposArea/updateTipoArea",
-      getTipoArea: "tiposArea/getTipoArea"
+      createArea: "areas/createArea",
+      getTiposArea: "tiposArea/getTiposArea",
     }),
 
-    setForm(tipoArea) {
-      this.form.tipo_nombre = tipoArea.tipo_nombre;
-      this.form.estado = tipoArea.estado;
-    },
-
-    submitUpdateTipoArea() {
+    submitCreateArea() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.updateTipoArea({
-        tipoAreaId: this.$route.params.id,
-        data: this.form,
-      })
+      this.createArea({ data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "listatipoarea" });
         })
         .catch(error => {
           this.processingForm = false;
+          this.formErrors = error.response.data.errors || {};
         });
     }
   }
 };
+
 </script>

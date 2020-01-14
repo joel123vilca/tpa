@@ -117,4 +117,9 @@ export default [
     name: 'edittipoarea',
     component: () => import('@/views/tiposArea/Edit.vue'),
   },
+  {
+    path: '/crear-area',
+    name: 'crearArea',
+    component: () => import('@/views/areas/Create.vue'),
+  },
 ];
