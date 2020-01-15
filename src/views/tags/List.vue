@@ -19,7 +19,7 @@
           <v-toolbar-title>Tags</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'sgcUsersCreate' }"
+            :to="{ name: 'creartags' }"
             color="success"
           >
             Agregar Tag
@@ -56,6 +56,17 @@
                     {{ props.item.descripcion }}
                   </td>
                   <td class="px-3">
+                    <v-chip
+                      v-if="props.item.estado === 1"
+                      small
+                      color="primary"
+                      text-color="white"
+                    >
+                      Activo
+                    </v-chip>
+                    <v-chip v-else-if="props.item.estado === 0" small>
+                      Inactivo
+                    </v-chip>
                   </td>
                   <td class="text-xs-center px-3">
                     <v-btn

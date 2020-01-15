@@ -6,7 +6,7 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Tags' },
+          { name: 'Areas' },
           { name: 'Listado' }
         ]"
       />
@@ -19,7 +19,7 @@
           <v-toolbar-title>Cursos</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'sgcUsersCreate' }"
+            :to="{ name: 'CreateCourse' }"
             color="success"
           >
             Agregar Curso
@@ -53,10 +53,44 @@
                     {{ props.item.nombre }}
                   </td>
                   <td class="px-3">
+                    <v-chip
+                      v-if="props.item.tipo === 1"
+                      small
+                      color="teal"
+                      text-color="white"
+                    >
+                      Interno
+                    </v-chip>
+                    <v-chip v-else-if="props.item.tipo === 0" small>
+                      Externo
+                    </v-chip>
                   </td>
                   <td class="px-3">
+                    <v-chip
+                      v-if="props.item.estado === 1"
+                      small
+                      color="primary"
+                      text-color="white"
+                    >
+                      Activo
+                    </v-chip>
+                    <v-chip v-else-if="props.item.estado === 0" small>
+                      Inactivo
+                    </v-chip>
                   </td>
                   <td class="text-xs-center px-3">
+                    <v-btn
+                        class="ma-0"
+                        :to="{ name: 'courseEdit', params: { id: props.item.id } }"
+                        small
+                        icon
+                        flat
+                        color="info"
+                      >
+                        <v-icon small>
+                          edit
+                        </v-icon>
+                      </v-btn>
                   </td>
                 </tr>
               </v-data-table>

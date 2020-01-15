@@ -105,16 +105,16 @@ export const actions = {
 };
 
 export const mutations = {
-  [types.REPLACE_LOADING_TAGS](state, { status }) {
-    state.loadingTags = status;
+  [types.REPLACE_LOADING_AREAS](state, { status }) {
+    state.loadingAreas = status;
   },
-  [types.REPLACE_TAGS](state, { tags }) {
-    state.tags = tags;
+  [types.REPLACE_AREAS](state, { areas }) {
+    state.areas = areas;
   },
-  [types.REPLACE_CURRENT_TAG](state, { tag }) {
-    state.currentTag = tag;
+  [types.REPLACE_CURRENT_AREA](state, { area }) {
+    state.currentArea = area;
   },
-  [types.REPLACE_SHOW_MODAL_DELETE_TAG](state, { status }) {
-    state.showModalDeleteTag = status;
+  [types.REPLACE_SHOW_MODAL_DELETE_AREA](state, { status }) {
+    state.showModalDeleteArea = status;
   }
 };

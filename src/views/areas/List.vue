@@ -6,7 +6,7 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Tipos Area' },
+          { name: 'Areas' },
           { name: 'Listado' }
         ]"
       />
@@ -16,13 +16,13 @@
           dark
           card
         >
-          <v-toolbar-title>Tipos Area</v-toolbar-title>
+          <v-toolbar-title>Areas</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'creartipoarea' }"
+            :to="{ name: 'crearArea' }"
             color="success"
           >
-            Agregar Tipo Area
+            Agregar Area
           </v-btn>
         </v-toolbar>
         <v-container
@@ -36,12 +36,13 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombres', value: 'tipo_nombre' },
+                  { text: 'Nombres', value: 'nombre' },
+                  { text: 'Descripcion' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"
-                :items="tiposArea"
-                :loading="loadingTiposArea"
+                :items="areas"
+                :loading="loadingAreas"
                 class="elevation-1"
               >
                 <tr
@@ -49,7 +50,10 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.tipo_nombre }}
+                    {{ props.item.nombre }}
+                  </td>
+                  <td class="px-3">
+                    {{ props.item.tipoArea.tipo_nombre }}
                   </td>
                   <td class="px-3">
                     <v-chip
@@ -67,7 +71,7 @@
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
-                        :to="{ name: 'edittipoarea', params: { id: props.item.id } }"
+                        :to="{ name: 'editArea', params: { id: props.item.id } }"
                         small
                         icon
                         flat
@@ -93,7 +97,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
 
   metaInfo () {
-    return { title: 'Listado de tipos Area' }
+    return { title: 'Listado de areas' }
   },
 
   components: {
@@ -107,17 +111,17 @@ export default {
 
   computed: {
     ...mapState({
-      tiposArea: state => state.tiposArea.tiposArea,
-      loadingTiposArea: state => state.tiposArea.loadingTiposArea,
+      areas: state => state.areas.areas,
+      loadingAreas: state => state.areas.loadingAreas,
     })
   },
   created () {
-    this.getTiposArea();
+    this.getAreas();
   },
 
   methods: {
     ...mapActions({
-      getTiposArea: 'tiposArea/getTiposArea',
+      getAreas: 'areas/getAreas',
     }),
   }
 }

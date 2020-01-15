@@ -37,7 +37,7 @@ export default {
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/areas/${areaId}`,
-        method: "put",
+        method: "patch",
         data
       })
         .then(response => resolve(response))

@@ -69,7 +69,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+                  <v-btn @click="$router.push({ name: 'listatipoarea' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -127,6 +127,7 @@ export default {
       this.createTipoArea({ data: this.form })
         .then(response => {
           this.processingForm = false;
+          this.$router.push({ name: "listatipoarea" });
         })
         .catch(error => {
           this.processingForm = false;

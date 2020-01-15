@@ -2,7 +2,7 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[{ name: 'Inicio', to: { name: 'sgcUsersList' } }, { name: 'Nuevo curso' }]"
+        :routes="[{ name: 'Inicio', to: { name: 'ListCourse' } }, { name: 'Nuevo curso' }]"
       />
       <v-layout row wrap>
         <v-flex md6 sm6 xs12>
@@ -91,7 +91,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+                  <v-btn @click="$router.push({ name: 'ListCourse' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -157,6 +157,7 @@ export default {
       this.createCourse({ data: this.form })
         .then(response => {
           this.processingForm = false;
+          this.$router.push({ name: "ListCourse" });
         })
         .catch(error => {
           this.processingForm = false;

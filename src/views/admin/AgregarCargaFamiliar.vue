@@ -183,10 +183,6 @@ export default {
       ],
       validForm: true,
       processingForm: false,
-
-      rules: {
-        rut: [v => !!v || "El rut es requerido"],
-      }
     };
   },
   computed: {

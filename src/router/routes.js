@@ -34,7 +34,7 @@ export default [
   },
   {
     path: '/grafico',
-    name:'grafico',
+    name: 'grafico',
     component: () => import('@/views/users/graficos.vue'),
   },
   {
@@ -49,7 +49,7 @@ export default [
   },
   {
     path: '/crear-curso',
-    name:'CreateCourse',
+    name: 'CreateCourse',
     component: () => import('@/views/courses/Create.vue'),
   },
   {
@@ -64,7 +64,7 @@ export default [
   },
   {
     path: '/crea-colaborador',
-    name: 'colaborador',
+    name: 'crearcolaborador',
     component: () => import('@/views/admin/FormColaborador.vue'),
   },
   {
@@ -89,7 +89,7 @@ export default [
   },
   {
     path: '/crear-nivel-jerarquico',
-    name: 'niveljerarquico',
+    name: 'creaniveljerarquico',
     component: () => import('@/views/nivelJerarquico/Crear.vue'),
   },
   {
@@ -121,5 +121,15 @@ export default [
     path: '/crear-area',
     name: 'crearArea',
     component: () => import('@/views/areas/Create.vue'),
+  },
+  {
+    path: '/lista-areas',
+    name: 'listaArea',
+    component: () => import('@/views/areas/List.vue'),
+  },
+  {
+    path: '/area/:id',
+    name: 'editArea',
+    component: () => import('@/views/areas/Edit.vue'),
   },
 ];

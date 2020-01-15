@@ -18,6 +18,20 @@
     <br>
     <template>
       <v-card>
+        <v-toolbar
+          color="grey darken-4"
+          dark
+          card
+        >
+          <v-toolbar-title>Nivel Jerarquico</v-toolbar-title>
+          <v-spacer />
+          <v-btn
+            :to="{ name: 'creaniveljerarquico' }"
+            color="success"
+          >
+            Agregar Nivel Jerarquico
+          </v-btn>
+        </v-toolbar>
         <v-container
           fluid
           grid-list-lg
@@ -61,7 +75,17 @@
                     {{ props.item.nivel_nombre }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.estado }}
+                    <v-chip
+                      v-if="props.item.estado === 1"
+                      small
+                      color="primary"
+                      text-color="white"
+                    >
+                      Activo
+                    </v-chip>
+                    <v-chip v-else-if="props.item.estado === 0" small>
+                      Inactivo
+                    </v-chip>
                   </td>
                   <td class="px-3">
                     <v-btn

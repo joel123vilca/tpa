@@ -26,7 +26,7 @@ export default {
   el: "#app",
 
   metaInfo() {
-    const appName = "User";
+    const appName = "TPA";
 
     return {
       title: appName,

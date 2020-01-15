@@ -2,7 +2,7 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[{ name: 'Inicio', to: { name: 'sgcUsersList' } }, { name: 'Crear nivel jerarquico' }]"
+        :routes="[{ name: 'Inicio', to: { name: 'listaniveljerarquico' } }, { name: 'Crear nivel jerarquico' }]"
       />
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
@@ -69,7 +69,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+                  <v-btn @click="$router.push({ name: 'listaniveljerarquico' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -128,6 +128,7 @@ export default {
       this.createNivelJerarquico({ data: this.form })
         .then(response => {
           this.processingForm = false;
+          this.$router.push({ name: "listaniveljerarquico" });
         })
         .catch(error => {
           this.processingForm = false;

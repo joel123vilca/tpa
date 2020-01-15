@@ -40,6 +40,18 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getFamily(payload = {}) {
+    const data = payload.data || {};
+    const colaboradorId = payload.colaboradorId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/cargas-familiares`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getCarga(payload = {}) {
     return new Promise((resolve, reject) => {
       axios({

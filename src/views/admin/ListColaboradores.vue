@@ -18,6 +18,20 @@
     <br>
     <template>
       <v-card>
+        <v-toolbar
+          color="grey darken-4"
+          dark
+          card
+        >
+          <v-toolbar-title></v-toolbar-title>
+          <v-spacer />
+          <v-btn
+            :to="{ name: 'crearcolaborador' }"
+            color="success"
+          >
+            Agregar Colaborador
+          </v-btn>
+        </v-toolbar>
         <v-container
           fluid
           grid-list-lg
