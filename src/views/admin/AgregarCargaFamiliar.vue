@@ -5,7 +5,7 @@
         :routes="[{ name: 'Inicio' }, { name: 'Colaborador' }, {name: 'Agregar Carga Familiar'}]"
       />
       <v-layout row wrap>
-        <v-flex md6 sm6 xs12>
+        <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
               <span class="success--text font-weight-bold headline">Agregar Carga Familiar</span>
@@ -24,7 +24,6 @@
                     :disabled="processingForm"
                     label="Rut"
                     outline
-                    :rules="rules.rut"
                     :error="!!formErrors.rut"
                     :error-messages="formErrors.rut"
                     @keyup="
@@ -39,7 +38,6 @@
                     :disabled="processingForm"
                     label="nombres"
                     outline
-                    :rules="rules.nombres"
                     :error="!!formErrors.nombres"
                     :error-messages="formErrors.nombres"
                     @keyup="
@@ -54,7 +52,6 @@
                     :disabled="processingForm"
                     label="Apellidos"
                     outline
-                    :rules="rules.apellidos"
                     :error="!!formErrors.apellidos"
                     :error-messages="formErrors.apellidos"
                     @keyup="
@@ -69,7 +66,6 @@
                     :disabled="processingForm"
                     label="Fecha de nacimiento"
                     outline
-                    :rules="rules.fecha_nacimiento"
                     :error="!!formErrors.fecha_nacimiento"
                     :error-messages="formErrors.fecha_nacimiento"
                     @keyup="
@@ -136,7 +132,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+                  <v-btn @click="$router.push({name: 'ListaCargaFamiliar', params: { id: $route.params.id }})">
                     Cancelar
                   </v-btn>
                 </div>

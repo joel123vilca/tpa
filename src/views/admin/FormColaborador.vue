@@ -189,14 +189,14 @@
               outline
             ></v-text-field>
           </v-flex>
-          <v-flex xs12 sm4 md4>
+          <v-flex xs12 sm6 md6>
             <v-text-field
               v-model="form.estado"
               label="Estado"
               outline
             ></v-text-field>
           </v-flex>
-          <v-flex xs12 sm4 md4>
+          <v-flex xs12 sm6 md6>
              <v-menu
               ref="menu"
               v-model="menu"
@@ -213,35 +213,6 @@
             <v-text-field
               v-model="date"
               label="Fecha de Ingreso "
-              readonly
-              v-on="on"
-              outline
-            ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
-              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
-            </v-menu>
-          </v-flex>
-          <v-flex xs12 sm4 md4>
-             <v-menu
-              ref="menu"
-              v-model="menu2"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="date"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
-            >
-            <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Fecha de Inactividad "
               readonly
               v-on="on"
               outline
@@ -371,6 +342,49 @@
             </v-date-picker>
             </v-menu>
           </v-flex>
+
+          <v-flex sm6 xs12>
+            <v-autocomplete
+              v-model="form.credencial_vigilante"
+              :items="licencias"
+              dense
+              clearable
+              small-chips
+              label="Credencial Vigilante"
+              outline
+            />
+          </v-flex>
+          <v-flex xs12 sm6 md6>
+             <v-menu
+              ref="menu"
+              v-model="menu4"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="date"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              min-width="290px"
+            >
+            <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="date"
+              label="Vencimiento Credencial Vigilante "
+              readonly
+              v-on="on"
+              outline
+            ></v-text-field>
+            </template>
+            <v-date-picker v-model="date" no-title scrollable>
+              <v-spacer></v-spacer>
+              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
+              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+            </v-date-picker>
+            </v-menu>
+          </v-flex>
+
+
           <v-flex sm6 xs12>
             <v-autocomplete
               v-model="form.canet_portuario"
@@ -524,6 +538,8 @@ export default {
         vencimiento_licencia_d: '',
         carnet_portuario: '',
         vencimiento_carnet_portuario: '',
+        credencial_vigilante: '',
+        vencimiento_credencial_vigilante: '',
         talla_calzado: '',
         talla_chaleco: '',
         talla_polera: '',

@@ -41,7 +41,6 @@ export default {
     });
   },
   getFamily(payload = {}) {
-    const data = payload.data || {};
     const colaboradorId = payload.colaboradorId;
     return new Promise((resolve, reject) => {
       axios({

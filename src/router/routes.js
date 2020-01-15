@@ -48,6 +48,11 @@ export default [
     component: () => import('@/views/admin/AgregarCargaFamiliar.vue'),
   },
   {
+    path: '/Colaborador/:id/lista-carga-familiar',
+    name: 'ListaCargaFamiliar',
+    component: () => import('@/views/admin/ListaCargaFamiliar.vue'),
+  },
+  {
     path: '/crear-curso',
     name: 'CreateCourse',
     component: () => import('@/views/courses/Create.vue'),

@@ -6,6 +6,8 @@ export const state = {
   loadingColaboradores: false,
   tiposCarga: [],
   loadingTiposCarga: false,
+  cargaFamiliar: [],
+  loadingCargaFamiliar: false,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -60,6 +62,25 @@ export const actions = {
         });
     });
   },
+  getFamily({ commit }, payload) {
+    commit(types.REPLACE_LOADING_CARGA_FAMILIAR, { status: true });
+
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getFamily(payload)
+        .then(response => {
+          const cargaFamiliar = response.data.data
+          commit(types.REPLACE_LOADING_CARGA_FAMILIAR, { status: false });
+          commit(types.REPLACE_CARGA_FAMILIAR, { cargaFamiliar });
+
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_CARGA_FAMILIAR, { status: false });
+          reject(error);
+        });
+    });
+  },
   getTiposCarga({ commit }, payload) {
     commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: true });
 
@@ -68,7 +89,6 @@ export const actions = {
         .getCarga(payload)
         .then(response => {
           const tiposCarga = response.data.data
-          console.log(tiposCarga);
           commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: false });
           commit(types.REPLACE_TIPOS_CARGA, { tiposCarga });
 
@@ -88,6 +108,12 @@ export const mutations = {
   },
   [types.REPLACE_COLABORADORES](state, { colaboradores }) {
     state.colaboradores = colaboradores;
+  },
+  [types.REPLACE_LOADING_CARGA_FAMILIAR](state, { status }) {
+    state.loadingCargaFamiliar = status;
+  },
+  [types.REPLACE_CARGA_FAMILIAR](state, { cargaFamiliar }) {
+    state.cargaFamiliar = cargaFamiliar;
   },
   [types.REPLACE_LOADING_TIPOS_CARGA](state, { status }) {
     state.loadingTiposCarga = status;
