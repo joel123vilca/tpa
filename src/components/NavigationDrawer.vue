@@ -52,17 +52,17 @@ export default {
     return {
        items: [
           {
-            title: 'Perfil',
+            title: 'Colaboradores',
             items: [
-              { title: 'Datos Generales' },
-              { title: 'Desarrollo Organizacional' },
-              { title: 'Capacitaciòn' },
+              { title: 'Agregar Nuevo', to: { name: "crearcolaborador" } },
+              { title: 'Listar Todos', to: { name: "listacolaboradores" } },
             ],
           },
           {
-            title: 'Gerencia Personas',
+            title: 'Reportes',
             items: [
-              { title: 'Adm. De Personas' },
+              { title: 'Adm. De Personas' ,
+              to: { name: "listacolaboradores" }},
               { title: 'DO y Capacitaciòn' },
               { title: 'Bienestar' },
               { title: 'Comunicaciones' },
@@ -70,15 +70,46 @@ export default {
             ],
           },
           {
-            title: 'Colaboradores',
+            title: 'Tag / Etiquetas',
             items: [
-              { title: 'Ranking TPA' },
+              { title: 'Agregar Nuevo', to: { name: "creartags" } },
+              { title: 'Listar Todas', to: { name: "listatags" } },
+
             ],
           },
           {
-            title: 'Cerrar Sesion',
+            title: 'Nivel Jerarquico',
             items: [
-              { title: 'List Item' },
+              { title: 'Agregar Nuevo', to: { name: "creaniveljerarquico" } },
+              { title: 'Listar Todas', to: { name: "listaniveljerarquico" } },
+            ],
+          },
+          {
+            title: 'Areas',
+            items: [
+              { title: 'Agregar Nuevo', to: { name: "crearArea" } },
+              { title: 'Listar Todas', to: { name: "listaArea" } },
+            ],
+          },
+          {
+            title: 'Cargos',
+            items: [
+              { title: 'Agregar Nuevo' },
+              { title: 'Listar Todas' },
+            ],
+          },
+          {
+            title: 'Cursos / Capacitaciones',
+            items: [
+              { title: 'Agregar Nuevo', to: { name: "CreateCourse" } },
+              { title: 'Listar Todas', to: { name: "ListCourse" }},
+            ],
+          },
+          {
+            title: 'Configuraciones',
+            items: [
+              { title: 'Agregar Nuevo' },
+              { title: 'Listar Todas' },
             ],
           }
         ],
@@ -114,11 +145,11 @@ export default {
 
 <style lang="scss" scoped>
 .drawer{
-  background-color: #283848 !important;
+  background-color: #337ab7 !important;
   color: white !important;
 }
 .menu-expand{
-  background-color: #283848 !important;
+  background-color: #337ab7 !important;
   color: white !important;
 }
 .scoped-list-tile {

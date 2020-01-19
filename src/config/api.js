@@ -1,1 +1,1 @@
-export const baseUrlAPI = "http://localhost:8000/api";
+export const baseUrlAPI = "https://brisef.cl/tpa/proyectodo/backend/public/api";

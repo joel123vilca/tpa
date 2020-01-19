@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     redirect: {
-      name: 'login',
+      name: 'listacolaboradores',
     },
   },
   {
@@ -38,7 +38,7 @@ export default [
     component: () => import('@/views/users/graficos.vue'),
   },
   {
-    path: '/Colaboradores',
+    path: '/colaboradores',
     name: 'colaboradores',
     component: () => import('@/views/users/Collaborators.vue'),
   },
@@ -76,6 +76,11 @@ export default [
     path: '/lista-colaboradores',
     name: 'listacolaboradores',
     component: () => import('@/views/admin/ListColaboradores.vue'),
+  },
+  {
+    path: '/colaborador/:id',
+    name: 'editcolaborador',
+    component: () => import('@/views/admin/EditColaborador.vue'),
   },
   {
     path: '/lista-tags',

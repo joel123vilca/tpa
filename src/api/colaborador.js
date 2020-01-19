@@ -27,6 +27,34 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getById(payload = {}) {
+    const colaboradorId = payload.colaboradorId || "";
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+
+  put(payload = {}) {
+    const colaboradorId = payload.colaboradorId;
+    const data = payload.data || {};
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}`,
+        method: "patch",
+        data,
+        headers: {'Content-Type': 'multipart/form-data' },
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   postFamily(payload = {}) {
     const data = payload.data || {};
     const colaboradorId = payload.colaboradorId;

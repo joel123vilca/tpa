@@ -4,6 +4,7 @@ import colaboradorAPI from "@/api/colaborador";
 export const state = {
   colaboradores: [],
   loadingColaboradores: false,
+  currentColaborador: null,
   tiposCarga: [],
   loadingTiposCarga: false,
   cargaFamiliar: [],
@@ -62,6 +63,40 @@ export const actions = {
         });
     });
   },
+  replaceCurrentColaborador({ commit }, payload) {
+    commit(types.REPLACE_CURRENT_COLABORADOR, payload);
+  },
+  getColaborador({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getById(payload)
+        .then(response => {
+          const colaborador = response.data.data;
+          commit(types.REPLACE_CURRENT_COLABORADOR, { colaborador });
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  updateColaborador({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .put(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "Colaborador",
+            message: "El colaborador ha sido actualizado con éxito."
+          });
+
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
   getFamily({ commit }, payload) {
     commit(types.REPLACE_LOADING_CARGA_FAMILIAR, { status: true });
 
@@ -108,6 +143,9 @@ export const mutations = {
   },
   [types.REPLACE_COLABORADORES](state, { colaboradores }) {
     state.colaboradores = colaboradores;
+  },
+  [types.REPLACE_CURRENT_COLABORADOR](state, { colaborador }) {
+    state.currentColaborador = colaborador;
   },
   [types.REPLACE_LOADING_CARGA_FAMILIAR](state, { status }) {
     state.loadingCargaFamiliar = status;

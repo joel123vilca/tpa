@@ -478,7 +478,7 @@
           type="file"
           ref="image"
           name="image"
-          style="none"
+          style="display:none;"
           accept="image/*"
           @change="onFilePicked"
         >
@@ -550,7 +550,7 @@ export default {
         anexo: '',
         contacto_emergencia_nombre: '',
         contacto_emergencia_telefono: '',
-        estado: '',
+        estado: 'Activo (a)',
         fecha_inactividad: '',
         nivel_educacion_id: 0,
         estado_civil_id: 0,
@@ -654,6 +654,9 @@ export default {
       formData.append("apellido_paterno", this.form.apellido_paterno);
       formData.append("apellido_materno", this.form.apellido_materno);
       formData.append("sexo", this.form.sexo);
+      formData.append("nacionalidad", this.form.nacionalidad);
+      formData.append("domicilio", this.form.domicilio);
+
       formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
       formData.append("estado_civil_id", this.form.estado_civil_id);
       formData.append("imagen", this.form.imagen);

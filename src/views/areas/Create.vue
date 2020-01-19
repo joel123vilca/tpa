@@ -57,6 +57,34 @@
                         "
                       />
                     </v-flex>
+                    <v-autocomplete
+                        v-model="form.padre_id"
+                        :items="filterData"
+                        label="SELECCIONAR "
+                        item-text="nombre"
+                        item-value="id"
+                        :rules="rules.padre_id"
+                        :error="!!formErrors.padre_id"
+                        :error-messages="formErrors.padre_id"
+                        @keyup="() => {
+                          formErrors.padre_id = undefined
+                          delete formErrors.padre_id
+                        }"
+                      />
+                      <v-autocomplete
+                        v-model="form.segundo_padre_id"
+                        :items="filterDataSubgerencia"
+                        label="SELECCIONAR subgerencia "
+                        item-text="nombre"
+                        item-value="id"
+                        :rules="rules.segundo_padre_id"
+                        :error="!!formErrors.segundo_padre_id"
+                        :error-messages="formErrors.segundo_padre_id"
+                        @keyup="() => {
+                          formErrors.segundo_padre_id = undefined
+                          delete formErrors.segundo_padre_id
+                        }"
+                      />
                     <v-flex sm6 xs12>
                       <v-autocomplete
                         v-model="form.estado"
@@ -122,8 +150,9 @@ export default {
 
       form: {
         nombre: '',
-        padre_id: 1,
+        padre_id: '',
         tipo_area_id: 0,
+        segundo_padre_id: '',
         estado: 0,
       },
       tipos: ['POSITIVO', 'NEGATIVO'],
@@ -143,15 +172,29 @@ export default {
     ...mapState({
       tiposArea: state => state.tiposArea.tiposArea,
       loadingTiposArea: state => state.tiposArea.loadingTiposArea,
-    })
+      areas: state => state.areas.areas,
+      loadingAreas: state => state.areas.loadingAreas,
+    }),
+      filterData() {
+      let areas = this.areas
+      return areas.filter(o => o.tipoArea.nivel === 1);
+    },
+    filterDataSubgerencia() {
+      console.log(areas);
+      let areas = this.areas
+      return areas.filter(o => o.padre_id === this.form.padre_id);
+    },
+
   },
   created(){
     this.getTiposArea();
+    this.getAreas();
   },
   methods: {
     ...mapActions({
       createArea: "areas/createArea",
       getTiposArea: "tiposArea/getTiposArea",
+      getAreas: 'areas/getAreas',
     }),
 
     submitCreateArea() {
