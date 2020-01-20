@@ -1,19 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
 .profile-description{
-  background-color: #44b5ba;
-  color:white;
-  height: 26px;
-  width: 200px;
-  border-radius: 4px;
-  font-family: 'Montserrat', sans-serif;
-  margin-top: 15px;
-  font-size: 1em;
-  padding: 0 0 0 10px;
-  font-weight: 400;
+  font-size: 0.9em;
 }
-.tab:hover {
-    color: white !important;
-    background: #44b5ba !important;
+.star-icon {
+  font-size:1.5em;
+  margin-right: 8px;
 }
 .profile-dates{
   color:#67757c;
@@ -26,7 +16,10 @@
 .profile-image{
   border:6px solid #44b5ba;
   border-radius: 4px;
+  background-color:#44b5ba;
+
 }
+
 .link-encuestas{
   color:#455a64;
   font-weight: 400;
@@ -40,4 +33,52 @@
   padding: 6px 20px;
   min-width: 110px;
   font-weight: 400;
+}
+
+.tab{
+
+    line-height: 1;
+
+    padding: 8px 0 0 0;
+    font-family: Montserrat;
+    letter-spacing: 2px;
+}
+.tab:hover {
+    color: #ffffff;
+    background: #44b5ba !important;
+}
+
+.v-card{
+  border-radius:10px;
+  padding:15px 15px 10px 15px;
+}
+
+/*.v-input__slot,  {
+  height: 85px;
+}*/
+.v-input__control {
+  height: 65px;
+
+}
+.v-text-field__slot {
+  height: 50px;
+
+}
+.v-text-field label {
+  margin-top: -8px;
+  font-size: 17px;
+}
+
+.v-text-field input {
+  padding: 0px 0px 0px 0px;
+  margin-top: 20px;
+  margin-left: 18px;
+  font-size: 18px;
+
+
+}
+
+.datos-principales {
+  margin-top:15px;
+  text-align:left;
 }

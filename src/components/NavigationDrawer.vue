@@ -9,8 +9,10 @@
     fixed
     app
     class="drawer"
+    dark
   >
-    <img style="height:60px;width:300px;" :src="require('@/assets/logo.png')"/>
+
+    <div style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
      <v-layout row>
     <v-flex xs12 sm12>
         <v-list>
@@ -34,7 +36,7 @@
               :to="subItem.to"
             >
               <v-list-tile-content>
-                <v-list-tile-title class="white--text">{{ subItem.title }}</v-list-tile-title>
+                <v-list-tile-title class="white--text">- {{ subItem.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -50,7 +52,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-       items: [
+      items: [
           {
             title: 'Colaboradores',
             items: [

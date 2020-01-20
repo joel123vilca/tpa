@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     redirect: {
-      name: 'listacolaboradores',
+      name: 'login',
     },
   },
   {
@@ -10,7 +10,11 @@ export default [
     name: 'login',
     component: () => import('@/components/Login.vue'),
   },
-
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/Home.vue'),
+  },
   // sgc users
   {
     path: '/users',

@@ -1,22 +1,22 @@
 <template>
   <div>
     <v-toolbar
-
-      height="64"
+      height="60"
       :clipped-left="primaryDrawer.clipped"
       app
       class="toolbar"
       center
+      dark
     >
       <v-toolbar-side-icon
 
         @click.stop="replacePrimaryDrawerModel"
       />
-
       <v-spacer />
+      <div style="height:40px;width:100px;" class="mx-auto">         <img style="height:40px;width:auto; border-radius:4px;" :src="require('@/assets/logo.png')"/>       </div>
       <v-spacer />
         <template>
-          <v-btn icon>
+          <!-- <v-btn icon>
           <v-menu offset-y>
       <template v-slot:activator="{ on }">
           <v-badge
@@ -72,40 +72,7 @@
     </v-flex>
   </v-layout>
     </v-menu>
-        </v-btn>
-        <v-btn icon>
-          <v-menu offset-y>
-      <template v-slot:activator="{ on }">
-          <v-avatar size="36px" v-on="on">
-              <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="John"
-              >
-            </v-avatar>
-      </template>
-      <v-list>
-        <v-list-tile
-          v-if="authenticated"
-          exact
-          ripple
-          active-class="accent"
-          class="scoped-list-tile mb-1"
-        >
-          <v-list-tile-content>Perfil</v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile
-          v-if="authenticated"
-          exact
-          ripple
-          active-class="accent"
-          class="scoped-list-tile mb-1"
-          @click="logout({ router: $router })"
-        >
-          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-        </v-btn>
+        </v-btn> -->
         </template>
     </v-toolbar>
 

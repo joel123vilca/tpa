@@ -95,6 +95,9 @@
                 v-if="form.tipo_area_id > 2"
                 v-model="form.padre_id"
                 :items="filterData"
+                outline
+                clearable
+                small-chips
                 label="SELECCIONAR GERENCIA"
                 item-text="nombre"
                 item-value="id"
@@ -110,6 +113,9 @@
                 v-if="form.tipo_area_id > 3"
                 v-model="form.segundo_padre_id"
                 :items="filterDataSubgerencia"
+                outline
+                clearable
+                small-chips
                 label="SELECCIONAR SUBGERENCIA "
                 item-text="nombre"
                 item-value="id"
@@ -125,6 +131,9 @@
                 v-if="form.tipo_area_id > 4"
                 v-model="form.tercer_padre_id"
                 :items="filterDataArea"
+                outline
+                clearable
+                small-chips
                 label="SELECCIONAR AREA "
                 item-text="nombre"
                 item-value="id"
@@ -211,7 +220,6 @@ export default {
     filterDataArea() {
       let areas = this.areas
       if(this.form.segundo_padre_id != 0){
-        console.log(this.form.segundo_padre_id);
         return areas.filter(o => o.padre_id === this.form.segundo_padre_id && o.tipoArea.nivel === 3);
       } else {
         return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 3);
@@ -233,6 +241,22 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
+      if(this.form.tipo_area_id === 1){
+        this.form.padre_id = 1;
+      }
+      if(this.form.tipo_area_id === 2){
+        this.form.padre_id = this.form.segundo_padre_id;
+      }
+      // if(this.form.tipo_area_id === 3){
+      //   this.form.padre_id = this.form.segundo_padre_id;
+      // }
+      // if(this.form.tipo_area_id === 4){
+      //   if(this.form.tercer_padre_id != 0){
+      //     this.form.padre_id = this.form.segundo_padre_id;
+      //   } else {
+      //     this.form.padre_id = this.form.tercer_padre_id;
+      //   }
+      // }
       this.createArea({ data: this.form })
         .then(response => {
           this.processingForm = false;
