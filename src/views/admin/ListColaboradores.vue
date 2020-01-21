@@ -58,7 +58,8 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombre', value: 'Nombre', color: 'red'},
+                  { text: 'Nombre', value: 'primer_nombre'},
+                  { text: 'Cargo',value: 'apellido_paterno'},
                   { text: 'Cargo'},
                   { text: 'Editar informacion'},
                   { text: 'Editar Movilidad'},
@@ -77,6 +78,9 @@
                 >
                   <td class="px-3">
                     {{ props.item.primer_nombre }}
+                  </td>
+                  <td class="px-3">
+                    {{ props.item.apellido_paterno }}
                   </td>
                   <td class="px-3">
                     cargo
