@@ -128,22 +128,22 @@
                 full-width
                 min-width="290px"
               >
-                        <template v-slot:activator="{ on }">
-                        <v-text-field
-                            :value="formatDate(form.birth_date)"
-                            hint="Formato DD/MM/AAAA"
-                            label="FECHA DE NACIMIENTO"
-                            v-on="on"
-                            outline
-                        ></v-text-field>
-                        </template>
-                        <v-date-picker
-                          ref="picker"
-                          v-model="form.birth_date"
-                          @input="targetIssueDate = false"
-                        ></v-date-picker>
-                      </v-menu>
-                    </v-flex>
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    :value="formatDate(form.fecha_nacimiento)"
+                    hint="Formato DD/MM/AAAA"
+                    label="FECHA DE NACIMIENTO"
+                    v-on="on"
+                    outline
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  ref="picker"
+                  v-model="form.fecha_nacimiento"
+                  @input="targetIssueDate = false"
+                ></v-date-picker>
+                </v-menu>
+              </v-flex>
             <v-flex sm4 xs12>
               <v-autocomplete
                 v-model="form.nivel_educacion_id"
@@ -197,33 +197,33 @@
               outline
             ></v-text-field>
           </v-flex>
-          <v-flex xs12 sm6 md6>
-             <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="date"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
+          <v-flex
+              sm6
+              xs12
             >
-            <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Fecha de Ingreso "
-              readonly
-              v-on="on"
-              outline
-            ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
-              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
+              <v-menu
+                ref="menu1"
+                v-model="targetIssueDate1"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.fecha_ingreso)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE INGRESO"
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker1"
+                v-model="form.fecha_ingreso"
+                @input="targetIssueDate1 = false"
+              ></v-date-picker>
             </v-menu>
           </v-flex>
           <v-flex xs12 sm4 md4>
@@ -274,33 +274,33 @@
               outline
             />
           </v-flex>
-          <v-flex xs12 sm6 md6>
-             <v-menu
-              ref="menu"
-              v-model="menu3"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="date"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
+          <v-flex
+              sm6
+              xs12
             >
-            <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Vencimiento Licencia B"
-              readonly
-              v-on="on"
-              outline
-            ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
-              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
+              <v-menu
+                ref="menu1"
+                v-model="targetIssueDate2"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.vencimiento_licencia_b)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE VENCIMIENTO LICENCIA B"
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker2"
+                v-model="form.vencimiento_licencia_b"
+                @input="targetIssueDate2 = false"
+              ></v-date-picker>
             </v-menu>
           </v-flex>
           <v-flex sm6 xs12>
@@ -314,33 +314,33 @@
               outline
             />
           </v-flex>
-          <v-flex xs12 sm6 md6>
-             <v-menu
-              ref="menu"
-              v-model="menu4"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="date"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
+          <v-flex
+              sm6
+              xs12
             >
-            <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Vencimiento Licencia D "
-              readonly
-              v-on="on"
-              outline
-            ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
-              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
+              <v-menu
+                ref="menu1"
+                v-model="targetIssueDate3"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.vencimiento_licencia_d)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE VENCIMIENTO LICENCIA D"
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker3"
+                v-model="form.vencimiento_licencia_d"
+                @input="targetIssueDate3 = false"
+              ></v-date-picker>
             </v-menu>
           </v-flex>
 
@@ -355,40 +355,40 @@
               outline
             />
           </v-flex>
-          <v-flex xs12 sm6 md6>
-             <v-menu
-              ref="menu"
-              v-model="menu4"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="date"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
+          <v-flex
+              sm6
+              xs12
             >
-            <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Vencimiento Credencial Vigilante "
-              readonly
-              v-on="on"
-              outline
-            ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
-              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
+              <v-menu
+                ref="menu1"
+                v-model="targetIssueDate4"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.vencimiento_credencial_vigilante)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE VENCIMIENTO CREDENCIAL VIGILANTE"
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker4"
+                v-model="form.vencimiento_credencial_vigilante"
+                @input="targetIssueDate4 = false"
+              ></v-date-picker>
             </v-menu>
           </v-flex>
 
 
           <v-flex sm6 xs12>
             <v-autocomplete
-              v-model="form.canet_portuario"
+              v-model="form.carnet_portuario"
               :items="licencias"
               dense
               clearable
@@ -397,33 +397,33 @@
               outline
             />
           </v-flex>
-          <v-flex xs12 sm6 md6>
-             <v-menu
-              ref="menu"
-              v-model="menu5"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="date"
-              lazy
-              transition="scale-transition"
-              offset-y
-              full-width
-              min-width="290px"
+          <v-flex
+              sm6
+              xs12
             >
-            <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Vencimiento Carnet Portuario"
-              readonly
-              v-on="on"
-              outline
-            ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="menu = false">Cancelar</v-btn>
-              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
+              <v-menu
+                ref="menu1"
+                v-model="targetIssueDate5"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.vencimiento_carnet_portuario)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE VENCIMIENTO CARNET PORTUARIO"
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker5"
+                v-model="form.vencimiento_carnet_portuario"
+                @input="targetIssueDate5 = false"
+              ></v-date-picker>
             </v-menu>
           </v-flex>
           <v-flex xs12 sm6 md6>
@@ -472,6 +472,7 @@
 
       <v-stepper-content step="3">
         <br>
+        <img :src="form.imagen_url" height="150" />
         <img :src="imageUrl" height="150" v-if="imageUrl"/>
           <v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
         <input
@@ -507,6 +508,11 @@ export default {
   data () {
     return {
       targetIssueDate: false,
+      targetIssueDate1: false,
+      targetIssueDate2: false,
+      targetIssueDate3: false,
+      targetIssueDate4: false,
+      targetIssueDate5: false,
       e1: 0,
       date: new Date().toISOString().substr(0, 10),
       menu: false,
@@ -557,6 +563,7 @@ export default {
         estado_civil_id: 0,
         imagen: '',
         tags: [],
+        imagen_url: '',
       },
       validForm: true,
       processingForm: false,
@@ -634,6 +641,8 @@ export default {
       this.form.licencia_d = colaborador.licencia_d;
       this.form.carnet_portuario = colaborador.carnet_portuario;
       this.form.vencimiento_carnet_portuario = colaborador.vencimiento_carnet_portuario;
+      this.form.credencial_vigilante = colaborador.credencial_vigilante;
+      this.form.vencimiento_credencial_vigilante = colaborador.vencimiento_credencial_vigilante;
       this.form.talla_calzado = colaborador.talla_calzado;
       this.form.talla_chaleco = colaborador.talla_chaleco;
       this.form.talla_polera = colaborador.talla_polera;
@@ -648,8 +657,8 @@ export default {
       this.form.fecha_inactividad = colaborador.fecha_inactividad;
       this.form.nivel_educacion_id = colaborador.nivelEducacion.id;
       this.form.estado_civil_id = colaborador.estadoCivil.id;
-      this.form.imagen = colaborador.imagen;
       this.form.tags = colaborador.tags;
+      this.form.imagen_url = colaborador.imagen_url;
     },
     pickFile() {
       this.$refs.image.click()
@@ -683,6 +692,7 @@ export default {
       this.processingForm = true
       var tags = JSON.stringify(this.form.tags);
       var formData = new FormData();
+      formData.append("_method", 'PATCH');
       for (var i = 0; i < this.form.tags.length; i++)
       { formData.append('tags[]', this.form.tags[i]);
         console.log(this.form.tags[i]);
@@ -693,6 +703,31 @@ export default {
       formData.append("apellido_paterno", this.form.apellido_paterno);
       formData.append("apellido_materno", this.form.apellido_materno);
       formData.append("sexo", this.form.sexo);
+      formData.append("nacionalidad", this.form.nacionalidad);
+      formData.append("domicilio", this.form.domicilio);
+      formData.append("edad", this.form.edad);
+      formData.append("email", this.form.email);
+      formData.append("fecha_ingreso", this.form.fecha_ingreso);
+      formData.append("licencia_b", this.form.licencia_b);
+      formData.append("vencimiento_licencia_b", this.form.vencimiento_licencia_b);
+      formData.append("licencia_d", this.form.licencia_d);
+      formData.append("vencimiento_licencia_d", this.form.vencimiento_licencia_d);
+      formData.append("carnet_portuario", this.form.carnet_portuario);
+      formData.append("vencimiento_carnet_portuario", this.form.vencimiento_carnet_portuario);
+      formData.append("credencial_vigilante", this.form.credencial_vigilante);
+      formData.append("vencimiento_credencial_vigilante", this.form.vencimiento_credencial_vigilante);
+      formData.append("talla_calzado", this.form.talla_calzado);
+      formData.append("talla_chaleco", this.form.talla_chaleco);
+      formData.append("talla_polera", this.form.talla_polera);
+      formData.append("talla_pantalon", this.form.talla_pantalon);
+      formData.append("telefono", this.form.telefono);
+      formData.append("celular", this.form.celular);
+      formData.append("anexo", this.form.anexo);
+      formData.append("estado", this.form.estado);
+      formData.append("contacto_emergencia_nombre", this.form.contacto_emergencia_nombre);
+      formData.append("contacto_emergencia_telefono", this.form.contacto_emergencia_telefono);
+      formData.append("fecha_nacimiento", this.form.fecha_nacimiento);
+
       formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
       formData.append("estado_civil_id", this.form.estado_civil_id);
       formData.append("imagen", this.form.imagen);

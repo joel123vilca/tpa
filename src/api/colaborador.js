@@ -47,9 +47,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/colaboradores/${colaboradorId}`,
-        method: "patch",
+        method: "post",
         data,
-        headers: {'Content-Type': 'multipart/form-data' },
+        headers: {'Content-Type': 'multipart/form-data'},
       })
         .then(response => resolve(response))
         .catch(error => reject(error));
