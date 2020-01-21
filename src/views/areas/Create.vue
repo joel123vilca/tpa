@@ -30,7 +30,7 @@
               <v-text-field
                 v-model="form.nombre"
                 :disabled="processingForm"
-                label="nombre"
+                label="NOMBRE"
                 outline
                 :rules="rules.nombre"
                 :error="!!formErrors.nombre"
@@ -49,7 +49,7 @@
                 outline
                 clearable
                 small-chips
-                label="Seleccionar tipo de curso"
+                label="SELECCIONAR TIPO AREA"
                 item-text="tipo_nombre"
                 item-value="id"
                 :disabled="processingForm"
@@ -66,9 +66,9 @@
                 color="primary"
                 @click="e1 = 2"
               >
-                Continue
+                Continuar
               </v-btn>
-              <v-btn flat>Cancel</v-btn>
+              <v-btn flat>Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-autocomplete
@@ -183,11 +183,11 @@ export default {
       e1: 0,
       form: {
         nombre: '',
-        padre_id: '',
+        padre_id: 1,
         tipo_area_id: 0,
         segundo_padre_id: 0,
         tercer_padre_id: '',
-        estado: 0,
+        estado: 1,
       },
       tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [

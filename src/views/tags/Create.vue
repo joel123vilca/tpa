@@ -5,7 +5,7 @@
         :routes="[{ name: 'Inicio' }, { name: 'Nuevo tag' }]"
       />
       <v-layout row wrap>
-        <v-flex md6 sm6 xs12>
+        <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
               <span class="success--text font-weight-bold headline">Crear Tag</span>
@@ -46,21 +46,6 @@
                       () => {
                         formErrors.descripcion = undefined;
                         delete formErrors.descripcion;
-                      }
-                    "
-                  />
-                  <v-text-field
-                    v-model="form.permisos"
-                    :disabled="processingForm"
-                    label="Permisos"
-                    outline
-                    :rules="rules.permisos"
-                    :error="!!formErrors.permisos"
-                    :error-messages="formErrors.permisos"
-                    @keyup="
-                      () => {
-                        formErrors.permisos = undefined;
-                        delete formErrors.permisos;
                       }
                     "
                   />

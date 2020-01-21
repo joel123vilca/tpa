@@ -10,7 +10,7 @@
       />
 
       <v-layout row wrap>
-        <v-flex md6 sm6 xs12>
+        <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
               <span class="success--text font-weight-bold headline">Editar Curso</span>

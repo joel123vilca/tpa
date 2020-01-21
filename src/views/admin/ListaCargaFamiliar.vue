@@ -75,7 +75,7 @@
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
-                        :to="{ name: 'edittag', params: { id: props.item.id } }"
+                        :to="{ name: '', params: { id: props.item.id } }"
                         small
                         icon
                         flat

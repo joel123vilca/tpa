@@ -4,13 +4,13 @@
     grid-list-lg
   >
     <v-card-title class="white cyan--text headline">
-        Listado de Niveles jerarquico
+        Listado de Colaboradores
         <v-spacer />
         <v-spacer />
         <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Niveles Jerarquico' },
+          { name: 'Colaboradores' },
           { name: 'Listado'}
         ]"
         />
@@ -59,7 +59,7 @@
               <v-data-table
                 :headers="[
                   { text: 'Nombre', value: 'primer_nombre'},
-                  { text: 'Cargo',value: 'apellido_paterno'},
+                  { text: 'Apellido',value: 'apellido_paterno'},
                   { text: 'Cargo'},
                   { text: 'Editar informacion'},
                   { text: 'Editar Movilidad'},

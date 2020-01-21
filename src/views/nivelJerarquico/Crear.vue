@@ -102,7 +102,7 @@ export default {
 
       form: {
         nivel_nombre: '',
-        estado: 0,
+        estado: 1,
       },
       estados: [
         { id: 0, nombre: 'inactivo' },

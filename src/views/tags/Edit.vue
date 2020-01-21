@@ -55,21 +55,6 @@
                       }
                     "
                   />
-                  <v-text-field
-                    v-model="form.permisos"
-                    :disabled="processingForm"
-                    label="Permisos"
-                    outline
-                    :rules="rules.permisos"
-                    :error="!!formErrors.permisos"
-                    :error-messages="formErrors.permisos"
-                    @keyup="
-                      () => {
-                        formErrors.permisos = undefined;
-                        delete formErrors.permisos;
-                      }
-                    "
-                  />
 
                   <v-layout row wrap>
                     <v-flex sm6 xs12>

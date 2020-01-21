@@ -16,21 +16,21 @@ export default [
     component: () => import('@/views/Home.vue'),
   },
   // sgc users
-  {
-    path: '/users',
-    name: 'sgcUsersList',
-    component: () => import('@/views/users/ListUsers.vue'),
-  },
-  {
-    path: '/users/create',
-    name: 'sgcUsersCreate',
-    component: () => import('@/views/users/CreateUser.vue'),
-  },
-  {
-    path: '/users/:id',
-    name: 'sgcUsersEdit',
-    component: () => import('@/views/users/EditUser.vue'),
-  },
+  // {
+  //   path: '/users',
+  //   name: 'sgcUsersList',
+  //   component: () => import('@/views/users/ListUsers.vue'),
+  // },
+  // {
+  //   path: '/users/create',
+  //   name: 'sgcUsersCreate',
+  //   component: () => import('@/views/users/CreateUser.vue'),
+  // },
+  // {
+  //   path: '/users/:id',
+  //   name: 'sgcUsersEdit',
+  //   component: () => import('@/views/users/EditUser.vue'),
+  // },
   {
     path: '/Perfil',
     name: 'perfil',
@@ -58,7 +58,7 @@ export default [
   },
   {
     path: '/crear-curso',
-    name: 'CreateCourse',
+    name: 'createcurso',
     component: () => import('@/views/courses/Create.vue'),
   },
   {

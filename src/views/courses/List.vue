@@ -19,7 +19,7 @@
           <v-toolbar-title>Cursos</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'CreateCourse' }"
+            :to="{ name: 'createcurso' }"
             color="success"
           >
             Agregar Curso

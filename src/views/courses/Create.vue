@@ -5,7 +5,7 @@
         :routes="[{ name: 'Inicio', to: { name: 'ListCourse' } }, { name: 'Nuevo curso' }]"
       />
       <v-layout row wrap>
-        <v-flex md6 sm6 xs12>
+        <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
               <span class="success--text font-weight-bold headline">Crear Curso</span>
@@ -125,7 +125,7 @@ export default {
       form: {
         nombre: "",
         tipo: 0,
-        estado: 0,
+        estado: 1,
       },
       tipos: [
         {id:0, nombre:'externo'},

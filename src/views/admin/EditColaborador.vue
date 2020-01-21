@@ -639,6 +639,7 @@ export default {
       this.form.licencia_b = colaborador.licencia_b;
       this.form.vencimiento_licencia_b = colaborador.vencimiento_licencia_b;
       this.form.licencia_d = colaborador.licencia_d;
+      this.form.vencimiento_licencia_d = colaborador.vencimiento_licencia_d;
       this.form.carnet_portuario = colaborador.carnet_portuario;
       this.form.vencimiento_carnet_portuario = colaborador.vencimiento_carnet_portuario;
       this.form.credencial_vigilante = colaborador.credencial_vigilante;

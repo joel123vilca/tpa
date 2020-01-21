@@ -103,7 +103,7 @@ export default {
           {
             title: 'Cursos / Capacitaciones',
             items: [
-              { title: 'Agregar Nuevo', to: { name: "CreateCourse" } },
+              { title: 'Agregar Nuevo', to: { name: "createcurso" } },
               { title: 'Listar Todas', to: { name: "ListCourse" }},
             ],
           },
