@@ -184,10 +184,18 @@
         <br>
         <v-layout row wrap>
           <v-flex xs12 sm12 md12>
-            <v-text-field
-              label="Cargo"
+              <v-autocomplete
+              v-model="form.cargos"
+              :items="cargos"
+              :search-input.sync="search"
+              dense
+              clearable
+              small-chips
+              label="Seleccionar Cargo"
+              item-text="nombre"
+              item-value="id"
               outline
-            ></v-text-field>
+            />
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field
@@ -523,6 +531,7 @@ export default {
       imageUrl: '',
       imageFile: '',
       file: '',
+      search: null,
       form: {
         rut: '',
         usuario: '',
@@ -603,12 +612,15 @@ export default {
       loadingNivelesEducacion: state => state.nivelesEducacion.loadingNivelesEducacion,
       tags: state => state.tags.tags,
       loadingTags: state => state.tags.loadingTags,
+      cargos: state => state.cargos.cargos,
+      loadingCargos: state => state.cargos.loadingCargos,
     })
   },
   created() {
     this.getEstadoCiviles();
     this.getNivelesEducacion();
     this.getTags();
+    this.getCargos();
   },
   methods: {
     ...mapActions({
@@ -616,6 +628,7 @@ export default {
       getEstadoCiviles: 'estadoCiviles/getEstadoCiviles',
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
+      getCargos: 'cargos/getCargos',
     }),
     pickFile() {
       this.$refs.image.click()

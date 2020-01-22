@@ -57,6 +57,11 @@ export default [
     component: () => import('@/views/admin/ListaCargaFamiliar.vue'),
   },
   {
+    path: '/Colaborador/:id/crear-movilidad',
+    name: 'crearmovilidad',
+    component: () => import('@/views/admin/Movilidad.vue'),
+  },
+  {
     path: '/crear-curso',
     name: 'createcurso',
     component: () => import('@/views/courses/Create.vue'),

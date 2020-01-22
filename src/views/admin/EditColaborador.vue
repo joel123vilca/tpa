@@ -15,15 +15,16 @@
   <br>
   <v-stepper v-model="e1">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales </v-stepper-step>
+      <v-stepper-step editable
+          step="1" >Paso 1: Datos Generales </v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Empresa</v-stepper-step>
+      <v-stepper-step editable step="2">Paso 2: Datos Empresa</v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step step="3">Paso 3: Fotografia Colaborador</v-stepper-step>
+      <v-stepper-step editable step="3">Paso 3: Fotografia Colaborador</v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items>
