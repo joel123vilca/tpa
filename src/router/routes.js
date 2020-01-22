@@ -117,6 +117,16 @@ export default [
     component: () => import('@/views/nivelJerarquico/Edit.vue'),
   },
   {
+    path: '/crear-cargo',
+    name: 'crearcargo',
+    component: () => import('@/views/cargos/Create.vue'),
+  },
+  {
+    path: '/lista-cargos',
+    name: 'listacargo',
+    component: () => import('@/views/cargos/List.vue'),
+  },
+  {
     path: '/crea-tipos-area',
     name: 'creartipoarea',
     component: () => import('@/views/tiposArea/Create.vue'),

@@ -96,8 +96,8 @@ export default {
           {
             title: 'Cargos',
             items: [
-              { title: 'Agregar Nuevo' },
-              { title: 'Listar Todas' },
+              { title: 'Agregar Nuevo', to: { name: "crearcargo" } },
+              { title: 'Listar Todas', to: { name: "listacargo" } },
             ],
           },
           {
