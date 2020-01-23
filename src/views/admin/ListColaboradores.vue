@@ -89,7 +89,7 @@
                     <v-btn small  :to="{ name: 'editcolaborador', params: { id: props.item.id } }"  color="success">Informacion</v-btn>
                   </td>
                   <td class="px-3">
-                    <v-btn small color="success">Movilidad</v-btn>
+                    <v-btn small :to="{ name: 'crearmovilidad', params: { id: props.item.id } }" color="success">Movilidad</v-btn>
                   </td>
                   <td class="px-3">
                     <v-btn small :to="{ name: 'ListaCargaFamiliar', params: { id: props.item.id } }" color="success">Cargas</v-btn>

@@ -16,7 +16,7 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitCreateCourse"
+                @submit.prevent="submitMovilidad"
               >
                 <v-container fluid grid-list-lg>
                   <v-text-field
@@ -153,7 +153,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'ListCourse' })">
+                  <v-btn @click="$router.push({ name: 'listacolaboradores' })">
                     Cancelar
                   </v-btn>
                 </div>
@@ -221,20 +221,24 @@ export default {
   methods: {
     ...mapActions({
       getCargos: 'cargos/getCargos',
+      postMovilidad: 'colaboradores/postMovilidad',
     }),
     formatDate(date) {
       if (!date) return null
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
     },
-    submitCreateCourse() {
+    submitMovilidad() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.createCourse({ data: this.form })
+      this.postMovilidad({
+        colaboradorId: this.$route.params.id,
+        data: this.form,
+      })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "ListCourse" });
+          this.$router.push({ name: "listacolaboradores" });
         })
         .catch(error => {
           this.processingForm = false;

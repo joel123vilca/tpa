@@ -186,10 +186,18 @@
         <br>
         <v-layout row wrap>
           <v-flex xs12 sm12 md12>
-            <v-text-field
-              label="Cargo"
+            <v-autocomplete
+              v-model="form.cargo_id"
+              :items="cargos"
+              :search-input.sync="search"
+              dense
+              clearable
+              small-chips
+              label="Seleccionar Cargo"
+              item-text="nombre"
+              item-value="id"
               outline
-            ></v-text-field>
+            />
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field
@@ -213,16 +221,16 @@
               >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  :value="formatDate(form.fecha_ingreso)"
+                  :value="formatDate(form.fecha_inicio)"
                   hint="Formato DD/MM/AAAA"
-                  label="FECHA DE INGRESO"
+                  label="FECHA DE INICIO"
                   v-on="on"
                   outline
                 ></v-text-field>
               </template>
               <v-date-picker
                 ref="picker1"
-                v-model="form.fecha_ingreso"
+                v-model="form.fecha_inicio"
                 @input="targetIssueDate1 = false"
               ></v-date-picker>
             </v-menu>
@@ -538,6 +546,7 @@ export default {
         nacionalidad: '',
         fecha_nacimiento: '',
         edad: 0,
+        cargo_id: '',
         email: '',
         domicilio: '',
         licencia_b: '',
@@ -552,7 +561,7 @@ export default {
         talla_chaleco: '',
         talla_polera: '',
         talla_pantalon: '',
-        fecha_ingreso: '',
+        fecha_inicio: '',
         telefono: '',
         celular: '',
         anexo: '',
@@ -606,6 +615,8 @@ export default {
       loadingNivelesEducacion: state => state.nivelesEducacion.loadingNivelesEducacion,
       tags: state => state.tags.tags,
       loadingTags: state => state.tags.loadingTags,
+      cargos: state => state.cargos.cargos,
+      loadingCargos: state => state.cargos.loadingCargos,
     })
   },
   created() {
@@ -616,6 +627,7 @@ export default {
     this.getEstadoCiviles();
     this.getNivelesEducacion();
     this.getTags();
+    this.getCargos();
   },
   methods: {
     ...mapActions({
@@ -624,6 +636,7 @@ export default {
       getEstadoCiviles: 'estadoCiviles/getEstadoCiviles',
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
+      getCargos: 'cargos/getCargos',
     }),
     setForm(colaborador) {
       this.form.rut = colaborador.rut;
@@ -649,13 +662,14 @@ export default {
       this.form.talla_chaleco = colaborador.talla_chaleco;
       this.form.talla_polera = colaborador.talla_polera;
       this.form.talla_pantalon = colaborador.talla_pantalon;
-      this.form.fecha_ingreso = colaborador.fecha_ingreso;
+      this.form.fecha_inicio = colaborador.fecha_inicio;
       this.form.telefono = colaborador.telefono;
       this.form.celular = colaborador.celular;
       this.form.anexo = colaborador.anexo;
       this.form.contacto_emergencia_nombre = colaborador.contacto_emergencia_nombre;
       this.form.contacto_emergencia_telefono = colaborador.contacto_emergencia_telefono;
       this.form.estado = colaborador.estado;
+      this.form.cargo_id = colaborador.cargoActual.id;
       this.form.fecha_inactividad = colaborador.fecha_inactividad;
       this.form.nivel_educacion_id = colaborador.nivelEducacion.id;
       this.form.estado_civil_id = colaborador.estadoCivil.id;
@@ -709,7 +723,7 @@ export default {
       formData.append("domicilio", this.form.domicilio);
       formData.append("edad", this.form.edad);
       formData.append("email", this.form.email);
-      formData.append("fecha_ingreso", this.form.fecha_ingreso);
+      formData.append("fecha_inicio", this.form.fecha_inicio);
       formData.append("licencia_b", this.form.licencia_b);
       formData.append("vencimiento_licencia_b", this.form.vencimiento_licencia_b);
       formData.append("licencia_d", this.form.licencia_d);
@@ -730,6 +744,7 @@ export default {
       formData.append("contacto_emergencia_telefono", this.form.contacto_emergencia_telefono);
       formData.append("fecha_nacimiento", this.form.fecha_nacimiento);
 
+      formData.append("cargo_id", this.form.cargo_id);
       formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
       formData.append("estado_civil_id", this.form.estado_civil_id);
       formData.append("imagen", this.form.imagen);

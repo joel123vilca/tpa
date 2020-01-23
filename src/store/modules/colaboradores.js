@@ -63,6 +63,22 @@ export const actions = {
         });
     });
   },
+  postMovilidad({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .postMovilidad(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "Colaborador Movilidad",
+            message: "Se hizo Movilidad con éxito."
+          });
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
   replaceCurrentColaborador({ commit }, payload) {
     commit(types.REPLACE_CURRENT_COLABORADOR, payload);
   },

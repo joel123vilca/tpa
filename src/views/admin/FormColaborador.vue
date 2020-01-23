@@ -185,7 +185,7 @@
         <v-layout row wrap>
           <v-flex xs12 sm12 md12>
               <v-autocomplete
-              v-model="form.cargos"
+              v-model="form.cargo_id"
               :items="cargos"
               :search-input.sync="search"
               dense
@@ -219,7 +219,7 @@
               >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  :value="formatDate(form.fecha_ingreso)"
+                  :value="formatDate(form.fecha_inicio)"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE INGRESO"
                   v-on="on"
@@ -228,7 +228,7 @@
               </template>
               <v-date-picker
                 ref="picker1"
-                v-model="form.fecha_ingreso"
+                v-model="form.fecha_inicio"
                 @input="targetIssueDate1 = false"
               ></v-date-picker>
             </v-menu>
@@ -541,6 +541,7 @@ export default {
         apellido_paterno: '',
         apellido_materno: '',
         sexo: '',
+        cargo_id: '',
         nacionalidad: '',
         fecha_nacimiento: '',
         edad: 0,
@@ -558,7 +559,7 @@ export default {
         talla_chaleco: '',
         talla_polera: '',
         talla_pantalon: '',
-        fecha_ingreso: '',
+        fecha_inicio: '',
         telefono: '',
         celular: '',
         anexo: '',
@@ -676,7 +677,7 @@ export default {
       formData.append("domicilio", this.form.domicilio);
       formData.append("edad", this.form.edad);
       formData.append("email", this.form.email);
-      formData.append("fecha_ingreso", this.form.fecha_ingreso);
+      formData.append("fecha_inicio", this.form.fecha_inicio);
       formData.append("licencia_b", this.form.licencia_b);
       formData.append("vencimiento_licencia_b", this.form.vencimiento_licencia_b);
       formData.append("licencia_d", this.form.licencia_d);
@@ -697,6 +698,7 @@ export default {
       formData.append("contacto_emergencia_telefono", this.form.contacto_emergencia_telefono);
       formData.append("fecha_nacimiento", this.form.fecha_nacimiento);
 
+      formData.append("cargo_id", this.form.cargo_id);
       formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
       formData.append("estado_civil_id", this.form.estado_civil_id);
       formData.append("imagen", this.form.imagen);

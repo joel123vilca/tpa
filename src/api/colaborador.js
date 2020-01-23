@@ -68,6 +68,19 @@ export default {
         .catch(error => reject(error));
     });
   },
+  postMovilidad(payload = {}) {
+    const data = payload.data || {};
+    const colaboradorId = payload.colaboradorId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/movilidades`,
+        method: "post",
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getFamily(payload = {}) {
     const colaboradorId = payload.colaboradorId;
     return new Promise((resolve, reject) => {
