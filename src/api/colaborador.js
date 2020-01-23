@@ -81,6 +81,17 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getMovilidad(payload = {}) {
+    const colaboradorId = payload.colaboradorId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/movilidades`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getFamily(payload = {}) {
     const colaboradorId = payload.colaboradorId;
     return new Promise((resolve, reject) => {

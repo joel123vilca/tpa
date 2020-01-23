@@ -473,7 +473,7 @@
 
         <v-btn
           color="error"
-          @click="e1 = 2"
+          @click="e1 = 1"
         >
         Volver
         </v-btn>
@@ -499,10 +499,10 @@
           color="success"
           :loading="processingForm"
         >
-          Siguiente
+          Guardar Cambios
         </v-btn>
 
-        <v-btn color="error">Volver</v-btn>
+        <v-btn @click="e1 = 2" color="error">Volver</v-btn>
       </v-stepper-content>
        </v-form>
     </v-stepper-items>

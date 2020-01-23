@@ -9,6 +9,8 @@ export const state = {
   loadingTiposCarga: false,
   cargaFamiliar: [],
   loadingCargaFamiliar: false,
+  movilidades: [],
+  loadingMovilidades: false,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -132,6 +134,25 @@ export const actions = {
         });
     });
   },
+  getMovilidad({ commit }, payload) {
+    commit(types.REPLACE_LOADING_MOVILIDADES, { status: true });
+
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getMovilidad(payload)
+        .then(response => {
+          const movilidades = response.data.data
+          commit(types.REPLACE_LOADING_MOVILIDADES, { status: false });
+          commit(types.REPLACE_MOVILIDADES, { movilidades });
+
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_MOVILIDADES, { status: false });
+          reject(error);
+        });
+    });
+  },
   getTiposCarga({ commit }, payload) {
     commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: true });
 
@@ -174,5 +195,11 @@ export const mutations = {
   },
   [types.REPLACE_TIPOS_CARGA](state, { tiposCarga }) {
     state.tiposCarga = tiposCarga;
+  },
+  [types.REPLACE_LOADING_MOVILIDADES](state, { status }) {
+    state.loadingMovilidades = status;
+  },
+  [types.REPLACE_MOVILIDADES](state, { movilidades }) {
+    state.movilidades = movilidades;
   },
 };
