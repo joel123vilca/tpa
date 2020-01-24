@@ -25,10 +25,9 @@
               >
                 <v-container fluid grid-list-lg>
                   <v-text-field
-                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Nombre"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -65,7 +64,7 @@
                         outline
                         clearable
                         small-chips
-                        label="Seleccionar tipo de curso"
+                        label="Seleccionar tipo de tag"
                         :disabled="processingForm"
                         :error="!!formErrors.tipo"
                         :error-messages="formErrors.tipo"
@@ -145,8 +144,8 @@ export default {
         nombre: '',
         descripcion: '',
         permisos: '',
-        tipo: 0,
-        estado: 0,
+        tipo: '',
+        estado: 1,
       },
       tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [

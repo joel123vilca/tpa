@@ -22,7 +22,7 @@
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Nombre"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -58,7 +58,7 @@
                         outline
                         clearable
                         small-chips
-                        label="Seleccionar tipo de curso"
+                        label="Seleccionar tipo Tag"
                         :disabled="processingForm"
                         :error="!!formErrors.tipo"
                         :error-messages="formErrors.tipo"
@@ -137,8 +137,8 @@ export default {
         nombre: '',
         descripcion: '',
         permisos: '',
-        tipo: 0,
-        estado: 0,
+        tipo: 'POSITIVO',
+        estado: 1,
       },
       tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [

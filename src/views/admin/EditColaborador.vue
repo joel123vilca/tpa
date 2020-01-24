@@ -108,16 +108,8 @@
                 outline
               />
             </v-flex>
-            <v-flex xs12 sm4 md4>
-              <v-text-field
-                v-model="form.edad"
-                label="Edad"
-                type="number"
-                outline
-              ></v-text-field>
-            </v-flex>
             <v-flex
-              sm4
+              sm6
               xs12
             >
               <v-menu
@@ -132,7 +124,7 @@
                 <template v-slot:activator="{ on }">
                   <v-text-field
                     :value="formatDate(form.fecha_nacimiento)"
-                    hint="Formato DD/MM/AAAA"
+                    hint="Formato (dd/mm/aa)"
                     label="FECHA DE NACIMIENTO"
                     v-on="on"
                     outline
@@ -145,7 +137,7 @@
                 ></v-date-picker>
                 </v-menu>
               </v-flex>
-            <v-flex sm4 xs12>
+            <v-flex sm6 xs12>
               <v-autocomplete
                 v-model="form.nivel_educacion_id"
                 :items="nivelesEducacion"
@@ -186,70 +178,21 @@
         <br>
         <v-layout row wrap>
           <v-flex xs12 sm12 md12>
-            <v-autocomplete
-              v-model="form.cargo_id"
-              :items="cargos"
-              :search-input.sync="search"
-              dense
-              clearable
-              small-chips
-              label="Seleccionar Cargo"
-              item-text="nombre"
-              item-value="id"
-              outline
-            />
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.estado"
-              label="Estado"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex
-              sm6
-              xs12
-            >
-              <v-menu
-                ref="menu1"
-                v-model="targetIssueDate1"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.fecha_inicio)"
-                  hint="Formato DD/MM/AAAA"
-                  label="FECHA DE INICIO"
-                  v-on="on"
-                  outline
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker1"
-                v-model="form.fecha_inicio"
-                @input="targetIssueDate1 = false"
-              ></v-date-picker>
-            </v-menu>
-          </v-flex>
-          <v-flex xs12 sm4 md4>
             <v-text-field
               v-model="form.email"
+              :rules="rules.email"
               label="E-mail"
               outline
             ></v-text-field>
           </v-flex>
-          <v-flex xs12 sm4 md4>
+          <v-flex xs12 sm6 md6>
             <v-text-field
               v-model="form.telefono"
               label="Teléfono"
               outline
             ></v-text-field>
           </v-flex>
-          <v-flex xs12 sm4 md4>
+          <v-flex xs12 sm6 md6>
             <v-text-field
               v-model="form.anexo"
               label="Anexo"
@@ -480,20 +423,31 @@
       </v-stepper-content>
 
       <v-stepper-content step="3">
-        <br>
-        <img :src="form.imagen_url" height="150" />
-        <img :src="imageUrl" height="150" v-if="imageUrl"/>
-          <v-text-field label="Seleccionar imagen " @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
-        <input
-          id="file"
-          type="file"
-          ref="image"
-          name="image"
-          style="display:none;"
-          accept="image/*"
-          @change="onFilePicked"
-        >
         <br><br>
+        <label class="grey--text text--darken-1">Imagen de Perfil</label>
+        <el-upload
+          class="avatar-uploader"
+          action=""
+          name="image"
+          :http-request="onFilePicked"
+          :show-file-list="false"
+          :before-upload="beforeImageUpload"
+        >
+          <img
+            v-if="form.imagen_url && !imageUrl"
+            :src="form.imagen_url"
+            class="avatar"
+          >
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            class="avatar"
+          >
+          <i
+            v-if="!form.imagen_url"
+            class="el-icon-plus avatar-uploader-icon"
+          />
+      </el-upload>
         <v-btn
           type="submit"
           color="success"
@@ -545,8 +499,6 @@ export default {
         sexo: '',
         nacionalidad: '',
         fecha_nacimiento: '',
-        edad: 0,
-        cargo_id: '',
         email: '',
         domicilio: '',
         licencia_b: '',
@@ -561,13 +513,11 @@ export default {
         talla_chaleco: '',
         talla_polera: '',
         talla_pantalon: '',
-        fecha_inicio: '',
         telefono: '',
         celular: '',
         anexo: '',
         contacto_emergencia_nombre: '',
         contacto_emergencia_telefono: '',
-        estado: 'Activo (a)',
         fecha_inactividad: '',
         nivel_educacion_id: 0,
         estado_civil_id: 0,
@@ -594,6 +544,9 @@ export default {
         { id: 3, nombre: 'Otro' },
       ],
       licencias: ['SI','NO'],
+      rules: {
+        email: [v => /.+@.+/.test(v) || 'E-mail tiene que ser ejemplo@gmail.com.'],
+      }
     }
   },
   components: {
@@ -615,8 +568,6 @@ export default {
       loadingNivelesEducacion: state => state.nivelesEducacion.loadingNivelesEducacion,
       tags: state => state.tags.tags,
       loadingTags: state => state.tags.loadingTags,
-      cargos: state => state.cargos.cargos,
-      loadingCargos: state => state.cargos.loadingCargos,
     })
   },
   created() {
@@ -627,7 +578,6 @@ export default {
     this.getEstadoCiviles();
     this.getNivelesEducacion();
     this.getTags();
-    this.getCargos();
   },
   methods: {
     ...mapActions({
@@ -636,7 +586,6 @@ export default {
       getEstadoCiviles: 'estadoCiviles/getEstadoCiviles',
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
-      getCargos: 'cargos/getCargos',
     }),
     setForm(colaborador) {
       this.form.rut = colaborador.rut;
@@ -647,7 +596,6 @@ export default {
       this.form.sexo = colaborador.sexo;
       this.form.nacionalidad = colaborador.nacionalidad;
       this.form.fecha_nacimiento = colaborador.fecha_nacimiento;
-      this.form.edad = colaborador.edad;
       this.form.email = colaborador.email;
       this.form.domicilio = colaborador.domicilio;
       this.form.licencia_b = colaborador.licencia_b;
@@ -662,14 +610,11 @@ export default {
       this.form.talla_chaleco = colaborador.talla_chaleco;
       this.form.talla_polera = colaborador.talla_polera;
       this.form.talla_pantalon = colaborador.talla_pantalon;
-      this.form.fecha_inicio = colaborador.fecha_inicio;
       this.form.telefono = colaborador.telefono;
       this.form.celular = colaborador.celular;
       this.form.anexo = colaborador.anexo;
       this.form.contacto_emergencia_nombre = colaborador.contacto_emergencia_nombre;
       this.form.contacto_emergencia_telefono = colaborador.contacto_emergencia_telefono;
-      this.form.estado = colaborador.estado;
-      this.form.cargo_id = colaborador.cargoActual.id;
       this.form.fecha_inactividad = colaborador.fecha_inactividad;
       this.form.nivel_educacion_id = colaborador.nivelEducacion.id;
       this.form.estado_civil_id = colaborador.estadoCivil.id;
@@ -680,25 +625,43 @@ export default {
       this.$refs.image.click()
     },
     onFilePicked(e) {
-      const files = e.target.files;
-      this.form.imagen = files[0];
-			if(files[0] !== undefined) {
-        this.imageName = files[0].name
+      this.form.imagen = e.file;
+			if(e.file !== undefined) {
+        this.imageName = e.file.name
 				if(this.imageName.lastIndexOf('.') <= 0) {
 					return
 				}
 				const fr = new FileReader()
-				fr.readAsDataURL(files[0])
+				fr.readAsDataURL(e.file)
 				fr.addEventListener('load', () => {
           this.imageUrl = fr.result
-          this.imageFile = files[0]
+          this.imageFile = e.file
 				})
 			} else {
 				this.imageName = '';
 				this.imageFile = '';
 				this.imageUrl = '';
 			}
-		},
+    },
+    beforeImageUpload (file) {
+      const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png')
+      const isLt5M = file.size / 1024 / 1024 < 5
+      if (!isJPG) {
+        this.$notify.info({
+          title: 'TPA',
+          message: 'La imagen tiene que estar en formato JPG ó PNG'
+        })
+        return isJPG && isLt5M
+      }
+      if (!isLt5M) {
+        this.$notify.info({
+          title: 'TPA',
+          message: 'La imagen no puede exceder los 5MB de tamaño'
+        })
+        return isJPG && isLt5M
+      }
+      return isJPG && isLt5M
+    },
     formatDate(date) {
       if (!date) return null
       const [year, month, day] = date.split('-')
@@ -721,9 +684,7 @@ export default {
       formData.append("sexo", this.form.sexo);
       formData.append("nacionalidad", this.form.nacionalidad);
       formData.append("domicilio", this.form.domicilio);
-      formData.append("edad", this.form.edad);
       formData.append("email", this.form.email);
-      formData.append("fecha_inicio", this.form.fecha_inicio);
       formData.append("licencia_b", this.form.licencia_b);
       formData.append("vencimiento_licencia_b", this.form.vencimiento_licencia_b);
       formData.append("licencia_d", this.form.licencia_d);
@@ -739,12 +700,9 @@ export default {
       formData.append("telefono", this.form.telefono);
       formData.append("celular", this.form.celular);
       formData.append("anexo", this.form.anexo);
-      formData.append("estado", this.form.estado);
       formData.append("contacto_emergencia_nombre", this.form.contacto_emergencia_nombre);
       formData.append("contacto_emergencia_telefono", this.form.contacto_emergencia_telefono);
       formData.append("fecha_nacimiento", this.form.fecha_nacimiento);
-
-      formData.append("cargo_id", this.form.cargo_id);
       formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
       formData.append("estado_civil_id", this.form.estado_civil_id);
       formData.append("imagen", this.form.imagen);
