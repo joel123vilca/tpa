@@ -422,7 +422,20 @@
 
       <v-stepper-content step="3">
         <br>
-        <label class="grey--text text--darken-1">Imagen de Perfil</label>
+        <v-fab-transition>
+          <v-btn
+            v-show="imageUrl"
+            color="pink"
+            small
+            dark
+            absolute
+            left
+            fab
+            @click="deleteImage()"
+          >
+            X
+          </v-btn>
+        </v-fab-transition>
         <el-upload
           class="avatar-uploader"
           action=""
@@ -442,6 +455,8 @@
             class="el-icon-plus avatar-uploader-icon"
           />
       </el-upload>
+      <label class="grey--text text--darken-1">Imagen de Perfil</label>
+      <br>
       <br>
         <v-btn
           type="submit"
@@ -577,6 +592,9 @@ export default {
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
     }),
+    deleteImage() {
+      this.imageUrl = null;
+    },
     pickFile() {
       this.$refs.image.click()
     },

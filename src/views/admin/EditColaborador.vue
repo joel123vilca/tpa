@@ -424,7 +424,34 @@
 
       <v-stepper-content step="3">
         <br><br>
-        <label class="grey--text text--darken-1">Imagen de Perfil</label>
+        <v-fab-transition>
+          <v-btn
+            v-show="imageUrl"
+            color="pink"
+            small
+            dark
+            absolute
+            left
+            fab
+            @click="deleteImage()"
+          >
+            X
+          </v-btn>
+        </v-fab-transition>
+        <v-fab-transition>
+         <v-btn
+            v-show="form.imagen_url"
+            color="pink"
+            small
+            dark
+            absolute
+            left
+            fab
+            @click="deleteImageSet()"
+          >
+            X
+          </v-btn>
+        </v-fab-transition>
         <el-upload
           class="avatar-uploader"
           action=""
@@ -444,10 +471,12 @@
             class="avatar"
           >
           <i
-            v-if="!form.imagen_url"
+            v-if="!form.imagen_url && !imageUrl"
             class="el-icon-plus avatar-uploader-icon"
           />
       </el-upload>
+        <label class="grey--text text--darken-1">Imagen de Perfil</label>
+        <br>
         <v-btn
           type="submit"
           color="success"
@@ -465,7 +494,7 @@
 </template>
 <script>
 
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
 
 export default {
   data () {
@@ -587,6 +616,12 @@ export default {
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
     }),
+    deleteImage() {
+      this.imageUrl = null;
+    },
+    deleteImageSet() {
+      this.form.imagen_url = null;
+    },
     setForm(colaborador) {
       this.form.rut = colaborador.rut;
       this.form.primer_nombre = colaborador.primer_nombre;

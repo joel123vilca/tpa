@@ -62,6 +62,26 @@
                   }
                 "
               />
+              <v-autocomplete
+                v-model="form.supervisor_id"
+                :items="cargos"
+                dense
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR SUPERVISOR"
+                item-text="nombre"
+                item-value="id"
+                :disabled="processingForm"
+                :error="!!formErrors.supervisor_id"
+                :error-messages="formErrors.supervisor_id"
+                @change="
+                  () => {
+                    formErrors.supervisor_id = undefined;
+                    delete formErrors.supervisor_id;
+                  }
+                "
+              />
               <v-btn
                 color="primary"
                 @click="e1 = 2"
@@ -184,7 +204,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   metaInfo() {
-    return { title: "Nuevo Area" };
+    return { title: "Nuevo Cargo" };
   },
 
   components: {
@@ -197,6 +217,7 @@ export default {
       e1: 0,
       form: {
         nombre: '',
+        supervisor_id: '',
         padre_id: 1,
         nivel_jerarquico_id: null,
         segundo_padre_id: null,
@@ -223,6 +244,8 @@ export default {
       loadingNivelesJerarquico: state => state.nivelesJerarquico.loadingNivelesJerarquico,
       areas: state => state.areas.areas,
       loadingAreas: state => state.areas.loadingAreas,
+      cargos: state => state.cargos.cargos,
+      loadingCargos: state => state.cargos.loadingCargos,
     }),
       filterData() {
       let areas = this.areas
@@ -248,12 +271,14 @@ export default {
   created(){
     this.getNivelesJerarquico();
     this.getAreas();
+    this.getCargos();
   },
   methods: {
     ...mapActions({
       createCargo: "cargos/createCargo",
       getNivelesJerarquico: "nivelesJerarquico/getNivelesJerarquico",
       getAreas: 'areas/getAreas',
+      getCargos: 'cargos/getCargos',
     }),
 
     submitCreateArea() {
@@ -278,7 +303,7 @@ export default {
       this.createCargo({ data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "listaArea" });
+          this.$router.push({ name: "listacargo" });
         })
         .catch(error => {
           this.processingForm = false;
