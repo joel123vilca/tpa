@@ -88,7 +88,7 @@
               >
                 Continuar
               </v-btn>
-              <v-btn flat>Cancelar</v-btn>
+              <v-btn flat @click="$router.push({ name: 'listacargo' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-autocomplete
@@ -187,7 +187,7 @@
                 >
                   Guardar
                 </v-btn>
-              <v-btn flat @click="e1 = 1">Cancel</v-btn>
+              <v-btn flat @click="e1 = 1">Volver</v-btn>
             </v-stepper-content>
             </v-form>
           </v-stepper-items>

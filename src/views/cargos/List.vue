@@ -71,7 +71,6 @@
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
-                        :to="{ name: 'editArea', params: { id: props.item.id } }"
                         small
                         icon
                         flat
