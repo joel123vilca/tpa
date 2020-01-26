@@ -29,7 +29,7 @@
             :to="{ name: 'creaniveljerarquico' }"
             color="success"
           >
-            Agregar Nivel Jerarquico
+            Agregar nivel jerarquico
           </v-btn>
         </v-toolbar>
         <v-container

@@ -16,94 +16,152 @@
               <span class="success--text font-weight-bold headline">Editar Area</span>
             </v-card-title>
             <v-divider />
-            <v-card-text class="pa-0">
+             <v-stepper v-model="e1">
+            <v-stepper-header>
+              <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales</v-stepper-step>
+              <v-divider></v-divider>
+              <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Especificos</v-stepper-step>
+            </v-stepper-header>
+
+            <v-stepper-items>
               <v-form
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitUpdateArea"
+                @submit.prevent="submitCreateArea"
               >
-                <v-container fluid grid-list-lg>
-                  <v-text-field
-                   <v-text-field
-                    v-model="form.nombre"
-                    :disabled="processingForm"
-                    label="nombre"
-                    outline
-                    :rules="rules.nombre"
-                    :error="!!formErrors.nombre"
-                    :error-messages="formErrors.nombre"
-                    @keyup="
-                      () => {
-                        formErrors.nombre = undefined;
-                        delete formErrors.nombre;
-                      }
-                    "
-                  />
-
-                  <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                      <v-autocomplete
-                        v-model="form.tipo_area_id"
-                        :items="tiposArea"
-                        dense
-                        outline
-                        clearable
-                        small-chips
-                        label="Seleccionar tipo de area"
-                        item-text="tipo_nombre"
-                        item-value="id"
-                        :disabled="processingForm"
-                        :error="!!formErrors.tipo_area_id"
-                        :error-messages="formErrors.tipo_area_id"
-                        @change="
-                          () => {
-                            formErrors.tipo_area_id = undefined;
-                            delete formErrors.tipo_area_id;
-                          }
-                        "
-                      />
-                    </v-flex>
-                    <v-flex sm6 xs12>
-                      <v-autocomplete
-                        v-model="form.estado"
-                        :items="estados"
-                        dense
-                        outline
-                        clearable
-                        small-chips
-                        label="Seleccionar Estado"
-                        item-text="nombre"
-                        item-value="id"
-                        :disabled="processingForm"
-                        :error="!!formErrors.estado"
-                        :error-messages="formErrors.estado"
-                        @change="
-                          () => {
-                            formErrors.estado = undefined;
-                            delete formErrors.estado;
-                          }
-                        "
-                      />
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-                <v-divider class="mb-3" />
-                <div class="text-xs-center pb-3">
-                  <v-btn
-                    type="submit"
-                    color="success"
-                    :disabled="!validForm || processingForm"
-                    :loading="processingForm"
-                  >
-                    Guardar
-                  </v-btn>
-                  <v-btn @click="$router.push({ name: 'listaArea' })">
-                    Cancelar
-                  </v-btn>
-                </div>
-              </v-form>
-            </v-card-text>
+            <v-stepper-content step="1">
+              <v-text-field
+                v-model="form.nombre"
+                :disabled="processingForm"
+                label="NOMBRE"
+                outline
+                :rules="rules.nombre"
+                :error="!!formErrors.nombre"
+                :error-messages="formErrors.nombre"
+                @keyup="
+                  () => {
+                    formErrors.nombre = undefined;
+                    delete formErrors.nombre;
+                  }
+                "
+              />
+              <v-autocomplete
+                v-model="form.tipo_area_id"
+                :items="tiposArea"
+                dense
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR TIPO AREA"
+                item-text="tipo_nombre"
+                item-value="id"
+                :disabled="processingForm"
+                :error="!!formErrors.tipo_area_id"
+                :error-messages="formErrors.tipo_area_id"
+                @change="
+                  () => {
+                    formErrors.tipo_area_id = undefined;
+                    delete formErrors.tipo_area_id;
+                  }
+                "
+              />
+              <v-btn
+                color="primary"
+                @click="e1 = 2"
+              >
+                Continuar
+              </v-btn>
+              <v-btn flat>Cancelar</v-btn>
+            </v-stepper-content>
+            <v-stepper-content step="2">
+              <v-autocomplete
+                v-model="form.estado"
+                :items="estados"
+                dense
+                outline
+                clearable
+                small-chips
+                label="Seleccionar Estado"
+                item-text="nombre"
+                item-value="id"
+                :disabled="processingForm"
+                :error="!!formErrors.estado"
+                :error-messages="formErrors.estado"
+                @change="
+                  () => {
+                    formErrors.estado = undefined;
+                    delete formErrors.estado;
+                  }
+                "
+              />
+              <v-autocomplete
+                v-if="form.tipo_area_id > 2"
+                v-model="form.padre_id"
+                :items="filterData"
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR GERENCIA"
+                item-text="nombre"
+                item-value="id"
+                :rules="rules.padre_id"
+                :error="!!formErrors.padre_id"
+                :error-messages="formErrors.padre_id"
+                @keyup="() => {
+                  formErrors.padre_id = undefined
+                  delete formErrors.padre_id
+                }"
+              />
+              <v-autocomplete
+                v-if="form.tipo_area_id > 3"
+                v-model="form.segundo_padre_id"
+                :items="filterDataSubgerencia"
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR SUBGERENCIA "
+                item-text="nombre"
+                item-value="id"
+                :rules="rules.segundo_padre_id"
+                :error="!!formErrors.segundo_padre_id"
+                :error-messages="formErrors.segundo_padre_id"
+                @keyup="() => {
+                  formErrors.segundo_padre_id = undefined
+                  delete formErrors.segundo_padre_id
+                }"
+              />
+              <v-autocomplete
+                v-if="form.tipo_area_id > 4"
+                v-model="form.tercer_padre_id"
+                :items="filterDataArea"
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR AREA "
+                item-text="nombre"
+                item-value="id"
+                :rules="rules.tercer_padre_id"
+                :error="!!formErrors.tercer_padre_id"
+                :error-messages="formErrors.tercer_padre_id"
+                @keyup="() => {
+                  formErrors.tercer_padre_id = undefined
+                  delete formErrors.tercer_padre_id
+                }"
+              />
+                <v-btn
+                  type="submit"
+                  color="success"
+                  :disabled="!validForm || processingForm"
+                  :loading="processingForm"
+                >
+                  Guardar
+                </v-btn>
+              <v-btn flat @click="e1 = 1">Cancel</v-btn>
+            </v-stepper-content>
+            </v-form>
+          </v-stepper-items>
+        </v-stepper>
           </v-card>
         </v-flex>
       </v-layout>
@@ -117,7 +175,7 @@ import { mapState, mapActions } from "vuex";
 export default {
 
   metaInfo() {
-    return { title: "Editar Tag" };
+    return { title: "Editar Area" };
   },
 
   components: {
@@ -128,13 +186,15 @@ export default {
     return {
       formErrors: {},
 
+      e1: 0,
       form: {
         nombre: '',
-        padre_id: '',
-        tipo_area_id: '',
-        estado: 0,
+        padre_id: 1,
+        tipo_area_id: 0,
+        segundo_padre_id: 0,
+        tercer_padre_id: '',
+        estado: 1,
       },
-      tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [
         { id: 0, nombre: 'inactivo' },
         { id: 1, nombre: 'activo' },

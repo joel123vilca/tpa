@@ -15,22 +15,6 @@ export default [
     name: 'home',
     component: () => import('@/views/Home.vue'),
   },
-  // sgc users
-  // {
-  //   path: '/users',
-  //   name: 'sgcUsersList',
-  //   component: () => import('@/views/users/ListUsers.vue'),
-  // },
-  // {
-  //   path: '/users/create',
-  //   name: 'sgcUsersCreate',
-  //   component: () => import('@/views/users/CreateUser.vue'),
-  // },
-  // {
-  //   path: '/users/:id',
-  //   name: 'sgcUsersEdit',
-  //   component: () => import('@/views/users/EditUser.vue'),
-  // },
   {
     path: '/Perfil',
     name: 'perfil',
@@ -112,14 +96,14 @@ export default [
     component: () => import('@/views/tags/Edit.vue'),
   },
   {
-    path: '/crear-nivel-jerarquico',
-    name: 'creaniveljerarquico',
-    component: () => import('@/views/nivelJerarquico/Crear.vue'),
-  },
-  {
     path: '/lista-nivel-jerarquico',
     name: 'listaniveljerarquico',
     component: () => import('@/views/nivelJerarquico/List.vue'),
+  },
+  {
+    path: '/crear-nivel-jerarquico',
+    name: 'creaniveljerarquico',
+    component: () => import('@/views/nivelJerarquico/Crear.vue'),
   },
   {
     path: '/nivel-jerarquico/:id',

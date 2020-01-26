@@ -189,7 +189,6 @@ export default {
         tercer_padre_id: '',
         estado: 1,
       },
-      tipos: ['POSITIVO', 'NEGATIVO'],
       estados: [
         {id:0, nombre:'inactivo'},
         {id:1, nombre:'activo'}

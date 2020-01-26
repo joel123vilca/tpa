@@ -23,7 +23,7 @@ export default router;
  */
 function createRouter() {
   const router = new Router({
-    scrollBehavior,
+  scrollBehavior: () => ({ y: 0 }),
     mode: "history",
     routes
   });
