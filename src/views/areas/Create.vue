@@ -92,7 +92,7 @@
                 "
               />
               <v-autocomplete
-                v-model="form.padre_id"
+                v-model="form.area_id"
                 :items="filterData"
                 outline
                 clearable
@@ -100,12 +100,12 @@
                 label="SELECCIONAR GERENCIA"
                 item-text="nombre"
                 item-value="id"
-                :rules="rules.padre_id"
-                :error="!!formErrors.padre_id"
-                :error-messages="formErrors.padre_id"
+                :rules="rules.area_id"
+                :error="!!formErrors.area_id"
+                :error-messages="formErrors.area_id"
                 @keyup="() => {
-                  formErrors.padre_id = undefined
-                  delete formErrors.padre_id
+                  formErrors.area_id = undefined
+                  delete formErrors.area_id
                 }"
               />
               <v-autocomplete
@@ -180,7 +180,8 @@ export default {
       e1: 0,
       form: {
         nombre: '',
-        padre_id: 1,
+        area_id: '',
+        padre_id: '',
         tipo_area_id: 0,
         segundo_padre_id: 0,
         tercer_padre_id: '',
@@ -211,7 +212,7 @@ export default {
     },
     filterDataSubgerencia() {
       let areas = this.areas
-      return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 2);
+      return areas.filter(o => o.padre_id === this.form.area_id && o.tipoArea.nivel === 2);
     },
     filterDataArea() {
       let areas = this.areas

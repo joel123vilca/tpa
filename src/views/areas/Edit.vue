@@ -28,7 +28,7 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitCreateArea"
+                @submit.prevent="submitUpdateArea"
               >
             <v-stepper-content step="1">
               <v-text-field
@@ -96,7 +96,7 @@
                 "
               />
               <v-autocomplete
-                v-model="form.padre_id"
+                v-model="form.area_id"
                 :items="filterData"
                 outline
                 clearable
@@ -104,12 +104,12 @@
                 label="SELECCIONAR GERENCIA"
                 item-text="nombre"
                 item-value="id"
-                :rules="rules.padre_id"
-                :error="!!formErrors.padre_id"
-                :error-messages="formErrors.padre_id"
+                :rules="rules.area_id"
+                :error="!!formErrors.area_id"
+                :error-messages="formErrors.area_id"
                 @keyup="() => {
-                  formErrors.padre_id = undefined
-                  delete formErrors.padre_id
+                  formErrors.area_id = undefined
+                  delete formErrors.area_id
                 }"
               />
               <v-autocomplete
@@ -186,7 +186,8 @@ export default {
       e1: 0,
       form: {
         nombre: '',
-        padre_id: 1,
+        area_id: '',
+        padre_id: '',
         tipo_area_id: 0,
         segundo_padre_id: 0,
         tercer_padre_id: '',
@@ -211,7 +212,25 @@ export default {
       currentArea: state => state.areas.currentArea,
       tiposArea: state => state.tiposArea.tiposArea,
       loadingTiposArea: state => state.tiposArea.loadingTiposArea,
+      areas: state => state.areas.areas,
+      loadingAreas: state => state.areas.loadingAreas,
     }),
+    filterData() {
+      let areas = this.areas
+      return areas.filter(o => o.tipoArea.nivel === 1);
+    },
+    filterDataSubgerencia() {
+      let areas = this.areas
+      return areas.filter(o => o.padre_id === this.form.area_id && o.tipoArea.nivel === 2);
+    },
+    filterDataArea() {
+      let areas = this.areas
+      if(this.form.segundo_padre_id != 0){
+        return areas.filter(o => o.padre_id === this.form.segundo_padre_id && o.tipoArea.nivel === 3);
+      } else {
+        return areas.filter(o => o.padre_id === this.form.area_id && o.tipoArea.nivel === 3);
+      }
+    },
   },
 
   created() {
@@ -220,6 +239,7 @@ export default {
       this.setForm(areaInfo);
     });
     this.getTiposArea();
+    this.getAreas();
   },
 
   methods: {
@@ -228,6 +248,7 @@ export default {
       updateArea: "areas/updateArea",
       getArea: "areas/getArea",
       getTiposArea: "tiposArea/getTiposArea",
+      getAreas: 'areas/getAreas',
     }),
 
     setForm(tag) {
@@ -239,7 +260,18 @@ export default {
 
     submitUpdateArea() {
       if (!this.$refs.form.validate()) return false;
+      if (this.form.tipo_area_id === 1){
+         this.form.padre_id = 1;
+      }
+       if(this.form.tipo_area_id === 4){
+         if(this.form.segundo_padre_id != 0){
+           this.form.padre_id = this.form.segundo_padre_id;
+         }
+       }
 
+       if(this.form.tipo_area_id === 5 ){
+         this.form.padre_id =this.form.tercer_padre_id;
+       }
       this.processingForm = true;
       this.updateArea({
         areaId: this.$route.params.id,

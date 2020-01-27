@@ -617,10 +617,10 @@ export default {
       getTags: 'tags/getTags',
     }),
     deleteImage() {
-      this.imageUrl = null;
+      this.imageUrl = '';
     },
     deleteImageSet() {
-      this.form.imagen_url = null;
+      this.form.imagen_url = '';
     },
     setForm(colaborador) {
       this.form.rut = colaborador.rut;
