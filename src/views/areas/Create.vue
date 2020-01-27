@@ -92,7 +92,6 @@
                 "
               />
               <v-autocomplete
-                v-if="form.tipo_area_id > 2"
                 v-model="form.padre_id"
                 :items="filterData"
                 outline
@@ -110,7 +109,6 @@
                 }"
               />
               <v-autocomplete
-                v-if="form.tipo_area_id > 3"
                 v-model="form.segundo_padre_id"
                 :items="filterDataSubgerencia"
                 outline
@@ -128,7 +126,6 @@
                 }"
               />
               <v-autocomplete
-                v-if="form.tipo_area_id > 4"
                 v-model="form.tercer_padre_id"
                 :items="filterDataArea"
                 outline

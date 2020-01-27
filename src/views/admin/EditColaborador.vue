@@ -741,6 +741,7 @@ export default {
       formData.append("nivel_educacion_id", this.form.nivel_educacion_id);
       formData.append("estado_civil_id", this.form.estado_civil_id);
       formData.append("imagen", this.form.imagen);
+      formData.append("imagen_url", this.form.imagen_url);
       this.updateColaborador({
         colaboradorId: this.$route.params.id,
         data: formData
