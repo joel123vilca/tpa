@@ -50,7 +50,7 @@
                 :disabled="loadingColaboradores"
                 box
                 append-icon="search"
-                label="Buscar Nombre"
+                label="Buscador"
                 clearable
                 hide-details
               />
@@ -58,6 +58,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
+                  { text: 'Rut', value: 'rut'},
                   { text: 'Nombre', value: 'primer_nombre'},
                   { text: 'Apellido',value: 'apellido_paterno'},
                   { text: 'Cargo'},
@@ -77,13 +78,16 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
+                    {{ props.item.rut }}
+                  </td>
+                  <td class="px-3">
                     {{ props.item.primer_nombre }}
                   </td>
                   <td class="px-3">
                     {{ props.item.apellido_paterno }}
                   </td>
                   <td class="px-3">
-                    cargo
+
                   </td>
                   <td class="px-3">
                     <v-btn small  :to="{ name: 'editcolaborador', params: { id: props.item.id } }"  color="success">Informacion</v-btn>

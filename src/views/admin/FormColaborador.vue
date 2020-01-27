@@ -43,6 +43,7 @@
               <v-text-field
                 v-model="form.rut"
                 label="RUT"
+                :rules="rules.rut"
                 outline
               ></v-text-field>
             </v-flex>
@@ -554,7 +555,9 @@ export default {
         { id: 3, nombre: 'Otro' },
       ],
       licencias: ['SI','NO'],
+
       rules: {
+        rut: [v => /^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(v) || 'rut no valido'],
         email: [v => /.+@.+/.test(v) || 'E-mail tiene que ser ejemplo@gmail.com.'],
       }
     }
@@ -682,7 +685,7 @@ export default {
       this.createColaborador({ data: formData})
       .then(response => {
         this.processingForm = false
-        this.e1 = 1
+        this.$router.push({ name: "listacolaboradores" });
       })
       .catch((error) => {
           this.processingForm = false

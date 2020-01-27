@@ -36,7 +36,7 @@
                   <v-text-field
                     v-model="form.nombres"
                     :disabled="processingForm"
-                    label="nombres"
+                    label="Nombres"
                     outline
                     :error="!!formErrors.nombres"
                     :error-messages="formErrors.nombres"
@@ -167,7 +167,7 @@ export default {
         apellidos: '',
         fecha_nacimiento: '2020-01-13',
         tipo_carga_id: 1,
-        estado: 0,
+        estado: 1,
       },
       estados: [
         {id:0, nombre:'inactivo'},

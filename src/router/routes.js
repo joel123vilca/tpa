@@ -101,7 +101,7 @@ export default [
     component: () => import('@/views/nivelJerarquico/List.vue'),
   },
   {
-    path: '/crear-nivel-jerarquico',
+    path: '/crear-niveljerarquico',
     name: 'creaniveljerarquico',
     component: () => import('@/views/nivelJerarquico/Crear.vue'),
   },
