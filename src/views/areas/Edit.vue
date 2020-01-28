@@ -271,10 +271,10 @@ export default {
 
     submitUpdateArea() {
       if (!this.$refs.form.validate()) return false;
-      if (this.form.tipo_area_id === 1){
+      if (this.form.tipo_area_id === 2){
          this.form.padre_id = 1;
       }
-      if(this.form.tipo_area_id === 2){
+      if(this.form.tipo_area_id === 3){
         this.form.padre_id = this.form.area_id;
       }
        if(this.form.tipo_area_id === 4){
@@ -282,7 +282,6 @@ export default {
            this.form.padre_id = this.form.segundo_padre_id;
          }
        }
-
        if(this.form.tipo_area_id === 5 ){
          this.form.padre_id =this.form.tercer_padre_id;
        }

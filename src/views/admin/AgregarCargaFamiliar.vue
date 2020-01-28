@@ -88,7 +88,7 @@
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-autocomplete
-                        v-model="form.tipo"
+                        v-model="form.tipo_carga_id"
                         :items="tiposCarga"
                         dense
                         outline
@@ -98,12 +98,12 @@
                         item-text="tipo"
                         item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.tipo"
-                        :error-messages="formErrors.tipo"
+                        :error="!!formErrors.tipo_carga_id"
+                        :error-messages="formErrors.tipo_carga_id"
                         @change="
                           () => {
-                            formErrors.tipo = undefined;
-                            delete formErrors.tipo;
+                            formErrors.tipo_carga_id = undefined;
+                            delete formErrors.tipo_carga_id;
                           }
                         "
                       />
@@ -177,16 +177,12 @@ export default {
         nombres: '',
         apellidos: '',
         fecha_nacimiento: '',
-        tipo_carga_id: 1,
+        tipo_carga_id: '',
         estado: 1,
       },
       estados: [
         {id:0, nombre:'inactivo'},
         {id:1, nombre:'activo'}
-      ],
-      tipos: [
-        {id:1, tipo:'papa'},
-        {id:2, tipo:'mama'}
       ],
       validForm: true,
       processingForm: false,
