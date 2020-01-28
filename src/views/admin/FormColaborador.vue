@@ -44,6 +44,7 @@
                 v-model="form.rut"
                 label="RUT"
                 :rules="rules.rut"
+                @change="verifyRut"
                 outline
               ></v-text-field>
             </v-flex>
@@ -594,7 +595,21 @@ export default {
       getEstadoCiviles: 'estadoCiviles/getEstadoCiviles',
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
+      getVerify: 'colaboradores/getVerify',
     }),
+    verifyRut() {
+      this.getVerify({
+        rut: this.form.rut,
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch((error) => {
+          this.form.rut = this.rules.rut.validForm
+          this.step = 1
+        })
+
+    },
     deleteImage() {
       this.imageUrl = null;
     },

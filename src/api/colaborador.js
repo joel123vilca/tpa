@@ -81,6 +81,20 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getVerify(payload = {}) {
+    const params = payload.params || {}
+    const rut = payload.rut
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/validacion-rut?rut=${rut}`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+
   getMovilidad(payload = {}) {
     const colaboradorId = payload.colaboradorId;
     return new Promise((resolve, reject) => {

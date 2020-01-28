@@ -153,6 +153,17 @@ export const actions = {
         });
     });
   },
+  getVerify ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI.getVerify(payload)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
   getTiposCarga({ commit }, payload) {
     commit(types.REPLACE_LOADING_TIPOS_CARGA, { status: true });
 
