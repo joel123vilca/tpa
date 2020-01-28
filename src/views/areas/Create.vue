@@ -92,26 +92,6 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-autocomplete
-                v-model="form.estado"
-                :items="estados"
-                dense
-                outline
-                clearable
-                small-chips
-                label="Seleccionar Estado"
-                item-text="nombre"
-                item-value="id"
-                :disabled="processingForm"
-                :error="!!formErrors.estado"
-                :error-messages="formErrors.estado"
-                @change="
-                  () => {
-                    formErrors.estado = undefined;
-                    delete formErrors.estado;
-                  }
-                "
-              />
-              <v-autocomplete
                 v-model="form.area_id"
                 :items="filterData"
                 outline
@@ -260,6 +240,9 @@ export default {
       this.processingForm = true;
       if (this.form.tipo_area_id === 1){
          this.form.padre_id = 1;
+      }
+      if(this.form.tipo_area_id === 2){
+        this.form.padre_id = this.form.area_id;
       }
        if(this.form.tipo_area_id === 4){
          if(this.form.segundo_padre_id != 0){

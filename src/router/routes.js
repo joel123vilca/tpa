@@ -16,7 +16,7 @@ export default [
     component: () => import('@/views/Home.vue'),
   },
   {
-    path: '/Perfil',
+    path: '/perfil',
     name: 'perfil',
     component: () => import('@/views/users/Profile.vue'),
   },
@@ -31,22 +31,22 @@ export default [
     component: () => import('@/views/users/Collaborators.vue'),
   },
   {
-    path: '/Colaborador/:id/agregar-carga-familiar',
+    path: '/colaborador/:id/agregar-carga-familiar',
     name: 'agregarCargaFamiliar',
     component: () => import('@/views/admin/AgregarCargaFamiliar.vue'),
   },
   {
-    path: '/Colaborador/:id/lista-carga-familiar',
+    path: '/colaborador/:id/lista-carga-familiar',
     name: 'ListaCargaFamiliar',
     component: () => import('@/views/admin/ListaCargaFamiliar.vue'),
   },
   {
-    path: '/Colaborador/:id/crear-movilidad',
+    path: '/colaborador/:id/crear-movilidad',
     name: 'crearmovilidad',
     component: () => import('@/views/admin/Movilidad.vue'),
   },
   {
-    path: '/Colaborador/:id/movilidades',
+    path: '/colaborador/:id/movilidades',
     name: 'movilidades',
     component: () => import('@/views/admin/ListaMovilidad.vue'),
   },
@@ -114,6 +114,11 @@ export default [
     path: '/crear-cargo',
     name: 'crearcargo',
     component: () => import('@/views/cargos/Create.vue'),
+  },
+  {
+    path: '/cargo/:id',
+    name: 'editcargo',
+    component: () => import('@/views/cargos/Edit.vue'),
   },
   {
     path: '/lista-cargos',

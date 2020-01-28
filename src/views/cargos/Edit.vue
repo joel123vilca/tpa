@@ -2,13 +2,13 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[{ name: 'Inicio' }, { name: 'Nuevo Cargo' }]"
+        :routes="[{ name: 'Inicio' }, { name: 'Editar Cargo' }]"
       />
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Crear Cargo</span>
+              <span class="success--text font-weight-bold headline">Editar Cargo</span>
             </v-card-title>
 
             <v-divider />
@@ -24,7 +24,7 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitCreateArea"
+                @submit.prevent="submitUpdate"
               >
             <v-stepper-content step="1">
               <v-text-field
@@ -111,7 +111,11 @@
               <v-btn flat @click="$router.push({ name: 'listacargo' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-
+              <div v-for="area in areasRelacionados.slice().reverse()">
+                   <h3 class="title" key='area.id'>{{area.tipoArea.tipo_nombre}}: {{ area.nombre }}</h3>
+                   <br>
+                </div>
+                <br>
               <v-autocomplete
                 v-model="form.padre_id"
                 :items="filterData"
@@ -186,7 +190,7 @@
                   :disabled="!validForm || processingForm"
                   :loading="processingForm"
                 >
-                  Guardar
+                  Guardar Cambios
                 </v-btn>
               <v-btn flat @click="e1 = 1">Volver</v-btn>
             </v-stepper-content>
@@ -205,7 +209,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   metaInfo() {
-    return { title: "Nuevo Cargo" };
+    return { title: "Editar Cargo" };
   },
 
   components: {
@@ -216,6 +220,7 @@ export default {
     return {
       formErrors: {},
       e1: 0,
+      areasRelacionados: [],
       form: {
         nombre: '',
         supervisor_id: '',
@@ -270,19 +275,35 @@ export default {
     },
   },
   created(){
+    this.getCargo({ cargoId: this.$route.params.id }).then(response => {
+      const cargoInfo = response.data.data;
+      this.setForm(cargoInfo);
+    });
     this.getNivelesJerarquico();
     this.getAreas();
     this.getCargos();
   },
   methods: {
     ...mapActions({
-      createCargo: "cargos/createCargo",
+      updateCargo: "cargos/updateCargo",
+      getCargo: 'cargos/getCargo',
       getNivelesJerarquico: "nivelesJerarquico/getNivelesJerarquico",
       getAreas: 'areas/getAreas',
       getCargos: 'cargos/getCargos',
+      getAreasRelacionados: 'areas/getAreasRelacionados',
     }),
-
-    submitCreateArea() {
+    setForm(cargo) {
+      this.form.nombre = cargo.nombre;
+      this.form.estado = cargo.estado;
+      this.form.supervisor_id = cargo.supervisor_id;
+      this.form.nivel_jerarquico_id = cargo.nivelJerarquico.id;
+      this.form.area_id = cargo.area.id;
+      this.getAreasRelacionados({ areaId: this.form.area_id }).then(response => {
+        const AreasRelacionados = response.data.data;
+        this.areasRelacionados= AreasRelacionados;
+      });
+    },
+    submitUpdate() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
@@ -301,7 +322,8 @@ export default {
        if(this.form.cuarto_padre_id !=null){
          this.form.area_id =this.form.cuarto_padre_id;
        }
-      this.createCargo({ data: this.form })
+      this.updateCargo({ cargoId: this.$route.params.id,
+        data: this.form, })
         .then(response => {
           this.processingForm = false;
           this.$router.push({ name: "listacargo" });

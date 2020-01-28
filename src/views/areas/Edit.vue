@@ -274,6 +274,9 @@ export default {
       if (this.form.tipo_area_id === 1){
          this.form.padre_id = 1;
       }
+      if(this.form.tipo_area_id === 2){
+        this.form.padre_id = this.form.area_id;
+      }
        if(this.form.tipo_area_id === 4){
          if(this.form.segundo_padre_id != 0){
            this.form.padre_id = this.form.segundo_padre_id;

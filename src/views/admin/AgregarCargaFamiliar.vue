@@ -61,20 +61,30 @@
                       }
                     "
                   />
-                  <v-text-field
-                    v-model="form.fecha_nacimiento"
-                    :disabled="processingForm"
-                    label="Fecha de nacimiento"
-                    outline
-                    :error="!!formErrors.fecha_nacimiento"
-                    :error-messages="formErrors.fecha_nacimiento"
-                    @keyup="
-                      () => {
-                        formErrors.fecha_nacimiento = undefined;
-                        delete formErrors.fecha_nacimiento;
-                      }
-                    "
-                  />
+                  <v-menu
+                ref="menu"
+                v-model="targetIssueDate"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                        <template v-slot:activator="{ on }">
+                        <v-text-field
+                            :value="formatDate(form.fecha_nacimiento)"
+                            hint="Formato (dd/mm/aa)"
+                            label="FECHA DE NACIMIENTO"
+                            v-on="on"
+                            outline
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          ref="picker"
+                          v-model="form.fecha_nacimiento"
+                          @input="targetIssueDate = false"
+                        ></v-date-picker>
+                      </v-menu>
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-autocomplete
@@ -150,7 +160,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   metaInfo() {
-    return { title: "Nuevo tag" };
+    return { title: "Nueva carga Familiar" };
   },
 
   components: {
@@ -160,12 +170,13 @@ export default {
   data() {
     return {
       formErrors: {},
-
+      targetIssueDate: false,
+      date: new Date().toISOString().substr(0, 10),
       form: {
         rut: '',
         nombres: '',
         apellidos: '',
-        fecha_nacimiento: '2020-01-13',
+        fecha_nacimiento: '',
         tipo_carga_id: 1,
         estado: 1,
       },
@@ -195,7 +206,11 @@ export default {
       postFamily: "colaboradores/postFamily",
       getTiposCarga: "colaboradores/getTiposCarga",
     }),
-
+     formatDate(date) {
+      if (!date) return null
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
     submitCreateCargaFamiliar() {
       if (!this.$refs.form.validate()) return false;
 
@@ -205,6 +220,7 @@ export default {
         data: this.form })
         .then(response => {
           this.processingForm = false;
+          this.$router.push({name: 'ListaCargaFamiliar', params: { id: this.$route.params.id }});
         })
         .catch(error => {
           this.processingForm = false;
