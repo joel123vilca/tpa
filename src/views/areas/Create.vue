@@ -16,7 +16,7 @@
             <v-stepper-header>
               <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales</v-stepper-step>
               <v-divider></v-divider>
-              <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Especificos</v-stepper-step>
+              <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Estructura Jerárquica</v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>
@@ -59,6 +59,26 @@
                   () => {
                     formErrors.tipo_area_id = undefined;
                     delete formErrors.tipo_area_id;
+                  }
+                "
+              />
+              <v-autocomplete
+                v-model="form.estado"
+                :items="estados"
+                dense
+                outline
+                clearable
+                small-chips
+                label="Seleccionar Estado"
+                item-text="nombre"
+                item-value="id"
+                :disabled="processingForm"
+                :error="!!formErrors.estado"
+                :error-messages="formErrors.estado"
+                @change="
+                  () => {
+                    formErrors.estado = undefined;
+                    delete formErrors.estado;
                   }
                 "
               />

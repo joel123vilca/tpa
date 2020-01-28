@@ -1,10 +1,10 @@
 export default [
-  {
-    path: '/',
-    redirect: {
-      name: 'login',
-    },
-  },
+  // {
+  //   path: '/',
+  //   redirect: {
+  //     name: 'login',
+  //   },
+  // },
   {
     path: '/login',
     name: 'login',
@@ -150,4 +150,5 @@ export default [
     name: 'editArea',
     component: () => import('@/views/areas/Edit.vue'),
   },
+  { path: '*', redirect: '/' },
 ];

@@ -29,7 +29,18 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getByIdAreas(payload = {}) {
+    const areaId = payload.areaId || "";
 
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/areas/${areaId}/relacionados`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   put(payload = {}) {
     const areaId = payload.areaId;
     const data = payload.data || {};

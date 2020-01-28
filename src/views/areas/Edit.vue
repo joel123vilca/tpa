@@ -20,7 +20,7 @@
             <v-stepper-header>
               <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales</v-stepper-step>
               <v-divider></v-divider>
-              <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Especificos</v-stepper-step>
+              <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Estructura Jerárquica</v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>
@@ -66,15 +66,6 @@
                   }
                 "
               />
-              <v-btn
-                color="primary"
-                @click="e1 = 2"
-              >
-                Continuar
-              </v-btn>
-              <v-btn flat>Cancelar</v-btn>
-            </v-stepper-content>
-            <v-stepper-content step="2">
               <v-autocomplete
                 v-model="form.estado"
                 :items="estados"
@@ -95,6 +86,20 @@
                   }
                 "
               />
+              <v-btn
+                color="primary"
+                @click="e1 = 2"
+              >
+                Continuar
+              </v-btn>
+              <v-btn flat>Cancelar</v-btn>
+            </v-stepper-content>
+            <v-stepper-content step="2">
+                <div v-for="area in areasRelacionados.slice().reverse()">
+                   <h3 class="title" key='area.id'>{{area.tipoArea.tipo_nombre}}: {{ area.nombre }}</h3>
+                   <br>
+                </div>
+                <br>
               <v-autocomplete
                 v-model="form.area_id"
                 :items="filterData"
@@ -193,6 +198,7 @@ export default {
         tercer_padre_id: '',
         estado: 1,
       },
+      areasRelacionados: [],
       estados: [
         { id: 0, nombre: 'inactivo' },
         { id: 1, nombre: 'activo' },
@@ -249,6 +255,7 @@ export default {
       getArea: "areas/getArea",
       getTiposArea: "tiposArea/getTiposArea",
       getAreas: 'areas/getAreas',
+      getAreasRelacionados: 'areas/getAreasRelacionados',
     }),
 
     setForm(tag) {
@@ -256,6 +263,10 @@ export default {
       this.form.padre_id = tag.padre_id;
       this.form.tipo_area_id = tag.tipoArea.id;
       this.form.estado = tag.estado;
+      this.getAreasRelacionados({ areaId: this.form.padre_id }).then(response => {
+        const AreasRelacionados = response.data.data;
+        this.areasRelacionados= AreasRelacionados;
+      });
     },
 
     submitUpdateArea() {

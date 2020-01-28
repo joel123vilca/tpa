@@ -6,6 +6,7 @@ export const state = {
   loadingAreas: false,
   currentArea: null,
   showModalDeleteArea: false,
+  areasRelacionados: [],
 };
 
 export const actions = {
@@ -36,6 +37,22 @@ export const actions = {
           const area = response.data.data;
 
           commit(types.REPLACE_CURRENT_AREA, { area });
+
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  getAreasRelacionados({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      areaAPI
+        .getByIdAreas(payload)
+        .then(response => {
+          const areasRelacionados = response.data.data;
+
+          commit(types.REPLACE_CURRENT_AREAS_RELACIONADOS, { areasRelacionados });
 
           resolve(response);
         })
@@ -113,6 +130,9 @@ export const mutations = {
   },
   [types.REPLACE_CURRENT_AREA](state, { area }) {
     state.currentArea = area;
+  },
+  [types.REPLACE_CURRENT_AREAS_RELACIONADOS](state, { areasRelacionados }) {
+    state.currentArea = areasRelacionados;
   },
   [types.REPLACE_SHOW_MODAL_DELETE_AREA](state, { status }) {
     state.showModalDeleteArea = status;
