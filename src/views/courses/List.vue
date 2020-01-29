@@ -19,7 +19,7 @@
           <v-toolbar-title>Cursos</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'createcurso' }"
+            :to="{ name: 'crearCurso' }"
             color="success"
           >
             Agregar Curso
@@ -98,7 +98,6 @@
           </v-layout>
         </v-container>
       </v-card>
-      <ModalDelete/>
   </v-container>
 </template>
 
@@ -113,7 +112,6 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    ModalDelete: () => import("@/views/courses/ModalDelete")
   },
 
   data () {
@@ -134,14 +132,10 @@ export default {
   methods: {
     ...mapActions({
       getCourses: 'courses/getCourses',
-      replaceShowModalDeleteCourse: 'courses/replaceShowModalDeleteCourse',
       replaceCurrentCourse: 'courses/replaceCurrentCourse',
       deleteCourse: 'courses/deleteCourse',
       replaceCourses: 'courses/replaceCourses',
     }),
-    openModalDeleteCourse() {
-      this.replaceShowModalDeleteCourse({ status: true});
-    },
   }
 }
 </script>

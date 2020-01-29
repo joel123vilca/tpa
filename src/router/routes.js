@@ -1,10 +1,4 @@
 export default [
-  // {
-  //   path: '/',
-  //   redirect: {
-  //     name: 'login',
-  //   },
-  // },
   {
     path: '/login',
     name: 'login',
@@ -52,7 +46,7 @@ export default [
   },
   {
     path: '/crear-curso',
-    name: 'createcurso',
+    name: 'crearCurso',
     component: () => import('@/views/courses/Create.vue'),
   },
   {

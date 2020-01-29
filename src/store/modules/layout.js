@@ -29,11 +29,9 @@ export const getters = {
             },
             {
               name: "Desarrollo Organizacional",
-              to: { name: "sgcUsersList" }
             },
             {
               name: "Capacitacion",
-              to: { name: "sgcUsersList" }
             },
           ],
         },
@@ -42,23 +40,18 @@ export const getters = {
           items: [
             {
               name: "Adm. de Personas",
-              to: { name: "sgcUsersList" }
             },
             {
               name: "DO y Capacitacion",
-              to: { name: "sgcUsersList" }
             },
             {
               name: "Bienestar",
-              to: { name: "sgcUsersList" }
             },
             {
               name: "Comunicaciones",
-              to: { name: "sgcUsersList" }
             },
             {
               name: "RSE",
-              to: { name: "sgcUsersList" }
             },
           ],
         },
@@ -86,14 +79,12 @@ export const getters = {
           items:[
             {
               name:"Perfil",
-              to:{name:"sgcUserList"}
             }
           ]
 
         },
         {
           name:"Perfil",
-          to:{name:"sgcUserList"}
         }
       );
       return items;

@@ -108,7 +108,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  middleware: "auth",
 
   metaInfo() {
     return { title: "Nuevo curso" };
@@ -146,7 +145,6 @@ export default {
 
   methods: {
     ...mapActions({
-      replaceCurrentUser: "users/replaceCurrentUser",
       createCourse: "courses/createCourse"
     }),
 
