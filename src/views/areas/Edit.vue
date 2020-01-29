@@ -31,6 +31,19 @@
                 @submit.prevent="submitUpdateArea"
               >
             <v-stepper-content step="1">
+              <v-alert
+                :value="hijos"
+                type="warning"
+              >
+                Esta Area tiene areas asociados
+              </v-alert>
+              <v-alert
+                :value="cargos"
+                type="warning"
+              >
+                Esta Area tiene cargos asociados
+              </v-alert>
+              <br>
               <v-text-field
                 v-model="form.nombre"
                 :disabled="processingForm"
@@ -50,7 +63,7 @@
                 v-model="form.tipo_area_id"
                 :items="tiposArea"
                 dense
-                disabled="!areasRelacionados.length"
+                :disabled='hijos || cargos'
                 outline
                 clearable
                 small-chips
@@ -70,7 +83,7 @@
                 v-model="form.estado"
                 :items="estados"
                 dense
-                disabled="!areasRelacionados.length"
+                :disabled='hijos || cargos'
                 outline
                 clearable
                 small-chips
@@ -95,10 +108,10 @@
               <v-btn flat>Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-                <div v-for="area in areasRelacionados.slice().reverse()">
-                   <h3 class="title" key='area.id'>{{area.tipoArea.tipo_nombre}}: {{ area.nombre }}</h3>
-                   <br>
-                </div>
+              <a class="title font-weight-light"  v-for="area in areasRelacionados.slice().reverse()">
+                  <v-icon>chevron_right</v-icon> {{area.nombre}}
+              </a>
+                <br>
                 <br>
               <v-autocomplete
                 v-model="form.area_id"
@@ -198,6 +211,8 @@ export default {
         tercer_padre_id: '',
         estado: 1,
       },
+      cargos: '',
+      hijos: '',
       areasRelacionados: [],
       estados: [
         { id: 0, nombre: 'inactivo' },
@@ -263,6 +278,8 @@ export default {
       this.form.padre_id = tag.padre_id;
       this.form.tipo_area_id = tag.tipoArea.id;
       this.form.estado = tag.estado;
+      this.cargos = tag.cargos;
+      this.hijos = tag.hijos;
       this.getAreasRelacionados({ areaId: tag.id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;

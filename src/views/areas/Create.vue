@@ -83,6 +83,16 @@
                 "
               />
               <v-btn
+                v-if="form.tipo_area_id <= 2"
+                  type="submit"
+                  color="success"
+                  :disabled="!validForm || processingForm"
+                  :loading="processingForm"
+                >
+                  Guardar
+                </v-btn>
+              <v-btn
+                v-else
                 color="primary"
                 @click="e1 = 2"
               >

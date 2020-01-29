@@ -111,10 +111,10 @@
               <v-btn flat @click="$router.push({ name: 'listacargo' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-              <div v-for="area in areasRelacionados.slice().reverse()">
-                   <h3 class="title" key='area.id'>{{area.tipoArea.tipo_nombre}}: {{ area.nombre }}</h3>
-                   <br>
-                </div>
+                <a class="title font-weight-light"  v-for="area in areasRelacionados.slice().reverse()">
+                  <v-icon>chevron_right</v-icon> {{area.nombre}}
+              </a>
+              <br>
                 <br>
               <v-autocomplete
                 v-model="form.padre_id"
@@ -232,6 +232,8 @@ export default {
         estado: 1,
         area_id: null,
       },
+      hijos:'',
+      cargos:'',
       estados: [
         {id:0, nombre:'inactivo'},
         {id:1, nombre:'activo'}
