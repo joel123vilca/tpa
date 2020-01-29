@@ -33,15 +33,15 @@
             <v-stepper-content step="1">
               <v-alert
                 :value="hijos"
-                type="warning"
+                type="info"
               >
-                Esta Area tiene areas asociados
+                Esta área tiene areas hijos asociados
               </v-alert>
               <v-alert
                 :value="cargos"
-                type="warning"
+                type="info"
               >
-                Esta Area tiene cargos asociados
+                Esta área tiene cargos asociados
               </v-alert>
               <br>
               <v-text-field
@@ -100,6 +100,16 @@
                 "
               />
               <v-btn
+                v-if="form.tipo_area_id <= 2"
+                  type="submit"
+                  color="success"
+                  :disabled="!validForm || processingForm"
+                  :loading="processingForm"
+                >
+                  Guardar
+                </v-btn>
+              <v-btn
+                v-else
                 color="primary"
                 @click="e1 = 2"
               >
@@ -114,6 +124,7 @@
                 <br>
                 <br>
               <v-autocomplete
+                v-if="form.tipo_area_id > 2"
                 v-model="form.area_id"
                 :items="filterData"
                 outline
@@ -131,6 +142,7 @@
                 }"
               />
               <v-autocomplete
+                v-if="form.tipo_area_id > 3"
                 v-model="form.segundo_padre_id"
                 :items="filterDataSubgerencia"
                 outline
@@ -148,6 +160,7 @@
                 }"
               />
               <v-autocomplete
+                v-if="form.tipo_area_id > 4"
                 v-model="form.tercer_padre_id"
                 :items="filterDataArea"
                 outline

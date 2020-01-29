@@ -102,6 +102,7 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-autocomplete
+                v-if="form.tipo_area_id > 2"
                 v-model="form.area_id"
                 :items="filterData"
                 outline
@@ -119,6 +120,7 @@
                 }"
               />
               <v-autocomplete
+                v-if="form.tipo_area_id > 3"
                 v-model="form.segundo_padre_id"
                 :items="filterDataSubgerencia"
                 outline
@@ -136,6 +138,7 @@
                 }"
               />
               <v-autocomplete
+                v-if="form.tipo_area_id > 4"
                 v-model="form.tercer_padre_id"
                 :items="filterDataArea"
                 outline
