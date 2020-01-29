@@ -50,13 +50,13 @@
                 v-model="form.tipo_area_id"
                 :items="tiposArea"
                 dense
+                disabled="!areasRelacionados.length"
                 outline
                 clearable
                 small-chips
                 label="SELECCIONAR TIPO AREA"
                 item-text="tipo_nombre"
                 item-value="id"
-                :disabled="processingForm"
                 :error="!!formErrors.tipo_area_id"
                 :error-messages="formErrors.tipo_area_id"
                 @change="
@@ -70,13 +70,13 @@
                 v-model="form.estado"
                 :items="estados"
                 dense
+                disabled="!areasRelacionados.length"
                 outline
                 clearable
                 small-chips
                 label="Seleccionar Estado"
                 item-text="nombre"
                 item-value="id"
-                :disabled="processingForm"
                 :error="!!formErrors.estado"
                 :error-messages="formErrors.estado"
                 @change="
