@@ -80,7 +80,7 @@ export default {
             ],
           },
           {
-            title: 'Nivel Jerarquico',
+            title: 'Nivel Jerárquico',
             items: [
               { title: 'Agregar Nuevo', to: { name: "creaniveljerarquico" } },
               { title: 'Listar Todas', to: { name: "listaniveljerarquico" } },

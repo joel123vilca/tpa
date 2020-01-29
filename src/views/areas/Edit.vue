@@ -193,8 +193,8 @@ export default {
         nombre: '',
         area_id: '',
         padre_id: '',
-        tipo_area_id: 0,
-        segundo_padre_id: 0,
+        tipo_area_id: '',
+        segundo_padre_id: '',
         tercer_padre_id: '',
         estado: 1,
       },
@@ -263,7 +263,7 @@ export default {
       this.form.padre_id = tag.padre_id;
       this.form.tipo_area_id = tag.tipoArea.id;
       this.form.estado = tag.estado;
-      this.getAreasRelacionados({ areaId: this.form.padre_id }).then(response => {
+      this.getAreasRelacionados({ areaId: tag.id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;
       });
@@ -278,8 +278,10 @@ export default {
         this.form.padre_id = this.form.area_id;
       }
        if(this.form.tipo_area_id === 4){
-         if(this.form.segundo_padre_id != 0){
+         if(this.form.segundo_padre_id != null){
            this.form.padre_id = this.form.segundo_padre_id;
+         }else{
+           this.form.padre_id = this.form.area_id;
          }
        }
        if(this.form.tipo_area_id === 5 ){

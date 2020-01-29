@@ -2,13 +2,13 @@
   <v-container fluid grid-list-lg>
     <template>
       <Breadcrumbs
-        :routes="[{ name: 'Inicio', to: { name: 'listaniveljerarquico' } }, { name: 'Crear nivel jerarquico' }]"
+        :routes="[{ name: 'Inicio', to: { name: 'listaniveljerarquico' } }, { name: 'Crear nivel jerárquico' }]"
       />
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Crear Nivel Jerarquico</span>
+              <span class="success--text font-weight-bold headline">Crear Nivel Jerárquico</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">

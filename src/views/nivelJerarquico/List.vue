@@ -4,13 +4,13 @@
     grid-list-lg
   >
     <v-card-title class="white cyan--text headline">
-        Listado de Niveles jerarquico
+        Listado de Niveles jerárquico
         <v-spacer />
         <v-spacer />
         <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Niveles Jerarquico' },
+          { name: 'Niveles Jerárquico' },
           { name: 'Listado'}
         ]"
         />

@@ -4,8 +4,8 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Nivel Jerarquico'},
-          { name: 'Editar Nivel Jerarquico' }
+          { name: 'Nivel Jerárquico'},
+          { name: 'Editar Nivel Jerárquico' }
         ]"
       />
 
@@ -13,7 +13,7 @@
         <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Editar Nivel Jerarquico</span>
+              <span class="success--text font-weight-bold headline">Editar Nivel Jerárquico</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -94,7 +94,7 @@ import { mapState, mapActions } from "vuex";
 export default {
 
   metaInfo() {
-    return { title: "Editar Nivel Jerarquico" };
+    return { title: "Editar Nivel Jerárquico" };
   },
 
   components: {
