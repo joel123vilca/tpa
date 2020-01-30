@@ -27,6 +27,13 @@
                 @submit.prevent="submitUpdate"
               >
             <v-stepper-content step="1">
+              <v-alert
+                :value="hijos"
+                type="info"
+              >
+                Este cargo tiene cargos hijos asociados.
+              </v-alert>
+              <br>
               <v-text-field
                 v-model="form.nombre"
                 :disabled="processingForm"
@@ -45,6 +52,7 @@
               <v-autocomplete
                 v-model="form.nivel_jerarquico_id"
                 :items="nivelesJerarquico"
+                :disabled='hijos'
                 dense
                 outline
                 clearable
@@ -52,7 +60,6 @@
                 label="SELECCIONAR NIVEL JERARQUICO"
                 item-text="nivel_nombre"
                 item-value="id"
-                :disabled="processingForm"
                 :error="!!formErrors.nivel_jerarquico_id"
                 :error-messages="formErrors.nivel_jerarquico_id"
                 @change="
@@ -65,6 +72,7 @@
               <v-autocomplete
                 v-model="form.supervisor_id"
                 :items="cargos"
+                :disabled='hijos'
                 dense
                 outline
                 clearable
@@ -72,7 +80,6 @@
                 label="SELECCIONAR SUPERVISOR"
                 item-text="nombre"
                 item-value="id"
-                :disabled="processingForm"
                 :error="!!formErrors.supervisor_id"
                 :error-messages="formErrors.supervisor_id"
                 @change="
@@ -85,6 +92,7 @@
               <v-autocomplete
                 v-model="form.estado"
                 :items="estados"
+                :disabled='hijos'
                 dense
                 outline
                 clearable
@@ -92,7 +100,6 @@
                 label="Seleccionar Estado"
                 item-text="nombre"
                 item-value="id"
-                :disabled="processingForm"
                 :error="!!formErrors.estado"
                 :error-messages="formErrors.estado"
                 @change="
@@ -232,8 +239,7 @@ export default {
         estado: 1,
         area_id: null,
       },
-      hijos:'',
-      cargos:'',
+      hijos: '',
       estados: [
         {id:0, nombre:'inactivo'},
         {id:1, nombre:'activo'}
@@ -300,6 +306,7 @@ export default {
       this.form.supervisor_id = cargo.supervisor_id;
       this.form.nivel_jerarquico_id = cargo.nivelJerarquico.id;
       this.form.area_id = cargo.area.id;
+      this.hijos = cargo.hijos;
       this.getAreasRelacionados({ areaId: this.form.area_id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;

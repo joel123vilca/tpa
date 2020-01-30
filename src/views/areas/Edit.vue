@@ -118,8 +118,8 @@
               <v-btn flat>Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-              <a class="title font-weight-light"  v-for="area in areasRelacionados.slice().reverse()">
-                  <v-icon>chevron_right</v-icon> {{area.nombre}}
+              <a class="title font-weight-light"  v-for="item in areasRelacionados.slice().reverse()">
+                  <v-icon>chevron_right</v-icon> {{item.nombre}}
               </a>
                 <br>
                 <br>
