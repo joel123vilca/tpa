@@ -10,6 +10,21 @@ export default [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/crear-administrador',
+    name: 'creaAdministrador',
+    component: () => import('@/views/administradores/Create.vue'),
+  },
+  {
+    path: '/lista-administradores',
+    name: 'listAdministradores',
+    component: () => import('@/views/administradores/List.vue'),
+  },
+  {
+    path: '/administrador/:id',
+    name: 'editAdministrador',
+    component: () => import('@/views/administradores/Edit.vue'),
+  },
+  {
     path: '/perfil',
     name: 'perfil',
     component: () => import('@/views/users/Profile.vue'),
