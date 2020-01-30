@@ -43,6 +43,7 @@
                 ]"
                 :items="courses"
                 :loading="loadingCourses"
+                :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
               >
                 <tr

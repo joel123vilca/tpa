@@ -232,10 +232,10 @@ export default {
         nombre: '',
         supervisor_id: '',
         padre_id: 1,
-        nivel_jerarquico_id: null,
-        segundo_padre_id: null,
-        tercer_padre_id: null,
-        cuarto_padre_id: null,
+        nivel_jerarquico_id: '',
+        segundo_padre_id: '',
+        tercer_padre_id: '',
+        cuarto_padre_id: '',
         estado: 1,
         area_id: null,
       },
@@ -298,7 +298,7 @@ export default {
       getNivelesJerarquico: "nivelesJerarquico/getNivelesJerarquico",
       getAreas: 'areas/getAreas',
       getCargos: 'cargos/getCargos',
-      getAreasRelacionados: 'areas/getAreasRelacionados',
+      getAreasRelacionados: 'cargos/getAreasRelacionados',
     }),
     setForm(cargo) {
       this.form.nombre = cargo.nombre;
@@ -307,7 +307,7 @@ export default {
       this.form.nivel_jerarquico_id = cargo.nivelJerarquico.id;
       this.form.area_id = cargo.area.id;
       this.hijos = cargo.hijos;
-      this.getAreasRelacionados({ areaId: this.form.area_id }).then(response => {
+      this.getAreasRelacionados({ cargoId: cargo.id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;
       });
@@ -322,13 +322,13 @@ export default {
       if(this.form.padre_id > 1){
         this.form.area_id = this.form.padre_id;
       }
-       if(this.form.segundo_padre_id !=null){
+       if(this.form.segundo_padre_id !=''){
          this.form.area_id =this.form.segundo_padre_id;
        }
-       if(this.form.tercer_padre_id !=null){
+       if(this.form.tercer_padre_id !=''){
          this.form.area_id =this.form.tercer_padre_id;
        }
-       if(this.form.cuarto_padre_id !=null){
+       if(this.form.cuarto_padre_id !=''){
          this.form.area_id =this.form.cuarto_padre_id;
        }
       this.updateCargo({ cargoId: this.$route.params.id,

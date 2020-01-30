@@ -69,4 +69,15 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getByIdAreas(payload = {}) {
+    const cargoId = payload.cargoId || "";
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cargos/${cargoId}/relacionados`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
 };

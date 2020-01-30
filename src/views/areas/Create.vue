@@ -232,7 +232,7 @@ export default {
       if(this.form.segundo_padre_id != 0){
         return areas.filter(o => o.padre_id === this.form.segundo_padre_id && o.tipoArea.nivel === 3);
       } else {
-        return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 3);
+        return areas.filter(o => o.padre_id === this.form.area_id && o.tipoArea.nivel === 3);
       }
     },
   },

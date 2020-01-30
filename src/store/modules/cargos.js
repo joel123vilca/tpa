@@ -6,6 +6,7 @@ export const state = {
   loadingCargos: false,
   currentCargo: null,
   showModalDeleteCargo: false,
+  areasRelacionados: [],
 };
 
 export const actions = {
@@ -100,7 +101,21 @@ export const actions = {
         });
     });
   },
+  getAreasRelacionados({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      cargoAPI
+        .getByIdAreas(payload)
+        .then(response => {
+          const areasRelacionados = response.data.data;
+          commit(types.REPLACE_CURRENT_CARGOS_AREAS_RELACIONADOS, { areasRelacionados });
 
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
 
 };
 
@@ -113,6 +128,9 @@ export const mutations = {
   },
   [types.REPLACE_CURRENT_CARGO](state, { cargo }) {
     state.currentCargo = cargo;
+  },
+  [types.REPLACE_CURRENT_CARGOS_AREAS_RELACIONADOS](state, { areasRelacionados }) {
+    state.currentArea = areasRelacionados;
   },
   [types.REPLACE_SHOW_MODAL_DELETE_CARGO](state, { status }) {
     state.showModalDeleteCargo = status;

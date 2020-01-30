@@ -186,7 +186,7 @@ export default {
           this.processingForm = false;
           this.formErrors = error.response.data.errors || {};
         });
-    }
-  }
+    },
+  },
 };
 </script>
