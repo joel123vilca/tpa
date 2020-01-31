@@ -117,6 +117,31 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getByIdFamily(payload = {}) {
+    const familiarId = payload.familiarId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cargas-familiares/${familiarId}`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+  putFamily(payload = {}) {
+    const familiarId = payload.familiarId;
+    const data = payload.data || {};
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cargas-familiares/${familiarId}`,
+        method: "patch",
+        data,
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getCarga(payload = {}) {
     return new Promise((resolve, reject) => {
       axios({

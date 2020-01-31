@@ -5,7 +5,7 @@ export default [
     component: () => import('@/components/Login.vue'),
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: () => import('@/views/Home.vue'),
   },
@@ -48,6 +48,11 @@ export default [
     path: '/colaborador/:id/lista-carga-familiar',
     name: 'ListaCargaFamiliar',
     component: () => import('@/views/admin/ListaCargaFamiliar.vue'),
+  },
+  {
+    path: '/editar-carga-familiar/:id',
+    name: 'EditarCargaFamiliar',
+    component: () => import('@/views/admin/EditCargaFamiliar.vue'),
   },
   {
     path: '/colaborador/:id/crear-movilidad',

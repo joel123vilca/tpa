@@ -134,6 +134,37 @@ export const actions = {
         });
     });
   },
+  getByIdFamily({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getByIdFamily(payload)
+        .then(response => {
+          const familiar = response.data.data;
+          commit(types.REPLACE_CURRENT_FAMILY, { familiar });
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  updateFamily({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .putFamily(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "TPA",
+            message: "El familiar ha sido actualizado con éxito."
+          });
+
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
   getMovilidad({ commit }, payload) {
     commit(types.REPLACE_LOADING_MOVILIDADES, { status: true });
 
@@ -194,6 +225,9 @@ export const mutations = {
   },
   [types.REPLACE_CURRENT_COLABORADOR](state, { colaborador }) {
     state.currentColaborador = colaborador;
+  },
+  [types.REPLACE_CURRENT_FAMILY](state, { familiar }) {
+    state.currentFamiliar = familiar;
   },
   [types.REPLACE_LOADING_CARGA_FAMILIAR](state, { status }) {
     state.loadingCargaFamiliar = status;
