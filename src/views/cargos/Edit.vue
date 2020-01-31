@@ -118,7 +118,7 @@
               <v-btn flat @click="$router.push({ name: 'listacargo' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-                <a class="title font-weight-light"  v-for="area in areasRelacionados.slice().reverse()">
+                <a class="title font-weight-light"  v-for="area in areasRelacionados">
                   <v-icon>chevron_right</v-icon> {{area.nombre}}
               </a>
               <br>

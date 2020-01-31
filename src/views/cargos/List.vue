@@ -6,7 +6,7 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Areas' },
+          { name: 'Cargos' },
           { name: 'Listado' }
         ]"
       />
