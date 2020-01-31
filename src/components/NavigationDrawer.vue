@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="authenticated"
     v-model="primaryDrawer.model"
     :permanent="primaryDrawer.type === 'permanent'"
     :temporary="primaryDrawer.type === 'temporary'"
@@ -12,7 +13,7 @@
     dark
   >
 
-    <div style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
+    <div  style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
      <v-layout row>
     <v-flex xs12 sm12>
         <v-list>
@@ -41,10 +42,23 @@
             </v-list-tile>
           </v-list-group>
         </v-list>
+        <v-list-tile
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+          @click="logout({ router: $router })"
+        >
+          <v-list-tile-action>
+            <v-icon>power_settings_new</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
+        </v-list-tile>
     </v-flex>
   </v-layout>
   </v-navigation-drawer>
 </template>
+
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";

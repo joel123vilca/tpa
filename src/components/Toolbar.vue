@@ -1,15 +1,16 @@
 <template>
   <div>
     <v-toolbar
+      v-if="authenticated"
       height="60"
       :clipped-left="primaryDrawer.clipped"
       app
-      class="toolbar"
+      color="#44b5ba"
       center
       dark
     >
       <v-toolbar-side-icon
-
+        v-if="authenticated"
         @click.stop="replacePrimaryDrawerModel"
       />
       <v-spacer />
@@ -141,9 +142,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.toolbar{
-  background-color: #44b5ba;
-}
 .scoped-toolbar-title {
   display: flex;
   filter: opacity(70%);

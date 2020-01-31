@@ -27,4 +27,15 @@ export default {
         .catch(error => reject(error));
     });
   },
+  user(payload = {}) {
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/administrador`,
+        method: 'get'
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  }
+
 };

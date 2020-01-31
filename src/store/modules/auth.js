@@ -34,10 +34,6 @@ export const actions = {
         .then(response => {
           const user = response.data.data;
           commit(types.FETCH_USER_SUCCESS, { user });
-
-          const newAbilities = defineAbilitiesFor(user);
-          ability.update(newAbilities);
-
           resolve(response);
         })
         .catch(error => {
@@ -102,7 +98,6 @@ export const mutations = {
   [types.LOGOUT](state) {
     state.user = null;
     state.token = null;
-
     Cookies.remove('token');
   }
 };

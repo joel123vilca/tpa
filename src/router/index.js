@@ -24,7 +24,7 @@ export default router;
 function createRouter() {
   const router = new Router({
   scrollBehavior: () => ({ y: 0 }),
-    mode: "hash",
+    mode: "history",
     routes
   });
 

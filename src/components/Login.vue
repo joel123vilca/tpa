@@ -1,10 +1,9 @@
 <template>
   <v-app id="login" class="fondo">
-    <v-container fluid fill-height>
       <template v-if="!authenticated">
-        <v-layout align-center justify-center>
+        <v-layout align-center justify-center >
           <v-flex xs12 sm8 md4 lg4>
-            <v-card class="login-card">
+            <v-card class="login-card" color="#44b5ba">
               <div class="layout column align-center">
               <Typography variant="subtitle1" class="login-title" gutterBottom>
                 Bienvenido a Plataforma Personas
@@ -44,7 +43,6 @@
           </v-flex>
         </v-layout>
       </template>
-    </v-container>
   </v-app>
 </template>
 
@@ -118,11 +116,11 @@ export default {
             .dispatch("auth/fetchUser")
             .then(response => {
               this.processingForm = false;
+              console.log('entro al push')
                 this.$router.push({ name: "home" });
             })
             .catch(error => {
               this.processingForm = false;
-              this.validationErrors = error.response.data.errors || {};
             });
         })
         .catch(error => {
@@ -139,7 +137,7 @@ export default {
   }
 };
 </script>
-<style scoped lang="css">
+<style scoped>
 #login {
   height: 100%;
   width: 100%;
@@ -154,7 +152,6 @@ export default {
   background-size: cover;
 }
 .login-card{
-  background-color: #44b5ba;
   width: 550px;
 }
 .login-title{
