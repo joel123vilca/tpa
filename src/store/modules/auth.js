@@ -53,10 +53,9 @@ export const actions = {
         .login(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'USERS',
+            title: 'TPA',
             message: 'Bienvenido'
           });
-
           resolve(response);
         })
         .catch(error => reject(error));
@@ -71,7 +70,7 @@ export const actions = {
           commit(types.LOGOUT);
 
           this._vm.$notify.success({
-            title: 'USERS',
+            title: 'TPA',
             message: 'Hasta luego'
           });
 

@@ -22,7 +22,7 @@
                   <v-container fluid class="pb-0" grid-list-lg>
                     <input class="login-input" v-model="form.username" placeholder="Rut" name="email" type="email" autofocus style="background-color: white; color: #283848;">
                     <br><br>
-                    <input class="login-input" v-model="form.password" placeholder="Contraseña" name="password" type="password" value="" style="background-color: white; color: #283848; ">
+                    <input class="login-input" v-model="form.password" placeholder="Contraseña" name="password" type="password"  style="background-color: white; color: #283848; ">
                   </v-container>
                   <v-divider />
                   <v-container fluid grid-list-lg>
@@ -89,17 +89,9 @@ export default {
     })
   },
 
-  watch: {
-    showModalLogin(newValue, oldValue) {
-      if (!newValue) {
-        this.tryFacebookLogin = false;
-        return false;
-      }
-    }
-  },
 
   created() {
-    if (this.authenticated) this.$router.push({ name: "sgcUsersList" });
+    if (this.authenticated) this.$router.push({ name: "home" });
   },
 
   methods: {
@@ -110,9 +102,6 @@ export default {
 
     lauchLogin() {
       this.processingForm = true;
-        if(this.form.username === 'admin' && this.form.password === 'admin'){
-          this.$router.push({ name: "home" });
-        }
       this.login({ params: this.form })
         .then(response => {
           // Save the token.
@@ -129,13 +118,7 @@ export default {
             .dispatch("auth/fetchUser")
             .then(response => {
               this.processingForm = false;
-
-              const roleType = response.data.data.typeUser;
-              if (roleType === "Administrador") {
-                this.$router.push({ name: "sgcUsersList" });
-              } else {
-                this.$router.push({ name: "sgcUsersList" });
-              }
+                this.$router.push({ name: "home" });
             })
             .catch(error => {
               this.processingForm = false;
@@ -144,7 +127,6 @@ export default {
         })
         .catch(error => {
           this.processingForm = false;
-          this.validationErrors = error.response.data.errors || {};
         });
     },
 

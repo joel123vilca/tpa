@@ -308,7 +308,8 @@ export default {
         this.form.padre_id = this.form.area_id;
       }
        if(this.form.tipo_area_id === 4){
-         if(this.form.segundo_padre_id != null){
+
+         if(this.form.segundo_padre_id != ''){
            this.form.padre_id = this.form.segundo_padre_id;
          }else{
            this.form.padre_id = this.form.area_id;

@@ -6,7 +6,6 @@ const HOST = baseUrlAPI;
 export default {
   login(payload = {}) {
     const params = payload.params || {};
-
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/login`,
