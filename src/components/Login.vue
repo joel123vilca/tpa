@@ -19,7 +19,7 @@
               <v-card-text class="pa-0">
                 <v-form v-model="validForm" lazy-validation @submit.prevent="lauchLogin">
                   <v-container fluid class="pb-0" grid-list-lg>
-                    <input class="login-input" v-model="form.username" placeholder="Rut" name="email" type="email" autofocus style="background-color: white; color: #283848;">
+                    <input class="login-input" v-model="form.username" placeholder="Rut" name="email"  autofocus style="background-color: white; color: #283848;">
                     <br><br>
                     <input class="login-input" v-model="form.password" placeholder="Contraseña" name="password" type="password"  style="background-color: white; color: #283848; ">
                   </v-container>

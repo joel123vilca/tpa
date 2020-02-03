@@ -127,6 +127,13 @@ export default {
               { title: 'Agregar Nuevo' },
               { title: 'Listar Todas' },
             ],
+          },
+          {
+            title: 'Administradores',
+            items: [
+              { title: 'Agregar Nuevo', to: { name: "creaAdministrador" } },
+              { title: 'Listar Todas', to: { name: "listAdministradores" } },
+            ],
           }
         ],
     };
