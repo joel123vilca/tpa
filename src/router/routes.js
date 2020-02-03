@@ -65,6 +65,11 @@ export default [
     component: () => import('@/views/admin/ListaMovilidad.vue'),
   },
   {
+    path: '/movilidad/:id',
+    name: 'editMovilidad',
+    component: () => import('@/views/admin/EditMovilidad.vue'),
+  },
+  {
     path: '/crear-curso',
     name: 'crearCurso',
     component: () => import('@/views/courses/Create.vue'),

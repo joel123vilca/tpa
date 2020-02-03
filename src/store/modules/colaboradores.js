@@ -11,6 +11,8 @@ export const state = {
   loadingCargaFamiliar: false,
   movilidades: [],
   loadingMovilidades: false,
+  tipoMovilidades: [],
+  loadingTipoMovilidades: false,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -167,7 +169,6 @@ export const actions = {
   },
   getMovilidad({ commit }, payload) {
     commit(types.REPLACE_LOADING_MOVILIDADES, { status: true });
-
     return new Promise((resolve, reject) => {
       colaboradorAPI
         .getMovilidad(payload)
@@ -180,6 +181,54 @@ export const actions = {
         })
         .catch(error => {
           commit(types.REPLACE_LOADING_MOVILIDADES, { status: false });
+          reject(error);
+        });
+    });
+  },
+  getTipoMovilidades({ commit }, payload) {
+    commit(types.REPLACE_LOADING_TIPO_MOVILIDADES, { status: true });
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getTipoMovilidad(payload)
+        .then(response => {
+          const tipoMovilidades = response.data.data
+          commit(types.REPLACE_LOADING_TIPO_MOVILIDADES, { status: false });
+          commit(types.REPLACE_TIPO_MOVILIDADES, { tipoMovilidades });
+
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_TIPO_MOVILIDADES, { status: false });
+          reject(error);
+        });
+    });
+  },
+  getByIdMovilidad({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getByIdMovilidad(payload)
+        .then(response => {
+          const movilidad = response.data.data;
+          commit(types.REPLACE_CURRENT_MOVILIDAD, { movilidad });
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  updateMovilidad({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .putMovilidad(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "TPA",
+            message: "La movilidad ha sido actualizado con éxito."
+          });
+          resolve(response);
+        })
+        .catch(error => {
           reject(error);
         });
     });
@@ -246,5 +295,14 @@ export const mutations = {
   },
   [types.REPLACE_MOVILIDADES](state, { movilidades }) {
     state.movilidades = movilidades;
+  },
+  [types.REPLACE_LOADING_TIPO_MOVILIDADES](state, { status }) {
+    state.loadingTipoMovilidades = status;
+  },
+  [types.REPLACE_TIPO_MOVILIDADES](state, { tipoMovilidades }) {
+    state.tipoMovilidades = tipoMovilidades;
+  },
+  [types.REPLACE_CURRENT_MOVILIDAD](state, { movilidad }) {
+    state.currentMovilidad = movilidad;
   },
 };

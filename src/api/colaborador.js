@@ -106,12 +106,46 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getTipoMovilidad(payload = {}) {
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/tipo-movilidades`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getFamily(payload = {}) {
     const colaboradorId = payload.colaboradorId;
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/colaboradores/${colaboradorId}/cargas-familiares`,
         method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+  getByIdMovilidad(payload = {}) {
+    const movilidadId = payload.movilidadId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/movilidades/${movilidadId}`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+  putMovilidad(payload = {}) {
+    const movilidadId = payload.movilidadId;
+    const data = payload.data || {};
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/movilidades/${movilidadId}`,
+        method: "put",
+        data,
       })
         .then(response => resolve(response))
         .catch(error => reject(error));

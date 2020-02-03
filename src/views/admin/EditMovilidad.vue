@@ -8,7 +8,7 @@
         <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Crear Movilidad</span>
+              <span class="success--text font-weight-bold headline">Editar Movilidad</span>
             </v-card-title>
             <v-divider />
 
@@ -179,6 +179,7 @@ export default {
         observaciones: '',
         tipo_movilidad_id: '',
         cargo_id: '',
+        colaborador_id: '',
         estado: 1,
       },
       estados: [
@@ -204,13 +205,27 @@ export default {
   created() {
     this.getCargos();
     this.getTipoMovilidades();
+    this.getByIdMovilidad({ movilidadId: this.$route.params.id }).then(response => {
+      const movilidadInfo = response.data.data;
+      this.setForm(movilidadInfo);
+    });
   },
   methods: {
     ...mapActions({
       getCargos: 'cargos/getCargos',
-      postMovilidad: 'colaboradores/postMovilidad',
+      updateMovilidad: 'colaboradores/updateMovilidad',
       getTipoMovilidades: 'colaboradores/getTipoMovilidades',
+      getByIdMovilidad: 'colaboradores/getByIdMovilidad',
     }),
+    setForm(movilidad) {
+      this.form.fecha_termino = movilidad.fecha_termino;
+      this.form.fecha_inicio = movilidad.fecha_inicio;
+      this.form.observaciones = movilidad.observaciones;
+      this.form.tipo_movilidad_id = movilidad.tipoMovilidad.id;
+      this.form.cargo_id = movilidad.cargo_id;
+      this.form.estado = movilidad.estado;
+      this.form.colaborador_id = movilidad.colaborador_id;
+    },
     formatDate(date) {
       if (!date) return null
       const [year, month, day] = date.split('-')
@@ -220,13 +235,13 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.postMovilidad({
-        colaboradorId: this.$route.params.id,
+      this.updateMovilidad({
+        movilidadId: this.$route.params.id,
         data: this.form,
       })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "movilidades", params: { id: this.$route.params.id }   });
+          this.$router.push({ name: "movilidades", params: { id: this.form.colaborador_id }   });
         })
         .catch(error => {
           this.processingForm = false;

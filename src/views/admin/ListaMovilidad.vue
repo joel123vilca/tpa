@@ -39,7 +39,7 @@
                   { text: 'cargo', value: 'cargo' },
                   { text: 'fecha Inicio' },
                   { text: 'Fecha Final' },
-                  { text: 'Estado' },
+                  { text: 'Tipo de movilidad' },
                   { text: 'Acciones'}
                 ]"
                 :items="movilidades"
@@ -52,7 +52,7 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.cargo_id }}
+                    {{ props.item.cargo_nombre }}
                   </td>
                   <td class="px-3">
                     {{ props.item.fecha_inicio }}
@@ -60,20 +60,22 @@
                   <td>
                     {{ props.item.fecha_termino }}
                   </td>
-                  <td class="px-3">
-                    <v-chip
-                      v-if="props.item.estado === 1"
-                      small
-                      color="primary"
-                      text-color="white"
-                    >
-                      Activo
-                    </v-chip>
-                    <v-chip v-else-if="props.item.estado === 0" small>
-                      Inactivo
-                    </v-chip>
+                  <td>
+                    {{ props.item.tipoMovilidad.tipo }}
                   </td>
                   <td class="text-xs-center px-3">
+                    <v-btn
+                        class="ma-0"
+                        :to="{ name: 'editMovilidad', params: { id: props.item.id } }"
+                        small
+                        icon
+                        flat
+                        color="info"
+                      >
+                        <v-icon small>
+                          edit
+                        </v-icon>
+                      </v-btn>
                     <v-btn
                         class="ma-0"
                         :to="{ name: '', params: { id: props.item.id } }"
@@ -81,11 +83,11 @@
                         icon
                         flat
                         color="error"
-                      >
+                    >
                         <v-icon small>
                           delete
                         </v-icon>
-                      </v-btn>
+                    </v-btn>
                   </td>
                 </tr>
               </v-data-table>
