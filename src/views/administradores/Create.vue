@@ -19,21 +19,6 @@
                 @submit.prevent="submitCreateAdministrador"
               >
                 <v-container fluid grid-list-lg>
-                   <v-text-field
-                    v-model="form.username"
-                    :disabled="processingForm"
-                    label="username"
-                    outline
-                    :rules="rules.username"
-                    :error="!!formErrors.username"
-                    :error-messages="formErrors.username"
-                    @keyup="
-                      () => {
-                        formErrors.username = undefined;
-                        delete formErrors.username;
-                      }
-                    "
-                  />
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
@@ -46,6 +31,21 @@
                       () => {
                         formErrors.nombre = undefined;
                         delete formErrors.nombre;
+                      }
+                    "
+                  />
+                  <v-text-field
+                    v-model="form.username"
+                    :disabled="processingForm"
+                    label="username"
+                    outline
+                    :rules="rules.username"
+                    :error="!!formErrors.username"
+                    :error-messages="formErrors.username"
+                    @keyup="
+                      () => {
+                        formErrors.username = undefined;
+                        delete formErrors.username;
                       }
                     "
                   />

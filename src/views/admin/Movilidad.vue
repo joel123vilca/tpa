@@ -14,9 +14,11 @@
 
             <v-stepper v-model="e1">
             <v-stepper-header>
-              <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales</v-stepper-step>
+              <v-stepper-step :complete="e1 > 1" step="1">Tipo de Movilidad</v-stepper-step>
               <v-divider></v-divider>
-              <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Asignacion</v-stepper-step>
+              <v-stepper-step v-if="movilidades.length > 0"  :complete="e1 > 2" step="2">Cargo Actual</v-stepper-step>
+              <v-divider></v-divider>
+              <v-stepper-step :complete="e1 > 3" step="3">Asignar cargo nuevo</v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>
@@ -45,54 +47,53 @@
                 }"
               />
               <v-btn
+                v-if="movilidades.length > 0"
                 color="primary"
                 @click="e1 = 2"
               >
                 Continuar
               </v-btn>
-              <v-btn flat>Cancelar</v-btn>
+              <v-btn
+                v-else
+                color="primary"
+                @click="e1 = 3"
+              >
+                Continuar
+              </v-btn>
+              <v-btn flat @click="$router.push({name: 'movilidades', params: { id: $route.params.id }})">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-                <v-autocomplete
-                  v-model="form.cargo_id"
-                  :items="cargos"
-                  :search-input.sync="search"
-                  dense
-                  clearable
-                  small-chips
-                  label="Seleccionar Cargo"
-                  item-text="nombre"
-                  item-value="id"
-                  outline
-                />
-                <v-layout row wrap>
-                    <v-flex sm6 xs12>
-                        <v-menu
-                ref="menu1"
-                v-model="targetIssueDate5"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.fecha_inicio)"
-                  hint="Formato DD/MM/AAAA"
-                  label="FECHA DE INICIO "
-                  v-on="on"
-                  outline
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker5"
-                v-model="form.fecha_inicio"
-                @input="targetIssueDate5 = false"
-              ></v-date-picker>
-            </v-menu>
+                <div v-for="item in movilidades">
+                  <div v-if="item.estado === 1">
+                    <v-flex sm12 xs12>
+                      <v-text-field
+                        label="NOMBRE DEL CARGO"
+                        :value="item.cargo_nombre"
+                        outline
+                        disabled
+                      />
+                    </v-flex>
+                    <v-flex sm12 xs12>
+                      <v-text-field
+                        label="OBSERVACIONES"
+                        :value="item.observaciones"
+                        outline
+                        disabled
+                      />
+                    </v-flex>
+                    <v-flex sm12 xs12>
+                      <v-text-field
+                        :value="formatDate(item.fecha_inicio)"
+                        label="FECHA DE INICIO"
+                        outline
+                        disabled
+                      ></v-text-field>
                     </v-flex>
                     <v-flex sm6 xs12>
+                    </v-flex>
+                  </div>
+                </div>
+              <v-flex sm12 xs12>
                         <v-menu
                 ref="menu1"
                 v-model="targetIssueDate"
@@ -115,6 +116,54 @@
                 ref="picker5"
                 v-model="form.fecha_termino"
                 @input="targetIssueDate = false"
+              ></v-date-picker>
+            </v-menu>
+                    </v-flex>
+                    <v-btn
+                color="primary"
+                @click="e1 = 3"
+              >
+                Continuar
+              </v-btn>
+              <v-btn flat @click="e1 = 1">Cancelar</v-btn>
+            </v-stepper-content>
+            <v-stepper-content step="3">
+                <v-autocomplete
+                  v-model="form.cargo_id"
+                  :items="cargos"
+                  :search-input.sync="search"
+                  dense
+                  clearable
+                  small-chips
+                  label="Seleccionar Cargo"
+                  item-text="nombre"
+                  item-value="id"
+                  outline
+                />
+                <v-layout row wrap>
+                    <v-flex sm12 xs12>
+                        <v-menu
+                ref="menu1"
+                v-model="targetIssueDate5"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.fecha_inicio)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE INICIO "
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker5"
+                v-model="form.fecha_inicio"
+                @input="targetIssueDate5 = false"
               ></v-date-picker>
             </v-menu>
                     </v-flex>
@@ -142,7 +191,7 @@
                 >
                   Guardar
                 </v-btn>
-              <v-btn flat @click="e1 = 1">Cancel</v-btn>
+              <v-btn flat @click="e1 = 2">Cancel</v-btn>
             </v-stepper-content>
             </v-form>
           </v-stepper-items>
@@ -199,17 +248,21 @@ export default {
       loadingCargos: state => state.cargos.loadingCargos,
       tipoMovilidades: state => state.colaboradores.tipoMovilidades,
       loadingTipoMovilidades: state => state.colaboradores.loadingTipoMovilidades,
+      movilidades: state => state.colaboradores.movilidades,
+      loadingMovilidades: state => state.colaboradores.loadingMovilidades,
     })
   },
   created() {
     this.getCargos();
     this.getTipoMovilidades();
+    this.getMovilidad({ colaboradorId: this.$route.params.id });
   },
   methods: {
     ...mapActions({
       getCargos: 'cargos/getCargos',
       postMovilidad: 'colaboradores/postMovilidad',
       getTipoMovilidades: 'colaboradores/getTipoMovilidades',
+      getMovilidad: 'colaboradores/getMovilidad',
     }),
     formatDate(date) {
       if (!date) return null
