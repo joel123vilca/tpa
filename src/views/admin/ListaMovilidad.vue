@@ -79,11 +79,11 @@
                     <v-btn
                         v-if="props.item.estado === 1"
                         class="ma-0"
-                        :to="{ name: '', params: { id: props.item.id } }"
                         small
                         icon
                         flat
                         color="error"
+                        @click="openModalDeleteMovilidad(props.item)"
                     >
                         <v-icon small>
                           delete
@@ -96,6 +96,7 @@
           </v-layout>
         </v-container>
       </v-card>
+      <ModalDeleteMovilidad />
   </v-container>
 </template>
 
@@ -104,24 +105,20 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
 
-  metaInfo () {
-    return { title: 'Listado de Movilidades' }
+  metaInfo() {
+    return { title: 'Listado de Movilidades' };
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
-  },
-
-  data () {
-    return {
-    }
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    ModalDeleteMovilidad: () => import('@/views/admin/ModalDeleteMovilidad'),
   },
 
   computed: {
     ...mapState({
       movilidades: state => state.colaboradores.movilidades,
       loadingMovilidades: state => state.colaboradores.loadingMovilidades,
-    })
+    }),
   },
   created() {
     this.getMovilidad({ colaboradorId: this.$route.params.id });
@@ -130,7 +127,13 @@ export default {
   methods: {
     ...mapActions({
       getMovilidad: 'colaboradores/getMovilidad',
+      replaceShowModalDeleteMovilidad: 'colaboradores/replaceShowModalDeleteMovilidad',
+      replaceCurrentMovilidad: 'colaboradores/replaceCurrentMovilidad',
     }),
-  }
-}
+    openModalDeleteMovilidad(movilidad) {
+      this.replaceCurrentMovilidad({ movilidad });
+      this.replaceShowModalDeleteMovilidad({ status: true });
+    },
+  },
+};
 </script>

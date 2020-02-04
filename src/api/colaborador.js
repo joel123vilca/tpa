@@ -151,6 +151,19 @@ export default {
         .catch(error => reject(error));
     });
   },
+  deleteMovilidad(payload = {}) {
+
+    const movilidadId = payload.movilidadId
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${movilidadId}/movilidades`,
+        method: 'delete',
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    });
+  },
   getByIdFamily(payload = {}) {
     const familiarId = payload.familiarId;
     return new Promise((resolve, reject) => {

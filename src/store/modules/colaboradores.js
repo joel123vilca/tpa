@@ -13,6 +13,9 @@ export const state = {
   loadingMovilidades: false,
   tipoMovilidades: [],
   loadingTipoMovilidades: false,
+  showModalDeleteMovilidad: false,
+  currentMovilidad: null,
+  loadingCurrentMovilidad: false,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -233,6 +236,30 @@ export const actions = {
         });
     });
   },
+  replaceShowModalDeleteMovilidad ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_DELETE_MOVILIDAD, payload)
+  },
+  replaceCurrentMovilidad ({ commit }, payload) {
+    commit(types.REPLACE_CURRENT_MOVILIDAD, payload)
+  },
+  deleteMovilidad ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI.deleteMovilidad(payload)
+        .then(response => {
+          commit(types.REPLACE_CURRENT_MOVILIDAD, { movilidad: null })
+
+          this._vm.$notify.success({
+            title: 'TPA',
+            message: 'La movilidad ha sido eliminado con éxito.'
+          })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
   getVerify ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       colaboradorAPI.getVerify(payload)
@@ -304,5 +331,11 @@ export const mutations = {
   },
   [types.REPLACE_CURRENT_MOVILIDAD](state, { movilidad }) {
     state.currentMovilidad = movilidad;
+  },
+  [types.REPLACE_SHOW_MODAL_DELETE_MOVILIDAD] (state, { status }) {
+    state.showModalDeleteMovilidad = status
+  },
+  [types.REPLACE_LOADING_CURRENT_MOVILIDAD] (state, { status }) {
+    state.loadingCurrentMovilidad = status
   },
 };
