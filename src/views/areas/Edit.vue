@@ -296,6 +296,9 @@ export default {
       this.getAreasRelacionados({ areaId: tag.id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;
+        this.form.area_id = AreasRelacionados.slice().reverse()[1].id;
+        this.form.segundo_padre_id = AreasRelacionados.slice().reverse()[2].id;
+        this.form.tercer_padre_id = AreasRelacionados.slice().reverse()[3].id;
       });
     },
 

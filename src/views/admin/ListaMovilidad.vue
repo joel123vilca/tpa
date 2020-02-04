@@ -36,7 +36,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'cargo', value: 'cargo' },
+                  { text: 'cargo' },
                   { text: 'fecha Inicio' },
                   { text: 'Fecha Final' },
                   { text: 'Tipo de movilidad' },

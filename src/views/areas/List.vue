@@ -37,8 +37,8 @@
               <v-data-table
                 :headers="[
                   { text: 'Nombres', value: 'nombre' },
-                  { text: 'Descripcion' },
-                  { text: 'Estado' },
+                  { text: 'Descripcion',value: 'descripcion' },
+                  { text: 'Estado',value: 'estado' },
                   { text: 'Acciones'}
                 ]"
                 :items="areas"

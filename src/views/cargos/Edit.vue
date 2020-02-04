@@ -310,6 +310,10 @@ export default {
       this.getAreasRelacionados({ cargoId: cargo.id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;
+        this.form.padre_id = AreasRelacionados[1].id;
+        this.form.segundo_padre_id = AreasRelacionados[2].id;
+        this.form.tercer_padre_id = AreasRelacionados[3].id;
+        this.form.cuarto_padre_id = AreasRelacionados[4].id;
       });
     },
     submitUpdate() {

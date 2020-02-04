@@ -50,7 +50,7 @@
               >
                 Continuar
               </v-btn>
-              <v-btn flat>Cancelar</v-btn>
+              <v-btn flat @click="$router.push({name: 'movilidades', params: { id: form.colaborador_id }})">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
                 <v-autocomplete
@@ -94,6 +94,7 @@
                     </v-flex>
                     <v-flex sm6 xs12>
                         <v-menu
+                          v-if="form.estado === 0"
                 ref="menu1"
                 v-model="targetIssueDate"
                 :close-on-content-click="false"
@@ -102,7 +103,7 @@
                 full-width
                 min-width="290px"
               >
-              <template v-slot:activator="{ on }">
+              <template  v-slot:activator="{ on }">
                 <v-text-field
                   :value="formatDate(form.fecha_termino)"
                   hint="Formato DD/MM/AAAA"
@@ -117,6 +118,15 @@
                 @input="targetIssueDate = false"
               ></v-date-picker>
             </v-menu>
+                    <v-text-field
+                    v-else
+                  :value="formatDate(form.fecha_termino)"
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE TERMINO "
+                  v-on="on"
+                  outline
+                  readonly
+                ></v-text-field>
                     </v-flex>
                   </v-layout>
                   <v-text-field

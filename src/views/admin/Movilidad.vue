@@ -70,7 +70,7 @@
                         label="NOMBRE DEL CARGO"
                         :value="item.cargo_nombre"
                         outline
-                        disabled
+                        readonly
                       />
                     </v-flex>
                     <v-flex sm12 xs12>
@@ -78,7 +78,7 @@
                         label="OBSERVACIONES"
                         :value="item.observaciones"
                         outline
-                        disabled
+                        readonly
                       />
                     </v-flex>
                     <v-flex sm12 xs12>
@@ -86,7 +86,7 @@
                         :value="formatDate(item.fecha_inicio)"
                         label="FECHA DE INICIO"
                         outline
-                        disabled
+                        readonly
                       ></v-text-field>
                     </v-flex>
                     <v-flex sm6 xs12>

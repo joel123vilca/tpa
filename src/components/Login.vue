@@ -23,7 +23,7 @@
                    <v-text-field
                       v-model="form.username"
                       :disabled="processingForm"
-                      label="Username"
+                      label="Usuario"
                       class="login-input"
                     />
                     <br>
