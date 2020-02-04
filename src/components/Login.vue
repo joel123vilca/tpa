@@ -2,7 +2,8 @@
   <v-app id="login" class="fondo">
       <template v-if="!authenticated">
         <v-layout align-center justify-center >
-          <v-flex xs12 sm8 md4 lg4>
+          <center>
+          <v-flex >
             <v-card  class="login-card" color="#44b5ba">
               <div class="layout column align-center">
               <Typography variant="subtitle1" class="login-title" gutterBottom>
@@ -54,6 +55,7 @@
               </v-card-text>
             </v-card>
           </v-flex>
+          </center>
         </v-layout>
       </template>
   </v-app>
@@ -163,6 +165,9 @@ export default {
   background-image: url('../assets/puerto.jpg');
   background-size: cover;
 }
+.login-card{
+  width: 500px;
+}
 .login-title{
   color:white;
   font-size: 24px;
@@ -186,5 +191,28 @@ export default {
 }
 .line{
   border-color:black;
+}
+
+@media only screen and (max-width: 400px) {
+  .login-card{
+    width: 320px;
+  }
+  .login-title{
+  color:white;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif !important;
+  margin-top:20px;
+}
+}
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .login-card{
+    width: 400px;
+  }
+  .login-title{
+  color:white;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif !important;
+  margin-top:20px;
+}
 }
 </style>
