@@ -174,5 +174,5 @@ export default [
     name: 'editArea',
     component: () => import('@/views/areas/Edit.vue'),
   },
-  { path: '*', redirect: '/' },
+  { path: '*', redirect: '/login' },
 ];

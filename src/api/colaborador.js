@@ -153,11 +153,11 @@ export default {
   },
   deleteMovilidad(payload = {}) {
 
-    const movilidadId = payload.movilidadId
+    const movilidadId = payload.movilidadId;
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/colaboradores/${movilidadId}/movilidades`,
+        url: `${HOST}/movilidades/${movilidadId}`,
         method: 'delete',
       })
         .then(response => resolve(response))

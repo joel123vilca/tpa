@@ -3,7 +3,7 @@
       <template v-if="!authenticated">
         <v-layout align-center justify-center >
           <v-flex xs12 sm8 md4 lg4>
-            <v-card class="login-card" color="#44b5ba">
+            <v-card  class="login-card" color="#44b5ba">
               <div class="layout column align-center">
               <Typography variant="subtitle1" class="login-title" gutterBottom>
                 Bienvenido a Plataforma Personas
@@ -19,9 +19,22 @@
               <v-card-text class="pa-0">
                 <v-form v-model="validForm" lazy-validation @submit.prevent="lauchLogin">
                   <v-container fluid class="pb-0" grid-list-lg>
-                    <input class="login-input" v-model="form.username" placeholder="Rut" name="email"  autofocus style="background-color: white; color: #283848;">
-                    <br><br>
-                    <input class="login-input" v-model="form.password" placeholder="Contraseña" name="password" type="password"  style="background-color: white; color: #283848; ">
+                   <v-text-field
+                      v-model="form.username"
+                      :disabled="processingForm"
+                      label="Username"
+                      class="login-input"
+                    />
+                    <br>
+                    <v-text-field
+                      v-model="form.password"
+                      type="password"
+                      label="Contraseña"
+                      class="login-input"
+                      prepend-inner-icon="lock"
+
+                    />
+
                   </v-container>
                   <v-divider />
                   <v-container fluid grid-list-lg>
@@ -116,7 +129,6 @@ export default {
             .dispatch("auth/fetchUser")
             .then(response => {
               this.processingForm = false;
-              console.log('entro al push')
                 this.$router.push({ name: "home" });
             })
             .catch(error => {
@@ -151,9 +163,6 @@ export default {
   background-image: url('../assets/puerto.jpg');
   background-size: cover;
 }
-.login-card{
-  width: 550px;
-}
 .login-title{
   color:white;
   font-size: 24px;
@@ -168,7 +177,6 @@ export default {
 .login-input{
   background-color: #fff;
   height: 52px;
-  width: 510px;
   font-size: 16px;
   border-radius: 1px;
   border: #2b3c4e;

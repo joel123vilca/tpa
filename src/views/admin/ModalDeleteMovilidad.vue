@@ -85,7 +85,7 @@ export default {
     }),
     launchDelete() {
       this.processingDelete = true;
-      this.deleteMovilidad({ movilidadId: this.$route.params.id })
+      this.deleteMovilidad({ movilidadId: this.currentMovilidad.id })
         .then((response) => {
           this.processingDelete = false;
           this.replaceShowModalDeleteMovilidad({ status: false });
