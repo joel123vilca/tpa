@@ -135,6 +135,7 @@
                 :rules="rules.padre_id"
                 :error="!!formErrors.padre_id"
                 :error-messages="formErrors.padre_id"
+                @change="filterData1"
                 @keyup="() => {
                   formErrors.padre_id = undefined
                   delete formErrors.padre_id
@@ -152,6 +153,7 @@
                 :rules="rules.segundo_padre_id"
                 :error="!!formErrors.segundo_padre_id"
                 :error-messages="formErrors.segundo_padre_id"
+                @change="filterData2"
                 @keyup="() => {
                   formErrors.segundo_padre_id = undefined
                   delete formErrors.segundo_padre_id
@@ -311,10 +313,24 @@ export default {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;
         this.form.padre_id = AreasRelacionados[1].id;
-        this.form.segundo_padre_id = AreasRelacionados[2].id;
-        this.form.tercer_padre_id = AreasRelacionados[3].id;
-        this.form.cuarto_padre_id = AreasRelacionados[4].id;
+        if(AreasRelacionados[2].tipoArea.nivel === 3){
+          this.form.tercer_padre_id = AreasRelacionados[2].id;
+          this.form.cuarto_padre_id = AreasRelacionados[3].id;
+        } else {
+          this.form.segundo_padre_id = AreasRelacionados[2].id;
+          this.form.tercer_padre_id = AreasRelacionados[3].id;
+          this.form.cuarto_padre_id = AreasRelacionados[4].id;
+        }
       });
+    },
+    filterData1() {
+      this.form.segundo_padre_id = '';
+      this.form.tercer_padre_id = '';
+      this.form.cuarto_padre_id = '';
+    },
+    filterData2() {
+      this.form.tercer_padre_id = '';
+      this.form.cuarto_padre_id = '';
     },
     submitUpdate() {
       if (!this.$refs.form.validate()) return false;

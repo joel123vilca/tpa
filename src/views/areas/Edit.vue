@@ -136,6 +136,7 @@
                 :rules="rules.area_id"
                 :error="!!formErrors.area_id"
                 :error-messages="formErrors.area_id"
+                @change="filterData1"
                 @keyup="() => {
                   formErrors.area_id = undefined
                   delete formErrors.area_id
@@ -297,11 +298,18 @@ export default {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;
         this.form.area_id = AreasRelacionados.slice().reverse()[1].id;
+        if(AreasRelacionados.slice().reverse()[2].tipoArea.nivel === 3){
+          this.form.tercer_padre_id = AreasRelacionados.slice().reverse()[2].id;
+        }else{
         this.form.segundo_padre_id = AreasRelacionados.slice().reverse()[2].id;
         this.form.tercer_padre_id = AreasRelacionados.slice().reverse()[3].id;
+        }
       });
     },
-
+    filterData1() {
+      this.form.segundo_padre_id = '';
+      this.form.tercer_padre_id = '';
+    },
     submitUpdateArea() {
       if (!this.$refs.form.validate()) return false;
       if (this.form.tipo_area_id === 2){
