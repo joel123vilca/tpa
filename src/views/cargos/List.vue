@@ -33,15 +33,31 @@
             row
             wrap
           >
+            <v-flex
+              v-if="cargos.length"
+              sm6
+              offset-sm6
+            >
+              <v-text-field
+                v-model="searchCargos"
+                :disabled="loadingCargos"
+                box
+                append-icon="search"
+                label="Buscar Cargo"
+                clearable
+                hide-details
+              />
+            </v-flex>
             <v-flex xs12>
               <v-data-table
                 :headers="[
                   { text: 'Nombres', value: 'nombre' },
-                  { text: 'Area' },
+                  { text: 'Area', value: 'area.nombre' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"
                 :items="cargos"
+                :search="searchCargos"
                 :loading="loadingCargos"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
@@ -97,17 +113,18 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
 
-  metaInfo () {
-    return { title: 'Listado de cargos' }
+  metaInfo() {
+    return { title: 'Listado de cargos' };
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
   },
 
-  data () {
+  data() {
     return {
-    }
+      searchCargos: '',
+    };
   },
 
   computed: {

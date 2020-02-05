@@ -33,6 +33,21 @@
             row
             wrap
           >
+            <v-flex
+              v-if="areas.length"
+              sm6
+              offset-sm6
+            >
+              <v-text-field
+                v-model="searchAreas"
+                :disabled="loadingAreas"
+                box
+                append-icon="search"
+                label="Buscar Area"
+                clearable
+                hide-details
+              />
+            </v-flex>
             <v-flex xs12>
               <v-data-table
                 :headers="[
@@ -42,6 +57,7 @@
                   { text: 'Acciones'}
                 ]"
                 :items="areas"
+                :search="searchAreas"
                 :loading="loadingAreas"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
@@ -105,8 +121,9 @@ export default {
     Breadcrumbs: () => import('@/components/Breadcrumbs')
   },
 
-  data () {
+  data() {
     return {
+      searchAreas: '',
     }
   },
 

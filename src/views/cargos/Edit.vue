@@ -33,6 +33,12 @@
               >
                 Este cargo tiene cargos hijos asociados.
               </v-alert>
+              <v-alert
+                :value="movilidades"
+                type="info"
+              >
+                Este cargo tiene movilidades asociados.
+              </v-alert>
               <br>
               <v-text-field
                 v-model="form.nombre"
@@ -52,7 +58,7 @@
               <v-autocomplete
                 v-model="form.nivel_jerarquico_id"
                 :items="nivelesJerarquico"
-                :disabled='hijos'
+                :disabled='hijos || movilidades'
                 dense
                 outline
                 clearable
@@ -72,7 +78,7 @@
               <v-autocomplete
                 v-model="form.supervisor_id"
                 :items="cargos"
-                :disabled='hijos'
+                :disabled='hijos || movilidades'
                 dense
                 outline
                 clearable
@@ -92,7 +98,7 @@
               <v-autocomplete
                 v-model="form.estado"
                 :items="estados"
-                :disabled='hijos'
+                :disabled='hijos || movilidades'
                 dense
                 outline
                 clearable
@@ -120,7 +126,7 @@
             <v-stepper-content step="2">
                 <a class="title font-weight-light"  v-for="area in areasRelacionados">
                   <v-icon>chevron_right</v-icon> {{area.nombre}}
-              </a>
+                </a>
               <br>
                 <br>
               <v-autocomplete
@@ -242,6 +248,7 @@ export default {
         area_id: null,
       },
       hijos: '',
+      movilidades: '',
       estados: [
         {id:0, nombre:'inactivo'},
         {id:1, nombre:'activo'}
@@ -309,6 +316,7 @@ export default {
       this.form.nivel_jerarquico_id = cargo.nivelJerarquico.id;
       this.form.area_id = cargo.area.id;
       this.hijos = cargo.hijos;
+      this.movilidades = cargo.movilidades;
       this.getAreasRelacionados({ cargoId: cargo.id }).then(response => {
         const AreasRelacionados = response.data.data;
         this.areasRelacionados= AreasRelacionados;

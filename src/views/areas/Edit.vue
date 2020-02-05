@@ -115,7 +115,7 @@
               >
                 Continuar
               </v-btn>
-              <v-btn flat>Cancelar</v-btn>
+              <v-btn flat @click="$router.push({ name: 'listaArea' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
               <a class="title font-weight-light"  v-for="item in areasRelacionados.slice().reverse()">

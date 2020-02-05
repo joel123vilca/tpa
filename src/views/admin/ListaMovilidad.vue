@@ -16,7 +16,7 @@
           dark
           card
         >
-          <v-toolbar-title>lista de Movilidades</v-toolbar-title>
+          <v-toolbar-title>Lista de Movilidades</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'crearmovilidad', params: { id: this.$route.params.id  } }"
@@ -36,11 +36,11 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'cargo' },
-                  { text: 'fecha Inicio' },
-                  { text: 'Fecha Final' },
-                  { text: 'Tipo de movilidad' },
-                  { text: 'Acciones'}
+                  { text: 'Cargo', value: 'cargo'},
+                  { text: 'Fecha Inicio',value: 'fecha_inicio' },
+                  { text: 'Fecha Final',value: 'fecha_final' },
+                  { text: 'Tipo de movilidad',value: 'tipo' },
+                  { text: 'Acciones', value: ''}
                 ]"
                 :items="movilidades"
                 :loading="loadingMovilidades"
