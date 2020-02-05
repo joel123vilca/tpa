@@ -55,7 +55,7 @@
             <v-stepper-content step="2">
                 <v-autocomplete
                   v-model="form.cargo_id"
-                  :items="cargos"
+                  :items="filterData"
                   :search-input.sync="search"
                   dense
                   clearable
@@ -210,7 +210,11 @@ export default {
       loadingCargos: state => state.cargos.loadingCargos,
       tipoMovilidades: state => state.colaboradores.tipoMovilidades,
       loadingTipoMovilidades: state => state.colaboradores.loadingTipoMovilidades,
-    })
+    }),
+    filterData() {
+      let cargos = this.cargos
+      return cargos.filter(o => o.estado === 1);
+    },
   },
   created() {
     this.getCargos();

@@ -250,23 +250,23 @@ export default {
     }),
       filterData() {
       let areas = this.areas
-      return areas.filter(o => o.tipoArea.nivel === 1);
+      return areas.filter(o => o.tipoArea.nivel === 1 && o.estado === 1);
     },
     filterDataSubgerencia() {
       let areas = this.areas
-      return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 2);
+      return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 2 && o.estado === 1);
     },
     filterDataArea() {
       let areas = this.areas
       if(this.form.segundo_padre_id != 0){
-        return areas.filter(o => o.padre_id === this.form.segundo_padre_id && o.tipoArea.nivel === 3);
+        return areas.filter(o => o.padre_id === this.form.segundo_padre_id && o.tipoArea.nivel === 3 && o.estado === 1);
       } else {
-        return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 3);
+        return areas.filter(o => o.padre_id === this.form.padre_id && o.tipoArea.nivel === 3 && o.estado === 1);
       }
     },
     filterDataSubArea() {
       let areas = this.areas
-      return areas.filter(o => o.padre_id === this.form.tercer_padre_id);
+      return areas.filter(o => o.padre_id === this.form.tercer_padre_id && o.estado === 1);
     },
   },
   created(){
