@@ -19,25 +19,10 @@
                 @submit.prevent="submitUpdateAdministrador"
               >
                 <v-container fluid grid-list-lg>
-                   <v-text-field
-                    v-model="form.username"
-                    :disabled="processingForm"
-                    label="username"
-                    outline
-                    :rules="rules.username"
-                    :error="!!formErrors.username"
-                    :error-messages="formErrors.username"
-                    @keyup="
-                      () => {
-                        formErrors.username = undefined;
-                        delete formErrors.username;
-                      }
-                    "
-                  />
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Nombre"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -49,6 +34,21 @@
                       }
                     "
                   />
+                   <v-text-field
+                    v-model="form.username"
+                    :disabled="processingForm"
+                    label="Usuario"
+                    outline
+                    :rules="rules.username"
+                    :error="!!formErrors.username"
+                    :error-messages="formErrors.username"
+                    @keyup="
+                      () => {
+                        formErrors.username = undefined;
+                        delete formErrors.username;
+                      }
+                    "
+                  />
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
 
@@ -56,7 +56,7 @@
                     v-model="form.password"
                     :disabled="processingForm"
                     :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                    label="password"
+                    label="Contraseña"
                     :type="show1 ? 'text' : 'password'"
                     outline
                     :rules="rules.password"
@@ -72,6 +72,27 @@
                   />
                     </v-flex>
                     <v-flex sm6 xs12>
+
+                  <v-text-field
+                    v-model="form.password_confirmation"
+                    :disabled="processingForm"
+                    :append-icon="show2 ? 'visibility' : 'visibility_off'"
+                    label="Confirmar contraseña"
+                    :type="show2 ? 'text' : 'password'"
+                    outline
+                    :rules="rules.password_confirmation"
+                    :error="!!formErrors.password_confirmation"
+                    :error-messages="formErrors.password_confirmation"
+                    @keyup="
+                      () => {
+                        formErrors.password_confirmation = undefined;
+                        delete formErrors.password_confirmation;
+                      }
+                    "
+                    @click:append="show2 = !show2"
+                  />
+                    </v-flex>
+                    <v-flex sm12 xs12>
                       <v-autocomplete
                         v-model="form.estado"
                         :items="estados"
@@ -135,10 +156,12 @@ export default {
     return {
       formErrors: {},
       show1: false,
+      show2: false,
       form: {
         username: '',
         nombre: '',
         password: '',
+        password_confirmation: '',
         estado: 1,
       },
       estados: [

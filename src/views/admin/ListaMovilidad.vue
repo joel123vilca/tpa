@@ -5,7 +5,7 @@
   >
       <Breadcrumbs
         :routes="[
-          { name: 'Inicio'},
+          { name: 'Inicio', to:{ name: 'listacolaboradores' }},
           { name: 'Movilidades' },
           { name: 'Listado' }
         ]"
@@ -51,8 +51,11 @@
                   slot="items"
                   slot-scope="props"
                 >
-                  <td class="px-3">
+                  <td v-if="props.item.cargo_nombre != ''" class="px-3">
                     {{ props.item.cargo_nombre }}
+                  </td>
+                  <td v-else class="px-3">
+                    Sin Cargo
                   </td>
                   <td class="px-3">
                     {{ props.item.fecha_inicio }}

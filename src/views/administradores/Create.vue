@@ -22,7 +22,7 @@
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Nombres"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -37,7 +37,7 @@
                   <v-text-field
                     v-model="form.username"
                     :disabled="processingForm"
-                    label="username"
+                    label="Usuario"
                     outline
                     :rules="rules.username"
                     :error="!!formErrors.username"
@@ -56,7 +56,7 @@
                     v-model="form.password"
                     :disabled="processingForm"
                     :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                    label="password"
+                    label="Contraseña"
                     :type="show1 ? 'text' : 'password'"
                     outline
                     :rules="rules.password"

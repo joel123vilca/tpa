@@ -5,7 +5,7 @@
   >
       <Breadcrumbs
         :routes="[
-          { name: 'Inicio'},
+          { name: 'Inicio', to:{ name: 'listacolaboradores' }},
           { name: 'Carga Familiar' },
           { name: 'Listado' }
         ]"
