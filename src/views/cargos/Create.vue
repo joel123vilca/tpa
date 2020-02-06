@@ -75,12 +75,7 @@
                 :disabled="processingForm"
                 :error="!!formErrors.supervisor_id"
                 :error-messages="formErrors.supervisor_id"
-                @change="
-                  () => {
-                    formErrors.supervisor_id = undefined;
-                    delete formErrors.supervisor_id;
-                  }
-                "
+                @change="selectCargo"
               />
               <v-autocomplete
                 v-model="form.estado"
@@ -280,8 +275,27 @@ export default {
       getNivelesJerarquico: "nivelesJerarquico/getNivelesJerarquico",
       getAreas: 'areas/getAreas',
       getCargos: 'cargos/getCargos',
+      getAreasRelacionados: 'cargos/getAreasRelacionados',
     }),
-
+    selectCargo(){
+      this.form.padre_id = '';
+      this.form.segundo_padre_id = '';
+      this.form.tercer_padre_id = '';
+      this.form.cuarto_padre_id = '';
+      this.getAreasRelacionados({ cargoId: this.form.supervisor_id }).then(response => {
+        const AreasRelacionados = response.data.data;
+        this.areasRelacionados= AreasRelacionados;
+        this.form.padre_id = AreasRelacionados[1].id;
+        if(AreasRelacionados[2].tipoArea.nivel === 3){
+          this.form.tercer_padre_id = AreasRelacionados[2].id;
+          this.form.cuarto_padre_id = AreasRelacionados[3].id;
+        } else {
+          this.form.segundo_padre_id = AreasRelacionados[2].id;
+          this.form.tercer_padre_id = AreasRelacionados[3].id;
+          this.form.cuarto_padre_id = AreasRelacionados[4].id;
+        }
+      });
+    },
     submitCreateArea() {
       if (!this.$refs.form.validate()) return false;
 
