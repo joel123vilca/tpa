@@ -52,7 +52,8 @@ export default {
       axios({
         url: `${HOST}/cargos`,
         method: "post",
-        data
+        data,
+        headers: {'Content-Type': 'multipart/form-data' },
       })
         .then(response => resolve(response))
         .catch(error => reject(error));
