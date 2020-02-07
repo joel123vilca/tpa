@@ -227,8 +227,15 @@
             </v-stepper-content>
             <v-stepper-content step="3">
             <br>
-            <v-layout column>
+            <v-layout row>
               <v-flex md3>
+                <v-card
+                  outlined
+                  width="250"
+                >
+                <br>
+                <center>
+                <h4>Subir Archivo Descriptor</h4>
             <v-fab-transition>
               <v-btn
                 v-show="descriptorUrl || form.descriptor_url"
@@ -265,9 +272,18 @@
                 class="el-icon-plus avatar-uploader-icon"
               />
               </el-upload>
-              <label class="grey--text text--darken-1">Descriptor</label>
+                </center>
+                </v-card>
               </v-flex>
               <v-flex md3>
+              <v-card
+                  outlined
+                  width="250"
+                >
+                <br>
+                <center>
+                <h4>Subir Archivo Organigrama</h4>
+                </center>
             <v-fab-transition>
               <v-btn
                 v-show="organigramaUrl || form.organigrama_url"
@@ -281,6 +297,7 @@
               X
               </v-btn>
               </v-fab-transition>
+              <center>
               <el-upload
                 class="avatar-uploader"
                 action=""
@@ -303,7 +320,8 @@
                 class="el-icon-plus avatar-uploader-icon"
               />
               </el-upload>
-              <label class="grey--text">Organigrama</label>
+                </center>
+              </v-card>
               </v-flex>
             </v-layout>
             <br>
