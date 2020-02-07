@@ -37,8 +37,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/cargos/${cargoId}`,
-        method: "patch",
-        data
+        method: "post",
+        data,
+        headers: {'Content-Type': 'multipart/form-data'},
       })
         .then(response => resolve(response))
         .catch(error => reject(error));

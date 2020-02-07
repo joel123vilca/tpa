@@ -18,7 +18,7 @@
               <v-divider></v-divider>
               <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Especificos</v-stepper-step>
               <v-divider></v-divider>
-              <v-stepper-step :complete="e1 > 3" step="2">Paso 3: Documentos</v-stepper-step>
+              <v-stepper-step :complete="e1 > 3" step="3">Paso 3: Documentos</v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>
@@ -41,6 +41,21 @@
                   () => {
                     formErrors.nombre = undefined;
                     delete formErrors.nombre;
+                  }
+                "
+              />
+              <v-text-field
+                v-model="form.nombre_fantasia"
+                :disabled="processingForm"
+                label="NOMBRE FANTASIA"
+                outline
+                :rules="rules.nombre_fantasia"
+                :error="!!formErrors.nombre_fantasia"
+                :error-messages="formErrors.nombre_fantasia"
+                @keyup="
+                  () => {
+                    formErrors.nombre_fantasia = undefined;
+                    delete formErrors.nombre_fantasia;
                   }
                 "
               />
@@ -187,7 +202,7 @@
             </v-stepper-content>
             <v-stepper-content step="3">
             <br>
-            <v-layout row>
+            <v-layout column>
               <v-flex md3>
             <v-fab-transition>
               <v-btn
@@ -314,6 +329,7 @@ export default {
         area_id: '',
         descriptor: '',
         organigrama: '',
+        nombre_fantasia: '',
       },
       image: '',
       type: '',
@@ -460,12 +476,13 @@ export default {
          this.form.area_id =this.form.cuarto_padre_id;
        }
 
-       var formData = new FormData();
-       formData.append("nombre", this.form.nombre);
+      var formData = new FormData();
+      formData.append("nombre", this.form.nombre);
       formData.append("supervisor_id", this.form.supervisor_id);
       formData.append("nivel_jerarquico_id", this.form.nivel_jerarquico_id);
       formData.append("area_id", this.form.area_id);
       formData.append("estado", this.form.estado);
+      formData.append("nombre_fantasia", this.form.nombre_fantasia);
       formData.append("descriptor", this.form.descriptor);
       formData.append("organigrama", this.form.organigrama);
       this.createCargo({ data: formData })
