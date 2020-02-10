@@ -88,7 +88,7 @@
                     {{ props.item.apellido_paterno }}
                   </td>
                   <td class="px-3">
-
+                    {{ props.item.cargoActual.nombre}}
                   </td>
                   <td class="px-3">
                     <v-btn small  :to="{ name: 'editcolaborador', params: { id: props.item.id } }"  color="success">Informacion</v-btn>
