@@ -54,6 +54,7 @@
                   { text: 'Nombres', value: 'nombre' },
                   { text: 'Area', value: 'area.nombre' },
                   { text: 'Estado' },
+                  { text: 'Fecha de modificacion',value: 'updated_at' },
                   { text: 'Acciones'}
                 ]"
                 :items="cargos"
@@ -84,6 +85,9 @@
                     <v-chip v-else-if="props.item.estado === 0" small>
                       Inactivo
                     </v-chip>
+                  </td>
+                  <td class="px-3">
+                    {{ props.item.updated_at }}
                   </td>
                   <td class="text-xs-center px-3">
                     <v-btn

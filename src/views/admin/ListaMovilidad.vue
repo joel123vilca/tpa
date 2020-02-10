@@ -58,10 +58,10 @@
                     Sin Cargo
                   </td>
                   <td class="px-3">
-                    {{ props.item.fecha_inicio }}
+                    {{ formatDate(props.item.fecha_inicio)}}
                   </td>
                   <td>
-                    {{ props.item.fecha_termino }}
+                    {{ formatDate(props.item.fecha_termino) }}
                   </td>
                   <td>
                     {{ props.item.tipoMovilidad.tipo }}
@@ -133,6 +133,11 @@ export default {
       replaceShowModalDeleteMovilidad: 'colaboradores/replaceShowModalDeleteMovilidad',
       replaceCurrentMovilidad: 'colaboradores/replaceCurrentMovilidad',
     }),
+    formatDate(date) {
+      if (!date) return null
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
     openModalDeleteMovilidad(movilidad) {
       this.replaceCurrentMovilidad({ movilidad });
       this.replaceShowModalDeleteMovilidad({ status: true });
