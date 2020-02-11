@@ -5,14 +5,14 @@
         :routes="[
           { name: 'Inicio'},
           { name: 'Colaboradores' },
-          { name: 'Crear Comentario'}
+          { name: 'Edit Comentario'}
         ]"
       />
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Crear Comentario</span>
+              <span class="success--text font-weight-bold headline">Edit Comentario</span>
             </v-card-title>
             <v-divider />
             <v-card-text class="pa-0">
@@ -157,7 +157,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({name: 'listacomentario', params: { id: $route.params.id }})">
+                  <v-btn @click="$router.push({name: 'listacomentario', params: { id: form.colaborador_id }})">
                     Cancelar
                   </v-btn>
                 </div>
@@ -176,7 +176,7 @@ import { mapState, mapActions } from "vuex";
 export default {
 
   metaInfo() {
-    return { title: "Nuevo comentario" };
+    return { title: "Editar comentario" };
   },
 
   components: {
@@ -225,13 +225,28 @@ export default {
   created() {
     this.getTipoComentarios();
     this.getColaboradores();
+    this.getComentario({ comentarioId: this.$route.params.id }).then(response => {
+      const comentarioInfo = response.data.data;
+      this.setForm(comentarioInfo);
+    });
   },
   methods: {
     ...mapActions({
-      createComentario: "comentarios/createComentario",
+      updateComentario: "comentarios/updateComentario",
       getTipoComentarios: "comentarios/getTipoComentarios",
       getColaboradores: 'colaboradores/getColaboradores',
+      getComentario: 'comentarios/getComentario',
     }),
+    setForm(comentario) {
+      this.form.texto_libre = comentario.texto_libre;
+      this.form.fecha = comentario.fecha;
+      this.form.estado = comentario.estado;
+      this.form.positivo = comentario.positivo;
+      this.form.publico = comentario.publico;
+      this.form.tipo_comentario_id = comentario.tipoComentario.id;
+      this.form.colaborador_id = comentario.receptor.id;
+      this.form.colaborador_autor_id = comentario.autor.id;
+    },
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split('-');
@@ -241,11 +256,10 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.form.colaborador_id = this.$route.params.id;
-      this.createComentario({ data: this.form })
+      this.updateComentario({ comentarioId: this.$route.params.id, data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "listacomentario", params: { id: this.$route.params.id }});
+          this.$router.push({ name: "listacomentario", params: { id: this.form.colaborador_id }});
         })
         .catch(error => {
           this.processingForm = false;

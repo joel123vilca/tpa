@@ -6,7 +6,7 @@ export const state = {
   loadingComentarios: false,
   currentComentario: null,
   showModalDeleteComentario: false,
-  tiposComentarios: [],
+  tipoComentarios: [],
   loadingTipoComentarios: false,
 };
 
@@ -55,7 +55,7 @@ export const actions = {
         .then(response => {
           const comentario = response.data.data;
 
-          commit(types.REPLACE_CURRENT_COMENTARIO, { course });
+          commit(types.REPLACE_CURRENT_COMENTARIO, { comentario });
 
           resolve(response);
         })

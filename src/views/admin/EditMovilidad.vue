@@ -255,7 +255,7 @@ export default {
       })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "movilidades", params: { id: this.form.colaborador_id }   });
+          this.$router.push({ name: "movilidades", params: { id: this.form.colaborador_id }});
         })
         .catch(error => {
           this.processingForm = false;

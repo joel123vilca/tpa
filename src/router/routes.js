@@ -55,6 +55,21 @@ export default [
     component: () => import('@/views/admin/EditCargaFamiliar.vue'),
   },
   {
+    path: '/colaborador/:id/crear-comentario',
+    name: 'crearcomentario',
+    component: () => import('@/views/admin/Comentario.vue'),
+  },
+  {
+    path: '/colaborador/:id/lista-comentarios',
+    name: 'listacomentario',
+    component: () => import('@/views/admin/ListComentario.vue'),
+  },
+  {
+    path: '/comentario/:id',
+    name: 'editcomentario',
+    component: () => import('@/views/admin/EditComentario.vue'),
+  },
+  {
     path: '/colaborador/:id/crear-movilidad',
     name: 'crearmovilidad',
     component: () => import('@/views/admin/Movilidad.vue'),

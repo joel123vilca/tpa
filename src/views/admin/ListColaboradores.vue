@@ -100,7 +100,7 @@
                     <v-btn small :to="{ name: 'ListaCargaFamiliar', params: { id: props.item.id } }" color="success">Cargas</v-btn>
                   </td>
                   <td>
-                    <v-btn small color="success">Hoja de Vida</v-btn>
+                    <v-btn small :to="{ name: 'listacomentario', params: { id: props.item.id } }" color="success">Hoja de vida</v-btn>
                   </td>
                   <td class="text-xs-center px-3">
                     <v-btn small color="success">Cursos</v-btn>
