@@ -19,6 +19,26 @@
                 @submit.prevent="submitCreateCourse"
               >
                 <v-container fluid grid-list-lg>
+                  <v-autocomplete
+                    v-model="form.tipo_curso_id"
+                    :items="tipoCursos"
+                    dense
+                    outline
+                    clearable
+                    small-chips
+                    label="Seleccionar tipo de curso"
+                    item-text="categoria"
+                    item-value="id"
+                    :disabled="processingForm"
+                    :error="!!formErrors.estado"
+                    :error-messages="formErrors.estado"
+                    @change="
+                      () => {
+                        formErrors.estado = undefined;
+                        delete formErrors.estado;
+                      }
+                    "
+                  />
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
@@ -34,25 +54,139 @@
                       }
                     "
                   />
+                  <v-text-field
+                    v-model="form.titulo"
+                    :disabled="processingForm"
+                    label="Titulo"
+                    outline
+                    :rules="rules.titulo"
+                    :error="!!formErrors.titulo"
+                    :error-messages="formErrors.titulo"
+                    @keyup="
+                      () => {
+                        formErrors.titulo = undefined;
+                        delete formErrors.titulo;
+                      }
+                    "
+                  />
+                  <v-text-field
+                    v-model="form.horas_cronologicas"
+                    :disabled="processingForm"
+                    label="Horas cronologicas"
+                    outline
+                    :rules="rules.horas_cronologicas"
+                    :error="!!formErrors.horas_cronologicas"
+                    :error-messages="formErrors.horas_cronologicas"
+                    @keyup="
+                      () => {
+                        formErrors.horas_cronologicas = undefined;
+                        delete formErrors.horas_cronologicas;
+                      }
+                    "
+                  />
+                  <v-text-field
+                    v-model="form.realizado"
+                    :disabled="processingForm"
+                    label="Realizado"
+                    outline
+                    :rules="rules.realizado"
+                    :error="!!formErrors.realizado"
+                    :error-messages="formErrors.realizado"
+                    @keyup="
+                      () => {
+                        formErrors.realizado = undefined;
+                        delete formErrors.realizado;
+                      }
+                    "
+                  />
+                  <v-text-field
+                    v-model="form.anio"
+                    :disabled="processingForm"
+                    label="Año"
+                    outline
+                    :rules="rules.anio"
+                    :error="!!formErrors.anio"
+                    :error-messages="formErrors.anio"
+                    @keyup="
+                      () => {
+                        formErrors.anio = undefined;
+                        delete formErrors.anio;
+                      }
+                    "
+                  />
+                  <v-layout row wrap>
+                    <v-flex sm6 xs12>
+                  <v-menu
+                ref="menu1"
+                v-model="targetIssueDate5"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.fecha_inicio)"
+                  hint="Formato DD/MM/AAAA"
+                  label="Fecha de inicio "
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker5"
+                v-model="form.fecha_inicio"
+                @input="targetIssueDate5 = false"
+              ></v-date-picker>
+            </v-menu>
+                    </v-flex>
+                    <v-flex sm6 xs12>
+            <v-menu
+                ref="menu1"
+                v-model="targetIssueDate"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="formatDate(form.fecha_termino)"
+                  hint="Formato DD/MM/AAAA"
+                  label="Fecha de termino "
+                  v-on="on"
+                  outline
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                ref="picker5"
+                v-model="form.fecha_termino"
+                @input="targetIssueDate = false"
+              ></v-date-picker>
+            </v-menu>
+                    </v-flex>
+                  </v-layout>
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-autocomplete
-                        v-model="form.tipo"
+                        v-model="form.interno"
                         :items="tipos"
                         dense
                         outline
                         clearable
                         small-chips
-                        label="Seleccionar tipo de curso"
+                        label="Clasificación"
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.tipo"
-                        :error-messages="formErrors.tipo"
+                        :error="!!formErrors.interno"
+                        :error-messages="formErrors.interno"
                         @change="
                           () => {
-                            formErrors.tipo = undefined;
-                            delete formErrors.tipo;
+                            formErrors.interno = undefined;
+                            delete formErrors.interno;
                           }
                         "
                       />
@@ -120,11 +254,19 @@ export default {
   data() {
     return {
       formErrors: {},
-
+      targetIssueDate5: false,
+      targetIssueDate: false,
       form: {
-        nombre: "",
-        tipo: 0,
-        estado: 1,
+        nombre: '',
+        titulo: '',
+        realizado: '',
+        fecha_inicio: '',
+        fecha_termino: '',
+        anio: '',
+        interno: '',
+        estado: '',
+        tipo_curso_id: '',
+        horas_cronologicas: '',
       },
       tipos: [
         {id:0, nombre:'externo'},
@@ -142,12 +284,25 @@ export default {
       }
     };
   },
-
+  computed: {
+    ...mapState({
+      tipoCursos: state => state.courses.tipoCursos,
+      loadingTipoCursos: state => state.courses.loadingTipoCursos,
+    }),
+  },
+  created() {
+    this.getTipoCursos();
+  },
   methods: {
     ...mapActions({
-      createCourse: "courses/createCourse"
+      createCourse: "courses/createCourse",
+      getTipoCursos: "courses/getTipoCursos",
     }),
-
+    formatDate(date) {
+      if (!date) return null;
+      const [year, month, day] = date.split('-');
+      return `${day}/${month}/${year}`;
+    },
     submitCreateCourse() {
       if (!this.$refs.form.validate()) return false;
 

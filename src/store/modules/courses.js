@@ -5,7 +5,9 @@ export const state = {
   courses: [],
   loadingCourses: false,
   currentCourse: null,
-  showModalDeleteCourse: false
+  showModalDeleteCourse: false,
+  tipoCursos: [],
+  loadingTipoCursos: false,
 };
 
 export const actions = {
@@ -28,7 +30,24 @@ export const actions = {
         });
     });
   },
+  getTipoCursos({ commit }, payload) {
+    commit(types.REPLACE_LOADING_TIPO_CURSOS, { status: true });
+    return new Promise((resolve, reject) => {
+      courseAPI
+        .getTipoCursos(payload)
+        .then(response => {
+          const tipoCursos = response.data.data;
+          commit(types.REPLACE_LOADING_TIPO_CURSOS, { status: false });
+          commit(types.REPLACE_TIPO_CURSOS, { tipoCursos });
 
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_TIPO_CURSOS, { status: false });
+          reject(error);
+        });
+    });
+  },
   getCourse({ commit }, payload) {
     return new Promise((resolve, reject) => {
       courseAPI
@@ -118,6 +137,12 @@ export const mutations = {
   },
   [types.REPLACE_SHOW_MODAL_DELETE_COURSE](state, { status }) {
     state.showModalDeleteCourse = status;
-  }
+  },
+  [types.REPLACE_LOADING_TIPO_CURSOS](state, { status }) {
+    state.loadingTipoCursos = status;
+  },
+  [types.REPLACE_TIPO_CURSOS](state, { tipoCursos }) {
+    state.tipoCursos = tipoCursos;
+  },
 };
 

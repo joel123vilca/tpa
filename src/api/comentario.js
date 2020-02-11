@@ -8,19 +8,7 @@ export default {
     const params = payload.params || {};
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/cursos`,
-        method: "get",
-        params
-      })
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
-  },
-  getTipoCursos(payload = {}) {
-    const params = payload.params || {};
-    return new Promise((resolve, reject) => {
-      axios({
-        url: `${HOST}/tipo-cursos`,
+        url: `${HOST}/comentarios`,
         method: "get",
         params
       })
@@ -30,11 +18,11 @@ export default {
   },
 
   getById(payload = {}) {
-    const cursoId = payload.cursoId || "";
+    const comentarioId = payload.comentarioId || "";
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/cursos/${cursoId}`,
+        url: `${HOST}/comentarios/${comentarioId}`,
         method: "get"
       })
         .then(response => resolve(response))
@@ -43,12 +31,12 @@ export default {
   },
 
   put(payload = {}) {
-    const cursoId = payload.cursoId;
+    const comentarioId = payload.comentarioId;
     const data = payload.data || {};
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/cursos/${cursoId}`,
+        url: `${HOST}/comentarios/${comentarioId}`,
         method: "put",
         data
       })
@@ -62,7 +50,7 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/cursos`,
+        url: `${HOST}/comentarios`,
         method: "post",
         data
       })
@@ -71,16 +59,27 @@ export default {
     });
   },
   delete(payload = {}) {
-    const cursoId = payload.cursoId;
+    const comentarioId = payload.comentarioId;
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/cursos/${cursoId}`,
+        url: `${HOST}/comentarios/${comentarioId}`,
         method: "delete",
       })
         .then(response => resolve(response))
         .catch(error => reject(error));
     });
   },
-
+  getTipoComentarios(payload = {}) {
+    const params = payload.params || {};
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/tipo-comentarios`,
+        method: "get",
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
 };
 

@@ -38,6 +38,7 @@
                 :headers="[
                   { text: 'Nombre'},
                   { text: 'Tipo' },
+                  { text: 'Clasificacion' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"
@@ -54,15 +55,18 @@
                     {{ props.item.nombre }}
                   </td>
                   <td class="px-3">
+                    {{ props.item.tipoCurso.categoria }}
+                  </td>
+                  <td class="px-3">
                     <v-chip
-                      v-if="props.item.tipo === 1"
+                      v-if="props.item.interno === 1"
                       small
                       color="teal"
                       text-color="white"
                     >
                       Interno
                     </v-chip>
-                    <v-chip v-else-if="props.item.tipo === 0" small>
+                    <v-chip v-else-if="props.item.interno === 0" small>
                       Externo
                     </v-chip>
                   </td>
