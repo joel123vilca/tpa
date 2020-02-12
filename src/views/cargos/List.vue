@@ -54,6 +54,8 @@
                   { text: 'Nombres', value: 'nombre' },
                   { text: 'Area', value: 'area.nombre' },
                   { text: 'Estado' },
+                  { text: 'Descriptor'},
+                  { text: 'Organigrama'},
                   { text: 'Fecha de modificacion',value: 'updated_at' },
                   { text: 'Acciones'}
                 ]"
@@ -72,6 +74,28 @@
                   </td>
                   <td class="px-3">
                     {{ props.item.area.nombre }}
+                  </td>
+                  <td class="px-3">
+                    <v-btn class="ma-0"
+                        small
+                        :href="props.item.organigrama_path"
+                        target="_blank"
+                        color="success"
+                        text-color="white"
+                        >
+                      Ver
+                    </v-btn>
+                  </td>
+                  <td class="px-3">
+                    <v-btn class="ma-0"
+                        small
+                        :href="props.item.organigrama_path"
+                        target="_blank"
+                        color="success"
+                        text-color="white"
+                        >
+                      Ver
+                    </v-btn>
                   </td>
                   <td class="px-3">
                     <v-chip
