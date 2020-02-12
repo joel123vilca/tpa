@@ -37,8 +37,8 @@
               <v-data-table
                 :headers="[
                   { text: 'Nombre'},
+                  { text: 'Categoría' },
                   { text: 'Tipo' },
-                  { text: 'Clasificacion' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"

@@ -31,7 +31,7 @@
                     outline
                     clearable
                     small-chips
-                    label="Seleccionar tipo de curso"
+                    label="Seleccionar Categoría"
                     item-text="categoria"
                     item-value="id"
                     :disabled="processingForm"
@@ -47,7 +47,7 @@
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Nombre Curso"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -62,7 +62,7 @@
                   <v-text-field
                     v-model="form.titulo"
                     :disabled="processingForm"
-                    label="Titulo"
+                    label="Titulo Diploma"
                     outline
                     :rules="rules.titulo"
                     :error="!!formErrors.titulo"
@@ -77,7 +77,7 @@
                   <v-text-field
                     v-model="form.horas_cronologicas"
                     :disabled="processingForm"
-                    label="Horas cronologicas"
+                    label="Horas Cronológicas"
                     outline
                     :rules="rules.horas_cronologicas"
                     :error="!!formErrors.horas_cronologicas"
@@ -107,7 +107,7 @@
                   <v-text-field
                     v-model="form.anio"
                     :disabled="processingForm"
-                    label="Año"
+                    label="Por su aprobación"
                     outline
                     :rules="rules.anio"
                     :error="!!formErrors.anio"
@@ -182,7 +182,7 @@
                         outline
                         clearable
                         small-chips
-                        label="Clasificación"
+                        label="Seleccionar Tipo"
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"

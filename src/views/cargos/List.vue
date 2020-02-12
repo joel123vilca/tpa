@@ -64,6 +64,7 @@
                 :loading="loadingCargos"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
+                :text-align="left"
               >
                 <tr
                   slot="items"
@@ -74,28 +75,6 @@
                   </td>
                   <td class="px-3">
                     {{ props.item.area.nombre }}
-                  </td>
-                  <td class="px-3">
-                    <v-btn class="ma-0"
-                        small
-                        :href="props.item.organigrama_path"
-                        target="_blank"
-                        color="success"
-                        text-color="white"
-                        >
-                      Ver
-                    </v-btn>
-                  </td>
-                  <td class="px-3">
-                    <v-btn class="ma-0"
-                        small
-                        :href="props.item.organigrama_path"
-                        target="_blank"
-                        color="success"
-                        text-color="white"
-                        >
-                      Ver
-                    </v-btn>
                   </td>
                   <td class="px-3">
                     <v-chip
@@ -110,6 +89,29 @@
                       Inactivo
                     </v-chip>
                   </td>
+                  <td class="px-3">
+                    <v-btn class="ma-0"
+                        small
+                        :href="props.item.organigrama_path"
+                        target="_blank"
+                        color="success"
+                        text-color="white"
+                        >
+                      Ver
+                    </v-btn>
+                  </td>
+                  <td class="px-3">
+                    <v-btn class="ma-0"
+                        small
+                        :href="props.item.organigrama_path"
+                        target="_blank"
+                        color="success"
+                        text-color="white"
+                        >
+                      Ver
+                    </v-btn>
+                  </td>
+
                   <td class="px-3">
                     {{ props.item.updated_at }}
                   </td>

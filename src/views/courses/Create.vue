@@ -26,7 +26,7 @@
                     outline
                     clearable
                     small-chips
-                    label="Seleccionar tipo de curso"
+                    label="Seleccionar Categoría"
                     item-text="categoria"
                     item-value="id"
                     :disabled="processingForm"
@@ -42,7 +42,7 @@
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="nombre"
+                    label="Nombre del Curso"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -57,7 +57,7 @@
                   <v-text-field
                     v-model="form.titulo"
                     :disabled="processingForm"
-                    label="Titulo"
+                    label="Título Diploma"
                     outline
                     :rules="rules.titulo"
                     :error="!!formErrors.titulo"
@@ -72,7 +72,7 @@
                   <v-text-field
                     v-model="form.horas_cronologicas"
                     :disabled="processingForm"
-                    label="Horas cronologicas"
+                    label="Horas cronológicas"
                     outline
                     :rules="rules.horas_cronologicas"
                     :error="!!formErrors.horas_cronologicas"
@@ -102,7 +102,7 @@
                   <v-text-field
                     v-model="form.anio"
                     :disabled="processingForm"
-                    label="Año"
+                    label="Por su aprobación"
                     outline
                     :rules="rules.anio"
                     :error="!!formErrors.anio"
@@ -177,7 +177,7 @@
                         outline
                         clearable
                         small-chips
-                        label="Clasificación"
+                        label="Seleccionar Tipo"
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
@@ -264,7 +264,7 @@ export default {
         fecha_termino: '',
         anio: '',
         interno: '',
-        estado: '',
+        estado: 1,
         tipo_curso_id: '',
         horas_cronologicas: '',
       },

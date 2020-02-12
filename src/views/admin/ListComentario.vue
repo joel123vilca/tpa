@@ -37,6 +37,7 @@
               <v-data-table
                 :headers="[
                   { text: 'Tipo' },
+                  { text: 'Autor' },
                   { text: 'Fecha'},
                   { text: 'Estado' },
                   { text: 'Acciones'}
@@ -52,6 +53,9 @@
                 >
                   <td class="px-3">
                     {{ props.item.tipoComentario.tipo }}
+                  </td>
+                   <td class="px-3">
+
                   </td>
                   <td class="px-3">
                     {{ props.item.fecha}}
