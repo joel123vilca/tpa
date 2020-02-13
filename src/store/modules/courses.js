@@ -8,6 +8,8 @@ export const state = {
   showModalDeleteCourse: false,
   tipoCursos: [],
   loadingTipoCursos: false,
+  colaboradoresDisponibles: [],
+  loadingColaboradoresDisponibles: false,
 };
 
 export const actions = {
@@ -121,7 +123,41 @@ export const actions = {
         });
     });
   },
+  getCobaradoresDisponibles({ commit }, payload) {
+    commit(types.REPLACE_LOADING_COLABORADORES_DISPONIBLES, { status: true });
+    return new Promise((resolve, reject) => {
+      courseAPI
+        .getCobaradoresDisponibles(payload)
+        .then(response => {
+          const colaboradoresDisponibles = response.data.data;
+          commit(types.REPLACE_LOADING_COLABORADORES_DISPONIBLES, { status: false });
+          commit(types.REPLACE_COLABORADORES_DISPONIBLES, { colaboradoresDisponibles });
 
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_COLABORADORES_DISPONIBLES, { status: false });
+          reject(error);
+        });
+    });
+  },
+  asignarCurso({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      courseAPI
+        .cursoSeleccionado(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "CURSO",
+            message: "El curso ha sido asignado con éxito."
+          });
+
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
 
 };
 
@@ -143,6 +179,12 @@ export const mutations = {
   },
   [types.REPLACE_TIPO_CURSOS](state, { tipoCursos }) {
     state.tipoCursos = tipoCursos;
+  },
+  [types.REPLACE_LOADING_COLABORADORES_DISPONIBLES](state, { status }) {
+    state.loadingColaboradoresDisponibles = status;
+  },
+  [types.REPLACE_COLABORADORES_DISPONIBLES](state, { colaboradoresDisponibles }) {
+    state.colaboradoresDisponibles = colaboradoresDisponibles;
   },
 };
 

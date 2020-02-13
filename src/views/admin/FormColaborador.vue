@@ -605,8 +605,9 @@ export default {
           console.log(response)
         })
         .catch((error) => {
-          this.form.rut = this.rules.rut.validForm
-          this.step = 1
+          this.form.rut = this.rules.rut.validForm;
+          this.form.rut = 'duplicado';
+          this.step = 1;
         })
 
     },

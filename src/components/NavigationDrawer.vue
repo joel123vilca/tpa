@@ -119,6 +119,7 @@ export default {
             items: [
               { title: 'Agregar Nuevo', to: { name: "crearCurso" } },
               { title: 'Listar Todas', to: { name: "ListCourse" }},
+              { title: 'Asignar curso', to: { name: "asignar" }},
             ],
           },
           {

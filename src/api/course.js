@@ -28,7 +28,19 @@ export default {
         .catch(error => reject(error));
     });
   },
-
+  cursoSeleccionado(payload = {}) {
+    const data = payload.data || {};
+    const cursoId = payload.cursoId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cursos/${cursoId}/capacitaciones`,
+        method: "post",
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getById(payload = {}) {
     const cursoId = payload.cursoId || "";
 
@@ -41,7 +53,17 @@ export default {
         .catch(error => reject(error));
     });
   },
-
+  getCobaradoresDisponibles(payload = {}) {
+    const cursoId = payload.cursoId || "";
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cursos/${cursoId}/colaboradores-disponibles`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   put(payload = {}) {
     const cursoId = payload.cursoId;
     const data = payload.data || {};

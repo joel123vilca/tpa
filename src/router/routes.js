@@ -100,6 +100,11 @@ export default [
     component: () => import('@/views/courses/Edit.vue'),
   },
   {
+    path: '/asignar-cursos',
+    name: 'asignar',
+    component: () => import('@/views/courses/Asignar.vue'),
+  },
+  {
     path: '/crea-colaborador',
     name: 'crearcolaborador',
     component: () => import('@/views/admin/FormColaborador.vue'),
