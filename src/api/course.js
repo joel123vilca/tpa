@@ -64,6 +64,17 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getCursosDisponibles(payload = {}) {
+    const colaboradorId = payload.colaboradorId || "";
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/cursos-disponibles`,
+        method: "get"
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   put(payload = {}) {
     const cursoId = payload.cursoId;
     const data = payload.data || {};

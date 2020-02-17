@@ -7,7 +7,7 @@
         :routes="[
           { name: 'Inicio'},
           { name: 'Colaborador' },
-          { name: 'Listado de comentarios' }
+          { name: 'Listado de cursos' }
         ]"
       />
       <v-card>
@@ -16,13 +16,13 @@
           dark
           card
         >
-          <v-toolbar-title>Comentarios</v-toolbar-title>
+          <v-toolbar-title>Cursos Asignados</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'crearcomentario', params: { id: $route.params.id } }"
+            :to="{ name: 'asignarCurso', params: { id: $route.params.id } }"
             color="success"
           >
-            Agregar Comentario
+            Agregar curso
           </v-btn>
         </v-toolbar>
         <v-container
@@ -36,14 +36,12 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Tipo' },
-                  { text: 'Autor' },
-                  { text: 'Fecha'},
-                  { text: 'Estado' },
+                  { text: 'Nombre del curso' },
+                  { text: 'Diploma' },
                   { text: 'Acciones'}
                 ]"
-                :items="comentarios"
-                :loading="loadingComentarios"
+                :items="cursos"
+                :loading="loadingCursos"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
               >
@@ -52,38 +50,22 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.tipoComentario.tipo }}
-                  </td>
-                   <td class="px-3">
-                    {{ props.item.autor.primer_nombre }} {{ props.item.autor.apellido_paterno }}
+                    {{ props.item.curso_nombre }}
                   </td>
                   <td class="px-3">
-                    {{ formatDate(props.item.fecha) }}
-                  </td>
-                  <td class="px-3">
-                    <v-chip
-                      v-if="props.item.estado === 1"
-                      small
-                      color="primary"
-                      text-color="white"
-                    >
-                      Activo
-                    </v-chip>
-                    <v-chip v-else-if="props.item.estado === 0" small>
-                      Inactivo
-                    </v-chip>
+                    {{ props.item.diploma_path}}
                   </td>
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
-                        :to="{ name: 'editcomentario', params: { id: props.item.id } }"
+                        :to="{ name: '', params: { id: props.item.id } }"
                         small
                         icon
                         flat
-                        color="info"
+                        color="error"
                       >
                         <v-icon small>
-                          edit
+                          delete
                         </v-icon>
                       </v-btn>
                   </td>
@@ -102,7 +84,7 @@ import { mapState, mapActions } from 'vuex';
 export default {
 
   metaInfo() {
-    return { title: 'Listado de comentarios' };
+    return { title: 'Listado de cursos' };
   },
 
   components: {
@@ -111,26 +93,21 @@ export default {
 
   computed: {
     ...mapState({
-      comentarios: state => state.comentarios.comentarios,
-      loadingComentarios: state => state.comentarios.loadingComentarios,
+      cursos: state => state.colaboradores.cursos,
+      loadingCursos: state => state.colaboradores.loadingCursos,
     }),
   },
   created() {
-    this.getComentarios();
+    this.getCursos({ colaboradorId: this.$route.params.id });
   },
 
   methods: {
     ...mapActions({
-      getComentarios: 'comentarios/getComentarios',
+      getCursos: 'colaboradores/getCursos',
       replaceCurrentComentario: 'comentarios/replaceCurrentComentario',
       deleteComentario: 'comentarios/deleteComentario',
       replaceComentarios: 'comentarios/replaceComentarios',
     }),
-    formatDate(date) {
-      if (!date) return null;
-      const [year, month, day] = date.split('-');
-      return `${day}/${month}/${year}`;
-    },
   },
 };
 </script>

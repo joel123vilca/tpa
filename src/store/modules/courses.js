@@ -10,6 +10,8 @@ export const state = {
   loadingTipoCursos: false,
   colaboradoresDisponibles: [],
   loadingColaboradoresDisponibles: false,
+  cursosDisponibles: [],
+  loadingCursosDisponibles: false,
 };
 
 export const actions = {
@@ -141,6 +143,24 @@ export const actions = {
         });
     });
   },
+  getCursosDisponibles({ commit }, payload) {
+    commit(types.REPLACE_LOADING_CURSOS_DISPONIBLES, { status: true });
+    return new Promise((resolve, reject) => {
+      courseAPI
+        .getCursosDisponibles(payload)
+        .then(response => {
+          const cursosDisponibles = response.data.data;
+          commit(types.REPLACE_LOADING_CURSOS_DISPONIBLES, { status: false });
+          commit(types.REPLACE_CURSOS_DISPONIBLES, { cursosDisponibles });
+
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_CURSOS_DISPONIBLES, { status: false });
+          reject(error);
+        });
+    });
+  },
   asignarCurso({ commit }, payload) {
     return new Promise((resolve, reject) => {
       courseAPI
@@ -185,6 +205,13 @@ export const mutations = {
   },
   [types.REPLACE_COLABORADORES_DISPONIBLES](state, { colaboradoresDisponibles }) {
     state.colaboradoresDisponibles = colaboradoresDisponibles;
+  },
+
+  [types.REPLACE_LOADING_CURSOS_DISPONIBLES](state, { status }) {
+    state.loadingCursosDisponibles = status;
+  },
+  [types.REPLACE_CURSOS_DISPONIBLES](state, { cursosDisponibles }) {
+    state.cursosDisponibles = cursosDisponibles;
   },
 };
 

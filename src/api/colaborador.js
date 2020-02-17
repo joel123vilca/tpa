@@ -199,4 +199,30 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getCurso(payload = {}) {
+    const colaboradorId = payload.colaboradorId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/capacitaciones`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
+  postAsignarCurso(payload = {}) {
+    const data = payload.data || {};
+    const colaboradorId = payload.colaboradorId;
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/capacitaciones`,
+        method: "post",
+        data,
+        headers: {'Content-Type': 'multipart/form-data' },
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
 }

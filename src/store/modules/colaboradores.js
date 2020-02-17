@@ -16,6 +16,8 @@ export const state = {
   showModalDeleteMovilidad: false,
   currentMovilidad: null,
   loadingCurrentMovilidad: false,
+  cursos: [],
+  loadingCursos: false,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -290,6 +292,42 @@ export const actions = {
         });
     });
   },
+  getCursos({ commit }, payload) {
+    commit(types.REPLACE_LOADING_COLABORADOR_CURSOS, { status: true });
+
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getCurso(payload)
+        .then(response => {
+          const cursos = response.data.data
+          commit(types.REPLACE_LOADING_COLABORADOR_CURSOS, { status: false });
+          commit(types.REPLACE_COLABORADOR_CURSOS, { cursos });
+
+          resolve(response);
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_COLABORADOR_CURSOS, { status: false });
+          reject(error);
+        });
+    });
+  },
+  asignarCurso({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .postAsignarCurso(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "TPA",
+            message: "El Curso ha sido asignado con éxito."
+          });
+
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
 }
 
 export const mutations = {
@@ -337,5 +375,11 @@ export const mutations = {
   },
   [types.REPLACE_LOADING_CURRENT_MOVILIDAD] (state, { status }) {
     state.loadingCurrentMovilidad = status
+  },
+  [types.REPLACE_LOADING_COLABORADOR_CURSOS](state, { status }) {
+    state.loadingCursos = status;
+  },
+  [types.REPLACE_COLABORADOR_CURSOS](state, { cursos }) {
+    state.cursos = cursos;
   },
 };

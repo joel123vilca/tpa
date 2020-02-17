@@ -63,6 +63,7 @@
               >
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  v-model="form.fecha"
                   :value="formatDate(form.fecha)"
                   hint="Formato DD/MM/AAAA"
                   label="Fecha"
@@ -192,7 +193,7 @@ export default {
         texto_libre: '',
         publico: '',
         fecha: '',
-        estado: '',
+        estado: 1,
         tipo_comentario_id: '',
         colaborador_id: '',
         colaborador_autor_id: '',

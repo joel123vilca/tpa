@@ -202,8 +202,8 @@
             </v-stepper-content>
             <v-stepper-content step="3">
             <br>
-            <v-layout row>
-              <v-flex md4>
+            <v-layout row wrap>
+              <v-flex xs12 md4>
                 <v-card
                   outlined
                   width="250"
@@ -247,7 +247,7 @@
                 </center>
                 </v-card>
               </v-flex>
-              <v-flex md4>
+              <v-flex xs12 md4>
                 <v-card
                   outlined
                   width="250"

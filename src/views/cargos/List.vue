@@ -91,8 +91,9 @@
                   </td>
                   <td class="px-3">
                     <v-btn class="ma-0"
+                        v-if="!!props.item.descriptor_path"
                         small
-                        :href="props.item.organigrama_path"
+                        :href="props.item.descriptor_path"
                         target="_blank"
                         color="success"
                         text-color="white"
@@ -102,6 +103,7 @@
                   </td>
                   <td class="px-3">
                     <v-btn class="ma-0"
+                        v-if="!!props.item.organigrama_path"
                         small
                         :href="props.item.organigrama_path"
                         target="_blank"

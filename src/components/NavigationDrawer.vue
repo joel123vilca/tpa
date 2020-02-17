@@ -41,19 +41,19 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-        </v-list>
-        <v-list-tile
-          exact
-          ripple
-          active-class="accent"
-          class="scoped-list-tile mb-1"
-          @click="logout({ router: $router })"
-        >
-          <v-list-tile-action>
+          <v-list-tile
+               exact
+              ripple
+              active-class="accent"
+              class="scoped-list-tile mb-1"
+              @click="logout({ router: $router })"
+            >
+          <v-list-tile-action @click="logout({ router: $router })">
             <v-icon>power_settings_new</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>Cerrar sesión</v-list-tile-content>
         </v-list-tile>
+        </v-list>
     </v-flex>
   </v-layout>
   </v-navigation-drawer>
