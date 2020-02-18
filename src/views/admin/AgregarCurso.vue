@@ -97,7 +97,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({name: 'listacomentario', params: { id: $route.params.id }})">
+                  <v-btn @click="$router.push({name: 'ListCursosColaborador', params: { id: $route.params.id }})">
                     Cancelar
                   </v-btn>
                 </div>

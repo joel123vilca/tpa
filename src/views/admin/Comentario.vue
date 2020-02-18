@@ -66,7 +66,7 @@
                     <v-flex sm6 xs12>
                       <v-autocomplete
                     v-model="form.colaborador_autor_id"
-                    :items="colaboradores"
+                    :items="filterData"
                     dense
                     outline
                     clearable
@@ -208,6 +208,10 @@ export default {
       colaboradores: state => state.colaboradores.colaboradores,
       loadingColaboradores: state => state.colaboradores.loadingColaboradores,
     }),
+    filterData() {
+      let colaboradores = this.colaboradores;
+      return colaboradores.filter(o => o.id != this.$route.params.id );
+    },
   },
   created() {
     this.getTipoComentarios();
