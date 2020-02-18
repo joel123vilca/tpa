@@ -122,7 +122,7 @@ export default {
     }),
   },
   created() {
-    this.getCourses();
+    this.getCourses({ interno: 1 });
   },
   methods: {
     ...mapActions({

@@ -87,7 +87,7 @@
                     clearable
                     small-chips
                     label="Autor del comentario"
-                    item-text="primer_nombre"
+                    item-text="nombre_completo"
                     item-value="id"
                     :disabled="processingForm"
                     :error="!!formErrors.colaborador_autor_id"

@@ -131,7 +131,7 @@ export default {
     })
   },
   created() {
-    this.getCourses();
+    this.getCourses({ interno: 0 });
   },
 
   methods: {

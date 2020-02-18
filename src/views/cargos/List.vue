@@ -165,7 +165,7 @@ export default {
       loadingCargos: state => state.cargos.loadingCargos,
     })
   },
-  created () {
+  created() {
     this.getCargos();
   },
 

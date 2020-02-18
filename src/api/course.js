@@ -5,10 +5,12 @@ const HOST = baseUrlAPI;
 
 export default {
   get(payload = {}) {
-    const params = payload.params || {};
+    const params = payload.params || {}
+    const interno = payload.interno
+
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/cursos`,
+        url: `${HOST}/cursos?interno=${interno}`,
         method: "get",
         params
       })
