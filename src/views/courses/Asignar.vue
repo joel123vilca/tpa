@@ -94,7 +94,7 @@
                   </td>
                 </tr>
               </v-data-table>
-              <v-btn v-if="form.colaboradores.length > 0"  large color="success" dark  @click="crear()">Asignar Seleccionados</v-btn>
+              <v-btn v-if="form.colaboradores.length > 0"  large color="success" dark  @click="crear()" :loading="loading">Asignar Seleccionados</v-btn>
               <v-btn flat @click="e1 = 1">Cancel</v-btn>
             </v-stepper-content>
           </v-stepper-items>
@@ -123,6 +123,7 @@ export default {
       formErrors: {},
       e1: 0,
       searchUsers: '',
+      loading: false,
       form: {
         curso_id: '',
         colaboradores: [],
@@ -152,11 +153,13 @@ export default {
     });
     },
     crear() {
+      this.loading = true;
       this.asignarCurso({
         cursoId: this.form.curso_id,
         data: this.form,
       })
         .then(response => {
+          this.loading = false;
           this.$router.push({ name: "ListCourse" });
         })
         .catch(error => {

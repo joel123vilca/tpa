@@ -6,9 +6,10 @@ const HOST = baseUrlAPI;
 export default {
   get(payload = {}) {
     const params = payload.params || {};
+    const colaboradorId = payload.colaboradorId;
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/comentarios`,
+        url: `${HOST}/colaboradores/${colaboradorId}/comentarios`,
         method: "get",
         params
       })

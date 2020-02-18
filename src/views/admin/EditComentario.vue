@@ -52,35 +52,20 @@
                   ></v-textarea>
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
-                  <v-menu
-                ref="menu1"
-                v-model="targetIssueDate5"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
+              <template>
                 <v-text-field
-                  :value="formatDate(form.fecha)"
+                  v-model="form.fecha"
                   hint="Formato DD/MM/AAAA"
                   label="Fecha"
-                  v-on="on"
                   outline
+                  type="date"
                 ></v-text-field>
               </template>
-              <v-date-picker
-                ref="picker5"
-                v-model="form.fecha"
-                @input="targetIssueDate5 = false"
-              ></v-date-picker>
-            </v-menu>
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-autocomplete
                     v-model="form.colaborador_autor_id"
-                    :items="colaboradores"
+                    :items="filterData"
                     dense
                     outline
                     clearable
@@ -221,6 +206,10 @@ export default {
       colaboradores: state => state.colaboradores.colaboradores,
       loadingColaboradores: state => state.colaboradores.loadingColaboradores,
     }),
+    filterData() {
+      let colaboradores = this.colaboradores;
+      return colaboradores.filter(o => o.id != this.$route.params.id );
+    },
   },
   created() {
     this.getTipoComentarios();

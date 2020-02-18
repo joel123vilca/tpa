@@ -36,9 +36,9 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Tipo' },
+                  { text: 'Tipo', value: 'tipoComentario.tipo' },
                   { text: 'Autor' },
-                  { text: 'Fecha'},
+                  { text: 'Fecha', value: 'fecha' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"
@@ -116,7 +116,7 @@ export default {
     }),
   },
   created() {
-    this.getComentarios();
+    this.getComentarios({ colaboradorId: this.$route.params.id });
   },
 
   methods: {
