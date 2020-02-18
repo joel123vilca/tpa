@@ -53,7 +53,16 @@
                     {{ props.item.curso_nombre }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.diploma_path}}
+                    <v-btn class="ma-0"
+                        v-if="!!props.item.diploma_path"
+                        small
+                        :href="props.item.diploma_path"
+                        target="_blank"
+                        color="success"
+                        text-color="white"
+                        >
+                      Ver
+                    </v-btn>
                   </td>
                   <td class="text-xs-center px-3">
                     <v-btn
