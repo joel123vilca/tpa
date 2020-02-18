@@ -651,8 +651,8 @@ export default {
       this.form.contacto_emergencia_nombre = colaborador.contacto_emergencia_nombre;
       this.form.contacto_emergencia_telefono = colaborador.contacto_emergencia_telefono;
       this.form.fecha_inactividad = colaborador.fecha_inactividad;
-      this.form.nivel_educacion_id = colaborador.nivelEducacion.id;
-      this.form.estado_civil_id = colaborador.estadoCivil.id;
+      this.form.nivel_educacion_id = colaborador.nivelEducacion === '' ? '' : colaborador.nivelEducacion.id;
+      this.form.estado_civil_id = colaborador.estadoCivil === '' ? '' : colaborador.estadoCivil.id;
       this.form.tags = colaborador.tags;
       this.form.imagen_url = colaborador.imagen_url;
     },

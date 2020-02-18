@@ -52,31 +52,16 @@
                   ></v-textarea>
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
-                  <v-menu
-                ref="menu1"
-                v-model="targetIssueDate5"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
+
+              <template >
                 <v-text-field
                   v-model="form.fecha"
-                  :value="formatDate(form.fecha)"
                   hint="Formato DD/MM/AAAA"
                   label="Fecha"
-                  v-on="on"
                   outline
+                  type="date"
                 ></v-text-field>
               </template>
-              <v-date-picker
-                ref="picker5"
-                v-model="form.fecha"
-                @input="targetIssueDate5 = false"
-              ></v-date-picker>
-            </v-menu>
                     </v-flex>
                     <v-flex sm6 xs12>
                       <v-autocomplete
@@ -189,6 +174,7 @@ export default {
       formErrors: {},
       targetIssueDate5: false,
       targetIssueDate: false,
+      mask: 'date',
       form: {
         texto_libre: '',
         publico: '',

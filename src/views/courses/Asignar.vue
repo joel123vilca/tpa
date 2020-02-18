@@ -46,7 +46,20 @@
               <v-btn flat @click="$router.push({ name: 'ListCourse' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-
+              <v-flex
+              v-if="colaboradores.length"
+              sm6
+              offset-sm6
+            >
+              <v-text-field
+                v-model="searchUsers"
+                box
+                append-icon="search"
+                label="Buscador"
+                clearable
+                hide-details
+              />
+            </v-flex>
               <v-data-table
                 :headers="[
                   { text: '',sortable: false},
@@ -56,6 +69,7 @@
                   { text: 'Cargo'},
                 ]"
                 :items="colaboradores"
+                :search="searchUsers"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
               >
@@ -108,6 +122,7 @@ export default {
     return {
       formErrors: {},
       e1: 0,
+      searchUsers: '',
       form: {
         curso_id: '',
         colaboradores: [],
