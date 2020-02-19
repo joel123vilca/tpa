@@ -33,17 +33,33 @@
             row
             wrap
           >
+            <v-flex
+              v-if="courses.length"
+              sm6
+              offset-sm6
+            >
+              <v-text-field
+                v-model="searchCursos"
+                :disabled="loadingCourses"
+                box
+                append-icon="search"
+                label="Buscar Curso"
+                clearable
+                hide-details
+              />
+            </v-flex>
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombre'},
-                  { text: 'Categoría' },
-                  { text: 'Tipo' },
+                  { text: 'Nombre', value: 'nombre'},
+                  { text: 'Categoría', value: 'tipoCurso.cartegoria' },
+                  { text: 'Tipo', value: 'interno' },
                   { text: 'Estado' },
                   { text: 'Acciones'}
                 ]"
                 :items="courses"
                 :loading="loadingCourses"
+                :search="searchCursos"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
               >
@@ -112,16 +128,17 @@ import { mapState, mapActions } from 'vuex';
 export default {
 
   metaInfo() {
-    return { title: 'Listado de cursos' }
+    return { title: 'Listado de cursos' };
   },
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
   },
 
-  data () {
+  data() {
     return {
-    }
+      searchCursos: '',
+    };
   },
 
   computed: {
