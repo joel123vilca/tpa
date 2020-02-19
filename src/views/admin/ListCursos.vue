@@ -67,11 +67,11 @@
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
-                        :to="{ name: '', params: { id: props.item.id } }"
                         small
                         icon
                         flat
                         color="error"
+                        @click="openModalDeleteCurso(props.item)"
                       >
                         <v-icon small>
                           delete
@@ -84,6 +84,7 @@
           </v-layout>
         </v-container>
       </v-card>
+      <ModalDeleteCurso />
   </v-container>
 </template>
 
@@ -98,6 +99,7 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    ModalDeleteCurso: () => import('@/views/admin/ModalDeleteCurso'),
   },
 
   computed: {
@@ -113,10 +115,13 @@ export default {
   methods: {
     ...mapActions({
       getCursos: 'colaboradores/getCursos',
-      replaceCurrentComentario: 'comentarios/replaceCurrentComentario',
-      deleteComentario: 'comentarios/deleteComentario',
-      replaceComentarios: 'comentarios/replaceComentarios',
+      replaceShowModalDeleteCurso: 'colaboradores/replaceShowModalDeleteCurso',
+      replaceCurrentCurso: 'colaboradores/replaceCurrentCurso',
     }),
+    openModalDeleteCurso(curso) {
+      this.replaceCurrentCurso({ curso });
+      this.replaceShowModalDeleteCurso({ status: true });
+    },
   },
 };
 </script>

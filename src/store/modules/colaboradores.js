@@ -18,6 +18,8 @@ export const state = {
   loadingCurrentMovilidad: false,
   cursos: [],
   loadingCursos: false,
+  showModalDeleteCurso: false,
+  currentCurso: null,
 };
 export const actions = {
   createColaborador({ commit }, payload) {
@@ -328,6 +330,30 @@ export const actions = {
         });
     });
   },
+  replaceShowModalDeleteCurso ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_DELETE_CURSO, payload)
+  },
+  replaceCurrentCurso ({ commit }, payload) {
+    commit(types.REPLACE_CURRENT_CURSO, payload)
+  },
+  deleteCurso ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI.deleteCurso(payload)
+        .then(response => {
+          commit(types.REPLACE_CURRENT_CURSO, { curso: null })
+
+          this._vm.$notify.success({
+            title: 'TPA',
+            message: 'El curso se ha sido eliminado con éxito.'
+          })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
 }
 
 export const mutations = {
@@ -381,5 +407,11 @@ export const mutations = {
   },
   [types.REPLACE_COLABORADOR_CURSOS](state, { cursos }) {
     state.cursos = cursos;
+  },
+  [types.REPLACE_CURRENT_CURSO](state, { curso }) {
+    state.currentCurso = curso;
+  },
+  [types.REPLACE_SHOW_MODAL_DELETE_CURSO] (state, { status }) {
+    state.showModalDeleteCurso = status;
   },
 };

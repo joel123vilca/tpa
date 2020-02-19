@@ -225,4 +225,16 @@ export default {
         .catch(error => reject(error));
     });
   },
-}
+  deleteCurso(payload = {}) {
+    const cursoId = payload.cursoId;
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/capacitaciones/${cursoId}`,
+        method: 'delete',
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    });
+  },
+};
