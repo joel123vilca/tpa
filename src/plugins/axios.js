@@ -98,7 +98,7 @@ axios.interceptors.response.use(
       //   .then(() => {
       store.commit("auth/LOGOUT");
 
-      router.push({ name: "admin" });
+      router.push({ name: "login" });
       // })
     }
 

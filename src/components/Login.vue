@@ -25,6 +25,14 @@
                       :disabled="processingForm"
                       label="Usuario"
                       class="login-input"
+                      :error="!!validationErrors.username"
+                      :error-messages="validationErrors.username"
+                      @keyup="() => {
+                        validationErrors.username = undefined
+                        delete validationErrors.username
+                      }"
+
+
                     />
                     <br>
                     <v-text-field
@@ -33,6 +41,13 @@
                       label="Contraseña"
                       class="login-input"
                       prepend-inner-icon="lock"
+                      :error="!!validationErrors.username"
+                      :error-messages="validationErrors.username"
+                      @keyup="() => {
+                        validationErrors.username = undefined
+                        delete validationErrors.username
+                      }"
+
 
                     />
 
@@ -139,6 +154,7 @@ export default {
         })
         .catch(error => {
           this.processingForm = false;
+          this.validationErrors = error.response.data.errors || {}
         });
     },
 

@@ -61,7 +61,7 @@
               />
               <v-autocomplete
                 v-model="form.nivel_jerarquico_id"
-                :items="nivelesJerarquico"
+                :items="filterDataJerarquico"
                 dense
                 outline
                 clearable
@@ -373,6 +373,10 @@ export default {
       cargos: state => state.cargos.cargos,
       loadingCargos: state => state.cargos.loadingCargos,
     }),
+    filterDataJerarquico() {
+      let nivelesJerarquico = this.nivelesJerarquico;
+      return nivelesJerarquico.filter(o => o.estado === 1);
+    },
     filterData() {
       let areas = this.areas;
       return areas.filter(o => o.tipoArea.nivel === 1 && o.estado === 1);
