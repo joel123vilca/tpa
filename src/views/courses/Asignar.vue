@@ -79,9 +79,9 @@
         ></v-checkbox>
       </td>
       <td>{{ props.item.rut }}</td>
-      <td class="text-xs-right">{{ props.item.primer_nombre}}</td>
-      <td class="text-xs-right">{{ props.item.apellido_paterno }}</td>
-      <td class="text-xs-right">{{ props.item.cargoActual.nombre}}</td>
+      <td>{{ props.item.primer_nombre}}</td>
+      <td>{{ props.item.apellido_paterno }}</td>
+      <td>{{ props.item.cargoActual.nombre}}</td>
     </template>
   </v-data-table>
   </v-card>
@@ -120,9 +120,9 @@ export default {
           sortable: false,
           value: 'rut',
         },
-        { text: 'Nombre', value: 'primer nombre' },
-        { text: 'Apellido', value: '' },
-        { text: 'Cargo', value: 'cargo' },
+        { text: 'Nombre', value: 'primer_nombre' },
+        { text: 'Apellido', value: 'apellido_paterno' },
+        { text: 'Cargo',  value: 'cargoActual.nombre' },
       ],
       formErrors: {},
       e1: 0,
