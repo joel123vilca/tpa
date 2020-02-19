@@ -61,7 +61,9 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
+                    <a @click="$router.push({ name: 'editcolaborador', params: { id: props.item.colaborador.id } })">
                     {{ props.item.colaborador.nombre_completo }}
+                    </a>
                   </td>
                   <td class="px-3">
                     {{ props.item.mensaje }}
