@@ -12,6 +12,21 @@
       />
       <v-card>
         <v-toolbar
+          color="white darken-4"
+          card
+        >
+          <v-avatar
+            size="45px"
+          >
+            <img
+              v-if="avatar"
+              :src='avatar'
+              alt="Avatar"
+            >
+          </v-avatar>
+          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
+        </v-toolbar>
+        <v-toolbar
           color="grey darken-4"
           dark
           card
@@ -83,6 +98,11 @@
             </v-flex>
           </v-layout>
         </v-container>
+        <center>
+        <v-btn color="error" @click="$router.push({name: 'listacolaboradores'})">
+          Volver
+        </v-btn>
+        </center>
       </v-card>
       <ModalDeleteCurso />
   </v-container>
@@ -102,6 +122,13 @@ export default {
     ModalDeleteCurso: () => import('@/views/admin/ModalDeleteCurso'),
   },
 
+  data() {
+    return {
+      avatar: '',
+      nombre_completo: '',
+    };
+  },
+
   computed: {
     ...mapState({
       cursos: state => state.colaboradores.cursos,
@@ -110,6 +137,10 @@ export default {
   },
   created() {
     this.getCursos({ colaboradorId: this.$route.params.id });
+    this.getColaborador({ colaboradorId: this.$route.params.id }).then(response => {
+      const colaboradorInfo = response.data.data;
+      this.setForm(colaboradorInfo);
+    });
   },
 
   methods: {
@@ -117,7 +148,12 @@ export default {
       getCursos: 'colaboradores/getCursos',
       replaceShowModalDeleteCurso: 'colaboradores/replaceShowModalDeleteCurso',
       replaceCurrentCurso: 'colaboradores/replaceCurrentCurso',
+      getColaborador: 'colaboradores/getColaborador',
     }),
+    setForm(colaborador) {
+      this.nombre_completo = colaborador.nombre_completo;
+      this.avatar = colaborador.imagen_url;
+    },
     openModalDeleteCurso(curso) {
       this.replaceCurrentCurso({ curso });
       this.replaceShowModalDeleteCurso({ status: true });

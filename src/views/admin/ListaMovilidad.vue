@@ -12,6 +12,21 @@
       />
       <v-card>
         <v-toolbar
+          color="white darken-4"
+          card
+        >
+          <v-avatar
+            size="45px"
+          >
+            <img
+              v-if="avatar"
+              :src='avatar'
+              alt="Avatar"
+            >
+          </v-avatar>
+          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
+        </v-toolbar>
+        <v-toolbar
           color="grey darken-4"
           dark
           card
@@ -98,6 +113,11 @@
             </v-flex>
           </v-layout>
         </v-container>
+        <center>
+        <v-btn color="error" @click="$router.push({name: 'listacolaboradores'})">
+          Volver
+        </v-btn>
+        </center>
       </v-card>
       <ModalDeleteMovilidad />
   </v-container>
@@ -116,7 +136,12 @@ export default {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
     ModalDeleteMovilidad: () => import('@/views/admin/ModalDeleteMovilidad'),
   },
-
+  data() {
+    return {
+      avatar: '',
+      nombre_completo: '',
+    };
+  },
   computed: {
     ...mapState({
       movilidades: state => state.colaboradores.movilidades,
@@ -125,6 +150,10 @@ export default {
   },
   created() {
     this.getMovilidad({ colaboradorId: this.$route.params.id });
+    this.getColaborador({ colaboradorId: this.$route.params.id }).then(response => {
+      const colaboradorInfo = response.data.data;
+      this.setForm(colaboradorInfo);
+    });
   },
 
   methods: {
@@ -132,7 +161,12 @@ export default {
       getMovilidad: 'colaboradores/getMovilidad',
       replaceShowModalDeleteMovilidad: 'colaboradores/replaceShowModalDeleteMovilidad',
       replaceCurrentMovilidad: 'colaboradores/replaceCurrentMovilidad',
+      getColaborador: 'colaboradores/getColaborador',
     }),
+    setForm(colaborador) {
+      this.nombre_completo = colaborador.nombre_completo;
+      this.avatar = colaborador.imagen_url;
+    },
     formatDate(date) {
       if (!date) return null
       const [year, month, day] = date.split('-')

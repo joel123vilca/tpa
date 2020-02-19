@@ -12,6 +12,21 @@
       />
       <v-card>
         <v-toolbar
+          color="white darken-4"
+          card
+        >
+          <v-avatar
+            size="45px"
+          >
+            <img
+              v-if="avatar"
+              :src='avatar'
+              alt="Avatar"
+            >
+          </v-avatar>
+          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
+        </v-toolbar>
+        <v-toolbar
           color="grey darken-4"
           dark
           card
@@ -92,6 +107,11 @@
             </v-flex>
           </v-layout>
         </v-container>
+        <center>
+        <v-btn color="error" @click="$router.push({name: 'listacolaboradores'})">
+          Volver
+        </v-btn>
+        </center>
       </v-card>
   </v-container>
 </template>
@@ -108,6 +128,12 @@ export default {
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
   },
+  data() {
+    return {
+      avatar: '',
+      nombre_completo: '',
+    };
+  },
 
   computed: {
     ...mapState({
@@ -117,6 +143,10 @@ export default {
   },
   created() {
     this.getComentarios({ colaboradorId: this.$route.params.id });
+    this.getColaborador({ colaboradorId: this.$route.params.id }).then(response => {
+      const colaboradorInfo = response.data.data;
+      this.setForm(colaboradorInfo);
+    });
   },
 
   methods: {
@@ -125,7 +155,12 @@ export default {
       replaceCurrentComentario: 'comentarios/replaceCurrentComentario',
       deleteComentario: 'comentarios/deleteComentario',
       replaceComentarios: 'comentarios/replaceComentarios',
+      getColaborador: 'colaboradores/getColaborador',
     }),
+    setForm(colaborador) {
+      this.nombre_completo = colaborador.nombre_completo;
+      this.avatar = colaborador.imagen_url;
+    },
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split('-');

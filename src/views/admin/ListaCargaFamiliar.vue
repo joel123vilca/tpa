@@ -12,6 +12,21 @@
       />
       <v-card>
         <v-toolbar
+          color="white darken-4"
+          card
+        >
+          <v-avatar
+            size="45px"
+          >
+            <img
+              v-if="avatar"
+              :src='avatar'
+              alt="Avatar"
+            >
+          </v-avatar>
+          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
+        </v-toolbar>
+        <v-toolbar
           color="grey darken-4"
           dark
           card
@@ -92,6 +107,11 @@
             </v-flex>
           </v-layout>
         </v-container>
+        <center>
+        <v-btn color="error" @click="$router.push({name: 'listacolaboradores'})">
+          Volver
+        </v-btn>
+        </center>
       </v-card>
   </v-container>
 </template>
@@ -101,17 +121,19 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
 
-  metaInfo () {
-    return { title: 'Listado de tags' }
+  metaInfo() {
+    return { title: 'Listado de tags' };
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
   },
 
-  data () {
+  data() {
     return {
-    }
+      avatar: '',
+      nombre_completo: '',
+    };
   },
 
   computed: {
@@ -122,12 +144,21 @@ export default {
   },
   created() {
     this.getFamily({ colaboradorId: this.$route.params.id });
+    this.getColaborador({ colaboradorId: this.$route.params.id }).then(response => {
+      const colaboradorInfo = response.data.data;
+      this.setForm(colaboradorInfo);
+    });
   },
 
   methods: {
     ...mapActions({
       getFamily: 'colaboradores/getFamily',
+      getColaborador: 'colaboradores/getColaborador',
     }),
-  }
-}
+    setForm(colaborador) {
+      this.nombre_completo = colaborador.nombre_completo;
+      this.avatar = colaborador.imagen_url;
+    },
+  },
+};
 </script>
