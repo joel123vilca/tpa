@@ -16,7 +16,19 @@ export default {
         .catch(error => reject(error));
     });
   },
-
+  getVerify(payload = {}) {
+    const params = payload.params || {}
+    const nombre = payload.nombre
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/areas/validar-nombre?nombre=${nombre}`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
   getById(payload = {}) {
     const areaId = payload.areaId || "";
 

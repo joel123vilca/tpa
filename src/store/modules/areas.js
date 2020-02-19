@@ -77,6 +77,17 @@ export const actions = {
         });
     });
   },
+  getVerify ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      areaAPI.getVerify(payload)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
   replaceCurrentArea({ commit }, payload) {
     commit(types.REPLACE_CURRENT_AREA, payload);
   },

@@ -35,6 +35,7 @@
                 :rules="rules.nombre"
                 :error="!!formErrors.nombre"
                 :error-messages="formErrors.nombre"
+                @change="verifyNombre"
                 @keyup="
                   () => {
                     formErrors.nombre = undefined;
@@ -245,8 +246,22 @@ export default {
       createArea: "areas/createArea",
       getTiposArea: "tiposArea/getTiposArea",
       getAreas: 'areas/getAreas',
+      getVerify: 'areas/getVerify',
     }),
+    verifyNombre() {
+      this.getVerify({
+        nombre: this.form.nombre,
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+          this.rules.rut = 'duplicado';
+          this.step = 1;
+        })
 
+    },
     submitCreateArea() {
       if (!this.$refs.form.validate()) return false;
 
