@@ -38,6 +38,7 @@
                 @change="getColaboradores"
               />
               <v-btn
+                :disabled='!form.curso_id'
                 color="primary"
                 @click="e1 = 2"
               >

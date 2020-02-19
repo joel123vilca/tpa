@@ -164,6 +164,7 @@
           </v-layout>
 
         <v-btn
+          :disabled='!form.rut'
           color="success"
           @click="e1 = 2"
         >
@@ -202,7 +203,7 @@
           <v-flex sm12 xs12>
             <v-autocomplete
               v-model="form.tags"
-              :items="tags"
+              :items="filterData"
               dense
               clearable
               small-chips
@@ -582,7 +583,11 @@ export default {
       loadingNivelesEducacion: state => state.nivelesEducacion.loadingNivelesEducacion,
       tags: state => state.tags.tags,
       loadingTags: state => state.tags.loadingTags,
-    })
+    }),
+    filterData() {
+      let tags = this.tags;
+      return tags.filter(o => o.estado === 1);
+    },
   },
   created() {
     this.getEstadoCiviles();

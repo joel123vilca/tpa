@@ -129,9 +129,11 @@ export default {
           //     { title: 'Listar Todas' },
           //   ],
           // },
-           {
+          {
             title: 'Notificaciones',
-            to: { name: "notificaciones" }
+             items: [
+              { title: 'Listar Todas', to: { name: "notificaciones" } },
+            ],
           },
           {
             title: 'Administradores',

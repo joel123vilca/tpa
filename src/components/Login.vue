@@ -131,7 +131,7 @@ export default {
             .dispatch("auth/fetchUser")
             .then(response => {
               this.processingForm = false;
-                this.$router.push({ name: "home" });
+                this.$router.push({ name: "notificaciones" });
             })
             .catch(error => {
               this.processingForm = false;

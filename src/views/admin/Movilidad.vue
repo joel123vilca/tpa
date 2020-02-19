@@ -55,6 +55,7 @@
               </v-btn>
               <v-btn
                 v-else
+                :disabled ='!form.tipo_movilidad_id'
                 color="primary"
                 @click="e1 = 3"
               >
