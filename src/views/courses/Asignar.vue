@@ -47,55 +47,45 @@
               <v-btn flat @click="$router.push({ name: 'ListCourse' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
-              <v-flex
-              v-if="colaboradores.length"
-              sm6
-              offset-sm6
-            >
-              <v-text-field
-                v-model="searchUsers"
-                box
-                append-icon="search"
-                label="Buscador"
-                clearable
-                hide-details
-              />
-            </v-flex>
-              <v-data-table
-                :headers="[
-                  { text: '',sortable: false},
-                  { text: 'Rut', value: 'rut'},
-                  { text: 'Nombre', value: 'primer_nombre'},
-                  { text: 'Apellido',value: 'apellido_paterno'},
-                  { text: 'Cargo'},
-                ]"
-                :items="colaboradores"
-                :search="searchUsers"
-                :rows-per-page-items="[10,25,35,50]"
-                class="elevation-1"
-              >
-                <tr
-                  slot="items"
-                  slot-scope="props"
-                >
-                  <td class="px-3">
-                    <v-checkbox v-model="form.colaboradores"  :value="props.item.id"></v-checkbox>
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.rut }}
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.primer_nombre }}
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.apellido_paterno }}
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.cargoActual.nombre}}
-                  </td>
-                </tr>
-              </v-data-table>
-              <v-btn v-if="form.colaboradores.length > 0"  large color="success" dark  @click="crear()" :loading="loading">Asignar Seleccionados</v-btn>
+              <v-card>
+  <v-card-title>
+      Colaboradores
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Buscador"
+        single-line
+        hide-details
+        box
+      ></v-text-field>
+    </v-card-title>
+  <v-data-table
+    v-model="selected"
+    :headers="headers"
+    :items="colaboradores"
+    :search="search"
+    :rows-per-page-items="[10,25,35,50]"
+    item-key="id"
+    select-all
+    class="elevation-1"
+  >
+    <template v-slot:items="props">
+      <td>
+        <v-checkbox
+          v-model="props.selected"
+          primary
+          hide-details
+        ></v-checkbox>
+      </td>
+      <td>{{ props.item.rut }}</td>
+      <td class="text-xs-right">{{ props.item.primer_nombre}}</td>
+      <td class="text-xs-right">{{ props.item.apellido_paterno }}</td>
+      <td class="text-xs-right">{{ props.item.cargoActual.nombre}}</td>
+    </template>
+  </v-data-table>
+  </v-card>
+              <v-btn v-if="selected.length > 0"  large color="success" dark  @click="crear()" :loading="loading">Asignar Seleccionados</v-btn>
               <v-btn flat @click="e1 = 1">Cancel</v-btn>
             </v-stepper-content>
           </v-stepper-items>
@@ -121,6 +111,19 @@ export default {
 
   data() {
     return {
+      selected: [],
+      search: '',
+      headers: [
+        {
+          text: 'Rut',
+          align: 'left',
+          sortable: false,
+          value: 'rut',
+        },
+        { text: 'Nombre', value: 'primer nombre' },
+        { text: 'Apellido', value: '' },
+        { text: 'Cargo', value: 'cargo' },
+      ],
       formErrors: {},
       e1: 0,
       searchUsers: '',
@@ -155,6 +158,7 @@ export default {
     },
     crear() {
       this.loading = true;
+      this.form.colaboradores = this.selected.map(function(item) {return item.id});
       this.asignarCurso({
         cursoId: this.form.curso_id,
         data: this.form,
