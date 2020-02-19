@@ -69,7 +69,7 @@
                     {{ props.item.mensaje }}
                   </td>
                   <td class="px-3">
-                      {{ props.item.tipo }}
+                      {{ props.item.tipoFormato }}
                   </td>
                   <td class="px-3">
                       {{ formatDate(props.item.updated_at) }}
