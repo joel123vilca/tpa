@@ -74,17 +74,17 @@ export default {
               { title: 'Listar Todos', to: { name: "listacolaboradores" } },
             ],
           },
-          {
-            title: 'Reportes',
-            items: [
-              { title: 'Adm. De Personas' ,
-              to: { name: "listacolaboradores" }},
-              { title: 'DO y Capacitaciòn' },
-              { title: 'Bienestar' },
-              { title: 'Comunicaciones' },
-              { title: 'RSE' },
-            ],
-          },
+          // {
+          //   title: 'Reportes',
+          //   items: [
+          //     { title: 'Adm. De Personas' ,
+          //     to: { name: "listacolaboradores" }},
+          //     { title: 'DO y Capacitaciòn' },
+          //     { title: 'Bienestar' },
+          //     { title: 'Comunicaciones' },
+          //     { title: 'RSE' },
+          //   ],
+          // },
           {
             title: 'Tag / Etiquetas',
             items: [
@@ -122,12 +122,16 @@ export default {
               { title: 'Asignar curso', to: { name: "asignar" }},
             ],
           },
-          {
-            title: 'Configuraciones',
-            items: [
-              { title: 'Agregar Nuevo' },
-              { title: 'Listar Todas' },
-            ],
+          // {
+          //   title: 'Configuraciones',
+          //   items: [
+          //     { title: 'Agregar Nuevo' },
+          //     { title: 'Listar Todas' },
+          //   ],
+          // },
+           {
+            title: 'Notificaciones',
+            to: { name: "notificaciones" }
           },
           {
             title: 'Administradores',

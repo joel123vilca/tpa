@@ -5,8 +5,8 @@ export default [
     component: () => import('@/components/Login.vue'),
   },
   {
-    path: '/home',
-    name: 'home',
+    path: '/notificaciones',
+    name: 'notificaciones',
     component: () => import('@/views/Home.vue'),
   },
   {
