@@ -61,30 +61,13 @@
                       }
                     "
                   />
-                  <v-menu
-                ref="menu"
-                v-model="targetIssueDate"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                        <template v-slot:activator="{ on }">
-                        <v-text-field
-                            :value="formatDate(form.fecha_nacimiento)"
-                            hint="Formato (dd/mm/aa)"
-                            label="FECHA DE NACIMIENTO"
-                            v-on="on"
-                            outline
-                        ></v-text-field>
-                        </template>
-                        <v-date-picker
-                          ref="picker"
-                          v-model="form.fecha_nacimiento"
-                          @input="targetIssueDate = false"
-                        ></v-date-picker>
-                      </v-menu>
+                  <v-text-field
+                  v-model="form.fecha_nacimiento"
+                  hint="Formato DD/MM/AAAA"
+                  label="Fecha de Nacimiento"
+                  outline
+                  type="date"
+                ></v-text-field>
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
                       <v-autocomplete

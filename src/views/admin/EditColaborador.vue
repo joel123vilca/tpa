@@ -112,30 +112,13 @@
               sm6
               xs12
             >
-              <v-menu
-                ref="menu"
-                v-model="targetIssueDate"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    :value="formatDate(form.fecha_nacimiento)"
-                    hint="Formato (dd/mm/aa)"
-                    label="FECHA DE NACIMIENTO"
-                    v-on="on"
-                    outline
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  ref="picker"
+              <v-text-field
                   v-model="form.fecha_nacimiento"
-                  @input="targetIssueDate = false"
-                ></v-date-picker>
-                </v-menu>
+                  hint="Formato DD/MM/AAAA"
+                  label="FECHA DE NACIMIENTO"
+                  outline
+                  type="date"
+                ></v-text-field>
               </v-flex>
             <v-flex sm6 xs12>
               <v-autocomplete
@@ -230,30 +213,13 @@
               sm6
               xs12
             >
-              <v-menu
-                ref="menu1"
-                v-model="targetIssueDate2"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.vencimiento_licencia_b)"
+            <v-text-field
+                  v-model="form.vencimiento_licencia_b"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA B"
-                  v-on="on"
                   outline
+                  type="date"
                 ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker2"
-                v-model="form.vencimiento_licencia_b"
-                @input="targetIssueDate2 = false"
-              ></v-date-picker>
-            </v-menu>
           </v-flex>
           <v-flex sm6 xs12>
             <v-autocomplete
@@ -270,30 +236,13 @@
               sm6
               xs12
             >
-              <v-menu
-                ref="menu1"
-                v-model="targetIssueDate3"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.vencimiento_licencia_d)"
+              <v-text-field
+                  v-model="form.vencimiento_licencia_d"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA D"
-                  v-on="on"
                   outline
+                  type="date"
                 ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker3"
-                v-model="form.vencimiento_licencia_d"
-                @input="targetIssueDate3 = false"
-              ></v-date-picker>
-            </v-menu>
           </v-flex>
 
           <v-flex sm6 xs12>
@@ -311,30 +260,13 @@
               sm6
               xs12
             >
-              <v-menu
-                ref="menu1"
-                v-model="targetIssueDate4"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.vencimiento_credencial_vigilante)"
+              <v-text-field
+                  v-model="form.vencimiento_credencial_vigilante"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CREDENCIAL VIGILANTE"
-                  v-on="on"
                   outline
+                  type="date"
                 ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker4"
-                v-model="form.vencimiento_credencial_vigilante"
-                @input="targetIssueDate4 = false"
-              ></v-date-picker>
-            </v-menu>
           </v-flex>
 
 
@@ -353,30 +285,13 @@
               sm6
               xs12
             >
-              <v-menu
-                ref="menu1"
-                v-model="targetIssueDate5"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.vencimiento_carnet_portuario)"
+              <v-text-field
+                  v-model="form.vencimiento_carnet_portuario"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CARNET PORTUARIO"
-                  v-on="on"
                   outline
+                  type="date"
                 ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker5"
-                v-model="form.vencimiento_carnet_portuario"
-                @input="targetIssueDate5 = false"
-              ></v-date-picker>
-            </v-menu>
           </v-flex>
           <v-flex xs12 sm6 md6>
             <v-text-field

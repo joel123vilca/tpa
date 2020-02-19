@@ -121,56 +121,22 @@
                   />
                   <v-layout row wrap>
                     <v-flex sm6 xs12>
-                  <v-menu
-                ref="menu1"
-                v-model="targetIssueDate5"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.fecha_inicio)"
+                      <v-text-field
+                  v-model="form.fecha_inicio"
                   hint="Formato DD/MM/AAAA"
-                  label="Fecha de inicio "
-                  v-on="on"
+                  label="FECHA DE INICIO"
                   outline
+                  type="date"
                 ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker5"
-                v-model="form.fecha_inicio"
-                @input="targetIssueDate5 = false"
-              ></v-date-picker>
-            </v-menu>
                     </v-flex>
                     <v-flex sm6 xs12>
-            <v-menu
-                ref="menu1"
-                v-model="targetIssueDate"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  :value="formatDate(form.fecha_termino)"
+            <v-text-field
+                  v-model="form.fecha_termino"
                   hint="Formato DD/MM/AAAA"
-                  label="Fecha de termino "
-                  v-on="on"
+                  label="FECHA DE TERMINO"
                   outline
+                  type="date"
                 ></v-text-field>
-              </template>
-              <v-date-picker
-                ref="picker5"
-                v-model="form.fecha_termino"
-                @input="targetIssueDate = false"
-              ></v-date-picker>
-            </v-menu>
                     </v-flex>
                   </v-layout>
                   <v-layout row wrap>

@@ -122,7 +122,7 @@ export default {
         },
         { text: 'Nombre', value: 'primer_nombre' },
         { text: 'Apellido', value: 'apellido_paterno' },
-        { text: 'Cargo',  value: 'cargoActual.nombre' },
+        { text: 'Cargo', value: 'cargoActual.nombre' },
       ],
       formErrors: {},
       e1: 0,
@@ -152,9 +152,9 @@ export default {
     }),
     getColaboradores() {
       this.getCobaradoresDisponibles({ cursoId: this.form.curso_id })
-      .then(response => {
-      this.colaboradores = response.data.data;
-    });
+        .then(response => {
+          this.colaboradores = response.data.data
+      });
     },
     crear() {
       this.loading = true;
