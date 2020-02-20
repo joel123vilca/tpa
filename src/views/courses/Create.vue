@@ -30,12 +30,13 @@
                     item-text="categoria"
                     item-value="id"
                     :disabled="processingForm"
-                    :error="!!formErrors.estado"
-                    :error-messages="formErrors.estado"
+                    :rules="rules.tipo_curso_id"
+                    :error="!!formErrors.tipo_curso_id"
+                    :error-messages="formErrors.tipo_curso_id"
                     @change="
                       () => {
-                        formErrors.estado = undefined;
-                        delete formErrors.estado;
+                        formErrors.tipo_curso_id = undefined;
+                        delete formErrors.tipo_curso_id;
                       }
                     "
                   />
@@ -146,6 +147,7 @@
                         label="Seleccionar Tipo"
                         item-text="nombre"
                         item-value="id"
+                        :rules="rules.interno"
                         :disabled="processingForm"
                         :error="!!formErrors.interno"
                         :error-messages="formErrors.interno"
@@ -169,6 +171,7 @@
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
+                        :rules="rules.estado"
                         :error="!!formErrors.estado"
                         :error-messages="formErrors.estado"
                         @change="
@@ -247,6 +250,9 @@ export default {
 
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
+        estado: [v => !!v || "El estado es requerido"],
+        interno: [v => !!v || "El tipo es requerido"],
+        tipo_curso_id: [v => !!v || "La categoria es requerido"],
       }
     };
   },

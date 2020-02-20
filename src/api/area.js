@@ -29,6 +29,20 @@ export default {
         .catch(error => reject(error))
     })
   },
+  getVerifyById(payload = {}) {
+    const params = payload.params || {};
+    const nombre = payload.nombre;
+    const areaId = payload.areaId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/areas/${areaId}/validar-nombre?nombre=${nombre}`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
   getById(payload = {}) {
     const areaId = payload.areaId || "";
 

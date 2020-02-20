@@ -52,6 +52,7 @@
                 :rules="rules.nombre"
                 :error="!!formErrors.nombre"
                 :error-messages="formErrors.nombre"
+                @change="verifyNombre"
                 @keyup="
                   () => {
                     formErrors.nombre = undefined;
@@ -216,6 +217,7 @@ export default {
       formErrors: {},
 
       e1: 0,
+      id: '',
       form: {
         nombre: '',
         area_id: '',
@@ -285,9 +287,11 @@ export default {
       getTiposArea: "tiposArea/getTiposArea",
       getAreas: 'areas/getAreas',
       getAreasRelacionados: 'areas/getAreasRelacionados',
+      getVerifyById: 'areas/getVerifyById',
     }),
 
     setForm(tag) {
+      this.id = tag.id;
       this.form.nombre = tag.nombre;
       this.form.padre_id = tag.padre_id;
       this.form.tipo_area_id = tag.tipoArea.id;
@@ -305,6 +309,20 @@ export default {
         this.form.tercer_padre_id = AreasRelacionados.slice().reverse()[3].id;
         }
       });
+    },
+    verifyNombre() {
+      this.getVerifyById({
+        nombre: this.form.nombre,
+        areaId: this.id,
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch((error) => {
+          this.formErrors = error.response.data.errors || {};
+          this.step = 1;
+        })
+
     },
     filterData1() {
       this.form.segundo_padre_id = '';

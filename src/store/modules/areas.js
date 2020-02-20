@@ -77,9 +77,20 @@ export const actions = {
         });
     });
   },
-  getVerify ({ commit }, payload) {
+  getVerify({ commit }, payload) {
     return new Promise((resolve, reject) => {
       areaAPI.getVerify(payload)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+  getVerifyById({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      areaAPI.getVerifyById(payload)
         .then(response => {
           resolve(response)
         })
