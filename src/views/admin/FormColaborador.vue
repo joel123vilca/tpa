@@ -44,6 +44,14 @@
                 v-model="form.rut"
                 label="RUT"
                 :rules="rules.rut"
+                :error="!!formErrors.rut"
+                :error-messages="formErrors.rut"
+                @keyup="
+                  () => {
+                    formErrors.rut = undefined;
+                    delete formErrors.rut;
+                  }
+                "
                 @change="verifyRut"
                 outline
               ></v-text-field>
@@ -417,6 +425,7 @@ export default {
       imageFile: '',
       file: '',
       search: null,
+      formErrors: {},
       form: {
         rut: '',
         usuario: '',
@@ -525,8 +534,7 @@ export default {
           console.log(response)
         })
         .catch((error) => {
-          this.form.rut = this.rules.rut.validForm;
-          this.form.rut = 'duplicado';
+          this.formErrors = error.response.data.errors || {};
           this.step = 1;
         })
 

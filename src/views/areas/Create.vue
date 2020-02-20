@@ -213,14 +213,14 @@ export default {
       }
     };
   },
-    computed: {
+  computed: {
     ...mapState({
       tiposArea: state => state.tiposArea.tiposArea,
       loadingTiposArea: state => state.tiposArea.loadingTiposArea,
       areas: state => state.areas.areas,
       loadingAreas: state => state.areas.loadingAreas,
     }),
-      filterData() {
+    filterData() {
       let areas = this.areas
       return areas.filter(o => o.tipoArea.nivel === 1);
     },
@@ -256,8 +256,7 @@ export default {
           console.log(response)
         })
         .catch((error) => {
-          console.log(error)
-          this.rules.rut = 'duplicado';
+          this.formErrors = error.response.data.errors || {};
           this.step = 1;
         })
 

@@ -21,7 +21,6 @@
                 <v-container fluid grid-list-lg>
                   <v-text-field
                     v-model="form.rut"
-                    disabled
                     label="Rut"
                     outline
                     :error="!!formErrors.rut"

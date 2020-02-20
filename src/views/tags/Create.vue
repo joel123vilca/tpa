@@ -60,6 +60,7 @@
                         small-chips
                         label="Seleccionar tipo Tag"
                         :disabled="processingForm"
+                        :rules="rules.tipo"
                         :error="!!formErrors.tipo"
                         :error-messages="formErrors.tipo"
                         @change="
@@ -150,6 +151,7 @@ export default {
 
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
+        tipo: [v => !!v || "El tipo de tag es requerido"],
       }
     };
   },

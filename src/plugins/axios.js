@@ -32,7 +32,7 @@ axios.interceptors.response.use(
     // too many request
     if (errorResponse.status === 429) {
       Vue.prototype.$notify.info({
-        title: "Info",
+        title: "Informacion TPA",
         message: errorResponse.statusText
       });
     }
@@ -43,7 +43,7 @@ axios.interceptors.response.use(
       const error = errorResponse.data.error;
       const message = errorResponse.data.message;
       Vue.prototype.$notify.info({
-        title: "Info",
+        title: "Informacion TPA",
         message: message || error || data
       });
     }
@@ -51,7 +51,7 @@ axios.interceptors.response.use(
     // conflict
     if (errorResponse.status === 409) {
       Vue.prototype.$notify.info({
-        title: "Info",
+        title: "Informacion TPA",
         message: errorResponse.data.message
       });
     }
@@ -61,7 +61,7 @@ axios.interceptors.response.use(
       const url = `The "${errorResponse.config.url}" url Not Found (method "${errorResponse.config.method}").`;
       const message = errorResponse.data.message;
       Vue.prototype.$notify.info({
-        title: "Info",
+        title: "Informacion TPA",
         message: message || url
       });
     }
@@ -71,7 +71,7 @@ axios.interceptors.response.use(
       const message = errorResponse.data.message;
       const url = `You do not have enough permissions to run "${errorResponse.config.url}" url Not Found (method "${errorResponse.config.method}").`;
       Vue.prototype.$notify.info({
-        title: "Info",
+        title: "Informacion TPA",
         message: message || url
       });
     }
@@ -81,7 +81,7 @@ axios.interceptors.response.use(
       const message = errorResponse.data.message;
       const email = errorResponse.data.email;
       Vue.prototype.$notify.info({
-        title: "Info",
+        title: "Informacion TPA",
         message: message || email
       });
     }
