@@ -82,4 +82,31 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getVerify(payload = {}) {
+    const params = payload.params || {}
+    const nombre = payload.nombre
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cargos/validar-nombre?nombre=${nombre}`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+  getVerifyById(payload = {}) {
+    const params = payload.params || {};
+    const nombre = payload.nombre;
+    const cargoId = payload.cargoId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/cargos/${cargoId}/validar-nombre?nombre=${nombre}`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 };

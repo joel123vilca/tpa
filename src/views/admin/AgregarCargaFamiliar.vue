@@ -38,6 +38,7 @@
                     :disabled="processingForm"
                     label="Nombres"
                     outline
+                    :rules="rules.nombres"
                     :error="!!formErrors.nombres"
                     :error-messages="formErrors.nombres"
                     @keyup="
@@ -52,6 +53,7 @@
                     :disabled="processingForm"
                     label="Apellidos"
                     outline
+                    :rules="rules.apellidos"
                     :error="!!formErrors.apellidos"
                     :error-messages="formErrors.apellidos"
                     @keyup="
@@ -81,6 +83,7 @@
                         item-text="tipo"
                         item-value="id"
                         :disabled="processingForm"
+                        :rules="rules.tipo_carga_id"
                         :error="!!formErrors.tipo_carga_id"
                         :error-messages="formErrors.tipo_carga_id"
                         @change="
@@ -169,6 +172,11 @@ export default {
       ],
       validForm: true,
       processingForm: false,
+      rules: {
+        nombres: [v => !!v || "Los nombres son requerido"],
+        apellidos: [v => !!v || "Los apellidos son requerido"],
+        tipo_carga_id: [v => !!v || "El tipo de carga es requerido"],
+      }
     };
   },
   computed: {

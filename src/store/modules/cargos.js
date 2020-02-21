@@ -116,7 +116,28 @@ export const actions = {
         });
     });
   },
-
+  getVerify({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      cargoAPI.getVerify(payload)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+  getVerifyById({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      cargoAPI.getVerifyById(payload)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
 };
 
 export const mutations = {

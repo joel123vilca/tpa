@@ -35,6 +35,7 @@
                     item-text="tipo"
                     item-value="id"
                     :disabled="processingForm"
+                    :rules="rules.tipo_comentario_id"
                     :error="!!formErrors.tipo_comentario_id"
                     :error-messages="formErrors.tipo_comentario_id"
                     @change="
@@ -60,6 +61,7 @@
                   label="Fecha"
                   outline
                   type="date"
+                  :rules="rules.fecha"
                 ></v-text-field>
               </template>
                     </v-flex>
@@ -75,6 +77,7 @@
                     item-text="nombre_completo"
                     item-value="id"
                     :disabled="processingForm"
+                    :rules="rules.colaborador_autor_id"
                     :error="!!formErrors.colaborador_autor_id"
                     :error-messages="formErrors.colaborador_autor_id"
                     @change="
@@ -99,6 +102,7 @@
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
+                        :rules="rules.publico"
                         :error="!!formErrors.publico"
                         :error-messages="formErrors.publico"
                         @change="
@@ -199,6 +203,12 @@ export default {
       ],
       validForm: true,
       processingForm: false,
+      rules: {
+        publico: [v => !!v || "El privacidad es requerido"],
+        fecha: [v => !!v || "La fecha es requerido"],
+        colaborador_autor_id: [v => !!v || "El auto es requerido"],
+        tipo_comentario_id: [v => !!v || "El tipo de comentario es requerido"],
+      }
     };
   },
   computed: {

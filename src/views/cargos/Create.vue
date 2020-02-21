@@ -37,6 +37,7 @@
                 :rules="rules.nombre"
                 :error="!!formErrors.nombre"
                 :error-messages="formErrors.nombre"
+                @change="verifyNombre"
                 @keyup="
                   () => {
                     formErrors.nombre = undefined;
@@ -70,6 +71,7 @@
                 item-text="nivel_nombre"
                 item-value="id"
                 :disabled="processingForm"
+                :rules="rules.nivel_jerarquico_id"
                 :error="!!formErrors.nivel_jerarquico_id"
                 :error-messages="formErrors.nivel_jerarquico_id"
                 @change="
@@ -105,6 +107,7 @@
                 item-text="nombre"
                 item-value="id"
                 :disabled="processingForm"
+                :rules="rules.estado"
                 :error="!!formErrors.estado"
                 :error-messages="formErrors.estado"
                 @change="
@@ -361,6 +364,9 @@ export default {
       processingForm: false,
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
+        estado: [v => !!v || "El  estado es requerido"],
+        area_id: [v => !!v || "El area es requerido"],
+        nivel_jerarquico_id: [v => !!v || "El nivel jerarquico es requerido"],
       },
     };
   },
@@ -410,7 +416,21 @@ export default {
       getAreas: 'areas/getAreas',
       getCargos: 'cargos/getCargos',
       getAreasRelacionados: 'cargos/getAreasRelacionados',
+      getVerify: 'cargos/getVerify',
     }),
+    verifyNombre() {
+      this.getVerify({
+        nombre: this.form.nombre,
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch((error) => {
+          this.formErrors = error.response.data.errors || {};
+          this.step = 1;
+        })
+
+    },
     deleteDescriptor() {
       this.descriptorUrl = null;
     },

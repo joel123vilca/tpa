@@ -50,6 +50,7 @@
                 :rules="rules.nombre"
                 :error="!!formErrors.nombre"
                 :error-messages="formErrors.nombre"
+                @change="verifyNombre"
                 @keyup="
                   () => {
                     formErrors.nombre = undefined;
@@ -371,6 +372,7 @@ export default {
       organigramaUrl: '',
       organigramaFile: '',
       file: '',
+      id: '',
       form: {
         nombre: '',
         supervisor_id: '',
@@ -452,8 +454,24 @@ export default {
       getAreas: 'areas/getAreas',
       getCargos: 'cargos/getCargos',
       getAreasRelacionados: 'cargos/getAreasRelacionados',
+      getVerifyById: 'cargos/getVerifyById',
     }),
+    verifyNombre() {
+      this.getVerifyById({
+        nombre: this.form.nombre,
+        cargoId: this.id,
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch((error) => {
+          this.formErrors = error.response.data.errors || {};
+          this.step = 1;
+        })
+
+    },
     setForm(cargo) {
+      this.id = cargo.id;
       this.form.nombre = cargo.nombre;
       this.form.estado = cargo.estado;
       this.form.supervisor_id = cargo.supervisor_id;

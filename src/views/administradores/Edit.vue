@@ -173,6 +173,9 @@ export default {
 
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
+        username: [v => !!v || "El usuario es requerido"],
+        password: [v => !!v || "La contraseña es requerido"],
+        estado: [v => !!v || "El estado es requerido"],
       }
     };
   },

@@ -54,6 +54,7 @@
                 item-text="tipo_nombre"
                 item-value="id"
                 :disabled="processingForm"
+                :rules="rules.tipo_area_id"
                 :error="!!formErrors.tipo_area_id"
                 :error-messages="formErrors.tipo_area_id"
                 @change="
@@ -210,6 +211,8 @@ export default {
 
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
+        estado: [v => !!v || "El estado es requerido"],
+        tipo_area_id: [v => !!v || "El tipo de area es requerido"],
       }
     };
   },

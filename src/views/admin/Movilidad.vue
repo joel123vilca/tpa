@@ -131,6 +131,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE INICIO"
                   outline
+                  :rules="rules.fecha_inicio"
                   type="date"
                 ></v-text-field>
                     </v-flex>
@@ -206,6 +207,8 @@ export default {
 
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
+        fecha_inicio: [v => !!v || "La fecha de inicio es requerido"],
+        tipo_movilidad_id: [v => !!v || "El tipo de movilidad es requerido"]
       }
     };
   },

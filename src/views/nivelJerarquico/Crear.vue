@@ -47,6 +47,7 @@
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
+                        :rules="rules.estado"
                         :error="!!formErrors.estado"
                         :error-messages="formErrors.estado"
                         @change="
@@ -112,6 +113,7 @@ export default {
       processingForm: false,
       rules: {
         nivel_nombre: [v => !!v || "El nombre es requerido"],
+        estado: [v => !!v || "El estado es requerido"],
       }
     };
   },
