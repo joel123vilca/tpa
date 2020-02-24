@@ -1,6 +1,7 @@
 <template>
   <v-container fluid grid-list-lg>
-    <template>
+    <NotPermission v-if="!authenticated" />
+    <template v-else>
       <Breadcrumbs
         :routes="[{ name: 'Inicio' }, { name: 'Nuevo Cargo' }]"
       />
@@ -317,7 +318,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   metaInfo() {
@@ -326,6 +327,7 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    NotPermission: () => import('@/views/errors/NotPermission')
   },
 
   data() {
@@ -378,6 +380,10 @@ export default {
       loadingAreas: state => state.areas.loadingAreas,
       cargos: state => state.cargos.cargos,
       loadingCargos: state => state.cargos.loadingCargos,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
+      user: 'auth/user',
     }),
     filterDataJerarquico() {
       let nivelesJerarquico = this.nivelesJerarquico;

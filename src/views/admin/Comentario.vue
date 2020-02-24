@@ -1,6 +1,7 @@
 <template>
   <v-container fluid grid-list-lg>
-    <template>
+    <NotPermission v-if="authenticated" />
+    <template v-else>
       <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
@@ -105,7 +106,7 @@
                         :rules="rules.publico"
                         :error="!!formErrors.publico"
                         :error-messages="formErrors.publico"
-                        @change="
+                        @keyup="
                           () => {
                             formErrors.publico = undefined;
                             delete formErrors.publico;
@@ -125,6 +126,7 @@
                         item-text="nombre"
                         item-value="id"
                         :disabled="processingForm"
+                        :rules="rules.estado"
                         :error="!!formErrors.estado"
                         :error-messages="formErrors.estado"
                         @change="
@@ -161,7 +163,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
 
@@ -171,6 +173,8 @@ export default {
 
   components: {
     Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    NotPermission: () => import('@/views/errors/NotPermission')
+
   },
 
   data() {
@@ -187,15 +191,15 @@ export default {
         tipo_comentario_id: '',
         colaborador_id: '',
         colaborador_autor_id: '',
-        positivo: 1,
+        positivo:1,
       },
       tipos: [
-        {id: 0, nombre: 'Negativo'},
-        {id: 1, nombre: 'Positivo'}
+        { id: 0, nombre: 'Negativo'},
+        { id: 1, nombre: 'Positivo'}
       ],
       privacidad: [
-        {id: 0, nombre: 'Privado'},
-        {id: 1, nombre: 'Publico'}
+        { id: 2, nombre: 'Privado'},
+        { id: 1, nombre: 'Publico'}
       ],
       estados: [
         {id:0, nombre:'inactivo'},
@@ -217,6 +221,10 @@ export default {
       loadingTipoComentarios: state => state.comentarios.loadingTipoComentarios,
       colaboradores: state => state.colaboradores.colaboradores,
       loadingColaboradores: state => state.colaboradores.loadingColaboradores,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
+      user: 'auth/user',
     }),
     filterData() {
       let colaboradores = this.colaboradores;
@@ -242,6 +250,9 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
+      if(this.form.publico === 2){
+        this.form.publico = 0;
+      }
       this.form.colaborador_id = this.$route.params.id;
       this.createComentario({ data: this.form })
         .then(response => {
