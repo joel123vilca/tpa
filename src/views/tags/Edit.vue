@@ -56,7 +56,7 @@
                   />
 
                   <v-layout row wrap>
-                    <v-flex sm6 xs12>
+                    <!-- <v-flex sm6 xs12>
                       <v-autocomplete
                         v-model="form.tipo"
                         :items="tipos"
@@ -75,8 +75,8 @@
                           }
                         "
                       />
-                    </v-flex>
-                    <v-flex sm6 xs12>
+                    </v-flex> -->
+                    <v-flex md12 sm12 xs12>
                       <v-autocomplete
                         v-model="form.estado"
                         :items="estados"
