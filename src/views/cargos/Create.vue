@@ -119,6 +119,7 @@
                 "
               />
               <v-btn
+                v-show= "form.nombre && form.nivel_jerarquico_id && form.estado"
                 color="primary"
                 @click="e1 = 2"
               >
@@ -197,6 +198,7 @@
                 }"
               />
                 <v-btn
+                v-show= "form.padre_id"
                 color="primary"
                 @click="e1 = 3"
               >
