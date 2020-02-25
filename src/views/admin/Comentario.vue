@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-lg>
-    <NotPermission v-if="authenticated" />
+    <NotPermission v-if="!authenticated" />
     <template v-else>
       <Breadcrumbs
         :routes="[

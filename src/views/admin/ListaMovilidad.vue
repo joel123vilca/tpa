@@ -1,5 +1,7 @@
 <template>
+  <NotPermission v-if="!authenticated" />
   <v-container
+    v-else
     fluid
     grid-list-lg
   >
@@ -124,7 +126,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
 
@@ -135,6 +137,7 @@ export default {
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
     ModalDeleteMovilidad: () => import('@/views/admin/ModalDeleteMovilidad'),
+    NotPermission: () => import('@/views/errors/NotPermission')
   },
   data() {
     return {
@@ -146,6 +149,10 @@ export default {
     ...mapState({
       movilidades: state => state.colaboradores.movilidades,
       loadingMovilidades: state => state.colaboradores.loadingMovilidades,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
+      user: 'auth/user',
     }),
   },
   created() {

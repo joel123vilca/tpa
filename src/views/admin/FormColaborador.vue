@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid grid-list-lg>
+  <NotPermission v-if="!authenticated" />
+  <v-container v-else fluid grid-list-lg>
   <v-card-title class="white cyan--text headline">
         Ingresar Colaborador
         <v-spacer />
@@ -401,7 +402,7 @@
 </template>
 <script>
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -490,6 +491,7 @@ export default {
   },
   components: {
     Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    NotPermission: () => import('@/views/errors/NotPermission')
   },
   watch: {
     targetIssueDate (val) {
@@ -507,6 +509,10 @@ export default {
       loadingNivelesEducacion: state => state.nivelesEducacion.loadingNivelesEducacion,
       tags: state => state.tags.tags,
       loadingTags: state => state.tags.loadingTags,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
+      user: 'auth/user',
     }),
     filterData() {
       let tags = this.tags;
