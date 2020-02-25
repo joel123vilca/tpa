@@ -18,8 +18,8 @@
               <v-stepper-step :complete="e1 > 1" step="1">Tipo de Movilidad</v-stepper-step>
               <v-divider></v-divider>
               <v-stepper-step v-if="movilidades.length > 0"  :complete="e1 > 2" step="2">Cargo Actual</v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step :complete="e1 > 3" step="3">Asignar cargo nuevo</v-stepper-step>
+              <v-divider v-if="form.tipo_movilidad_id <= 3"></v-divider>
+              <v-stepper-step v-if="form.tipo_movilidad_id <= 3" :complete="e1 > 3" step="3">Asignar cargo nuevo</v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>
@@ -104,15 +104,26 @@
                   type="date"
                 ></v-text-field>
                     </v-flex>
+
                     <v-btn
-                color="primary"
-                @click="e1 = 3"
-              >
-                Continuar
-              </v-btn>
+                    v-if="form.tipo_movilidad_id <= 3"
+                    color="primary"
+                    @click="e1 = 3"
+                     >
+                       Continuar
+                     </v-btn>
+                  <v-btn
+                      v-else
+                      type="submit"
+                      color="success"
+                     :disabled="!validForm || processingForm"
+                     :loading="processingForm"
+                    >
+                  Guardar
+                </v-btn>
               <v-btn flat @click="e1 = 1">Cancelar</v-btn>
             </v-stepper-content>
-            <v-stepper-content step="3">
+            <v-stepper-content v-if="form.tipo_movilidad_id <= 3" step="3">
                 <v-autocomplete
                   v-model="form.cargo_id"
                   :items="filterData"
@@ -174,16 +185,16 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   metaInfo() {
-    return { title: "Crear Movilidad" };
+    return { title: 'Crear Movilidad' };
   },
 
   components: {
-    Breadcrumbs: () => import("@/components/Breadcrumbs"),
-    NotPermission: () => import('@/views/errors/NotPermission')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    NotPermission: () => import('@/views/errors/NotPermission'),
   },
 
   data() {
@@ -253,6 +264,9 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
+      if(this.form.tipo_movilidad_id > 3){
+        this.form.fecha_inicio = this.form.fecha_termino;
+      }
       this.postMovilidad({
         colaboradorId: this.$route.params.id,
         data: this.form,

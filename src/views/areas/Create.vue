@@ -94,13 +94,14 @@
                 >
                   Guardar
                 </v-btn>
-              <v-btn
-                v-else
-                color="primary"
-                @click="e1 = 2"
-              >
-                Continuar
-              </v-btn>
+                  <v-btn
+                    v-show="verify"
+                    v-else
+                    color="primary"
+                    @click="e1 = 2"
+                  >
+                  Continuar
+                  </v-btn>
               <v-btn flat @click="$router.push({ name: 'listaArea' })">Cancelar</v-btn>
             </v-stepper-content>
             <v-stepper-content step="2">
@@ -204,6 +205,7 @@ export default {
         tercer_padre_id: '',
         estado: 1,
       },
+      verify: false,
       estados: [
         {id:0, nombre:'inactivo'},
         {id:1, nombre:'activo'}
@@ -263,8 +265,10 @@ export default {
       })
         .then(response => {
           console.log(response)
+          this.verify = true;
         })
         .catch((error) => {
+          this.verify = false;
           this.formErrors = error.response.data.errors || {};
           this.step = 1;
         })

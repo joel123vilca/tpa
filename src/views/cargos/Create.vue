@@ -119,7 +119,7 @@
                 "
               />
               <v-btn
-                v-show= "form.nombre && form.nivel_jerarquico_id && form.estado"
+                v-show= "form.nombre && form.nivel_jerarquico_id && form.estado && verify"
                 color="primary"
                 @click="e1 = 2"
               >
@@ -344,6 +344,7 @@ export default {
       organigramaUrl: '',
       organigramaFile: '',
       file: '',
+      verify: false,
       form: {
         nombre: '',
         supervisor_id: '',
@@ -432,8 +433,10 @@ export default {
       })
         .then(response => {
           console.log(response)
+          this.verify =true;
         })
         .catch((error) => {
+          this.verify = false;
           this.formErrors = error.response.data.errors || {};
           this.step = 1;
         })
