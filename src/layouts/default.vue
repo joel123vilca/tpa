@@ -20,8 +20,7 @@ export default {
 
   components: {
     Toolbar: () => import("@/components/Toolbar.vue"),
-    NavigationDrawer: () => import("@/components/NavigationDrawer.vue"),
-    NavigationDrawerUser: () => import("@/components/NavigationDrawerUser.vue")
+    NavigationDrawer: () => import("@/components/NavigationDrawer.vue")
   },
   data: () => ({
     title: "Bienvenido a la Usuarios!"

@@ -148,6 +148,23 @@
               <br>
                 <br>
               <v-autocomplete
+                v-model="form.gerencia"
+                :items="filterDataGerencia"
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR GERENCIA GENERAL"
+                item-text="nombre"
+                item-value="id"
+                :rules="rules.gerencia"
+                :error="!!formErrors.gerencia"
+                :error-messages="formErrors.gerencia"
+                @keyup="() => {
+                  formErrors.gerencia = undefined
+                  delete formErrors.gerencia
+                }"
+              />
+              <v-autocomplete
                 v-model="form.padre_id"
                 :items="filterData"
                 outline
@@ -374,6 +391,7 @@ export default {
       file: '',
       id: '',
       form: {
+        gerencia: 1,
         nombre: '',
         supervisor_id: '',
         padre_id: 1,
@@ -415,6 +433,10 @@ export default {
     filterDataJerarquico() {
       let nivelesJerarquico = this.nivelesJerarquico;
       return nivelesJerarquico.filter(o => o.estado === 1);
+    },
+    filterDataGerencia() {
+      let areas = this.areas;
+      return areas.filter(o => o.id === 1 && o.estado === 1);
     },
     filterData() {
       let areas = this.areas

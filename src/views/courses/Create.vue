@@ -147,7 +147,6 @@
                         label="Seleccionar Tipo"
                         item-text="nombre"
                         item-value="id"
-                        :rules="rules.interno"
                         :disabled="processingForm"
                         :error="!!formErrors.interno"
                         :error-messages="formErrors.interno"
@@ -250,8 +249,6 @@ export default {
 
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
-        estado: [v => !!v || "El estado es requerido"],
-        interno: [v => !!v || "El tipo es requerido"],
         tipo_curso_id: [v => !!v || "La categoria es requerido"],
       }
     };
@@ -276,7 +273,6 @@ export default {
       return `${day}/${month}/${year}`;
     },
     submitCreateCourse() {
-      if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
       this.createCourse({ data: this.form })

@@ -107,6 +107,24 @@
             <v-stepper-content step="2">
               <v-autocomplete
                 v-if="form.tipo_area_id > 2"
+                v-model="form.gerencia"
+                :items="filterDataGerencia"
+                outline
+                clearable
+                small-chips
+                label="SELECCIONAR GERENCIA GENERAL"
+                item-text="nombre"
+                item-value="id"
+                :rules="rules.gerencia"
+                :error="!!formErrors.gerencia"
+                :error-messages="formErrors.gerencia"
+                @keyup="() => {
+                  formErrors.gerencia = undefined
+                  delete formErrors.gerencia
+                }"
+              />
+              <v-autocomplete
+                v-if="form.tipo_area_id > 2"
                 v-model="form.area_id"
                 :items="filterData"
                 outline
@@ -197,6 +215,7 @@ export default {
       formErrors: {},
       e1: 0,
       form: {
+        gerencia: 1,
         nombre: '',
         area_id: '',
         padre_id: '',
@@ -231,6 +250,10 @@ export default {
       authenticated: 'auth/check',
       user: 'auth/user',
     }),
+    filterDataGerencia() {
+      let areas = this.areas
+      return areas.filter(o => o.id === 1);
+    },
     filterData() {
       let areas = this.areas
       return areas.filter(o => o.tipoArea.nivel === 1);
@@ -264,7 +287,6 @@ export default {
         nombre: this.form.nombre,
       })
         .then(response => {
-          console.log(response)
           this.verify = true;
         })
         .catch((error) => {
