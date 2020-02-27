@@ -93,30 +93,30 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
 
 export default {
 
-  metaInfo () {
-    return { title: 'Listado de tags' }
+  metaInfo() {
+    return { title: 'Listado de tags' };
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
   },
 
-  data () {
+  data() {
     return {
-    }
+    };
   },
 
   computed: {
     ...mapState({
       tags: state => state.tags.tags,
       loadingTags: state => state.tags.loadingTags,
-    })
+    }),
   },
-  created () {
+  created() {
     this.getTags();
   },
 
@@ -124,6 +124,6 @@ export default {
     ...mapActions({
       getTags: 'tags/getTags',
     }),
-  }
-}
+  },
+};
 </script>

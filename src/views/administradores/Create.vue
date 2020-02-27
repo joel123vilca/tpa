@@ -151,7 +151,6 @@ export default {
       processingForm: false,
 
       rules: {
-        nombre: [v => !!v || "El nombre es requerido"],
         username: [v => !!v || "El usuario es requerido"],
         password: [v => !!v || "La contraseña es requerido"],
         estado: [v => !!v || "El estado es requerido"],
@@ -168,20 +167,19 @@ export default {
     ...mapActions({
       createAdministrador: "administradores/createAdministrador",
     }),
-
-    submitCreateAdministrador() {
+    async submitCreateAdministrador() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      this.createAdministrador({ data: this.form })
-        .then(response => {
-          this.processingForm = false;
-          this.$router.push({ name: "listAdministradores" });
-        })
-        .catch(error => {
-          this.processingForm = false;
-          this.formErrors = error.response.data.errors || {};
-        });
+      try {
+        await this.createAdministrador({ data: this.form });
+        this.processingForm = false;
+        this.$router.push({ name: 'listAdministradores' });
+      }
+      catch (error) {
+        this.processingForm = false;
+        this.formErrors = error.response.data.errors || {};
+      }
     }
   }
 };

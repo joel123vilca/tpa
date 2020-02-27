@@ -45,18 +45,21 @@ export default {
     });
   },
 
-  post(payload = {}) {
+  async post(payload = {}) {
     const data = payload.data || {};
-
-    return new Promise((resolve, reject) => {
-      axios({
+    try {
+      const response = await axios({
         url: `${HOST}/users`,
         method: "post",
         data
       })
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+      return response;
+    }
+    catch (error) {
+      console.log(error)
+      return error;
+    }
+
   },
   delete(payload = {}) {
     const data = payload.users;

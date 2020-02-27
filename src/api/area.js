@@ -4,21 +4,34 @@ import { baseUrlAPI } from "@/config/api";
 const HOST = baseUrlAPI;
 
 export default {
-  get(payload = {}) {
+  // get(payload = {}) {
+  //   const params = payload.params || {};
+  //   return new Promise((resolve, reject) => {
+  //     axios({
+  //       url: `${HOST}/areas`,
+  //       method: "get",
+  //       params
+  //     })
+  //       .then(response => resolve(response))
+  //       .catch(error => reject(error));
+  //   });
+  // },
+  async get(payload = {}) {
     const params = payload.params || {};
-    return new Promise((resolve, reject) => {
-      axios({
+    try {
+      const response = await  axios({
         url: `${HOST}/areas`,
-        method: "get",
-        params
-      })
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+        method: 'get',
+        params,
+      });
+      return response;
+    } catch (error) {
+      return error;
+    }
   },
   getVerify(payload = {}) {
-    const params = payload.params || {}
-    const nombre = payload.nombre
+    const params = payload.params || {};
+    const nombre = payload.nombre;
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/areas/validar-nombre?nombre=${nombre}`,

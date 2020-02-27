@@ -2,7 +2,6 @@
   <v-app>
     <Toolbar />
     <NavigationDrawer/>
-
     <v-content>
       <transition name="page" mode="out-in">
         <slot>
@@ -21,7 +20,8 @@ export default {
 
   components: {
     Toolbar: () => import("@/components/Toolbar.vue"),
-    NavigationDrawer: () => import("@/components/NavigationDrawer.vue")
+    NavigationDrawer: () => import("@/components/NavigationDrawer.vue"),
+    NavigationDrawerUser: () => import("@/components/NavigationDrawerUser.vue")
   },
   data: () => ({
     title: "Bienvenido a la Usuarios!"

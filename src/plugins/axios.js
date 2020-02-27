@@ -38,15 +38,15 @@ axios.interceptors.response.use(
     }
 
     // data was invalid
-    if (errorResponse.status === 422) {
-      const data = errorResponse.data[0];
-      const error = errorResponse.data.error;
-      const message = errorResponse.data.message;
-      Vue.prototype.$notify.info({
-        title: "Informacion TPA",
-        message: message || error || data
-      });
-    }
+    // if (errorResponse.status === 422) {
+    //   const data = errorResponse.data[0];
+    //   const error = errorResponse.data.error;
+    //   const message = errorResponse.data.message;
+    //   Vue.prototype.$notify.info({
+    //     title: "Informacion TPA",
+    //     message: message || error || data
+    //   });
+    // }
 
     // conflict
     if (errorResponse.status === 409) {

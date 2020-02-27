@@ -10,23 +10,16 @@ export const state = {
 };
 
 export const actions = {
-  getAreas({ commit }, payload) {
+  async getAreas({ commit }, payload) {
     commit(types.REPLACE_LOADING_AREAS, { status: true });
-    return new Promise((resolve, reject) => {
-      areaAPI
-        .get(payload)
-        .then(response => {
-          const areas = response.data.data;
-          commit(types.REPLACE_LOADING_AREAS, { status: false });
-          commit(types.REPLACE_AREAS, { areas });
-
-          resolve(response);
-        })
-        .catch(error => {
-          commit(types.REPLACE_LOADING_AREAS, { status: false });
-          reject(error);
-        });
-    });
+    try {
+      const response = await areaAPI.get(payload);
+      const areas = response.data.data;
+      commit(types.REPLACE_LOADING_AREAS, { status: false });
+      commit(types.REPLACE_AREAS, { areas });
+    } catch (error) {
+      commit(types.REPLACE_LOADING_AREAS, { status: false });
+    }
   },
 
   getArea({ commit }, payload) {

@@ -85,24 +85,36 @@ export const actions = {
     });
   },
 
-  createUser({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      userAPI
-        .post(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: "USERS",
-            message: "El usuario ha sido creado con éxito."
-          });
+  // createUser({ commit }, payload) {
+  //   return new Promise((resolve, reject) => {
+  //     userAPI
+  //       .post(payload)
+  //       .then(response => {
+  //         this._vm.$notify.success({
+  //           title: "USERS",
+  //           message: "El usuario ha sido creado con éxito."
+  //         });
 
-          resolve(response);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+  //         resolve(response);
+  //       })
+  //       .catch(error => {
+  //         reject(error);
+  //       });
+  //   });
+  // },
+  async createUser(payload) {
+    try {
+      const response = await userAPI.post(payload);
+      this._vm.$notify.success({
+        title: "USERS",
+        message: "El usuario ha sido creado con éxito."
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   },
-
   sendTokenForResetPassword({ commit }, payload) {
     return new Promise((resolve, reject) => {
       userAPI

@@ -65,22 +65,17 @@ export const actions = {
     });
   },
 
-  createAdministrador({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      administradorAPI
-        .post(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: "TPA",
-            message: "El administrador ha sido creado con éxito."
-          });
-
-          resolve(response);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+  async createAdministrador({ commit }, payload) {
+    try {
+      const response = await administradorAPI.post(payload);
+      this._vm.$notify.success({
+        title: "TPA",
+        message: "El administrador ha sido creado con éxito."
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
   },
 };
 

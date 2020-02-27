@@ -16,65 +16,6 @@
       <v-spacer />
       <div style="height:40px;width:100px;" class="mx-auto">         <img style="height:40px;width:auto; border-radius:4px;" :src="require('@/assets/logo.png')"/>       </div>
       <v-spacer />
-        <template>
-          <!-- <v-btn icon>
-          <v-menu offset-y>
-      <template v-slot:activator="{ on }">
-          <v-badge
-              color="success"
-              overlap
-            >
-              <template slot="badge">
-                {{ notifications.length }}
-              </template>
-              <v-icon color="white" v-on="on">notifications</v-icon>
-            </v-badge>
-      </template>
-      <v-layout row>
-    <v-flex>
-      <v-card>
-        <v-list two-line>
-          <template v-for="(item, index) in items">
-            <v-subheader
-              v-if="item.header"
-              :key="item.header"
-            >
-              {{ item.header }}
-               <v-spacer></v-spacer>
-              <span class="span-notification">4 pendientes</span>
-            </v-subheader>
-
-            <v-divider
-              v-else-if="item.divider"
-              :key="index"
-              :inset="item.inset"
-            ></v-divider>
-
-            <v-list-tile
-              v-else
-              :key="item.title"
-              avatar
-            >
-              <v-list-tile-avatar>
-                <img :src="item.avatar">
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-          <center>
-            <a>Ver Todas</a>
-          </center>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
-    </v-menu>
-        </v-btn> -->
-        </template>
     </v-toolbar>
 
   </div>
