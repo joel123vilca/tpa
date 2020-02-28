@@ -102,8 +102,6 @@
                         label="Privacidad"
                         item-text="nombre"
                         item-value="id"
-                        :disabled="processingForm"
-                        :rules="rules.publico"
                         :error="!!formErrors.publico"
                         :error-messages="formErrors.publico"
                         @keyup="
@@ -198,7 +196,7 @@ export default {
         { id: 1, nombre: 'Positivo'}
       ],
       privacidad: [
-        { id: 2, nombre: 'Privado'},
+        { id: 0, nombre: 'Privado'},
         { id: 1, nombre: 'Publico'}
       ],
       estados: [
@@ -208,7 +206,6 @@ export default {
       validForm: true,
       processingForm: false,
       rules: {
-        publico: [v => !!v || "El privacidad es requerido"],
         fecha: [v => !!v || "La fecha es requerido"],
         colaborador_autor_id: [v => !!v || "El auto es requerido"],
         tipo_comentario_id: [v => !!v || "El tipo de comentario es requerido"],
@@ -250,9 +247,6 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      if(this.form.publico === 2){
-        this.form.publico = 0;
-      }
       this.form.colaborador_id = this.$route.params.id;
       this.createComentario({ data: this.form })
         .then(response => {

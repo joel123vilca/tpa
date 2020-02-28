@@ -309,12 +309,22 @@ export default {
        if(this.form.tipo_area_id === 4){
          if(this.form.segundo_padre_id != 0){
            this.form.padre_id = this.form.segundo_padre_id;
-         }else{
+         }else if (this.form.area_id != ''){
            this.form.padre_id = this.form.area_id;
+         } else {
+            this.form.padre_id = this.form.gerencia;
          }
        }
        if(this.form.tipo_area_id === 5 ){
-         this.form.padre_id =this.form.tercer_padre_id;
+         if(this.form.tercer_padre_id != '' ){
+           this.form.padre_id =this.form.tercer_padre_id;
+         } else if (this.form.segundo_padre_id != 0){
+           this.form.padre_id = this.form.segundo_padre_id;
+         } else  if (this.form.area_id != ''){
+           this.form.padre_id = this.form.area_id;
+         } else {
+            this.form.padre_id = this.form.gerencia;
+         }
        }
       this.createArea({ data: this.form })
         .then(response => {

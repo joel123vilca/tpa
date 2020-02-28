@@ -1,2 +1,2 @@
 ////brisef.cl/tpa/proyectodo/backend/public/
-export const baseUrlAPI = "https://brisef.cl/tpa/proyectodo/test_backend/public/api";
+export const baseUrlAPI = "http://127.0.0.1:8000/api";
