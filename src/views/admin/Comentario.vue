@@ -104,7 +104,7 @@
                         item-value="id"
                         :error="!!formErrors.publico"
                         :error-messages="formErrors.publico"
-                        @keyup="
+                        @change="
                           () => {
                             formErrors.publico = undefined;
                             delete formErrors.publico;
