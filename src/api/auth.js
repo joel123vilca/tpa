@@ -18,10 +18,14 @@ export default {
   },
 
   logout(payload = {}) {
+    const params = {
+      rol: 'api'
+    }
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/logout`,
-        method: "post"
+        method: "post",
+        params
       })
         .then(response => resolve(response))
         .catch(error => reject(error));

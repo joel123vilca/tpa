@@ -89,7 +89,8 @@ export default {
       processingForm: false,
       form: {
         username: "",
-        password: ""
+        password: "",
+        rol: "api"
       },
       validationErrors: {},
       remember: true,
