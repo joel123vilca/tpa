@@ -64,6 +64,7 @@
                   { text: 'Nombre', value: 'primer_nombre'},
                   { text: 'Apellido',value: 'apellido_paterno'},
                   { text: 'Cargo'},
+                  { text: 'Estado', value: 'estado'},
                   { text: 'Editar informacion'},
                   { text: 'Editar Movilidad'},
                   { text: 'Editar Cargas' },
@@ -91,6 +92,26 @@
                   </td>
                   <td class="px-3">
                     {{ props.item.cargoActual.nombre}}
+                  </td>
+                  <td class="px-3">
+                    <v-chip
+                      v-if="props.item.estado === 1"
+                      class="ma-2"
+                      color="primary"
+                      dark
+                      small
+                    >
+                      Activo
+                    </v-chip>
+                    <v-chip
+                      v-else
+                      class="ma-2"
+                      color="error"
+                      dark
+                      small
+                    >
+                      Inactivo
+                    </v-chip>
                   </td>
                   <td class="px-3">
                     <v-btn small  :to="{ name: 'editcolaborador', params: { id: props.item.id } }"  color="success">Informacion</v-btn>

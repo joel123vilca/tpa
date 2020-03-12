@@ -7,7 +7,7 @@
             <v-card  class="login-card" color="#44b5ba">
               <div class="layout column align-center">
               <Typography variant="subtitle1" class="login-title" gutterBottom>
-                Bienvenido a Plataforma Personas
+                Panel de Administrador
               </Typography>
               <br>
               </div>
