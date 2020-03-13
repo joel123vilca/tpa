@@ -79,17 +79,16 @@
                         outline
                         readonly
                       ></v-text-field>
+                      <v-text-field
+                        v-model="form.fecha_termino"
+                        hint="Formato DD/MM/AAAA"
+                        label="FECHA DE TERMINO"
+                        outline
+                        type="date"
+                        @change="addDay"
+                      ></v-text-field>
                   </div>
                 </div>
-                  <v-text-field
-                    v-if="movilidades.length > 0 "
-                  v-model="form.fecha_termino"
-                  hint="Formato DD/MM/AAAA"
-                  label="FECHA DE TERMINO"
-                  outline
-                  type="date"
-                  @change="addDay"
-                ></v-text-field>
                     </v-container>
                   </v-card>
                 </v-flex>

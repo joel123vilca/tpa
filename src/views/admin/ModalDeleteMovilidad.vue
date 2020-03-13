@@ -27,7 +27,8 @@
 
         <template v-if="currentMovilidad">
           <ul>
-            <li><strong>Nombre: </strong>{{ currentMovilidad.cargo_nombre }}</li>
+            <li v-if="currentMovilidad.cargo_nombre"><strong>Nombre: </strong>{{ currentMovilidad.cargo_nombre }}</li>
+            <li v-else><strong>Nombre: </strong>Sin Cargo asignado</li>
             <li><strong>Fecha de inicio: </strong>{{ currentMovilidad.fecha_inicio }}</li>
           </ul>
         </template>
