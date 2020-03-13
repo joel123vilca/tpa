@@ -29,7 +29,7 @@
           <ul>
             <li v-if="currentMovilidad.cargo_nombre"><strong>Nombre: </strong>{{ currentMovilidad.cargo_nombre }}</li>
             <li v-else><strong>Nombre: </strong>Sin Cargo asignado</li>
-            <li><strong>Fecha de inicio: </strong>{{ currentMovilidad.fecha_inicio }}</li>
+            <li><strong>Fecha de inicio: </strong>{{ formatDate(currentMovilidad.fecha_inicio) }}</li>
           </ul>
         </template>
       </v-card-text>
@@ -84,6 +84,11 @@ export default {
       deleteMovilidad: 'colaboradores/deleteMovilidad',
       getMovilidad: 'colaboradores/getMovilidad',
     }),
+    formatDate(date) {
+      if (!date) return null
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
     launchDelete() {
       this.processingDelete = true;
       this.deleteMovilidad({ movilidadId: this.currentMovilidad.id })
