@@ -37,7 +37,8 @@
                     :disabled="processingForm"
                     :error="!!formErrors.estado"
                     :error-messages="formErrors.estado"
-                    @change="
+                    @change="nombreCurso"
+                    @keyup="
                       () => {
                         formErrors.estado = undefined;
                         delete formErrors.estado;
@@ -67,6 +68,7 @@
                     :rules="rules.titulo"
                     :error="!!formErrors.titulo"
                     :error-messages="formErrors.titulo"
+                    @change="nombreCurso"
                     @keyup="
                       () => {
                         formErrors.titulo = undefined;
@@ -82,6 +84,7 @@
                     :rules="rules.horas_cronologicas"
                     :error="!!formErrors.horas_cronologicas"
                     :error-messages="formErrors.horas_cronologicas"
+                    @change="nombreCurso"
                     @keyup="
                       () => {
                         formErrors.horas_cronologicas = undefined;
@@ -127,6 +130,7 @@
                   label="FECHA DE INICIO"
                   outline
                   type="date"
+                  @change="nombreCurso"
                 ></v-text-field>
                     </v-flex>
                     <v-flex sm6 xs12>
@@ -154,7 +158,8 @@
                         :disabled="processingForm"
                         :error="!!formErrors.interno"
                         :error-messages="formErrors.interno"
-                        @change="
+                        @change="nombreCurso"
+                        @keypress="
                           () => {
                             formErrors.interno = undefined;
                             delete formErrors.interno;
@@ -297,6 +302,27 @@ export default {
       if (!date) return null;
       const [year, month, day] = date.split('-');
       return `${day}/${month}/${year}`;
+    },
+    nombreCurso() {
+      let tipo = '';
+      let interno = '';
+      switch(this.form.tipo_curso_id) {
+      case 1:
+        tipo =  'Legales'
+        break;
+      case 2:
+        tipo =  'Competencia'
+        break;
+      case 3:
+        tipo =  'Chile Valora'
+        break;
+      }
+      if(this.form.interno === 1){
+        interno = 'Interno'
+      }else{
+        interno = 'Externo'
+      }
+      this.form.nombre = this.form.titulo + ' - ' + this.form.horas_cronologicas + 'Horas' + '- ' + this.formatDate(this.form.fecha_inicio) + ' ' + tipo + ' ' + interno;
     },
     submitUpdateCourse() {
       if (!this.$refs.form.validate()) return false;
