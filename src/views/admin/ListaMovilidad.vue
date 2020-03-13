@@ -97,7 +97,6 @@
                         </v-icon>
                       </v-btn>
                     <v-btn
-                        v-if="props.item.estado === 1"
                         class="ma-0"
                         small
                         icon
