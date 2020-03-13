@@ -104,7 +104,7 @@
                       Activo
                     </v-chip>
                     <v-chip
-                      v-else
+                      v-if="props.item.estado === 0"
                       class="ma-2"
                       color="error"
                       dark

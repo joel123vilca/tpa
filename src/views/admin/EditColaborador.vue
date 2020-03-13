@@ -186,7 +186,7 @@
           <v-flex sm12 xs12>
             <v-autocomplete
               v-model="form.tags"
-              :items="tags"
+              :items="filterData"
               dense
               clearable
               small-chips
@@ -519,6 +519,10 @@ export default {
       authenticated: 'auth/check',
       user: 'auth/user',
     }),
+    filterData() {
+      let tags = this.tags;
+      return tags.filter(o => o.estado === 1);
+    },
   },
   created() {
     this.getColaborador({ colaboradorId: this.$route.params.id }).then(response => {
