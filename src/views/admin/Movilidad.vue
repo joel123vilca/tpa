@@ -250,9 +250,6 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
-      if(this.form.tipo_movilidad_id > 3){
-        this.form.fecha_inicio = this.form.fecha_termino;
-      }
       this.postMovilidad({
         colaboradorId: this.$route.params.id,
         data: this.form,
