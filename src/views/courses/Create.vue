@@ -33,8 +33,7 @@
                     :rules="rules.tipo_curso_id"
                     :error="!!formErrors.tipo_curso_id"
                     :error-messages="formErrors.tipo_curso_id"
-                    @change="nombreCurso"
-                    @keyup="
+                    @change="
                       () => {
                         formErrors.tipo_curso_id = undefined;
                         delete formErrors.tipo_curso_id;
@@ -127,6 +126,14 @@
                   outline
                   @change="nombreCurso"
                   type="date"
+                  :error="!!formErrors.fecha_inicio"
+                  :error-messages="formErrors.fecha_inicio"
+                  @keyup="
+                      () => {
+                        formErrors.fecha_inicio = undefined;
+                        delete formErrors.fecha_inicio;
+                      }
+                    "
                 ></v-text-field>
                     </v-flex>
                     <v-flex sm6 xs12>
@@ -136,6 +143,14 @@
                   label="FECHA DE TERMINO"
                   outline
                   type="date"
+                  :error="!!formErrors.fecha_termino"
+                  :error-messages="formErrors.fecha_termino"
+                  @keyup="
+                      () => {
+                        formErrors.fecha_termino = undefined;
+                        delete formErrors.fecha_termino;
+                      }
+                    "
                 ></v-text-field>
                     </v-flex>
                   </v-layout>
@@ -154,8 +169,7 @@
                         :disabled="processingForm"
                         :error="!!formErrors.interno"
                         :error-messages="formErrors.interno"
-                        @change="nombreCurso"
-                        @keyup="
+                        @change="
                           () => {
                             formErrors.interno = undefined;
                             delete formErrors.interno;
@@ -241,6 +255,7 @@ export default {
         tipo_curso_id: '',
         horas_cronologicas: '',
       },
+      tipo_curso_id: '',
       tipos: [
         {id:0, nombre:'externo'},
         {id:1, nombre:'interno'}
@@ -263,6 +278,18 @@ export default {
       tipoCursos: state => state.courses.tipoCursos,
       loadingTipoCursos: state => state.courses.loadingTipoCursos,
     }),
+  },
+  watch: {
+    'form.tipo_curso_id': function () {
+      this.nombreCurso();
+    },
+    'form.interno': function () {
+      this.nombreCurso();
+    },
+    'form.nombre': function (){
+      this.formErrors.nombre = undefined;
+      delete this.formErrors.nombre;
+    }
   },
   created() {
     this.getTipoCursos();
