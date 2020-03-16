@@ -322,7 +322,7 @@ export default {
       }else{
         interno = 'Externo'
       }
-      this.form.nombre = this.form.titulo + ' - ' + this.form.horas_cronologicas + 'Horas' + '- ' + this.formatDate(this.form.fecha_inicio) + ' ' + tipo + ' ' + interno;
+      this.form.nombre = this.form.titulo + ' - ' + this.form.horas_cronologicas + 'Horas' + ' - ' + this.formatDate(this.form.fecha_inicio) + ' - ' + tipo + ' - ' + interno;
     },
     submitUpdateCourse() {
       if (!this.$refs.form.validate()) return false;

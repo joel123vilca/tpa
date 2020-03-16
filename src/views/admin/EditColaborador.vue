@@ -153,6 +153,9 @@
         >
           Siguiente
         </v-btn>
+        <v-btn color="error" @click="$router.push({name: 'listacolaboradores'})">
+          Volver
+        </v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
@@ -673,7 +676,7 @@ export default {
       })
       .then(response => {
         this.processingForm = false
-        this.e1 = 1
+        this.$router.push({ name: "listacolaboradores" });
       })
       .catch((error) => {
           this.processingForm = false
