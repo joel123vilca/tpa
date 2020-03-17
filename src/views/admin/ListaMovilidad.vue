@@ -36,6 +36,12 @@
           <v-toolbar-title>Lista de Movilidades</v-toolbar-title>
           <v-spacer />
           <v-btn
+            :to="{ name: 'movilidadHistorica', params: { id: this.$route.params.id  } }"
+            color="success"
+          >
+            Agregar Movilidad Historica
+          </v-btn>
+          <v-btn
             :to="{ name: 'crearmovilidad', params: { id: this.$route.params.id  } }"
             color="success"
           >

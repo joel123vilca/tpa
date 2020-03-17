@@ -47,6 +47,14 @@
               />
               <v-btn
                 color="primary"
+                v-if="!form.tipo_movilidad_id"
+                disabled
+              >
+                Continuar
+              </v-btn>
+              <v-btn
+                color="primary"
+                v-else
                 @click="e1 = 2"
               >
                 Continuar
@@ -55,8 +63,8 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-layout row wrap>
-                <v-flex sm6 xs12 v-if="movilidades.length > 0 ">
-                  <v-card v-if="movilidades.length > 0 ">
+                <v-flex sm6 xs12 v-if="movilidades.length > 0 && form.tipo_movilidad_id != 1 ">
+                  <v-card v-if="movilidades.length > 0 && form.tipo_movilidad_id != 1 ">
                     <v-card-title class="title">Cargo Actual</v-card-title>
                     <v-container>
                 <div v-for="item in movilidades">
@@ -107,6 +115,11 @@
                       item-text="nombre"
                       item-value="id"
                       outline
+                      :rules="rules.cargo_id"
+                      @keyup="() => {
+                        formErrors.cargo_id = undefined
+                        delete formErrors.cargo_id
+                      }"
                     />
                     <v-text-field
                       v-model="form.fecha_inicio"
@@ -192,7 +205,8 @@ export default {
       rules: {
         nombre: [v => !!v || "El nombre es requerido"],
         fecha_inicio: [v => !!v || "La fecha de inicio es requerido"],
-        tipo_movilidad_id: [v => !!v || "El tipo de movilidad es requerido"]
+        tipo_movilidad_id: [v => !!v || "El tipo de movilidad es requerido"],
+        cargo_id: [v => !!v || "El cargo nuevo es requerido."]
       }
     };
   },
@@ -249,6 +263,20 @@ export default {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
+      if(this.form.fecha_termino === ''){
+        var datatoday = new Date(this.form.fecha_inicio);
+        var datatodays = datatoday.setDate(new Date(datatoday).getDate() -1);
+
+        var newdate = new Date(datatodays);
+        const fill = (number, len) =>
+        "0".repeat(len - number.toString().length) + number.toString();
+        var dd = newdate.getDate();
+        var mm = newdate.getMonth() + 1;
+        var y = newdate.getFullYear();
+          dd = fill(dd, 2)
+          mm = fill(mm, 2)
+        this.form.fecha_termino = y + '-' + mm + '-' + dd;
+      }
       this.postMovilidad({
         colaboradorId: this.$route.params.id,
         data: this.form,

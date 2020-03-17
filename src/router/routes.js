@@ -85,6 +85,11 @@ export default [
     component: () => import('@/views/admin/Movilidad.vue'),
   },
   {
+    path: '/colaborador/:id/crear-movilidad-historica',
+    name: 'movilidadHistorica',
+    component: () => import('@/views/admin/MovilidadHistorica.vue'),
+  },
+  {
     path: '/colaborador/:id/movilidades',
     name: 'movilidades',
     component: () => import('@/views/admin/ListaMovilidad.vue'),

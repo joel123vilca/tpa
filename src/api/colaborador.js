@@ -81,6 +81,19 @@ export default {
         .catch(error => reject(error));
     });
   },
+  postMovilidadHistorico(payload = {}) {
+    const data = payload.data || {};
+    const colaboradorId = payload.colaboradorId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/colaboradores/${colaboradorId}/movilidades/historicos`,
+        method: "post",
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   getVerify(payload = {}) {
     const params = payload.params || {}
     const rut = payload.rut
@@ -133,19 +146,6 @@ export default {
       axios({
         url: `${HOST}/movilidades/${movilidadId}`,
         method: "get",
-      })
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
-  },
-  putMovilidad(payload = {}) {
-    const movilidadId = payload.movilidadId;
-    const data = payload.data || {};
-    return new Promise((resolve, reject) => {
-      axios({
-        url: `${HOST}/movilidades/${movilidadId}`,
-        method: "put",
-        data,
       })
         .then(response => resolve(response))
         .catch(error => reject(error));
