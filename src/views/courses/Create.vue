@@ -1,6 +1,7 @@
 <template>
   <v-container fluid grid-list-lg>
-    <template>
+    <NotPermission v-if="!authenticated" />
+    <template v-else>
       <Breadcrumbs
         :routes="[{ name: 'Inicio', to: { name: 'ListCourse' } }, { name: 'Nuevo curso' }]"
       />
@@ -226,7 +227,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
 
@@ -236,6 +237,7 @@ export default {
 
   components: {
     Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    NotPermission: () => import('@/views/errors/NotPermission')
   },
 
   data() {
@@ -277,6 +279,9 @@ export default {
     ...mapState({
       tipoCursos: state => state.courses.tipoCursos,
       loadingTipoCursos: state => state.courses.loadingTipoCursos,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
     }),
   },
   watch: {

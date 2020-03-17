@@ -1,5 +1,7 @@
 <template>
+  <NotPermission v-if="!authenticated" />
   <v-container
+    v-else
     fluid
     grid-list-lg
   >
@@ -113,31 +115,35 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
 
   metaInfo () {
-    return { title: 'Listado de areas' }
+    return { title: 'Listado de areas' };
   },
 
   components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    NotPermission: () => import('@/views/errors/NotPermission')
   },
 
   data() {
     return {
       searchAreas: '',
-    }
+    };
   },
 
   computed: {
     ...mapState({
       areas: state => state.areas.areas,
       loadingAreas: state => state.areas.loadingAreas,
-    })
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
+    }),
   },
-  created () {
+  created() {
     this.getAreas();
   },
 

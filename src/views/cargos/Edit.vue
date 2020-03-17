@@ -365,7 +365,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   metaInfo() {
@@ -429,6 +429,10 @@ export default {
       loadingAreas: state => state.areas.loadingAreas,
       cargos: state => state.cargos.cargos,
       loadingCargos: state => state.cargos.loadingCargos,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check',
+      user: 'auth/user',
     }),
     filterDataJerarquico() {
       let nivelesJerarquico = this.nivelesJerarquico;
