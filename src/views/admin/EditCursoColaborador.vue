@@ -67,6 +67,20 @@
               X
               </v-btn>
               </v-fab-transition>
+              <v-fab-transition>
+                <v-btn
+                  v-show="form.url_diploma"
+                  color="pink"
+                  small
+                  dark
+                  absolute
+                  left
+                  fab
+                  @click="deleteDiplomaSet()"
+                >
+                X
+                </v-btn>
+              </v-fab-transition>
               <center>
               <el-upload
                 class="avatar-uploader"
@@ -76,12 +90,17 @@
                 :show-file-list="false"
               >
               <img
+                v-if="form.url_diploma"
+                src="data:image/png;base64,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"
+                class="avatar"
+              >
+              <img
                 v-if="diplomaUrl"
                 :src="diplomaUrl"
                 class="avatar"
               >
               <i
-                v-else
+                v-if="!form.url_diploma && !diplomaUrl"
                 class="el-icon-plus avatar-uploader-icon"
               />
               </el-upload>
@@ -98,7 +117,7 @@
                   >
                     Guardar Cambios
                   </v-btn>
-                  <v-btn @click="$router.push({name: 'ListCursosColaborador', params: { id: $route.params.id }})">
+                  <v-btn @click="$router.push({name: 'ListCursosColaborador', params: { id: form.colaborador_id }})">
                     Cancelar
                   </v-btn>
                 </div>
@@ -134,6 +153,8 @@ export default {
       form: {
         curso_id: '',
         diploma: '',
+        colaborador_id: '',
+        url_diploma: '',
       },
       validForm: true,
       processingForm: false,
@@ -151,16 +172,22 @@ export default {
   },
   created() {
      this.getCursosDisponibles({ colaboradorId: 3 });
-     this.getCapacitacion({ capacitacionId: this.$route.params.id })
+     this.getCapacitacion({ capacitacionId: this.$route.params.id }).then(response => {
+      const capacitacionInfo = response.data.data;
+      this.setForm(capacitacionInfo);
+    });
   },
   methods: {
     ...mapActions({
       getCursosDisponibles: 'courses/getCursosDisponibles',
-      asignarCurso: 'colaboradores/asignarCurso',
+      updateCapacitacion: 'colaboradores/updateCapacitacion',
       getCapacitacion: 'colaboradores/getByIdCapacitacion',
     }),
     deleteDiploma() {
       this.diplomaUrl = null;
+    },
+    deleteDiplomaSet() {
+      this.form.diploma_url = null;
     },
     onFilePickedDiploma(e) {
       this.form.diploma = e.file;
@@ -181,18 +208,26 @@ export default {
         this.diplomaUrl = '';
       }
     },
+    setForm(capacitacion) {
+      this.form.curso_id = capacitacion.curso_id;
+      this.form.url_diploma = capacitacion.url_diploma;
+      this.form.colaborador_id = capacitacion.colaborador_id;
+    },
     submitCreateCurso() {
       if (!this.$refs.form.validate()) return false;
+      console.log(this.form.curso_id)
       var formData = new FormData();
+      formData.append("_method", 'PUT');
       formData.append("curso_id", this.form.curso_id);
       formData.append("diploma", this.form.diploma);
+      formData.append("url_diploma", this.form.url_diploma);
       this.processingForm = true;
-      this.asignarCurso({
-        colaboradorId: this.$route.params.id,
-      data: formData })
+      this.updateCapacitacion({
+        capacitacionId: this.$route.params.id,
+        data: formData })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "ListCursosColaborador", params: { id: this.$route.params.id }});
+          this.$router.push({ name: "ListCursosColaborador", params: { id: this.form.colaborador_id }});
         })
         .catch(error => {
           this.processingForm = false;

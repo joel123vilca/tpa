@@ -271,6 +271,23 @@ export const actions = {
         });
     });
   },
+  updateCapacitacion({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .putCapacitacion(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: "TPA",
+            message: "El curso ha sido actualizado con éxito."
+          });
+          resolve(response);
+        })
+        .catch(error => {
+          console.log(error)
+          reject(error);
+        });
+    });
+  },
   replaceShowModalDeleteMovilidad ({ commit }, payload) {
     commit(types.REPLACE_SHOW_MODAL_DELETE_MOVILIDAD, payload)
   },

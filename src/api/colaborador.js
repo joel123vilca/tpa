@@ -199,6 +199,20 @@ export default {
         .catch(error => reject(error));
     });
   },
+  putCapacitacion(payload = {}) {
+    const capacitacionId = payload.capacitacionId;
+    const data = payload.data || {};
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/capacitaciones/${capacitacionId}`,
+        method: "post",
+        data,
+        headers: {'Content-Type': 'multipart/form-data'},
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   putFamily(payload = {}) {
     const familiarId = payload.familiarId;
     const data = payload.data || {};
