@@ -175,6 +175,17 @@ export default {
         .catch(error => reject(error));
     });
   },
+  getByIdCapacitacion(payload = {}) {
+    const capacitacionId = payload.capacitacionId;
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/capacitaciones/${capacitacionId}`,
+        method: "get",
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   putMovilidad(payload = {}) {
     const movilidadId = payload.movilidadId;
     const data = payload.data || {};

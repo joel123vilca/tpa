@@ -84,6 +84,18 @@
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
+                        :to="{ name: 'editCursoAsignado', params: { id: props.item.id } }"
+                        small
+                        icon
+                        flat
+                        color="info"
+                      >
+                        <v-icon small>
+                          edit
+                        </v-icon>
+                      </v-btn>
+                    <v-btn
+                        class="ma-0"
                         small
                         icon
                         flat

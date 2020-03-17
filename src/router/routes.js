@@ -100,6 +100,11 @@ export default [
     component: () => import('@/views/admin/EditMovilidad.vue'),
   },
   {
+    path: '/curso-asignado/:id',
+    name: 'editCursoAsignado',
+    component: () => import('@/views/admin/EditCursoColaborador.vue'),
+  },
+  {
     path: '/crear-curso',
     name: 'crearCurso',
     component: () => import('@/views/courses/Create.vue'),

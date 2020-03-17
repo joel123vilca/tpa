@@ -240,6 +240,20 @@ export const actions = {
         });
     });
   },
+  getByIdCapacitacion({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      colaboradorAPI
+        .getByIdCapacitacion(payload)
+        .then(response => {
+          const capacitacion = response.data.data;
+          commit(types.REPLACE_CURRENT_CAPACITACION, { capacitacion });
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
   updateMovilidad({ commit }, payload) {
     return new Promise((resolve, reject) => {
       colaboradorAPI
@@ -430,5 +444,8 @@ export const mutations = {
   },
   [types.REPLACE_SHOW_MODAL_DELETE_CURSO] (state, { status }) {
     state.showModalDeleteCurso = status;
+  },
+  [types.REPLACE_CURRENT_CAPACITACION](state, { capacitacion }) {
+    state.currentCapacitacion = capacitacion;
   },
 };
