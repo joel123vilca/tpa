@@ -175,6 +175,19 @@ export default {
         .catch(error => reject(error));
     });
   },
+  putMovilidad(payload = {}) {
+    const movilidadId = payload.movilidadId;
+    const data = payload.data || {};
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/movilidades/${movilidadId}`,
+        method: "put",
+        data,
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+  },
   putFamily(payload = {}) {
     const familiarId = payload.familiarId;
     const data = payload.data || {};
