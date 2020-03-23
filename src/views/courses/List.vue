@@ -53,7 +53,9 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombre', value: 'nombre'},
+                  { text: 'Nombre', value: 'titulo'},
+                  { text: 'Horas', value: 'horas_cronologicas'},
+                  { text: 'Fecha de inicio', value: 'fecha_inicio'},
                   { text: 'Categoría', value: 'tipoCurso.cartegoria' },
                   { text: 'Tipo', value: 'interno' },
                   { text: 'Estado' },
@@ -70,7 +72,13 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.nombre }}
+                    {{ props.item.titulo }}
+                  </td>
+                  <td class=" text-xs-center px-3">
+                    {{ props.item.horas_cronologicas }}
+                  </td>
+                  <td class="px-3">
+                    {{ formatDate(props.item.fecha_inicio) }}
                   </td>
                   <td class="px-3">
                     {{ props.item.tipoCurso.categoria }}
@@ -164,6 +172,11 @@ export default {
       deleteCourse: 'courses/deleteCourse',
       replaceCourses: 'courses/replaceCourses',
     }),
+    formatDate(date) {
+      if (!date) return null;
+      const [year, month, day] = date.split('-');
+      return `${day}/${month}/${year}`;
+    },
   }
 }
 </script>
