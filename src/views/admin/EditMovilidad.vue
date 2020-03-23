@@ -40,7 +40,6 @@
                 :rules="rules.tipo_movilidad_id"
                 :error="!!formErrors.tipo_movilidad_id"
                 :error-messages="formErrors.tipo_movilidad_id"
-                :disabled="form.estado === 1"
                 @keyup="() => {
                   formErrors.tipo_movilidad_id = undefined
                   delete formErrors.tipo_movilidad_id

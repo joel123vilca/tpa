@@ -63,15 +63,25 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-layout row wrap>
-                <v-flex sm6 xs12 v-if="movilidades.length > 0 && form.tipo_movilidad_id != 1 ">
-                  <v-card v-if="movilidades.length > 0 && form.tipo_movilidad_id != 1 ">
+                <v-flex sm6 xs12 v-if="movilidades.length > 0  ">
+                  <v-card v-if="movilidades.length > 0  ">
                     <v-card-title class="title">Cargo Actual</v-card-title>
                     <v-container>
                 <div v-for="item in movilidades">
                   <div v-if="item.estado === 1">
+                      <h4>Tipo de Movilidad: {{item.tipoMovilidad.tipo}}</h4>
+                      <br>
                       <v-text-field
+                        v-if="item.cargo_nombre"
                         label="NOMBRE DEL CARGO"
                         :value="item.cargo_nombre"
+                        outline
+                        readonly
+                      />
+                      <v-text-field
+                        v-else
+                        label="NOMBRE DEL CARGO"
+                        value="Sin Cargo"
                         outline
                         readonly
                       />
@@ -104,6 +114,8 @@
                   <v-card v-if="form.tipo_movilidad_id < 4 ">
                     <v-card-title class="title">Cargo Nuevo</v-card-title>
                     <v-container>
+                    <h4>Tipo de Movilidad: {{ filterMovilidad(form.tipo_movilidad_id)}}</h4>
+                    <br>
                     <v-autocomplete
                       v-model="form.cargo_id"
                       :items="filterData"
@@ -259,13 +271,22 @@ export default {
         mm = fill(mm, 2)
       this.form.fecha_inicio = y + '-' + mm + '-' + dd;
     },
+    filterMovilidad(id){
+      let tipoMovilidades = this.tipoMovilidades;
+      const movilidades =  tipoMovilidades.filter(o => o.id === id);
+      var nombre = movilidades.map(function (movilidad) {
+      return movilidad.tipo
+      });
+      return String(nombre);
+
+    },
     submitMovilidad() {
       if (!this.$refs.form.validate()) return false;
 
       this.processingForm = true;
       if(this.form.fecha_termino === ''){
         var datatoday = new Date(this.form.fecha_inicio);
-        var datatodays = datatoday.setDate(new Date(datatoday).getDate() -1);
+        var datatodays = datatoday.setDate(new Date(datatoday).getDate());
 
         var newdate = new Date(datatodays);
         const fill = (number, len) =>
