@@ -86,12 +86,6 @@
                         readonly
                       />
                       <v-text-field
-                        label="OBSERVACIONES"
-                        :value="item.observaciones"
-                        outline
-                        readonly
-                      />
-                      <v-text-field
                         :value="formatDate(item.fecha_inicio)"
                         label="FECHA DE INICIO"
                         outline
@@ -105,6 +99,13 @@
                         type="date"
                         @change="addDay"
                       ></v-text-field>
+                      <v-text-field
+                        v-if="item.observaciones"
+                        label="OBSERVACIONES"
+                        :value="item.observaciones"
+                        outline
+                        readonly
+                      />
                   </div>
                 </div>
                     </v-container>
