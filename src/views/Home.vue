@@ -6,10 +6,73 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
-          { name: 'Notificaciones' },
-          { name: 'Listado' }
+          { name: 'Consultas y notificaciones' }
         ]"
       />
+      <v-card>
+        <v-toolbar
+          color="grey darken-4"
+          dark
+          card
+        >
+          <v-toolbar-title>Consultas</v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
+        <v-container
+          fluid
+          grid-list-lg
+        >
+          <v-layout
+            row
+            wrap
+          >
+            <v-flex
+              v-if="consultas.length"
+              sm6
+              offset-sm6
+            >
+              <v-text-field
+                v-model="searchConsultas"
+                :disabled="loadingConsultas"
+                box
+                append-icon="search"
+                label="Buscar"
+                clearable
+                hide-details
+              />
+            </v-flex>
+            <v-flex xs12>
+              <v-data-table
+                :headers="[
+                  { text: 'Colaborador', value: 'colaborador.nombre_completo' },
+                  { text: 'Consulta', value: 'mensaje' },
+                  { text: 'Tipo', value: 'tipo' },
+                ]"
+                :items="consultas"
+                :search="searchConsultas"
+                :loading="loadingConsultas"
+                :rows-per-page-items="[10,25,35,50]"
+                class="elevation-1"
+              >
+                <tr
+                  slot="items"
+                  slot-scope="props"
+                >
+                  <td class="px-3">
+                    {{ props.item.colaborador.nombre_completo }}
+                  </td>
+                  <td class="px-3">
+                    {{ props.item.texto }}
+                  </td>
+                  <td class="px-3">
+                      {{ props.item.tipoConsulta.tipo }}
+                  </td>
+                </tr>
+              </v-data-table>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
       <v-card>
         <v-toolbar
           color="grey darken-4"
@@ -99,6 +162,7 @@ export default {
   data() {
     return {
       searchNotificacion: '',
+      searchConsultas: '',
     };
   },
 
@@ -106,15 +170,19 @@ export default {
     ...mapState({
       notificaciones: state => state.notificaciones.notificaciones,
       loadingNotificaciones: state => state.notificaciones.loadingNotificaciones,
-    })
+      consultas: state => state.consultas.consultas,
+      loadingConsultas: state => state.consultas.loadingConsultas,
+    }),
   },
   created() {
     this.getNotificaciones();
+    this.getConsultas();
   },
 
   methods: {
     ...mapActions({
       getNotificaciones: 'notificaciones/getNotificaciones',
+      getConsultas: 'consultas/getConsultas',
     }),
     formatDate(date) {
       if (!date) return null;
