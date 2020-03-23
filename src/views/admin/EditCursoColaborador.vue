@@ -187,7 +187,7 @@ export default {
       this.diplomaUrl = null;
     },
     deleteDiplomaSet() {
-      this.form.diploma_url = null;
+      this.form.url_diploma = null;
     },
     onFilePickedDiploma(e) {
       this.form.diploma = e.file;
@@ -215,7 +215,6 @@ export default {
     },
     submitCreateCurso() {
       if (!this.$refs.form.validate()) return false;
-      console.log(this.form.curso_id)
       var formData = new FormData();
       formData.append("_method", 'PUT');
       formData.append("curso_id", this.form.curso_id);
