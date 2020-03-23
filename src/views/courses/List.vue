@@ -77,7 +77,7 @@
                   <td class=" text-xs-center px-3">
                     {{ props.item.horas_cronologicas }}
                   </td>
-                  <td class="px-3">
+                  <td class=" text-xs-center px-3">
                     {{ formatDate(props.item.fecha_inicio) }}
                   </td>
                   <td class="px-3">
