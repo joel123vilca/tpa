@@ -115,6 +115,11 @@ export default [
     component: () => import('@/views/courses/List.vue'),
   },
   {
+    path: '/consultas',
+    name: 'Consultas',
+    component: () => import('@/views/Consultas.vue'),
+  },
+  {
     path: '/curso/:id',
     name: 'courseEdit',
     component: () => import('@/views/courses/Edit.vue'),

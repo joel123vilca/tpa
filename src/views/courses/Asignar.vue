@@ -147,7 +147,7 @@ export default {
     }),
   },
   created() {
-    this.getCourses({ interno: 1 });
+    this.getCourses();
   },
   methods: {
     ...mapActions({

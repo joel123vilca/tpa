@@ -135,6 +135,12 @@ export default {
               { title: 'Listar Todas', to: { name: "notificaciones" } },
             ],
           },
+           {
+            title: 'Consultas',
+             items: [
+              { title: 'Listar Todas', to: { name: "Consultas" } },
+            ],
+          },
           {
             title: 'Administradores',
             items: [
