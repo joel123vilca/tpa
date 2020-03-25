@@ -67,12 +67,23 @@
                   <td class="px-3">
                       {{ props.item.tipoConsulta.tipo }}
                   </td>
+                  <td>
+                    <v-btn
+                        class="ma-0"
+                        small
+                        color="success"
+                        @click="openModalVerConsultas(props.item)"
+                    >
+                        ver
+                    </v-btn>
+                  </td>
                 </tr>
               </v-data-table>
             </v-flex>
           </v-layout>
         </v-container>
       </v-card>
+    <ModalVerConsultas />
   </v-container>
 </template>
 
@@ -87,6 +98,7 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    ModalVerConsultas: () => import('@/views/ModalVerConsultas')
   },
 
   data() {
@@ -108,7 +120,15 @@ export default {
   methods: {
     ...mapActions({
       getConsultas: 'consultas/getConsultas',
+      replaceShowModalVerConsultas: 'consultas/replaceShowModalVerConsultas',
+      replaceCurrentConsulta: 'consultas/replaceCurrentConsulta',
+      patchConsulta: 'consultas/patchConsulta',
     }),
+    openModalVerConsultas(consulta) {
+      this.replaceCurrentConsulta({ consulta });
+      this.patchConsulta({ consultaId: consulta.id });
+      this.replaceShowModalVerConsultas({ status: true });
+    },
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split('-');

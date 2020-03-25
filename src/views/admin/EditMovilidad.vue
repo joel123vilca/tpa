@@ -64,7 +64,6 @@
                   label="Seleccionar Cargo"
                   item-text="nombre"
                   item-value="id"
-
                   :error="!!formErrors.cargo_id"
                   :error-messages="formErrors.cargo_id"
                   @change="
@@ -178,6 +177,7 @@ export default {
       processingForm: false,
 
       rules: {
+        cargo_id: [v => !!v || "El cargo es requerido"],
         nombre: [v => !!v || "El nombre es requerido"],
       }
     };
