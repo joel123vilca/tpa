@@ -132,7 +132,7 @@ export default {
           {
             title: 'Notificaciones',
              items: [
-              { title: 'Listar Todas', to: { name: "notificaciones" } },
+              { title: 'Listar Todas', to: { name: "listaNotificaciones" } },
             ],
           },
            {

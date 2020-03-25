@@ -10,6 +10,11 @@ export default [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/lista-notificaciones',
+    name: 'listaNotificaciones',
+    component: () => import('@/views/Notificaciones.vue'),
+  },
+  {
     path: '/crear-administrador',
     name: 'creaAdministrador',
     component: () => import('@/views/administradores/Create.vue'),
