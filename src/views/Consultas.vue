@@ -126,7 +126,7 @@ export default {
     }),
     openModalVerConsultas(consulta) {
       this.replaceCurrentConsulta({ consulta });
-      this.patchConsulta({ consultaId: consulta.id });
+      this.patchConsulta({ consultaId: consulta.id, data: { leido: 1 } });
       this.replaceShowModalVerConsultas({ status: true });
     },
     formatDate(date) {
