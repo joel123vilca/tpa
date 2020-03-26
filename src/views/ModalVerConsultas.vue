@@ -23,11 +23,23 @@
         </v-btn>
       </v-toolbar>
       <v-card-title>
-        <strong> {{currentConsulta.tipoConsulta.tipo}} </strong>
+        <v-text-field
+          v-if="currentConsulta"
+          v-model="currentConsulta.tipoConsulta.tipo"
+          label="TIPO DE CONSULTA"
+          outline
+          readonly
+        ></v-text-field>
       </v-card-title>
       <v-card-text>
         <template v-if="currentConsulta">
-          <strong>{{ currentConsulta.texto}}</strong>
+          <v-textarea
+            v-model="currentConsulta.texto"
+            outline
+            readonly
+            name="input-7-4"
+            label="Texto"
+            ></v-textarea>
         </template>
       </v-card-text>
       <v-divider />

@@ -45,8 +45,9 @@
               <v-data-table
                 :headers="[
                   { text: 'Colaborador', value: 'colaborador.nombre_completo' },
-                  { text: 'Consulta', value: 'mensaje' },
-                  { text: 'Tipo', value: 'tipo' },
+                  { text: 'Tipo', value: 'tipoConsulta.tipo' },
+                  { text: 'Leido', value: 'leido' },
+                  { text: 'Accion' },
                 ]"
                 :items="consultas"
                 :search="searchConsultas"
@@ -62,10 +63,27 @@
                     {{ props.item.colaborador.nombre_completo }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.texto }}
+                    {{ props.item.tipoConsulta.tipo }}
                   </td>
                   <td class="px-3">
-                      {{ props.item.tipoConsulta.tipo }}
+                    <v-chip
+                      v-if="props.item.leido === 1"
+                      class="ma-2"
+                      color="primary"
+                      dark
+                      small
+                    >
+                      Si
+                    </v-chip>
+                    <v-chip
+                      v-else
+                      class="ma-2"
+                      color="error"
+                      dark
+                      small
+                    >
+                      No
+                    </v-chip>
                   </td>
                   <td>
                     <v-btn
@@ -127,6 +145,7 @@ export default {
     openModalVerConsultas(consulta) {
       this.replaceCurrentConsulta({ consulta });
       this.patchConsulta({ consultaId: consulta.id, data: { leido: 1 } });
+      this.getConsultas();
       this.replaceShowModalVerConsultas({ status: true });
     },
     formatDate(date) {
