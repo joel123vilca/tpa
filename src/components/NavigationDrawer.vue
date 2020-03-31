@@ -12,35 +12,29 @@
     class="drawer"
     dark
   >
-
-    <div  style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
-     <v-layout row>
-    <v-flex xs12 sm12>
+  <div  style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
         <v-list>
-          <v-list-group
-            v-for="item in items"
-            :key="item.title"
-            v-model="item.active"
-            no-action
-          >
-            <template v-slot:activator class="scoped-list-tile" color="white">
-              <v-list-tile class="scoped-list-tile">
-                <v-list-tile-content class="scoped-list-tile">
-                  <v-list-tile-title class="white--text">{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </template>
-            <v-list-tile
-              v-for="subItem in item.items"
-              :key="subItem.title"
-              class="scoped-list-tile"
-              :to="subItem.to"
-            >
-              <v-list-tile-content>
-                <v-list-tile-title class="white--text">- {{ subItem.title }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-group>
+          <template>
+        <v-list-tile
+          v-for="(item) in items"
+          :key="item.title"
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+          :to="item.to"
+          :disabled="!item.to"
+        >
+          <v-list-tile-action>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+
+          <template>
           <v-list-tile
                exact
               ripple
@@ -53,9 +47,8 @@
           </v-list-tile-action>
           <v-list-tile-content>Cerrar sesión</v-list-tile-content>
         </v-list-tile>
+          </template>
         </v-list>
-    </v-flex>
-  </v-layout>
   </v-navigation-drawer>
 </template>
 
@@ -67,93 +60,57 @@ export default {
   data() {
     return {
       items: [
-          {
-            title: 'Colaboradores',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "crearcolaborador" } },
-              { title: 'Listar Todos', to: { name: "listacolaboradores" } },
-            ],
-          },
-          // {
-          //   title: 'Reportes',
-          //   items: [
-          //     { title: 'Adm. De Personas' ,
-          //     to: { name: "listacolaboradores" }},
-          //     { title: 'DO y Capacitaciòn' },
-          //     { title: 'Bienestar' },
-          //     { title: 'Comunicaciones' },
-          //     { title: 'RSE' },
-          //   ],
-          // },
-          {
-            title: 'Tag / Etiquetas',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "creartags" } },
-              { title: 'Listar Todas', to: { name: "listatags" } },
-
-            ],
-          },
-          {
-            title: 'Nivel Jerárquico',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "creaniveljerarquico" } },
-              { title: 'Listar Todas', to: { name: "listaniveljerarquico" } },
-            ],
-          },
-          {
-            title: 'Areas',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "crearArea" } },
-              { title: 'Listar Todas', to: { name: "listaArea" } },
-            ],
-          },
-          {
-            title: 'Cargos',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "crearcargo" } },
-              { title: 'Listar Todas', to: { name: "listacargo" } },
-            ],
-          },
-          {
-            title: 'Cursos / Capacitaciones',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "crearCurso" } },
-              { title: 'Listar Todas', to: { name: "ListCourse" }},
-              { title: 'Asignar curso', to: { name: "asignar" }},
-            ],
-          },
-          // {
-          //   title: 'Configuraciones',
-          //   items: [
-          //     { title: 'Agregar Nuevo' },
-          //     { title: 'Listar Todas' },
-          //   ],
-          // },
-          {
-            title: 'Notificaciones',
-             items: [
-              { title: 'Listar Todas', to: { name: "listaNotificaciones" } },
-            ],
-          },
-           {
-            title: 'Consultas',
-             items: [
-              { title: 'Listar Todas', to: { name: "Consultas" } },
-            ],
-          },
-          {
-            title: 'Administradores',
-            items: [
-              { title: 'Agregar Nuevo', to: { name: "creaAdministrador" } },
-              { title: 'Listar Todas', to: { name: "listAdministradores" } },
-            ],
-          }
-        ],
+        {
+          title: 'Colaboradores',
+          icon: 'people',
+          to: { name: "listacolaboradores" }
+        },
+        {
+          title: 'Tag / Etiquetas',
+          icon: 'dehaze',
+          to: { name: "listatags" }
+        },
+        {
+          title: 'Nivel Jerárquico',
+          icon: 'share',
+          to: { name: "listaniveljerarquico" },
+        },
+        {
+          title: 'Areas',
+          icon: 'web',
+          to: { name: "listaArea" }
+        },
+        {
+          title: 'Cargos',
+          icon: 'folder_shared',
+          to: { name: "listacargo" }
+        },
+        {
+          title: 'Cursos / Capacitaciones',
+          icon: 'book',
+          to: { name: "ListCourse" }
+        },
+        {
+          title: 'Notificaciones',
+          icon: 'notifications',
+          to: { name: "listaNotificaciones" }
+        },
+        {
+          title: 'Consultas',
+          icon: 'email',
+          to: { name: "Consultas" }
+        },
+        {
+          title: 'Administradores',
+          icon: 'portrait',
+          to: { name: "listAdministradores" }
+        },
+      ],
     };
   },
   computed: {
     ...mapState({
-      primaryDrawer: state => state.layout.primaryDrawer
+      primaryDrawer: state => state.layout.primaryDrawer,
     }),
 
     ...mapGetters({
