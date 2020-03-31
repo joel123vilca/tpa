@@ -62,6 +62,7 @@
                   label="Fecha"
                   outline
                   type="date"
+                  max="9999-12-31"
                   :rules="rules.fecha"
                 ></v-text-field>
               </template>

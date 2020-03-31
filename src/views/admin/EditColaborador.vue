@@ -145,6 +145,7 @@
                   label="FECHA DE NACIMIENTO"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
               </v-flex>
             <v-flex sm6 xs12>
@@ -249,6 +250,7 @@
                   label="FECHA DE VENCIMIENTO LICENCIA B"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
           </v-flex>
           <v-flex sm6 xs12>
@@ -272,6 +274,7 @@
                   label="FECHA DE VENCIMIENTO LICENCIA D"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
           </v-flex>
 
@@ -296,6 +299,7 @@
                   label="FECHA DE VENCIMIENTO CREDENCIAL VIGILANTE"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
           </v-flex>
 
@@ -321,6 +325,7 @@
                   label="FECHA DE VENCIMIENTO CARNET PORTUARIO"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
           </v-flex>
           <v-flex xs12 sm6 md6>

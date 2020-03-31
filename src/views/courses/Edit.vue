@@ -131,6 +131,7 @@
                   label="FECHA DE INICIO"
                   outline
                   type="date"
+                  max="9999-12-31"
                   @change="nombreCurso"
                 ></v-text-field>
                     </v-flex>
@@ -141,6 +142,7 @@
                   label="FECHA DE TERMINO"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
                     </v-flex>
                   </v-layout>

@@ -70,6 +70,7 @@
                   label="Fecha de Nacimiento"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
                   <v-layout row wrap>
                     <v-flex sm6 xs12>

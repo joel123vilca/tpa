@@ -60,6 +60,7 @@
                   label="Fecha"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
               </template>
                     </v-flex>

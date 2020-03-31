@@ -97,6 +97,7 @@
                         label="FECHA DE TERMINO"
                         outline
                         type="date"
+                        max="9999-12-31"
                         @change="addDay"
                       ></v-text-field>
                       <v-text-field
@@ -141,6 +142,7 @@
                       outline
                       :rules="rules.fecha_inicio"
                       type="date"
+                      max="9999-12-31"
                     ></v-text-field>
                     <v-text-field
                       v-model="form.observaciones"

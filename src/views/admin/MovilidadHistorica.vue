@@ -74,6 +74,7 @@
                   label="Fecha de Inicio"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
                     </v-flex>
                     <v-flex sm6 xs12>
@@ -84,6 +85,7 @@
                   label="FECHA DE TERMINO"
                   outline
                   type="date"
+                  max="9999-12-31"
                 ></v-text-field>
                     </v-flex>
                   </v-layout>
