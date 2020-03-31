@@ -64,12 +64,9 @@
                   { text: 'Nombre', value: 'primer_nombre'},
                   { text: 'Apellido',value: 'apellido_paterno'},
                   { text: 'Cargo'},
+                  { text: 'Fecha de Ingreso'},
                   { text: 'Estado', value: 'estado'},
-                  { text: 'Editar informacion'},
-                  { text: 'Editar Movilidad'},
-                  { text: 'Editar Cargas' },
-                  { text: 'Editar Hoja de vida'},
-                  { text: 'Cursos'}
+                  { text: 'Editar informacion'}
                 ]"
                 :items="colaboradores"
                 :search="searchUsers"
@@ -94,6 +91,9 @@
                     {{ props.item.cargoActual.nombre}}
                   </td>
                   <td class="px-3">
+                    {{ formatDate(props.item.fecha_ingreso)}}
+                  </td>
+                  <td class="px-3">
                     <v-chip
                       v-if="props.item.estado === 1"
                       class="ma-2"
@@ -115,18 +115,6 @@
                   </td>
                   <td class="px-3">
                     <v-btn small  :to="{ name: 'editcolaborador', params: { id: props.item.id } }"  color="success">Informacion</v-btn>
-                  </td>
-                  <td class="px-3">
-                    <v-btn small :to="{ name: 'movilidades', params: { id: props.item.id } }" color="success">Movilidad</v-btn>
-                  </td>
-                  <td class="px-3">
-                    <v-btn small :to="{ name: 'ListaCargaFamiliar', params: { id: props.item.id } }" color="success">Cargas</v-btn>
-                  </td>
-                  <td>
-                    <v-btn small :to="{ name: 'listacomentario', params: { id: props.item.id } }" color="success">Hoja de vida</v-btn>
-                  </td>
-                  <td class="text-xs-center px-3">
-                    <v-btn small :to="{ name: 'ListCursosColaborador', params: { id: props.item.id } }" color="success">Cursos</v-btn>
                   </td>
                 </tr>
               </v-data-table>
@@ -168,7 +156,12 @@ export default {
   methods: {
     ...mapActions({
       getColaboradores: 'colaboradores/getColaboradores',
-    })
+    }),
+    formatDate(date) {
+      if (!date) return null;
+      const [year, month, day] = date.split('-');
+      return `${day}/${month}/${year}`;
+    },
   }
 }
 </script>
