@@ -145,7 +145,7 @@ export default [
     component: () => import('@/views/admin/ListColaboradores.vue'),
   },
   {
-    path: '/colaborador/:id',
+    path: '/colaborador/:id/editar',
     name: 'editcolaborador',
     component: () => import('@/views/admin/EditColaborador.vue'),
   },

@@ -13,27 +13,26 @@
         ]"
       />
       <v-bottom-nav
-        :active.sync="activeBtn"
         color="transparent"
-        :value="true"
+        :value="activeBtn"
       >
-        <v-btn :to="{ name: 'movilidades', params: { id: $route.params.id } }" flat color="teal">
-          <span>Movilidades</span>
-          <v-icon>history</v-icon>
-        </v-btn>
-        <v-btn :to="{ name: 'editcolaborador', params: { id: $route.params.id } }" flat  color="teal">
+        <v-btn :to="{ name: 'editcolaborador', params: { id: $route.params.id } }"  flat color="teal">
           <span>Informacion</span>
           <v-icon>assignment</v-icon>
+        </v-btn>
+        <v-btn :to="{ name: 'movilidades', params: { id: $route.params.id } }"  flat color="teal">
+          <span>Movilidades</span>
+          <v-icon>history</v-icon>
         </v-btn>
         <v-btn :to="{ name: 'listacomentario', params: { id: $route.params.id } }" flat  color="teal">
           <span>Hoja de vida</span>
           <v-icon>description</v-icon>
         </v-btn>
-        <v-btn :to="{ name: 'ListaCargaFamiliar', params: { id: $route.params.id } }" flat  color="teal">
+        <v-btn :to="{ name: 'ListaCargaFamiliar', params: { id: $route.params.id } }" flat   color="teal">
           <span>Cargas familiares</span>
           <v-icon>supervisor_account</v-icon>
         </v-btn>
-        <v-btn :to="{ name: 'ListCursosColaborador', params: { id: $route.params.id } }" flat  color="teal">
+        <v-btn :to="{ name: 'ListCursosColaborador', params: { id: $route.params.id } }" flat   color="teal">
           <span>Cursos</span>
           <v-icon>book</v-icon>
         </v-btn>
@@ -165,7 +164,7 @@ export default {
 
   data() {
     return {
-      activeBtn: 4,
+      activeBtn: 5,
       avatar: '',
       nombre_completo: '',
     };

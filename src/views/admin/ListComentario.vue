@@ -17,13 +17,13 @@
         color="transparent"
         :value="true"
       >
-        <v-btn :to="{ name: 'movilidades', params: { id: $route.params.id } }" flat color="teal">
-          <span>Movilidades</span>
-          <v-icon>history</v-icon>
-        </v-btn>
         <v-btn :to="{ name: 'editcolaborador', params: { id: $route.params.id } }" flat  color="teal">
           <span>Informacion</span>
           <v-icon>assignment</v-icon>
+        </v-btn>
+        <v-btn :to="{ name: 'movilidades', params: { id: $route.params.id } }" flat color="teal">
+          <span>Movilidades</span>
+          <v-icon>history</v-icon>
         </v-btn>
         <v-btn :to="{ name: 'listacomentario', params: { id: $route.params.id } }" flat  color="teal">
           <span>Hoja de vida</span>
