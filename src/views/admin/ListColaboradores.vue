@@ -5,7 +5,7 @@
     fluid
     grid-list-lg
   >
-    <v-card-title class="white cyan--text headline">
+    <v-card-title class="white cyan--text headline" style="border-radius:4px;">
         Listado de Colaboradores
         <v-spacer />
         <v-spacer />
@@ -19,9 +19,10 @@
     </v-card-title>
     <br>
     <template>
-      <v-card>
+      <v-card style="border-radius:10px;">
         <v-toolbar
-          color="grey darken-4"
+          color="grey darken-1"
+          style="border-radius:10px;"
           dark
           card
         >
@@ -29,7 +30,7 @@
           <v-spacer />
           <v-btn
             :to="{ name: 'crearcolaborador' }"
-            color="success"
+            color="primary"
           >
             Agregar Colaborador
           </v-btn>

@@ -57,7 +57,7 @@
                     <div class="text-xs-center">
                       <v-btn
                         type="submit"
-                        color="#4A74AF"
+                        color="#337ab7"
                         class="ma-2 white--text"
                         :disabled="!validForm || processingForm"
                         :loading="processingForm"

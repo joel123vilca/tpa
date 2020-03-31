@@ -18,16 +18,17 @@
     <br>
     <template>
       <v-card>
-        <v-toolbar
-          color="grey darken-4"
+       <v-toolbar
+          color="grey darken-1"
           dark
           card
+          style="border-radius:10px;"
         >
           <v-toolbar-title>Nivel Jerarquico</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'creaniveljerarquico' }"
-            color="success"
+            color="primary"
           >
             Agregar nivel jerarquico
           </v-btn>
