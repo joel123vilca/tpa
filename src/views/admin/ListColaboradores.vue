@@ -78,7 +78,7 @@
                   slot="items"
                   slot-scope="props"
                 >
-                  <td class="px-3">
+                  <td class="px-3" width="110px">
                     {{ props.item.rut }}
                   </td>
                   <td class="px-3">
