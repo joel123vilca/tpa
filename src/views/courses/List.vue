@@ -21,6 +21,12 @@
           <v-toolbar-title>Cursos</v-toolbar-title>
           <v-spacer />
           <v-btn
+            :to="{ name: 'asignar' }"
+            color="success"
+          >
+            Asignar Curso
+          </v-btn>
+          <v-btn
             :to="{ name: 'crearCurso' }"
             color="success"
           >
