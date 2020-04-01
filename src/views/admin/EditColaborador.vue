@@ -29,7 +29,7 @@
               alt="Avatar"
             >
           </v-avatar>
-          <v-toolbar-title>Datos Colaborador</v-toolbar-title>
+          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
         </v-toolbar>
   <v-bottom-nav
         color="transparent"
@@ -485,6 +485,8 @@ export default {
       imageUrl: '',
       imageFile: '',
       file: '',
+      avatar: '',
+      nombre_completo: '',
       form: {
         rut: '',
         usuario: '',
@@ -632,6 +634,8 @@ export default {
       this.form.estado_civil_id = colaborador.estadoCivil === '' ? '' : colaborador.estadoCivil.id;
       this.form.tags = colaborador.tags;
       this.form.imagen_url = colaborador.imagen_url;
+      this.nombre_completo = colaborador.nombre_completo;
+      this.avatar = colaborador.imagen_url;
     },
     pickFile() {
       this.$refs.image.click()

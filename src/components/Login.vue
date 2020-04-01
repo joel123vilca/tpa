@@ -41,11 +41,11 @@
                       type="password"
                       label="Contraseña"
                       class="login-input"
-                      :error="!!validationErrors.username"
-                      :error-messages="validationErrors.username"
+                      :error="!!validationErrors.password"
+                      :error-messages="validationErrors.password"
                       @keyup="() => {
-                        validationErrors.username = undefined
-                        delete validationErrors.username
+                        validationErrors.password = undefined
+                        delete validationErrors.password
                       }"
 
 
