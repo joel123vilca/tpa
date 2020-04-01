@@ -67,7 +67,7 @@ export default {
           to: { name: "listacolaboradores" }
         },
         {
-          title: 'Tag / Etiquetas',
+          title: 'Etiquetas',
           icon: 'dehaze',
           to: { name: "listatags" }
         },
@@ -87,7 +87,7 @@ export default {
           to: { name: "listacargo" }
         },
         {
-          title: 'Cursos / Capacitaciones',
+          title: 'Capacitaciones',
           icon: 'book',
           to: { name: "ListCourse" }
         },

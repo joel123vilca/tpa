@@ -4,7 +4,7 @@
     grid-list-lg
   >
     <v-card-title class="white cyan--text headline">
-        Listado de Niveles jerárquico
+        Listado de Niveles Jerárquicos
         <v-spacer />
         <v-spacer />
         <Breadcrumbs
@@ -24,7 +24,7 @@
           card
           style="border-radius:10px;"
         >
-          <v-toolbar-title>Nivel Jerarquico</v-toolbar-title>
+          <v-toolbar-title>Nivel Jerárquico</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'creaniveljerarquico' }"
