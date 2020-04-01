@@ -21,7 +21,7 @@
           dark
           card
         >
-          <v-toolbar-title>Listado de Colaboradores</v-toolbar-title>
+          <v-toolbar-title>Colaboradores</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'crearcolaborador' }"

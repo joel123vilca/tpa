@@ -19,7 +19,7 @@
           card
           style="border-radius:10px;"
         >
-          <v-toolbar-title>Listado de Niveles Jerárquicos</v-toolbar-title>
+          <v-toolbar-title>Niveles Jerárquicos</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'creaniveljerarquico' }"
