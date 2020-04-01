@@ -14,15 +14,16 @@
       />
       <v-card>
         <v-toolbar
-          color="grey darken-4"
+          color="grey darken-1"
           dark
           card
+          style="border-radius:10px;"
         >
           <v-toolbar-title>Administradores</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'creaAdministrador' }"
-            color="success"
+            color="primary"
           >
             Agregar Administrador
           </v-btn>

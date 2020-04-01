@@ -14,6 +14,23 @@
         />
   </v-card-title>
   <br>
+  <v-toolbar
+          card
+          style="border-radius:10px 10px 0 0;"
+          color="primary"
+          dark
+        >
+          <v-avatar
+            size="45px"
+          >
+            <img
+              v-if="avatar"
+              :src='avatar'
+              alt="Avatar"
+            >
+          </v-avatar>
+          <v-toolbar-title>Datos Colaborador</v-toolbar-title>
+        </v-toolbar>
   <v-bottom-nav
         color="transparent"
         :value="activeBtn"
@@ -39,6 +56,7 @@
           <v-icon>book</v-icon>
         </v-btn>
       </v-bottom-nav>
+      <br>
   <v-stepper v-model="e1">
     <v-stepper-header>
       <v-stepper-step editable

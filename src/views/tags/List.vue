@@ -10,17 +10,18 @@
           { name: 'Listado' }
         ]"
       />
-      <v-card>
+      <v-card >
         <v-toolbar
-          color="grey darken-4"
+          color="grey darken-1"
           dark
           card
+          style="border-radius:10px;"
         >
-          <v-toolbar-title>Tags</v-toolbar-title>
+          <v-toolbar-title>Listado de Tags</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'creartags' }"
-            color="success"
+            color="primary"
           >
             Agregar Tag
           </v-btn>

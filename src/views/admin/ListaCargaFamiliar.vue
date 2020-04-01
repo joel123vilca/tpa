@@ -12,7 +12,25 @@
           { name: 'Listado' }
         ]"
       />
-      <v-bottom-nav
+      <v-card style="border-radius:10px 10px 0 0;">
+        <v-toolbar
+          card
+          style="border-radius:10px 10px 0 0;"
+          color="primary"
+          dark
+        >
+          <v-avatar
+            size="45px"
+          >
+            <img
+              v-if="avatar"
+              :src='avatar'
+              alt="Avatar"
+            >
+          </v-avatar>
+          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
+        </v-toolbar>
+         <v-bottom-nav
         :active.sync="activeBtn"
         color="transparent"
         :value="true"
@@ -38,32 +56,17 @@
           <v-icon>book</v-icon>
         </v-btn>
       </v-bottom-nav>
-      <v-card>
+      <br>
         <v-toolbar
-          color="white darken-4"
-          card
-        >
-          <v-avatar
-            size="45px"
-          >
-            <img
-              v-if="avatar"
-              :src='avatar'
-              alt="Avatar"
-            >
-          </v-avatar>
-          <v-toolbar-title>{{nombre_completo}}</v-toolbar-title>
-        </v-toolbar>
-        <v-toolbar
-          color="grey darken-4"
+          color="grey darken-1"
           dark
           card
         >
-          <v-toolbar-title>lista de Carga Familiar</v-toolbar-title>
+          <v-toolbar-title>Listado de Cargas Familiares</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'agregarCargaFamiliar', params: { id: this.$route.params.id  } }"
-            color="success"
+            color="primary"
           >
             Agregar Carga Familiar
           </v-btn>
