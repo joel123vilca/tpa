@@ -5,10 +5,6 @@
     fluid
     grid-list-lg
   >
-    <v-card-title class="white cyan--text headline" style="border-radius:4px;">
-        Listado de Colaboradores
-        <v-spacer />
-        <v-spacer />
         <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
@@ -16,7 +12,6 @@
           { name: 'Listado'}
         ]"
         />
-    </v-card-title>
     <br>
     <template>
       <v-card style="border-radius:10px;">
@@ -26,7 +21,7 @@
           dark
           card
         >
-          <v-toolbar-title></v-toolbar-title>
+          <v-toolbar-title>Listado de Colaboradores</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'crearcolaborador' }"

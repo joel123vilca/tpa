@@ -3,10 +3,6 @@
     fluid
     grid-list-lg
   >
-    <v-card-title class="white cyan--text headline">
-        Listado de Niveles Jerárquicos
-        <v-spacer />
-        <v-spacer />
         <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
@@ -14,7 +10,6 @@
           { name: 'Listado'}
         ]"
         />
-    </v-card-title>
     <br>
     <template>
       <v-card>
@@ -24,7 +19,7 @@
           card
           style="border-radius:10px;"
         >
-          <v-toolbar-title>Nivel Jerárquico</v-toolbar-title>
+          <v-toolbar-title>Listado de Niveles Jerárquicos</v-toolbar-title>
           <v-spacer />
           <v-btn
             :to="{ name: 'creaniveljerarquico' }"
