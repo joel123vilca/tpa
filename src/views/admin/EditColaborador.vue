@@ -266,6 +266,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA B"
                   outline
+                  :disabled="form.licencia_b === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -290,6 +291,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA D"
                   outline
+                  :disabled="form.licencia_d === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -315,6 +317,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CREDENCIAL VIGILANTE"
                   outline
+                  :disabled="form.credencial_vigilante === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -341,6 +344,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CARNET PORTUARIO"
                   outline
+                  :disabled="form.carnet_portuario === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
