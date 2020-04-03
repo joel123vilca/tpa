@@ -229,6 +229,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA B"
                   outline
+                  :disabled="form.licencia_b === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -253,6 +254,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA D"
                   outline
+                  :disabled="form.licencia_d === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -278,6 +280,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CREDENCIAL VIGILANTE"
                   outline
+                  :disabled="form.credencial_vigilante === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -286,7 +289,7 @@
 
           <v-flex sm6 xs12>
             <v-autocomplete
-              v-model="form.canet_portuario"
+              v-model="form.carnet_portuario"
               :items="licencias"
               dense
               clearable
@@ -304,6 +307,7 @@
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CARNET PORTUARIO"
                   outline
+                  :disabled="form.carnet_portuario === 'NO'"
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
@@ -445,13 +449,13 @@ export default {
         fecha_nacimiento: '',
         email: '',
         domicilio: '',
-        licencia_b: '',
+        licencia_b: 'NO',
         vencimiento_licencia_b: '',
-        licencia_d: '',
+        licencia_d: 'NO',
         vencimiento_licencia_d: '',
-        carnet_portuario: '',
+        carnet_portuario: 'NO',
         vencimiento_carnet_portuario: '',
-        credencial_vigilante: '',
+        credencial_vigilante: 'NO',
         vencimiento_credencial_vigilante: '',
         talla_calzado: '',
         talla_chaleco: '',
