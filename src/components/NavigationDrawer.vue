@@ -11,7 +11,7 @@
     app
     dark
     class="drawer"
-    style="background-color: #337ab7; color: white"
+    style="background: #337ab7; color: white"
   >
   <div  style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
         <v-list>

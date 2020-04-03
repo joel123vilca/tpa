@@ -46,9 +46,11 @@
                     :disabled="processingForm"
                     label="año"
                     outline
+                    type="number"
                     :rules="rules.year"
                     :error="!!formErrors.year"
                     :error-messages="formErrors.year"
+                    @change="nombrePeriodo"
                     @keyup="
                       () => {
                         formErrors.year = undefined;
@@ -64,6 +66,7 @@
                     :rules="rules.detalle"
                     :error="!!formErrors.detalle"
                     :error-messages="formErrors.detalle"
+                    @change="nombrePeriodo"
                     @keyup="
                       () => {
                         formErrors.detalle = undefined;
@@ -167,6 +170,11 @@ export default {
       authenticated: 'auth/check',
     }),
   },
+  watch: {
+    'form.encuesta_plantilla_id': function () {
+      this.nombrePeriodo();
+    },
+  },
   created() {
     this.getPlantillas();
   },
@@ -175,8 +183,15 @@ export default {
       createPeriodo: "periodos/createPeriodo",
       getPlantillas: "periodos/getPlantillas",
     }),
+    nombrePeriodo() {
+      let periodos = this.plantillas;
+      const periodo =  periodos.filter(o => o.id === this.form.encuesta_plantilla_id);
+      var nombre = periodo.map(function (item) {
+        return item.nombre
+      });
+      this.form.nombre = String(nombre) + ' - ' + this.form.year + '-' + this.form.detalle;
+    },
     submitCreatePeriodo() {
-      console.log(this.form);
       this.processingForm = true;
       this.createPeriodo({ data: this.form })
         .then(response => {

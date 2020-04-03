@@ -121,6 +121,7 @@
         <center>
         </center>
       </v-card>
+      <ModalDelete />
   </v-container>
 </template>
 
@@ -135,6 +136,7 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    ModalDelete: () => import('@/views/periodos/Delete'),
     NotPermission: () => import('@/views/errors/NotPermission')
   },
 
@@ -163,7 +165,7 @@ export default {
       replaceShowModalDeletePeriodo: 'periodos/replaceShowModalDeletePeriodo',
       replaceCurrentPeriodo: 'periodos/replaceCurrentPeriodo',
     }),
-    openModalDeletePeriodo(periodo) {
+    openModalDelete(periodo) {
       this.replaceCurrentPeriodo({ periodo });
       this.replaceShowModalDeletePeriodo({ status: true });
     },
