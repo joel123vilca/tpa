@@ -92,6 +92,11 @@ export default {
           to: { name: "ListCourse" }
         },
         {
+          title: 'Periodos',
+          icon: 'book',
+          to: { name: "listaPeriodo" }
+        },
+        {
           title: 'Notificaciones',
           icon: 'notifications',
           to: { name: "listaNotificaciones" }
