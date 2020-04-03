@@ -224,5 +224,20 @@ export default [
     name: 'editArea',
     component: () => import('@/views/areas/Edit.vue'),
   },
+  {
+    path: '/periodo',
+    name: 'listaPeriodo',
+    component: () => import('@/views/periodos/List.vue'),
+  },
+  {
+    path: '/periodo/:id',
+    name: 'editPeriodo',
+    component: () => import('@/views/periodos/Edit.vue'),
+  },
+  {
+    path: '/crear-periodo',
+    name: 'crearPeriodo',
+    component: () => import('@/views/periodos/Create.vue'),
+  },
   { path: '*', redirect: '/login' },
 ];

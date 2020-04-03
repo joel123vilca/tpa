@@ -331,17 +331,16 @@ export default {
       this.form.nombre = this.form.titulo + ' - ' + this.form.horas_cronologicas + ' Horas ' + ' - ' + this.formatDate(this.form.fecha_inicio) + ' - ' + tipo + ' - ' + interno;
     },
     submitCreateCourse() {
-      console.log(this.form);
       this.processingForm = true;
-      // this.createCourse({ data: this.form })
-      //   .then(response => {
-      //     this.processingForm = false;
-      //     this.$router.push({ name: "ListCourse" });
-      //   })
-      //   .catch(error => {
-      //     this.processingForm = false;
-      //     this.formErrors = error.response.data.errors || {};
-      //   });
+      this.createCourse({ data: this.form })
+        .then(response => {
+          this.processingForm = false;
+          this.$router.push({ name: "ListCourse" });
+        })
+        .catch(error => {
+          this.processingForm = false;
+          this.formErrors = error.response.data.errors || {};
+        });
     }
   }
 };
