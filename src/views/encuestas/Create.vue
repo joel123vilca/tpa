@@ -17,67 +17,49 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitCreatePeriodo"
+                @submit.prevent="submitCreateEncuesta"
               >
                 <v-container fluid grid-list-lg>
                   <v-autocomplete
-                    v-model="form.encuesta_plantilla_id"
-                    :items="plantillas"
+                    v-model="form.periodo_id"
+                    :items="periodos"
                     dense
                     outline
                     clearable
                     small-chips
-                    label="Seleccionar Encuesta Plantilla"
+                    label="Seleccionar Periodo"
                     item-text="nombre"
                     item-value="id"
                     :disabled="processingForm"
-                    :rules="rules.encuesta_plantilla_id"
-                    :error="!!formErrors.encuesta_plantilla_id"
-                    :error-messages="formErrors.encuesta_plantilla_id"
+                    :rules="rules.periodo_id"
+                    :error="!!formErrors.periodo_id"
+                    :error-messages="formErrors.periodo_id"
                     @change="
                       () => {
-                        formErrors.encuesta_plantilla_id = undefined;
-                        delete formErrors.encuesta_plantilla_id;
+                        formErrors.periodo_id = undefined;
+                        delete formErrors.periodo_id;
                       }
                     "
                   />
                   <v-text-field
-                    v-model="form.year"
+                    v-model="form.encuesta_facil_id"
                     :disabled="processingForm"
-                    label="año"
+                    label="Id de encuesta facil"
                     outline
-                    type="number"
-                    :rules="rules.year"
-                    :error="!!formErrors.year"
-                    :error-messages="formErrors.year"
-                    @change="nombrePeriodo"
+                    :rules="rules.encuesta_facil_id"
+                    :error="!!formErrors.encuesta_facil_id"
+                    :error-messages="formErrors.encuesta_facil_id"
                     @keyup="
                       () => {
-                        formErrors.year = undefined;
-                        delete formErrors.year;
-                      }
-                    "
-                  />
-                  <v-text-field
-                    v-model="form.detalle"
-                    :disabled="processingForm"
-                    label="detalle"
-                    outline
-                    :rules="rules.detalle"
-                    :error="!!formErrors.detalle"
-                    :error-messages="formErrors.detalle"
-                    @change="nombrePeriodo"
-                    @keyup="
-                      () => {
-                        formErrors.detalle = undefined;
-                        delete formErrors.detalle;
+                        formErrors.encuesta_facil_id = undefined;
+                        delete formErrors.encuesta_facil_id;
                       }
                     "
                   />
                   <v-text-field
                     v-model="form.nombre"
                     :disabled="processingForm"
-                    label="Nombre"
+                    label="nombre"
                     outline
                     :rules="rules.nombre"
                     :error="!!formErrors.nombre"
@@ -101,6 +83,38 @@
                       () => {
                         formErrors.descripcion = undefined;
                         delete formErrors.descripcion;
+                      }
+                    "
+                  />
+                  <v-text-field
+                    v-model="form.fecha_inicio"
+                    :disabled="processingForm"
+                    label="Fecha inicio"
+                    outline
+                    :rules="rules.fecha_inicio"
+                    :error="!!formErrors.fecha_inicio"
+                    :error-messages="formErrors.fecha_inicio"
+                    type="date"
+                    @keyup="
+                      () => {
+                        formErrors.fecha_inicio = undefined;
+                        delete formErrors.fecha_inicio;
+                      }
+                    "
+                  />
+                  <v-text-field
+                    v-model="form.fecha_fin"
+                    :disabled="processingForm"
+                    label="Fecha final"
+                    outline
+                    type="date"
+                    :rules="rules.fecha_fin"
+                    :error="!!formErrors.fecha_fin"
+                    :error-messages="formErrors.fecha_fin"
+                    @keyup="
+                      () => {
+                        formErrors.fecha_fin = undefined;
+                        delete formErrors.fecha_fin;
                       }
                     "
                   />
@@ -132,7 +146,7 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   metaInfo() {
-    return { title: "Nuevo periodo" };
+    return { title: "Nuevo encuesta" };
   },
 
   components: {
@@ -147,10 +161,11 @@ export default {
       targetIssueDate: false,
       form: {
         nombre: '',
-        year: '',
-        detalle: '',
         descripcion: '',
-        encuesta_plantilla_id: ''
+        fecha_inicio: '',
+        fecha_fin: '',
+        encuesta_facil_id: '',
+        periodo_id: '',
       },
       validForm: true,
       processingForm: false,
@@ -163,37 +178,24 @@ export default {
   },
   computed: {
     ...mapState({
-      plantillas: state => state.periodos.plantillas,
-      loadingPlantillas: state => state.periodos.loadingPlantillas,
+      periodos: state => state.periodos.periodos,
+      loadingPeriodos: state => state.periodos.loadingPeriodos,
     }),
     ...mapGetters({
       authenticated: 'auth/check',
     }),
   },
-  watch: {
-    'form.encuesta_plantilla_id': function () {
-      this.nombrePeriodo();
-    },
-  },
   created() {
-    this.getPlantillas();
+    this.getPeriodos();
   },
   methods: {
     ...mapActions({
-      createPeriodo: "periodos/createPeriodo",
-      getPlantillas: "periodos/getPlantillas",
+      createEncuesta: "encuestas/createEncuesta",
+      getPeriodos: "periodos/getPeriodos",
     }),
-    nombrePeriodo() {
-      let periodos = this.plantillas;
-      const periodo =  periodos.filter(o => o.id === this.form.encuesta_plantilla_id);
-      var nombre = periodo.map(function (item) {
-        return item.nombre
-      });
-      this.form.nombre = String(nombre) + ' - ' + this.form.year + '-' + this.form.detalle;
-    },
-    submitCreatePeriodo() {
+    submitCreateEncuesta() {
       this.processingForm = true;
-      this.createPeriodo({ data: this.form })
+      this.createEncuesta({ data: this.form })
         .then(response => {
           this.processingForm = false;
           this.$router.push({ name: "listaPeriodo" });
