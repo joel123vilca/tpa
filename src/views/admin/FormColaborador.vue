@@ -212,11 +212,8 @@
               v-model="form.licencia_b"
               :items="licencias"
               dense
-              clearable
               small-chips
               label="Licencia B"
-              item-text="nombre"
-              item-value="id"
               outline
             />
           </v-flex>
@@ -239,7 +236,6 @@
               v-model="form.licencia_d"
               :items="licencias"
               dense
-              clearable
               small-chips
               label="Licencia D"
               outline
@@ -265,7 +261,6 @@
               v-model="form.credencial_vigilante"
               :items="licencias"
               dense
-              clearable
               small-chips
               label="Credencial Vigilante"
               outline
@@ -291,8 +286,7 @@
             <v-autocomplete
               v-model="form.carnet_portuario"
               :items="licencias"
-              dense
-              clearable
+              
               small-chips
               label="Carnet Portuario"
               outline
@@ -503,11 +497,29 @@ export default {
     NotPermission: () => import('@/views/errors/NotPermission')
   },
   watch: {
-    targetIssueDate (val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+    'form.licencia_b': function () {
+      if(this.form.licencia_b != 'SI'){
+        this.form.licencia_b = 'NO'
+        this.form.vencimiento_licencia_b = '';
+      }
     },
-    targetIssueDateYear (val) {
-      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+    'form.licencia_d': function () {
+      if(this.form.licencia_d != 'SI'){
+        this.form.licencia_d = 'NO';
+        this.form.vencimiento_licencia_d = '';
+      }
+    },
+    'form.carnet_portuario': function () {
+      if(this.form.carnet_portuario != 'SI'){
+        this.form.carnet_portuario = 'NO'
+        this.form.vencimiento_carnet_portuario = '';
+      }
+    },
+    'form.credencial_vigilante': function () {
+      if(this.form.credencial_vigilante != 'SI'){
+        this.form.credencial_vigilante = 'NO'
+        this.form.vencimiento_credencial_vigilante = '';
+      }
     },
   },
   computed: {
