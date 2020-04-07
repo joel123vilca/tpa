@@ -281,6 +281,12 @@ export default [{
             import ('@/views/periodos/Edit.vue'),
     },
     {
+        path: '/periodo/:id/encuestas',
+        name: 'periodoEncuestas',
+        component: () =>
+            import ('@/views/periodos/ListEncuesta.vue'),
+    },
+    {
         path: '/crear-periodo',
         name: 'crearPeriodo',
         component: () =>
@@ -297,6 +303,12 @@ export default [{
         name: 'listaEncuesta',
         component: () =>
             import ('@/views/encuestas/List.vue'),
+    },
+    {
+        path: '/encuesta-asignar',
+        name: 'encuestaAsignar',
+        component: () =>
+            import ('@/views/encuestas/Asignar.vue'),
     },
     { path: '*', redirect: '/login' },
 ];

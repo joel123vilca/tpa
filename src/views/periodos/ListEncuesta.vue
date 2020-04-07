@@ -9,7 +9,7 @@
         :routes="[
           { name: 'Inicio'},
           { name: 'Listado' },
-          { name: 'Periodos' }
+          { name: 'Periodos Encuestas' }
         ]"
       />
     <v-card style="border-radius:10px 10px 0 0;">
@@ -40,13 +40,13 @@
           dark
           card
         >
-          <v-toolbar-title>Listado de Periodos</v-toolbar-title>
+          <v-toolbar-title>Listado de Periodo -encuesta</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'crearPeriodo'}"
+            :to="{ name: 'crearEncuesta'}"
             color="primary"
           >
-            Agregar periodo
+            Agregar encuesta
           </v-btn>
         </v-toolbar>
         <v-container
@@ -61,13 +61,13 @@
               <v-data-table
                 :headers="[
                   { text: 'Nombre' },
-                  { text: 'Año' },
-                  { text: 'detalle' },
-                  { text: 'Platilla'},
+                  { text: 'Encuesta Facil' },
+                  { text: 'Fecha inicio' },
+                  { text: 'Fecha Fin'},
                   { text: 'Acciones'}
                 ]"
-                :items="periodos"
-                :loading="loadingPeriodos"
+                :items="periodoEncuestas"
+                :loading="loadingPeriodoEncuestas"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
               >
@@ -79,47 +79,22 @@
                     {{ props.item.nombre }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.year }}
+                    {{ props.item.encuesta_facil_id }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.detalle }}
+                    {{ props.item.fecha_inicio }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.encuestaPlantilla.nombre }}
+                    {{ props.item.fecha_fin }}
                   </td>
                   <td class="text-xs-center px-3">
                     <v-btn
                         class="ma-0"
                         small
                         flat
-                        :to="{ name: 'periodoEncuestas', params: { id: props.item.id } }"
                         color="info"
                       >
-                      encuestas
-                      </v-btn>
-                    <v-btn
-                        class="ma-0"
-                        small
-                        icon
-                        flat
-                        :to="{ name: 'editPeriodo', params: { id: props.item.id } }"
-                        color="info"
-                      >
-                        <v-icon small>
-                          edit
-                        </v-icon>
-                      </v-btn>
-                    <v-btn
-                        class="ma-0"
-                        small
-                        icon
-                        flat
-                        color="error"
-                        @click="openModalDelete(props.item)"
-                      >
-                        <v-icon small>
-                          delete
-                        </v-icon>
+                      colaboradores
                       </v-btn>
                   </td>
                 </tr>
@@ -129,8 +104,7 @@
         </v-container>
         <center>
         </center>
-      </v-card> 
-      <ModalDelete />
+      </v-card>
   </v-container>
 </template>
 
@@ -140,12 +114,11 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 export default {
 
   metaInfo() {
-    return { title: 'Listado de periodos' };
+    return { title: 'Listado de periodos-encuestas' };
   },
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    ModalDelete: () => import('@/views/periodos/Delete'),
     NotPermission: () => import('@/views/errors/NotPermission')
   },
 
@@ -157,27 +130,21 @@ export default {
 
   computed: {
     ...mapState({
-      periodos: state => state.periodos.periodos,
-      loadingPeriodos: state => state.periodos.loadingPeriodos,
+      periodoEncuestas: state => state.periodos.periodoEncuestas,
+      loadingPeriodoEncuestas: state => state.periodos.loadingPeriodoEncuestas,
     }),
     ...mapGetters({
       authenticated: 'auth/check',
     }),
   },
   created() {
-    this.getPeriodos();
+    this.getPeriodoEncuestas({ periodoId: this.$route.params.id });
   },
 
   methods: {
     ...mapActions({
-      getPeriodos: 'periodos/getPeriodos',
-      replaceShowModalDeletePeriodo: 'periodos/replaceShowModalDeletePeriodo',
-      replaceCurrentPeriodo: 'periodos/replaceCurrentPeriodo',
-    }),
-    openModalDelete(periodo) {
-      this.replaceCurrentPeriodo({ periodo });
-      this.replaceShowModalDeletePeriodo({ status: true });
-    },
+      getPeriodoEncuestas: 'periodos/getPeriodoEncuestas',
+    })
   },
 };
 </script>
