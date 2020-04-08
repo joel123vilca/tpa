@@ -13,27 +13,14 @@
         ]"
       />
     <v-card style="border-radius:10px 10px 0 0;">
-        <v-bottom-nav
-        color="transparent"
-        :value="activeBtn"
-      >
-        <v-btn  flat color="teal">
-          <span>Periodos</span>
-          <v-icon>assignment</v-icon>
-        </v-btn>
-        <v-btn   flat color="teal">
-          <span>Encuestas</span>
-          <v-icon>history</v-icon>
-        </v-btn>
-        <v-btn  flat  color="teal">
-          <span>Generar Resultados</span>
-          <v-icon>description</v-icon>
-        </v-btn>
-        <v-btn  flat   color="teal">
-          <span>Resultados</span>
-          <v-icon>supervisor_account</v-icon>
-        </v-btn>
-      </v-bottom-nav>
+      <v-toolbar
+          card
+          style="border-radius:10px 10px 0 0;"
+          color="primary"
+          dark
+        >
+          <v-toolbar-title>Nombre del Periodo</v-toolbar-title>
+        </v-toolbar>
       <br>
         <v-toolbar
           color="grey darken-1"
@@ -43,7 +30,7 @@
           <v-toolbar-title>Listado de Periodo -encuesta</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'crearEncuesta'}"
+            :to="{ name: 'crearEncuesta', params: { id: $route.params.id }}"
             color="primary"
           >
             Agregar encuesta

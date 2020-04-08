@@ -293,7 +293,7 @@ export default [{
             import ('@/views/periodos/Create.vue'),
     },
     {
-        path: '/crear-encuesta',
+        path: '/periodo/:id/crear-encuesta',
         name: 'crearEncuesta',
         component: () =>
             import ('@/views/encuestas/Create.vue'),

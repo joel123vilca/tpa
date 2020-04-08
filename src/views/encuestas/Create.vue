@@ -27,10 +27,10 @@
                     outline
                     clearable
                     small-chips
+                    disabled
                     label="Seleccionar Periodo"
                     item-text="nombre"
                     item-value="id"
-                    :disabled="processingForm"
                     :rules="rules.periodo_id"
                     :error="!!formErrors.periodo_id"
                     :error-messages="formErrors.periodo_id"
@@ -129,7 +129,7 @@
                   >
                     Guardar
                   </v-btn>
-                  <v-btn @click="$router.push({ name: 'listaPeriodo' })">
+                  <v-btn @click="$router.push({name: 'periodoEncuestas', params: { id: $route.params.id }})">
                     Cancelar
                   </v-btn>
                 </div>
@@ -165,7 +165,7 @@ export default {
         fecha_inicio: '',
         fecha_fin: '',
         encuesta_facil_id: '',
-        periodo_id: '',
+        periodo_id:'' ,
       },
       validForm: true,
       processingForm: false,
@@ -187,18 +187,22 @@ export default {
   },
   created() {
     this.getPeriodos();
+    this.setPeriodo();
   },
   methods: {
     ...mapActions({
       createEncuesta: "encuestas/createEncuesta",
       getPeriodos: "periodos/getPeriodos",
     }),
+    setPeriodo(){
+      this.form.periodo_id = parseInt(this.$route.params.id, 10);
+    },
     submitCreateEncuesta() {
       this.processingForm = true;
       this.createEncuesta({ data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "listaPeriodo" });
+          this.$router.push({ name: "periodoEncuestas",  params: { id: $route.params.id } });
         })
         .catch(error => {
           this.processingForm = false;
