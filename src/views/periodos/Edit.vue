@@ -204,7 +204,12 @@ export default {
       var nombre = periodo.map(function (item) {
         return item.nombre
       });
-      this.form.nombre = String(nombre) + ' - ' + this.form.year + '-' + this.form.detalle;
+      if(this.form.detalle.length != 0){
+        this.form.nombre = String(nombre) + ' - ' + this.form.year + ' - ' + this.form.detalle;
+      }
+      else{
+        this.form.nombre = String(nombre) + ' - ' + this.form.year;
+      }
     },
     submitUpdatePeriodo() {
       this.processingForm = true;
