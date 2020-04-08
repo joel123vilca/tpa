@@ -67,7 +67,6 @@
                   { text: 'Acciones'}
                 ]"
                 :items="periodos"
-                :loading="loadingPeriodos"
                 :rows-per-page-items="[10,25,35,50]"
                 class="elevation-1"
               >

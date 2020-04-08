@@ -64,7 +64,7 @@
   <v-data-table
     v-model="selected"
     :headers="headers"
-    :items="colaboradores"
+    :items="colaboradoresDisponibles"
     :search="search"
     :rows-per-page-items="[10,25,35,50]"
     item-key="id"
@@ -141,6 +141,8 @@ export default {
     ...mapState({
       courses: state => state.courses.courses,
       loadingCourses: state => state.courses.loadingCourses,
+      colaboradoresDisponibles: state => state.courses.colaboradoresDisponibles,
+      loadingColaboradoresDisponibles: state => state.courses.loadingColaboradoresDisponibles
     }),
     ...mapGetters({
       authenticated: 'auth/check',
@@ -152,14 +154,11 @@ export default {
   methods: {
     ...mapActions({
       getCourses: 'courses/getCourses',
-      getCobaradoresDisponibles: 'courses/getCobaradoresDisponibles',
+      getColaboradoresDisponibles: 'courses/getColaboradoresDisponibles',
       asignarCurso: 'courses/asignarCurso',
     }),
     getColaboradores() {
-      this.getCobaradoresDisponibles({ cursoId: this.form.curso_id })
-        .then(response => {
-          this.colaboradores = response.data.data
-      });
+      this.getColaboradoresDisponibles({ cursoId: this.form.curso_id })
     },
     crear() {
       this.loading = true;
