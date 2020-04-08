@@ -30,7 +30,7 @@
                     label="Seleccionar Encuesta Plantilla"
                     item-text="nombre"
                     item-value="id"
-                    :disabled="processingForm"
+                    :disabled="encuestas"
                     :rules="rules.encuesta_plantilla_id"
                     :error="!!formErrors.encuesta_plantilla_id"
                     :error-messages="formErrors.encuesta_plantilla_id"
@@ -153,6 +153,7 @@ export default {
         descripcion: '',
         encuesta_plantilla_id: ''
       },
+      encuestas:'',
       validForm: true,
       processingForm: false,
 
@@ -195,6 +196,7 @@ export default {
       this.form.detalle = periodo.detalle;
       this.form.descripcion = periodo.descripcion;
       this.form.encuesta_plantilla_id = periodo.encuestaPlantilla.id;
+      this.encuestas = periodo.encuestas;
     },
     nombrePeriodo() {
       let periodos = this.plantillas;

@@ -109,6 +109,7 @@
                         </v-icon>
                       </v-btn>
                     <v-btn
+                      v-if="props.item.encuestas != true"
                         class="ma-0"
                         small
                         icon
@@ -120,6 +121,22 @@
                           delete
                         </v-icon>
                       </v-btn>
+                      <v-tooltip bottom v-else>
+                        <template v-slot:activator="{ on }">
+                          <v-btn 
+                            small
+                            icon
+                            flat
+                            color="error" 
+                            dark
+                            v-on="on">
+                            <v-icon small>
+                              delete
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Tiene encuesta relacionada</span>
+                      </v-tooltip>
                   </td>
                 </tr>
               </v-data-table>
