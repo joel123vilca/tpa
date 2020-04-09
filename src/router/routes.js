@@ -305,10 +305,16 @@ export default [{
             import ('@/views/encuestas/List.vue'),
     },
     {
-        path: '/encuesta-asignar',
+        path: '/encuesta/:id/asignar',
         name: 'encuestaAsignar',
         component: () =>
             import ('@/views/encuestas/Asignar.vue'),
+    },
+    {
+        path: '/encuesta/:id/asignados',
+        name: 'encuestaAsignados',
+        component: () =>
+            import ('@/views/encuestas/ListColaboradores.vue'),
     },
     { path: '*', redirect: '/login' },
 ];

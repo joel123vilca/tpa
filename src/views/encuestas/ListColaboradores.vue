@@ -3,15 +3,21 @@
     <NotPermission v-if="!authenticated" />
     <template v-else>
       <Breadcrumbs
-        :routes="[{ name: 'Inicio' }, { name: 'Asignar Encuesta' }]"
+        :routes="[{ name: 'Inicio' }, { name: 'Lista de colaboradores' }]"
       />
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Asignar encuesta a colaboradores</span>
+              <span class="success--text font-weight-bold headline">encuesta - colaboradores</span>
             </v-card-title>
-
+            <v-spacer />
+            <v-btn
+            :to="{ name: 'encuestaAsignar', params: { id: $route.params.id }}"
+            color="primary"
+          >
+            Asignar Colaboradores
+          </v-btn>
             <v-divider />
               <v-card>
   <v-card-title>
@@ -29,7 +35,7 @@
   <v-data-table
     v-model="selected"
     :headers="headers"
-    :items="colaboradores"
+    :items="asignados"
     :search="search"
     :rows-per-page-items="[10,25,35,50]"
     item-key="id"
@@ -47,11 +53,11 @@
       <td>{{ props.item.rut }}</td>
       <td>{{ props.item.primer_nombre}}</td>
       <td>{{ props.item.apellido_paterno }}</td>
-      <td>{{ props.item.cargoActual.nombre}}</td>
+      <td>{{ props.item.apellido_materno }}</td>
     </template>
   </v-data-table>
   </v-card>
-              <v-btn v-if="selected.length > 0"  large color="success" dark  @click="crear()" :loading="loading">Asignar Seleccionados</v-btn>
+              <v-btn v-if="selected.length > 0"  large color="error" dark  @click="eleminar()" :loading="loading">desasignar Seleccionados</v-btn>
               <v-btn flat @click="e1 = 1">Cancel</v-btn>
             
           </v-card>
@@ -66,7 +72,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   metaInfo() {
-    return { title: "Asignar curso" };
+    return { title: "Lista de colaboradores" };
   },
 
   components: {
@@ -86,8 +92,8 @@ export default {
           value: 'rut',
         },
         { text: 'Nombre', value: 'primer_nombre' },
-        { text: 'Apellido', value: 'apellido_paterno' },
-        { text: 'Cargo', value: 'cargoActual.nombre' },
+        { text: 'Apellido Paterno', value: 'apellido_paterno' },
+        { text: 'Apellido Materno', value: 'apellido_materno' },
       ],
       formErrors: {},
       e1: 0,
@@ -100,31 +106,32 @@ export default {
   },
   computed: {
     ...mapState({
-        colaboradores: state => state.colaboradores.colaboradores,
-        loadingColaboradores: state => state.colaboradores.loadingColaboradores
+        asignados: state => state.encuestas.asignados,
+        loadingAsignados: state => state.encuestas.loadingAsignados
     }),
     ...mapGetters({
       authenticated: 'auth/check',
     }),
   },
   created() {
-      this.getColaboradores();
+      this.getAsignados({encuestaId: this.$route.params.id});
   },
   methods: {
     ...mapActions({
-      getColaboradores:'colaboradores/getColaboradores',
-      asignar: 'encuestas/asignar'
+      getAsignados:'encuestas/getAsignados',
+      desasignar: 'encuestas/desasignar'
     }),
-    crear() {
+    eleminar() {
       this.loading = true;
       this.form.colaboradores = this.selected.map(function(item) {return item.id});
-      this.asignar({
+      this.desasignar({
         encuestaId: this.$route.params.id,
         data: this.form,
       })
         .then(response => {
           this.loading = false;
-          this.$router.push({ name: "listaPeriodo" });
+          this.$router.push({name: 'encuestaAsignados', params: { id: this.$route.params.id }});
+          this.getAsignados({encuestaId: this.$route.params.id});
         })
         .catch(error => {
           this.formErrors = error.response.data.errors || {};

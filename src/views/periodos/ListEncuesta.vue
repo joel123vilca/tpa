@@ -79,6 +79,7 @@
                         class="ma-0"
                         small
                         flat
+                        :to="{ name: 'encuestaAsignados', params: { id: props.item.id } }"
                         color="info"
                       >
                       colaboradores
