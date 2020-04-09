@@ -1,98 +1,65 @@
 <template>
   <NotPermission v-if="!authenticated" />
-  <v-container
-    v-else
-    fluid
-    grid-list-lg
-  >
-      <Breadcrumbs
-        :routes="[
+  <v-container v-else fluid grid-list-lg>
+    <Breadcrumbs
+      :routes="[
           { name: 'Inicio'},
           { name: 'Listado' },
           { name: 'Periodos Encuestas' }
         ]"
-      />
+    />
     <v-card style="border-radius:10px 10px 0 0;">
-      <v-toolbar
-          card
-          style="border-radius:10px 10px 0 0;"
+      <v-toolbar card style="border-radius:10px 10px 0 0;" color="primary" dark>
+        <v-toolbar-title>Nombre del Periodo</v-toolbar-title>
+      </v-toolbar>
+      <br />
+      <v-toolbar color="grey darken-1" dark card>
+        <v-toolbar-title>Listado de Periodo -encuesta</v-toolbar-title>
+        <v-spacer />
+        <v-btn
+          :to="{ name: 'crearEncuesta', params: { id: $route.params.id }}"
           color="primary"
-          dark
-        >
-          <v-toolbar-title>Nombre del Periodo</v-toolbar-title>
-        </v-toolbar>
-      <br>
-        <v-toolbar
-          color="grey darken-1"
-          dark
-          card
-        >
-          <v-toolbar-title>Listado de Periodo -encuesta</v-toolbar-title>
-          <v-spacer />
-          <v-btn
-            :to="{ name: 'crearEncuesta', params: { id: $route.params.id }}"
-            color="primary"
-          >
-            Agregar encuesta
-          </v-btn>
-        </v-toolbar>
-        <v-container
-          fluid
-          grid-list-lg
-        >
-          <v-layout
-            row
-            wrap
-          >
-            <v-flex xs12>
-              <v-data-table
-                :headers="[
+        >Agregar encuesta</v-btn>
+      </v-toolbar>
+      <v-container fluid grid-list-lg>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <v-data-table
+              :headers="[
                   { text: 'Nombre' },
                   { text: 'Encuesta Facil' },
                   { text: 'Fecha inicio' },
                   { text: 'Fecha Fin'},
                   { text: 'Acciones'}
                 ]"
-                :items="periodoEncuestas"
-                :loading="loadingPeriodoEncuestas"
-                :rows-per-page-items="[10,25,35,50]"
-                class="elevation-1"
-              >
-                <tr
-                  slot="items"
-                  slot-scope="props"
-                >
-                  <td class="px-3">
-                    {{ props.item.nombre }}
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.encuesta_facil_id }}
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.fecha_inicio }}
-                  </td>
-                  <td class="px-3">
-                    {{ props.item.fecha_fin }}
-                  </td>
-                  <td class="text-xs-center px-3">
-                    <v-btn
-                        class="ma-0"
-                        small
-                        flat
-                        :to="{ name: 'encuestaAsignados', params: { id: props.item.id } }"
-                        color="info"
-                      >
-                      colaboradores
-                      </v-btn>
-                  </td>
-                </tr>
-              </v-data-table>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        <center>
-        </center>
-      </v-card>
+              :items="periodoEncuestas"
+              :loading="loadingPeriodoEncuestas"
+              :rows-per-page-items="[10,25,35,50]"
+              class="elevation-1"
+            >
+              <tr slot="items" slot-scope="props">
+                <td class="px-3">{{ props.item.nombre }}</td>
+                <td class="px-3">{{ props.item.encuesta_facil_id }}</td>
+                <td class="px-3">{{ props.item.fecha_inicio }}</td>
+                <td class="px-3">{{ props.item.fecha_fin }}</td>
+                <td class="text-xs-center px-3">
+                  <v-btn
+                    class="ma-0"
+                    small
+                    flat
+                    :to="{ name: 'encuestaAsignados', params: { id: props.item.id } }"
+                    color="info"
+                  >colaboradores</v-btn>
+                </td>
+              </tr>
+            </v-data-table>
+          </v-flex>
+        </v-layout>
+      </v-container>
+      <center>
+        <v-btn color="error" @click="$router.push({name: 'listaPeriodo'})">Volver</v-btn>
+      </center>
+    </v-card>
   </v-container>
 </template>
 
