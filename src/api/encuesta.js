@@ -57,6 +57,19 @@ export default {
                 .catch(error => reject(error));
         });
     },
+    disponibles(payload = {}) {
+        const encuestaId = payload.encuestaId;
+        const data = payload.data || {};
+
+        return new Promise((resolve, reject) => {
+            axios({
+                    url: `${HOST}/encuestas/${encuestaId}/colaboradores-disponibles`,
+                    method: "get",
+                })
+                .then(response => resolve(response))
+                .catch(error => reject(error));
+        });
+    },
     asignados(payload = {}) {
         const encuestaId = payload.encuestaId;
         return new Promise((resolve, reject) => {

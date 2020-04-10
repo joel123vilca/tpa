@@ -6,7 +6,9 @@ export const state = {
     loadingEncuestas: false,
     currentEncuesta: null,
     asignados: [],
-    loadingAsignados: false
+    loadingAsignados: false,
+    disponibles: [],
+    loadingDisponibles: false
 };
 
 export const actions = {
@@ -42,6 +44,24 @@ export const actions = {
                 })
                 .catch(error => {
                     commit(types.REPLACE_LOADING_ASIGNADOS, { status: false });
+                    reject(error);
+                });
+        });
+    },
+    getDisponibles({ commit }, payload) {
+        commit(types.REPLACE_LOADING_DISPONIBLES, { status: true });
+        return new Promise((resolve, reject) => {
+            encuestaAPI
+                .disponibles(payload)
+                .then(response => {
+                    const disponibles = response.data.data;
+                    commit(types.REPLACE_LOADING_DISPONIBLES, { status: false });
+                    commit(types.REPLACE_DISPONIBLES, { disponibles });
+
+                    resolve(response);
+                })
+                .catch(error => {
+                    commit(types.REPLACE_LOADING_DISPONIBLES, { status: false });
                     reject(error);
                 });
         });
@@ -134,5 +154,11 @@ export const mutations = {
     },
     [types.REPLACE_ASIGNADOS](state, { asignados }) {
         state.asignados = asignados;
+    },
+    [types.REPLACE_LOADING_DISPONIBLES](state, { status }) {
+        state.loadingDisponibles = status;
+    },
+    [types.REPLACE_DISPONIBLES](state, { disponibles }) {
+        state.disponibles = disponibles;
     },
 };
