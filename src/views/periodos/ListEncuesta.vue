@@ -14,7 +14,7 @@
       </v-toolbar>
       <br />
       <v-toolbar color="grey darken-1" dark card>
-        <v-toolbar-title>Listado de Periodo -encuesta</v-toolbar-title>
+        <v-toolbar-title>Listado de Encuestas</v-toolbar-title>
         <v-spacer />
         <v-btn
           :to="{ name: 'crearEncuesta', params: { id: $route.params.id }}"
@@ -40,8 +40,8 @@
               <tr slot="items" slot-scope="props">
                 <td class="px-3">{{ props.item.nombre }}</td>
                 <td class="px-3">{{ props.item.encuesta_facil_id }}</td>
-                <td class="px-3">{{ props.item.fecha_inicio }}</td>
-                <td class="px-3">{{ props.item.fecha_fin }}</td>
+                <td class="px-3">{{ formatDate(props.item.fecha_inicio) }}</td>
+                <td class="px-3">{{ formatDate(props.item.fecha_fin) }}</td>
                 <td class="text-xs-center px-3">
                   <v-btn
                     class="ma-0"
@@ -99,7 +99,12 @@ export default {
   methods: {
     ...mapActions({
       getPeriodoEncuestas: 'periodos/getPeriodoEncuestas',
-    })
+    }),
+    formatDate(date) {
+      if (!date) return null;
+      const [year, month, day] = date.split('-');
+      return `${day}/${month}/${year}`;
+    },
   },
 };
 </script>
