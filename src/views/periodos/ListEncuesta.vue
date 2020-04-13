@@ -10,7 +10,7 @@
     />
     <v-card style="border-radius:10px 10px 0 0;">
       <v-toolbar card style="border-radius:10px 10px 0 0;" color="primary" dark>
-        <v-toolbar-title>Nombre del Periodo</v-toolbar-title>
+        <v-toolbar-title>{{nombre}}</v-toolbar-title>
       </v-toolbar>
       <br />
       <v-toolbar color="grey darken-1" dark card>
@@ -80,6 +80,7 @@ export default {
   data() {
     return {
       activeBtn: 5,
+      nombre:''
     };
   },
 
@@ -94,12 +95,20 @@ export default {
   },
   created() {
     this.getPeriodoEncuestas({ periodoId: this.$route.params.id });
+    this.getPeriodo({ periodoId: this.$route.params.id }).then(response => {
+      const periodo = response.data.data;
+      this.setForm(periodo);
+    });
   },
 
   methods: {
     ...mapActions({
       getPeriodoEncuestas: 'periodos/getPeriodoEncuestas',
+      getPeriodo: "periodos/getPeriodo",
     }),
+    setForm(periodo) {
+      this.nombre = periodo.nombre;
+    },
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split('-');

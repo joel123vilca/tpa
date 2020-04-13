@@ -52,7 +52,10 @@
               @click="crear()"
               :loading="loading"
             >Asignar Seleccionados</v-btn>
-            <v-btn flat @click="e1 = 1">Cancel</v-btn>
+            <v-btn
+              flat
+              @click="$router.push({name: 'encuestaAsignados', params: { id: $route.params.id }})"
+            >Cancelar</v-btn>
           </v-card>
         </v-flex>
       </v-layout>
@@ -122,7 +125,7 @@ export default {
       })
         .then(response => {
           this.loading = false;
-          this.$router.push({ name: "listaPeriodo" });
+          this.$router.push({name: 'encuestaAsignados', params: { id: this.$route.params.id }});
         })
         .catch(error => {
           this.formErrors = error.response.data.errors || {};

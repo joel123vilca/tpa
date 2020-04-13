@@ -2,9 +2,7 @@
   <v-container fluid grid-list-lg>
     <NotPermission v-if="!authenticated" />
     <template v-else>
-      <Breadcrumbs
-        :routes="[{ name: 'Inicio' }, { name: 'Lista de colaboradores' }]"
-      />
+      <Breadcrumbs :routes="[{ name: 'Inicio' }, { name: 'Lista de colaboradores' }]" />
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
           <v-card>
@@ -13,53 +11,56 @@
             </v-card-title>
             <v-spacer />
             <v-btn
-            :to="{ name: 'encuestaAsignar', params: { id: $route.params.id }}"
-            color="primary"
-          >
-            Asignar Colaboradores
-          </v-btn>
+              :to="{ name: 'encuestaAsignar', params: { id: $route.params.id }}"
+              color="primary"
+            >Asignar Colaboradores</v-btn>
             <v-divider />
-              <v-card>
-  <v-card-title>
-      Colaboradores
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Buscador"
-        single-line
-        hide-details
-        box
-      ></v-text-field>
-    </v-card-title>
-  <v-data-table
-    v-model="selected"
-    :headers="headers"
-    :items="asignados"
-    :search="search"
-    :rows-per-page-items="[10,25,35,50]"
-    item-key="id"
-    select-all
-    class="elevation-1"
-  >
-    <template v-slot:items="props">
-      <td>
-        <v-checkbox
-          v-model="props.selected"
-          primary
-          hide-details
-        ></v-checkbox>
-      </td>
-      <td>{{ props.item.rut }}</td>
-      <td>{{ props.item.primer_nombre}}</td>
-      <td>{{ props.item.apellido_paterno }}</td>
-      <td>{{ props.item.apellido_materno }}</td>
-    </template>
-  </v-data-table>
-  </v-card>
-              <v-btn v-if="selected.length > 0"  large color="error" dark  @click="eleminar()" :loading="loading">desasignar Seleccionados</v-btn>
-              <v-btn flat @click="e1 = 1">Cancel</v-btn>
-            
+            <v-card>
+              <v-card-title>
+                Colaboradores
+                <v-spacer></v-spacer>
+                <v-text-field
+                  v-model="search"
+                  append-icon="search"
+                  label="Buscador"
+                  single-line
+                  hide-details
+                  box
+                ></v-text-field>
+              </v-card-title>
+              <v-data-table
+                v-model="selected"
+                :headers="headers"
+                :items="asignados"
+                :search="search"
+                :rows-per-page-items="[10,25,35,50]"
+                item-key="id"
+                select-all
+                class="elevation-1"
+              >
+                <template v-slot:items="props">
+                  <td>
+                    <v-checkbox v-model="props.selected" primary hide-details></v-checkbox>
+                  </td>
+                  <td>{{ props.item.rut }}</td>
+                  <td>{{ props.item.primer_nombre}}</td>
+                  <td>{{ props.item.apellido_paterno }}</td>
+                  <td>{{ props.item.apellido_materno }}</td>
+                </template>
+              </v-data-table>
+            </v-card>
+            <v-btn
+              v-if="selected.length > 0"
+              large
+              color="error"
+              dark
+              @click="eleminar()"
+              :loading="loading"
+            >desasignar Seleccionados</v-btn>
+            <v-btn
+              flat
+              @click="$router.push({name: 'periodoEncuestas', params: { id: peridoId }})"
+            >Cancelar</v-btn>
           </v-card>
         </v-flex>
       </v-layout>
@@ -102,6 +103,7 @@ export default {
       form: {
         colaboradores: [],
       },
+      peridoId: '',
     };
   },
   computed: {
@@ -115,12 +117,20 @@ export default {
   },
   created() {
       this.getAsignados({encuestaId: this.$route.params.id});
+      this.getEncuesta({encuestaId: this.$route.params.id}).then(response => {
+      const encuestaInfo = response.data.data;
+      this.setForm(encuestaInfo);
+    });
   },
   methods: {
     ...mapActions({
       getAsignados:'encuestas/getAsignados',
-      desasignar: 'encuestas/desasignar'
+      desasignar: 'encuestas/desasignar',
+      getEncuesta: 'encuestas/getEncuesta'
     }),
+    setForm(encuesta) {
+      this.peridoId= encuesta.periodo.id;
+    },
     eleminar() {
       this.loading = true;
       this.form.colaboradores = this.selected.map(function(item) {return item.id});
