@@ -40,6 +40,21 @@ export default {
                 .catch(error => reject(error));
         });
     },
+    cargarExcel(payload = {}) {
+        const periodoId = payload.periodoId;
+        const data = payload.data || {};
+    
+        return new Promise((resolve, reject) => {
+          axios({
+            url: `${HOST}/periodos/${periodoId}/detalle-respuestas`,
+            method: "post",
+            data,
+            headers: {'Content-Type': 'multipart/form-data'},
+          })
+            .then(response => resolve(response))
+            .catch(error => reject(error));
+        });
+    },
     getByIdEncuestas(payload = {}) {
         const periodoId = payload.periodoId || "";
 

@@ -299,6 +299,12 @@ export default [{
             import ('@/views/encuestas/Create.vue'),
     },
     {
+        path: '/periodo/:id/cargar-resultados',
+        name: 'cargarResultado',
+        component: () =>
+            import ('@/views/periodos/CargarExcel.vue'),
+    },
+    {
         path: '/lista-encuesta',
         name: 'listaEncuesta',
         component: () =>

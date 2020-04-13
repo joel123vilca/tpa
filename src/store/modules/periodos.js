@@ -139,6 +139,23 @@ export const actions = {
                 });
         });
     },
+    cargarExcel({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            periodoAPI
+                .cargarExcel(payload)
+                .then(response => {
+                    this._vm.$notify.success({
+                        title: "Periodo",
+                        message: "Se cargo con exito"
+                    });
+
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
 
 
 };
