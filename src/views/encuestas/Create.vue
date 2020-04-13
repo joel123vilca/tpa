@@ -126,12 +126,10 @@
                     color="success"
                     :disabled="!validForm || processingForm"
                     :loading="processingForm"
-                  >
-                    Guardar
-                  </v-btn>
-                  <v-btn @click="$router.push({name: 'periodoEncuestas', params: { id: $route.params.id }})">
-                    Cancelar
-                  </v-btn>
+                  >Guardar</v-btn>
+                  <v-btn
+                    @click="$router.push({name: 'periodoEncuestas', params: { id: $route.params.id }})"
+                  >Cancelar</v-btn>
                 </div>
               </v-form>
             </v-card-text>
@@ -202,7 +200,7 @@ export default {
       this.createEncuesta({ data: this.form })
         .then(response => {
           this.processingForm = false;
-          this.$router.push({ name: "periodoEncuestas",  params: { id: $route.params.id } });
+          this.$router.push({ name: "periodoEncuestas",  params: { id: this.$route.params.id } });
         })
         .catch(error => {
           this.processingForm = false;
