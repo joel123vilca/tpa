@@ -88,7 +88,7 @@
                           color="success"
                           :disabled="!validForm || processingForm"
                           :loading="processingForm"
-                        >Guardar</v-btn>
+                        >Continuar</v-btn>
                         <v-btn @click="$router.push({name: 'listaPeriodo'})">Cancelar</v-btn>
                       </div>
                     </v-form>
@@ -96,6 +96,19 @@
                 </v-stepper-content>
                 <v-stepper-content step="2">
                   <v-flex xs12>
+                    <div>
+                      <v-alert
+                        v-for="(error, index) in Array.from(Object.values(formErrors))"
+                        :key="index"
+                        v-model="aviso"
+                        border="left"
+                        close-text="Close Alert"
+                        color="error"
+                        dark
+                        dismissible
+                      >{{error[0]}}</v-alert>
+                    </div>
+                    <h3 v-if="resultados.length > 0">Resultados</h3>
                     <v-data-table
                       v-if="resultados.length > 0"
                       :headers="headers"
@@ -111,6 +124,7 @@
                       </tr>
                     </v-data-table>
                   </v-flex>
+                  <v-btn color="primary" @click="e1 = 1">Atras</v-btn>
                 </v-stepper-content>
               </v-stepper-items>
             </v-stepper>
@@ -199,7 +213,6 @@ export default {
             });
         })
         .catch(error => {
-          console.log(error.response.data.errors);
           this.processingForm = false;
           this.formErrors = error.response.data.errors || {};
           this.e1 = 2;
