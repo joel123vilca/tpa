@@ -35,6 +35,13 @@
                     >
                       <v-container fluid grid-list-lg>
                         <v-alert
+                          v-model="aviso"
+                          border="left"
+                          color="primary"
+                          dark
+                          dismissible
+                        >Atención: Se sobreescribiran los resultados anteriores.</v-alert>
+                        <v-alert
                           v-model="alert"
                           border="left"
                           close-text="Close Alert"
@@ -88,7 +95,22 @@
                   </v-card-text>
                 </v-stepper-content>
                 <v-stepper-content step="2">
-                  <h3>Aqui iran los resultados</h3>
+                  <v-flex xs12>
+                    <v-data-table
+                      v-if="resultados.length > 0"
+                      :headers="headers"
+                      :items="resultados"
+                      class="elevation-1"
+                    >
+                      <tr slot="items" slot-scope="props">
+                        <td
+                          class="px-3"
+                          v-for="(resultado, index) in Object.values(props.item)"
+                          :key="index"
+                        >{{resultado}}</td>
+                      </tr>
+                    </v-data-table>
+                  </v-flex>
                 </v-stepper-content>
               </v-stepper-items>
             </v-stepper>
@@ -124,8 +146,11 @@ export default {
       },
       e1: 0,
       alert: false,
+      aviso: true,
       validForm: true,
+      resultados: [],
       processingForm: false,
+      headers: []
     };
   },
   computed: {
@@ -166,11 +191,15 @@ export default {
         periodoId: this.$route.params.id,
       data: formData })
         .then(response => {
+          this.resultados = response.data.data;
           this.processingForm = false;
-          this.$router.push({ name: "listaPeriodo"});
           this.e1 = 2;
+          this.headers = Object.keys(this.resultados[0]).map(function(x) {
+                return ({text: x});
+            });
         })
         .catch(error => {
+          console.log(error.response.data.errors);
           this.processingForm = false;
           this.formErrors = error.response.data.errors || {};
           this.e1 = 2;
