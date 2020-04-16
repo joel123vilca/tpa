@@ -36,7 +36,7 @@ export default {
         return new Promise((resolve, reject) => {
             axios({
                     url: `${HOST}/encuestas/${encuestaId}`,
-                    method: "put",
+                    method: "patch",
                     data
                 })
                 .then(response => resolve(response))

@@ -311,6 +311,12 @@ export default [{
             import ('@/views/encuestas/List.vue'),
     },
     {
+        path: '/encuesta/:id',
+        name: 'encuestaEditar',
+        component: () =>
+            import ('@/views/encuestas/Edit.vue'),
+    },
+    {
         path: '/encuesta/:id/asignar',
         name: 'encuestaAsignar',
         component: () =>

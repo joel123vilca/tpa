@@ -47,6 +47,7 @@
                     label="año"
                     outline
                     type="number"
+                    :mask="mask"
                     :rules="rules.year"
                     :error="!!formErrors.year"
                     :error-messages="formErrors.year"
@@ -112,12 +113,8 @@
                     color="success"
                     :disabled="!validForm || processingForm"
                     :loading="processingForm"
-                  >
-                    Guardar
-                  </v-btn>
-                  <v-btn @click="$router.push({ name: 'listaPeriodo' })">
-                    Cancelar
-                  </v-btn>
+                  >Guardar</v-btn>
+                  <v-btn @click="$router.push({ name: 'listaPeriodo' })">Cancelar</v-btn>
                 </div>
               </v-form>
             </v-card-text>
@@ -152,6 +149,7 @@ export default {
         descripcion: '',
         encuesta_plantilla_id: ''
       },
+      mask:'####',
       validForm: true,
       processingForm: false,
 

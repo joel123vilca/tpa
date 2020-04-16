@@ -103,6 +103,23 @@ export const actions = {
                 });
         });
     },
+    putEncuesta({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            encuestaAPI
+                .put(payload)
+                .then(response => {
+                    this._vm.$notify.success({
+                        title: "Encuesta",
+                        message: "El encuesta ha sido editado con éxito."
+                    });
+
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
     asignar({ commit }, payload) {
         return new Promise((resolve, reject) => {
             encuestaAPI
