@@ -30,6 +30,7 @@
                   { text: 'Encuesta Facil' },
                   { text: 'Fecha inicio' },
                   { text: 'Fecha Fin'},
+                  { text: 'Colaboradores'},
                   { text: 'Acciones'}
                 ]"
               :items="periodoEncuestas"
@@ -51,16 +52,18 @@
                     color="info"
                   >colaboradores</v-btn>
                 </td>
-                <v-btn
-                  class="ma-0"
-                  small
-                  icon
-                  flat
-                  :to="{ name: 'encuestaEditar', params: { id: props.item.id } }"
-                  color="info"
-                >
-                  <v-icon small>edit</v-icon>
-                </v-btn>
+                <td>
+                  <v-btn
+                    class="ma-0"
+                    small
+                    icon
+                    flat
+                    :to="{ name: 'encuestaEditar', params: { id: props.item.id } }"
+                    color="info"
+                  >
+                    <v-icon small>edit</v-icon>
+                  </v-btn>
+                </td>
               </tr>
             </v-data-table>
           </v-flex>

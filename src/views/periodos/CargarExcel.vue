@@ -124,7 +124,7 @@
                       </tr>
                     </v-data-table>
                   </v-flex>
-                  <v-btn color="primary" @click="e1 = 1">Atras</v-btn>
+                  <v-btn v-if="Object.values(formErrors)>0" color="primary" @click="e1 = 1">Atras</v-btn>
                 </v-stepper-content>
               </v-stepper-items>
             </v-stepper>

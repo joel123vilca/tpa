@@ -56,7 +56,6 @@
           </center>
         </v-layout>
       </v-container>
-      <center></center>
     </v-card>
   </v-container>
 </template>
