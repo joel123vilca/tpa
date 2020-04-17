@@ -67,6 +67,18 @@ export default {
                 .catch(error => reject(error));
         });
     },
+    getByIdEstadistica(payload = {}) {
+        const periodoId = payload.periodoId || "";
+
+        return new Promise((resolve, reject) => {
+            axios({
+                    url: `${HOST}/periodos/${periodoId}/estadisticas`,
+                    method: "get"
+                })
+                .then(response => resolve(response))
+                .catch(error => reject(error));
+        });
+    },
     put(payload = {}) {
         const periodoId = payload.periodoId;
         const data = payload.data || {};

@@ -9,7 +9,9 @@ export const state = {
     plantillas: [],
     loadingPlantillas: false,
     periodoEncuestas: [],
-    loadingPeriodoEncuestas: false
+    loadingPeriodoEncuestas: false,
+    periodoEstadisticas: [],
+    loadingPeriodoEstadisticas: false
 };
 
 export const actions = {
@@ -79,6 +81,24 @@ export const actions = {
                 })
                 .catch(error => {
                     commit(types.REPLACE_LOADING_PERIODO_ENCUESTAS, { status: false });
+                    reject(error);
+                });
+        });
+    },
+    getPeriodoEstadisticas({ commit }, payload) {
+        commit(types.REPLACE_LOADING_PERIODO_ESTADISTICAS, { status: true });
+        return new Promise((resolve, reject) => {
+            periodoAPI
+                .getByIdEstadistica(payload)
+                .then(response => {
+                    const periodoEstadisticas = response.data.data;
+                    commit(types.REPLACE_LOADING_PERIODO_ESTADISTICAS, { status: false });
+                    commit(types.REPLACE_PERIODO_ESTADISTICAS, { periodoEstadisticas });
+
+                    resolve(response);
+                })
+                .catch(error => {
+                    commit(types.REPLACE_LOADING_PERIODO_ESTADISTICAS, { status: false });
                     reject(error);
                 });
         });
@@ -184,5 +204,11 @@ export const mutations = {
     },
     [types.REPLACE_SHOW_MODAL_DELETE_PERIODO](state, { status }) {
         state.showModalDeletePeriodo = status;
-    }
+    },
+    [types.REPLACE_LOADING_PERIODO_ESTADISTICAS](state, { status }) {
+        state.loadingPeriodoEstadisticas = status;
+    },
+    [types.REPLACE_PERIODO_ESTADISTICAS](state, { periodoEstadisticas }) {
+        state.periodoEstadisticas = periodoEstadisticas;
+    },
 };

@@ -305,6 +305,12 @@ export default [{
             import ('@/views/periodos/CargarExcel.vue'),
     },
     {
+        path: '/periodo/:id/estadisticas',
+        name: 'periodoEstadisticas',
+        component: () =>
+            import ('@/views/periodos/Estadistica.vue'),
+    },
+    {
         path: '/lista-encuesta',
         name: 'listaEncuesta',
         component: () =>

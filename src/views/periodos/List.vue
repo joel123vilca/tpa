@@ -42,8 +42,9 @@
                   { text: 'Año' },
                   { text: 'detalle' },
                   { text: 'Platilla'},
-                  { text: 'Resultados'},
                   { text: 'Encuestas'},
+                  { text: 'Resultados'},
+                  { text: 'Promedios'},
                   { text: 'Acciones'}
                 ]"
               :items="periodos"
@@ -55,6 +56,15 @@
                 <td class="px-3">{{ props.item.year }}</td>
                 <td class="px-3">{{ props.item.detalle }}</td>
                 <td class="px-3">{{ props.item.encuestaPlantilla.nombre }}</td>
+                <td>
+                  <v-btn
+                    class="ma-0"
+                    small
+                    flat
+                    :to="{ name: 'periodoEncuestas', params: { id: props.item.id } }"
+                    color="info"
+                  >encuestas</v-btn>
+                </td>
                 <td class="px-3">
                   <v-btn
                     class="ma-0"
@@ -69,9 +79,9 @@
                     class="ma-0"
                     small
                     flat
-                    :to="{ name: 'periodoEncuestas', params: { id: props.item.id } }"
+                    :to="{ name: 'periodoEstadisticas', params: { id: props.item.id } }"
                     color="info"
-                  >encuestas</v-btn>
+                  >ver promedios</v-btn>
                 </td>
                 <td class="text-xs-center px-3">
                   <v-btn
