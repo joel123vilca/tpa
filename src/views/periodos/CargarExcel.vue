@@ -113,6 +113,7 @@
                       v-if="resultados.length > 0"
                       :headers="headers"
                       :items="resultados"
+                      :rows-per-page-items="[25,35,50]"
                       class="elevation-1"
                     >
                       <tr slot="items" slot-scope="props">
