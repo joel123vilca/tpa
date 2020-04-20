@@ -45,7 +45,8 @@
                   <td>{{ props.item.rut }}</td>
                   <td>{{ props.item.primer_nombre}}</td>
                   <td>{{ props.item.apellido_paterno }}</td>
-                  <td>{{ props.item.apellido_materno }}</td>
+                  <td>{{ props.item.cargoActual.nombre }}</td>
+                  <td>{{ props.item.areaActual.nombre }}</td>
                 </template>
               </v-data-table>
             </v-card>
@@ -94,7 +95,8 @@ export default {
         },
         { text: 'Nombre', value: 'primer_nombre' },
         { text: 'Apellido Paterno', value: 'apellido_paterno' },
-        { text: 'Apellido Materno', value: 'apellido_materno' },
+        { text: 'Cargo', value: 'cargoActual.nombre' },
+        { text: 'Area', value: 'areaActual.nombre' },
       ],
       formErrors: {},
       e1: 0,

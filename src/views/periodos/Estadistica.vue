@@ -47,7 +47,7 @@
             >
               <tr slot="items" slot-scope="props">
                 <td class="px-8">{{ props.item.area.nombre }}</td>
-                <td class="px-3">{{ props.item.resultado }}</td>
+                <td class="px-3">{{ props.item.resultado +'%' }}</td>
               </tr>
             </v-data-table>
           </v-flex>

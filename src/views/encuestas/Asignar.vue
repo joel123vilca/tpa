@@ -41,6 +41,8 @@
                   <td>{{ props.item.rut }}</td>
                   <td>{{ props.item.primer_nombre}}</td>
                   <td>{{ props.item.apellido_paterno }}</td>
+                  <td>{{ props.item.cargoActual.nombre }}</td>
+                  <td>{{ props.item.areaActual.nombre }}</td>
                 </template>
               </v-data-table>
             </v-card>
@@ -68,7 +70,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   metaInfo() {
-    return { title: "Asignar curso" };
+    return { title: "Asignar Colaboradores" };
   },
 
   components: {
@@ -88,7 +90,9 @@ export default {
           value: 'rut',
         },
         { text: 'Nombre', value: 'primer_nombre' },
-        { text: 'Apellido', value: 'apellido_paterno' }
+        { text: 'Nombre', value: 'apellido_paterno' },
+        { text: 'Cargo', value: 'cargoActual.nombre' },
+        { text: 'Area', value: 'areaActual.nombre' },
       ],
       formErrors: {},
       e1: 0,
