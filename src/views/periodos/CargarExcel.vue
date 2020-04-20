@@ -125,6 +125,7 @@
                     </v-data-table>
                   </v-flex>
                   <v-btn v-if="Object.values(formErrors)>0" color="primary" @click="e1 = 1">Atras</v-btn>
+                  <v-btn color="error" @click="$router.push({ name: 'listaPeriodo' })">Volver</v-btn>
                 </v-stepper-content>
               </v-stepper-items>
             </v-stepper>
@@ -186,7 +187,7 @@ export default {
         const fr = new FileReader()
         fr.readAsDataURL(e.file)
         fr.addEventListener('load', () => {
-          this.resultadoUrl = 'https://cdn.icon-icons.com/icons2/1156/PNG/512/1486565571-microsoft-office-excel_81549.png'
+          this.resultadoUrl = require('@/assets/iconoexcel.png');
             this.resultadoFile = e.file;
         })
       } else {
