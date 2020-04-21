@@ -13,9 +13,11 @@
     class="drawer"
     style="background: #337ab7; color: white"
   >
-  <div  style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;">Panel Administrador</div>
-        <v-list>
-          <template>
+    <div
+      style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;"
+    >Panel Administrador</div>
+    <v-list>
+      <template>
         <v-list-tile
           v-for="(item) in items"
           :key="item.title"
@@ -35,21 +37,21 @@
         </v-list-tile>
       </template>
 
-          <template>
-          <v-list-tile
-               exact
-              ripple
-              active-class="accent"
-              class="scoped-list-tile mb-1"
-              @click="logout({ router: $router })"
-            >
+      <template>
+        <v-list-tile
+          exact
+          ripple
+          active-class="accent"
+          class="scoped-list-tile mb-1"
+          @click="logout({ router: $router })"
+        >
           <v-list-tile-action @click="logout({ router: $router })">
             <v-icon>power_settings_new</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>Cerrar sesión</v-list-tile-content>
         </v-list-tile>
-          </template>
-        </v-list>
+      </template>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -88,12 +90,12 @@ export default {
         },
         {
           title: 'Capacitaciones',
-          icon: 'book',
+          icon: 'assignment',
           to: { name: "ListCourse" }
         },
         {
-          title: 'Periodos',
-          icon: 'book',
+          title: 'Encuestas',
+          icon: 'assignment_ind',
           to: { name: "listaPeriodo" }
         },
         {
