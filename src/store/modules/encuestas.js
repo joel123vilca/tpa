@@ -8,7 +8,8 @@ export const state = {
     asignados: [],
     loadingAsignados: false,
     disponibles: [],
-    loadingDisponibles: false
+    loadingDisponibles: false,
+    showModalDeleteEncuesta: false,
 };
 
 export const actions = {
@@ -82,10 +83,28 @@ export const actions = {
                 });
         });
     },
+    deleteEncuesta({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            encuestaAPI
+                .delete(payload)
+                .then(response => {
+                    this._vm.$notify.success({
+                        title: "Encuesta",
+                        message: "La encuesta ha sido eliminado con éxito."
+                    });
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
     replaceCurrentEncuesta({ commit }, payload) {
         commit(types.REPLACE_CURRENT_ENCUESTA, payload);
     },
-
+    replaceShowModalDeleteEncuesta({ commit }, payload) {
+        commit(types.REPLACE_SHOW_MODAL_DELETE_ENCUESTA, payload);
+    },
     createEncuesta({ commit }, payload) {
         return new Promise((resolve, reject) => {
             encuestaAPI
@@ -178,4 +197,7 @@ export const mutations = {
     [types.REPLACE_DISPONIBLES](state, { disponibles }) {
         state.disponibles = disponibles;
     },
+    [types.REPLACE_SHOW_MODAL_DELETE_ENCUESTA](state, { status }) {
+        state.showModalDeleteEncuesta = status;
+    }
 };

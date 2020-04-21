@@ -89,7 +89,7 @@
                   </v-btn>
                   <v-tooltip bottom v-else>
                     <template v-slot:activator="{ on }">
-                      <v-btn small icon flat color="error" dark v-on="on">
+                      <v-btn small icon flat color="error" class="ma-0" dark v-on="on">
                         <v-icon small>delete</v-icon>
                       </v-btn>
                     </template>

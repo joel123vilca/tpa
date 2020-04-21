@@ -63,6 +63,25 @@
                   >
                     <v-icon small>edit</v-icon>
                   </v-btn>
+                  <v-btn
+                    v-if="props.item.colaboradoresAsignados != true"
+                    class="ma-0"
+                    small
+                    icon
+                    flat
+                    color="error"
+                    @click="openModalDelete(props.item)"
+                  >
+                    <v-icon small>delete</v-icon>
+                  </v-btn>
+                  <v-tooltip bottom v-else>
+                    <template v-slot:activator="{ on }">
+                      <v-btn small icon flat color="error" class="ma-0" dark v-on="on">
+                        <v-icon small>delete</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Tiene colaboradores asignados</span>
+                  </v-tooltip>
                 </td>
               </tr>
             </v-data-table>
@@ -73,6 +92,7 @@
         <v-btn color="error" @click="$router.push({name: 'listaPeriodo'})">Volver</v-btn>
       </center>
     </v-card>
+    <ModalDeleteEncuesta />
   </v-container>
 </template>
 
@@ -87,7 +107,8 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    NotPermission: () => import('@/views/errors/NotPermission')
+    NotPermission: () => import('@/views/errors/NotPermission'),
+    ModalDeleteEncuesta: () => import('@/views/periodos/ModalDeleteEncuesta'),
   },
 
   data() {
@@ -118,9 +139,15 @@ export default {
     ...mapActions({
       getPeriodoEncuestas: 'periodos/getPeriodoEncuestas',
       getPeriodo: "periodos/getPeriodo",
+      replaceShowModalDeleteEncuesta: 'encuestas/replaceShowModalDeleteEncuesta',
+      replaceCurrentEncuesta: 'encuestas/replaceCurrentEncuesta',
     }),
     setForm(periodo) {
       this.nombre = periodo.nombre;
+    },
+    openModalDelete(encuesta) {
+      this.replaceCurrentEncuesta({ encuesta });
+      this.replaceShowModalDeleteEncuesta({ status: true });
     },
     formatDate(date) {
       if (!date) return null;

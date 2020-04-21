@@ -1,21 +1,21 @@
 <template>
-  <v-dialog v-model="showModalDeletePeriodo" width="480px" persistent lazy scrollable>
+  <v-dialog v-model="showModalDeleteEncuesta" width="480px" persistent lazy scrollable>
     <v-card>
       <v-toolbar color="error" card dark>
-        <v-toolbar-title>Eliminar Periodo</v-toolbar-title>
+        <v-toolbar-title>Eliminar Encuesta</v-toolbar-title>
         <v-spacer />
-        <v-btn icon dark @click="replaceShowModalDeletePeriodo({ status: false })">
+        <v-btn icon dark @click="replaceShowModalDeleteEncuesta({ status: false })">
           <v-icon>close</v-icon>
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <p>¿Está seguro de Eliminar el periodo?</p>
+        <p>¿Está seguro de Eliminar la encuesta?</p>
 
-        <template v-if="currentPeriodo">
+        <template v-if="currentEncuesta">
           <ul>
             <li>
               <strong>Nombre:</strong>
-              {{ currentPeriodo.nombre}}
+              {{ currentEncuesta.nombre}}
             </li>
           </ul>
         </template>
@@ -30,7 +30,7 @@
         >Eliminar</v-btn>
         <v-btn
           :disabled="processingDelete"
-          @click="replaceShowModalDeletePeriodo({ status: false })"
+          @click="replaceShowModalDeleteEncuesta({ status: false })"
         >Cancelar</v-btn>
       </div>
     </v-card>
@@ -48,32 +48,32 @@ export default {
   },
   computed: {
     ...mapState({
-      showModalDeletePeriodo: state => state.periodos.showModalDeletePeriodo,
-      currentPeriodo: state => state.periodos.currentPeriodo,
+      showModalDeleteEncuesta: state => state.encuestas.showModalDeleteEncuesta,
+      currentEncuesta: state => state.encuestas.currentEncuesta,
     }),
   },
   watch: {
-    showModalDeletePeriodo(newValue, oldValue) {
+    showModalDeleteEncuesta(newValue, oldValue) {
       if (!newValue) {
-        this.replaceCurrentPeriodo({ periodo: null })
+        this.replaceCurrentEncuesta({ encuesta: null })
         return false;
       }
     }
   },
   methods: {
     ...mapActions({
-      replaceShowModalDeletePeriodo: 'periodos/replaceShowModalDeletePeriodo',
-      replaceCurrentPeriodo: 'periodos/replaceCurrentPeriodo',
-      deletePeriodo: 'periodos/deletePeriodo',
-      getPeriodos: 'periodos/getPeriodos',
+      replaceShowModalDeleteEncuesta: 'encuestas/replaceShowModalDeleteEncuesta',
+      replaceCurrentEncuesta: 'encuestas/replaceCurrentEncuesta',
+      deleteEncuesta: 'encuestas/deleteEncuesta',
+      getPeriodoEncuestas: 'periodos/getPeriodoEncuestas',
     }),
     launchDelete() {
       this.processingDelete = true;
-      this.deletePeriodo({ periodoId: this.currentPeriodo.id })
+      this.deleteEncuesta({ encuestaId: this.currentEncuesta.id })
         .then((response) => {
           this.processingDelete = false;
-          this.replaceShowModalDeletePeriodo({ status: false });
-          this.getPeriodos();
+          this.replaceShowModalDeleteEncuesta({ status: false });
+          this.getPeriodoEncuestas({ periodoId: this.$route.params.id });
         })
         .catch(() => {
           this.processingDelete = false;
