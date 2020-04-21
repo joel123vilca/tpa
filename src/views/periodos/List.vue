@@ -9,24 +9,6 @@
         ]"
     />
     <v-card style="border-radius:10px 10px 0 0;">
-      <v-bottom-nav color="transparent" :value="activeBtn">
-        <v-btn flat color="teal">
-          <span>Periodos</span>
-          <v-icon>assignment</v-icon>
-        </v-btn>
-        <v-btn flat color="teal">
-          <span>Encuestas</span>
-          <v-icon>history</v-icon>
-        </v-btn>
-        <v-btn flat color="teal">
-          <span>Generar Resultados</span>
-          <v-icon>description</v-icon>
-        </v-btn>
-        <v-btn flat color="teal">
-          <span>Resultados</span>
-          <v-icon>supervisor_account</v-icon>
-        </v-btn>
-      </v-bottom-nav>
       <br />
       <v-toolbar color="grey darken-1" dark card>
         <v-toolbar-title>Listado de Periodos</v-toolbar-title>
