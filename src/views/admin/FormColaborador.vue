@@ -1,127 +1,95 @@
 <template>
   <NotPermission v-if="!authenticated" />
   <v-container v-else fluid grid-list-lg>
-  <v-card-title class="white cyan--text headline">
-        Ingresar Colaborador
-        <v-spacer />
-        <v-spacer />
-        <Breadcrumbs
+    <v-card-title class="white cyan--text headline">
+      Ingresar Colaborador
+      <v-spacer />
+      <v-spacer />
+      <Breadcrumbs
         :routes="[
           { name: 'Inicio'},
           { name: 'Colaboradores' },
           { name: 'Ingresar Colaborador'}
         ]"
-        />
-  </v-card-title>
-  <br>
-  <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales </v-stepper-step>
+      />
+    </v-card-title>
+    <br />
+    <v-stepper v-model="e1">
+      <v-stepper-header>
+        <v-stepper-step :complete="e1 > 1" step="1">Paso 1: Datos Generales</v-stepper-step>
 
-      <v-divider></v-divider>
-
-      <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Empresa</v-stepper-step>
-
-      <v-divider></v-divider>
-
-      <v-stepper-step step="3">Paso 3: Fotografia Colaborador</v-stepper-step>
-    </v-stepper-header>
-
-    <v-stepper-items>
-      <v-form
-        ref="form"
-        v-model="validForm"
-        lazy-validation
-        @submit.prevent="submitCreateColaborador"
-      >
-      <v-stepper-content step="1">
-        <h3>Información General</h3>
-        <br>
         <v-divider></v-divider>
-        <br>
-          <v-layout row wrap>
-            <v-flex xs12  md12>
-              <v-text-field
-                v-model="form.rut"
-                label="RUT"
-                :rules="rules.rut"
-                :error="!!formErrors.rut"
-                :error-messages="formErrors.rut"
-                @keyup="
+
+        <v-stepper-step :complete="e1 > 2" step="2">Paso 2: Datos Empresa</v-stepper-step>
+
+        <v-divider></v-divider>
+
+        <v-stepper-step step="3">Paso 3: Fotografia Colaborador</v-stepper-step>
+      </v-stepper-header>
+
+      <v-stepper-items>
+        <v-form
+          ref="form"
+          v-model="validForm"
+          lazy-validation
+          @submit.prevent="submitCreateColaborador"
+        >
+          <v-stepper-content step="1">
+            <h3>Información General</h3>
+            <br />
+            <v-divider></v-divider>
+            <br />
+            <v-layout row wrap>
+              <v-flex xs12 md12>
+                <v-text-field
+                  v-model="form.rut"
+                  label="RUT"
+                  :rules="rules.rut"
+                  :error="!!formErrors.rut"
+                  :error-messages="formErrors.rut"
+                  @keyup="
                   () => {
                     formErrors.rut = undefined;
                     delete formErrors.rut;
                   }
                 "
-                @change="verifyRut"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12  md6>
-              <v-text-field
-                v-model="form.primer_nombre"
-                label="Primer Nombre"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 md6>
-              <v-text-field
-                v-model="form.segundo_nombre"
-                label="Segundo Nombre"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6 md6>
-              <v-text-field
-                v-model="form.apellido_paterno"
-                label="Apellido Paterno"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6 md6>
-              <v-text-field
-                v-model="form.apellido_materno"
-                label="Apellido Materno"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="form.domicilio"
-                label="Domicilio"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex sm4 xs12>
-              <v-autocomplete
-                v-model="form.sexo"
-                :items="genero"
-                label="Sexo"
-                outline
-              />
-            </v-flex>
-            <v-flex xs12 sm4 md4>
-              <v-text-field
-                v-model="form.nacionalidad"
-                label="Nacionalidad"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex sm4 xs12>
-              <v-autocomplete
-                v-model="form.estado_civil_id"
-                :items="estadoCiviles"
-                label="Estado Civil"
-                item-text="tipo"
-                item-value="id"
-                outline
-              />
-            </v-flex>
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
+                  @change="verifyRut"
+                  outline
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12 md6>
+                <v-text-field v-model="form.primer_nombre" label="Primer Nombre" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 md6>
+                <v-text-field v-model="form.segundo_nombre" label="Segundo Nombre" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.apellido_paterno" label="Apellido Paterno" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.apellido_materno" label="Apellido Materno" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm12 md12>
+                <v-text-field v-model="form.domicilio" label="Domicilio" outline></v-text-field>
+              </v-flex>
+              <v-flex sm4 xs12>
+                <v-autocomplete v-model="form.sexo" :items="genero" label="Sexo" outline />
+              </v-flex>
+              <v-flex xs12 sm4 md4>
+                <v-text-field v-model="form.nacionalidad" label="Nacionalidad" outline></v-text-field>
+              </v-flex>
+              <v-flex sm4 xs12>
+                <v-autocomplete
+                  v-model="form.estado_civil_id"
+                  :items="estadoCiviles"
+                  label="Estado Civil"
+                  item-text="tipo"
+                  item-value="id"
+                  outline
+                />
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-text-field
                   v-model="form.fecha_nacimiento"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE NACIMIENTO"
@@ -129,99 +97,77 @@
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
-                    </v-flex>
-            <v-flex sm6 xs12>
-              <v-autocomplete
-                v-model="form.nivel_educacion_id"
-                :items="nivelesEducacion"
-                label="Nivel de Educación"
-                item-text="nivel_tipo"
-                item-value="id"
-                outline
-              />
-            </v-flex>
-            <v-flex xs12 sm6 md6>
-              <v-text-field
-                v-model="form.contacto_emergencia_nombre"
-                label="Contacto de Emergencia"
-                outline
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6 md6>
-              <v-text-field
-                v-model="form.contacto_emergencia_telefono"
-                label="Teléfono Contacto de Emergencia"
-                outline
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-autocomplete
+                  v-model="form.nivel_educacion_id"
+                  :items="nivelesEducacion"
+                  label="Nivel de Educación"
+                  item-text="nivel_tipo"
+                  item-value="id"
+                  outline
+                />
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field
+                  v-model="form.contacto_emergencia_nombre"
+                  label="Contacto de Emergencia"
+                  outline
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field
+                  v-model="form.contacto_emergencia_telefono"
+                  label="Teléfono Contacto de Emergencia"
+                  outline
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
 
-        <v-btn
-          :disabled='!form.rut'
-          color="success"
-          @click="e1 = 2"
-        >
-          Siguiente
-        </v-btn>
-      </v-stepper-content>
+            <v-btn :disabled="!form.rut" color="success" @click="e1 = 2">Siguiente</v-btn>
+          </v-stepper-content>
 
-      <v-stepper-content step="2">
-        <h3>Datos Empresa</h3>
-        <br>
-        <v-divider></v-divider>
-        <br>
-        <v-layout row wrap>
-          <v-flex xs12 sm12 md12>
-            <v-text-field
-              v-model="form.email"
-              :rules="rules.email"
-              label="E-mail"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.telefono"
-              label="Teléfono"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.anexo"
-              label="Anexo"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex sm12 xs12>
-            <v-autocomplete
-              v-model="form.tags"
-              :items="filterData"
-              dense
-              clearable
-              small-chips
-              label="Seleccionar Etiquetas"
-              item-text="nombre"
-              item-value="id"
-              outline
-              multiple
-            />
-          </v-flex>
-          <v-flex sm6 xs12>
-            <v-autocomplete
-              v-model="form.licencia_b"
-              :items="licencias"
-              dense
-              small-chips
-              label="Licencia B"
-              outline
-            />
-          </v-flex>
-           <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
+          <v-stepper-content step="2">
+            <h3>Datos Empresa</h3>
+            <br />
+            <v-divider></v-divider>
+            <br />
+            <v-layout row wrap>
+              <v-flex xs12 sm12 md12>
+                <v-text-field v-model="form.email" :rules="rules.email" label="E-mail" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.telefono" label="Teléfono" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.anexo" label="Anexo" outline></v-text-field>
+              </v-flex>
+              <v-flex sm12 xs12>
+                <v-autocomplete
+                  v-model="form.tags"
+                  :items="filterData"
+                  dense
+                  clearable
+                  small-chips
+                  label="Seleccionar Etiquetas"
+                  item-text="nombre"
+                  item-value="id"
+                  outline
+                  multiple
+                />
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-autocomplete
+                  v-model="form.licencia_b"
+                  :items="licencias"
+                  dense
+                  small-chips
+                  label="Licencia B"
+                  outline
+                />
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-text-field
                   v-model="form.vencimiento_licencia_b"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA B"
@@ -230,22 +176,19 @@
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
-          </v-flex>
-          <v-flex sm6 xs12>
-            <v-autocomplete
-              v-model="form.licencia_d"
-              :items="licencias"
-              dense
-              small-chips
-              label="Licencia D"
-              outline
-            />
-          </v-flex>
-          <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-autocomplete
+                  v-model="form.licencia_d"
+                  :items="licencias"
+                  dense
+                  small-chips
+                  label="Licencia D"
+                  outline
+                />
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-text-field
                   v-model="form.vencimiento_licencia_d"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO LICENCIA D"
@@ -254,23 +197,20 @@
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
-          </v-flex>
+              </v-flex>
 
-          <v-flex sm6 xs12>
-            <v-autocomplete
-              v-model="form.credencial_vigilante"
-              :items="licencias"
-              dense
-              small-chips
-              label="Credencial Vigilante"
-              outline
-            />
-          </v-flex>
-          <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
+              <v-flex sm6 xs12>
+                <v-autocomplete
+                  v-model="form.credencial_vigilante"
+                  :items="licencias"
+                  dense
+                  small-chips
+                  label="Credencial Vigilante"
+                  outline
+                />
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-text-field
                   v-model="form.vencimiento_credencial_vigilante"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CREDENCIAL VIGILANTE"
@@ -279,24 +219,19 @@
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
-          </v-flex>
+              </v-flex>
 
-
-          <v-flex sm6 xs12>
-            <v-autocomplete
-              v-model="form.carnet_portuario"
-              :items="licencias"
-              
-              small-chips
-              label="Carnet Portuario"
-              outline
-            />
-          </v-flex>
-          <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
+              <v-flex sm6 xs12>
+                <v-autocomplete
+                  v-model="form.carnet_portuario"
+                  :items="licencias"
+                  small-chips
+                  label="Carnet Portuario"
+                  outline
+                />
+              </v-flex>
+              <v-flex sm6 xs12>
+                <v-text-field
                   v-model="form.vencimiento_carnet_portuario"
                   hint="Formato DD/MM/AAAA"
                   label="FECHA DE VENCIMIENTO CARNET PORTUARIO"
@@ -305,102 +240,61 @@
                   type="date"
                   max="9999-12-31"
                 ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.talla_calzado"
-              label="Talla Calzado"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.talla_chaleco"
-              label="Talla Chaleco"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.talla_polera"
-              label="Talla Polera"
-              outline
-            ></v-text-field>
-          </v-flex>
-          <v-flex xs12 sm6 md6>
-            <v-text-field
-              v-model="form.talla_pantalon"
-              label="Talla Pantalón"
-              outline
-            ></v-text-field>
-          </v-flex>
-        </v-layout>
-        <v-btn
-          color="success"
-          @click="e1 = 3"
-        >
-          Siguiente
-        </v-btn>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.talla_calzado" label="Talla Calzado" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.talla_chaleco" label="Talla Chaleco" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.talla_polera" label="Talla Polera" outline></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-text-field v-model="form.talla_pantalon" label="Talla Pantalón" outline></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-btn :disabled="continuar" color="success" @click="e1 = 3">Siguiente</v-btn>
 
-        <v-btn
-          color="error"
-          @click="e1 = 1"
-        >
-        Volver
-        </v-btn>
-      </v-stepper-content>
+            <v-btn color="error" @click="e1 = 1">Volver</v-btn>
+          </v-stepper-content>
 
-      <v-stepper-content step="3">
-        <br>
-        <v-fab-transition>
-          <v-btn
-            v-show="imageUrl"
-            color="pink"
-            small
-            dark
-            absolute
-            left
-            fab
-            @click="deleteImage()"
-          >
-            X
-          </v-btn>
-        </v-fab-transition>
-        <el-upload
-          class="avatar-uploader"
-          action=""
-          name="image"
-          :http-request="onFilePicked"
-          :show-file-list="false"
-          :before-upload="beforeImageUpload"
-        >
-          <img
-            v-if="imageUrl"
-            :src="imageUrl"
-            class="avatar"
-          >
+          <v-stepper-content step="3">
+            <br />
+            <v-fab-transition>
+              <v-btn
+                v-show="imageUrl"
+                color="pink"
+                small
+                dark
+                absolute
+                left
+                fab
+                @click="deleteImage()"
+              >X</v-btn>
+            </v-fab-transition>
+            <el-upload
+              class="avatar-uploader"
+              action
+              name="image"
+              :http-request="onFilePicked"
+              :show-file-list="false"
+              :before-upload="beforeImageUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
 
-          <i
-            v-else
-            class="el-icon-plus avatar-uploader-icon"
-          />
-      </el-upload>
-      <label class="grey--text text--darken-1">Imagen de Perfil</label>
-      <br>
-      <br>
-        <v-btn
-          type="submit"
-          color="success"
-          :loading="processingForm"
-        >
-          Guardar
-        </v-btn>
+              <i v-else class="el-icon-plus avatar-uploader-icon" />
+            </el-upload>
+            <label class="grey--text text--darken-1">Imagen de Perfil</label>
+            <br />
+            <br />
+            <v-btn type="submit" color="success" :loading="processingForm">Guardar</v-btn>
 
-        <v-btn @click="e1 = 2" color="error">Volver</v-btn>
-      </v-stepper-content>
-       </v-form>
-    </v-stepper-items>
-  </v-stepper>
+            <v-btn @click="e1 = 2" color="error">Volver</v-btn>
+          </v-stepper-content>
+        </v-form>
+      </v-stepper-items>
+    </v-stepper>
   </v-container>
 </template>
 <script>
@@ -423,6 +317,7 @@ export default {
       menu3: false,
       menu4: false,
       menu5: false,
+      continuar: false,
       files: [],
       imageName: '',
       imageUrl: '',
@@ -501,26 +396,62 @@ export default {
       if(this.form.licencia_b != 'SI'){
         this.form.licencia_b = 'NO'
         this.form.vencimiento_licencia_b = '';
+      } else {
+        this.btnContinuar();
       }
     },
     'form.licencia_d': function () {
       if(this.form.licencia_d != 'SI'){
         this.form.licencia_d = 'NO';
         this.form.vencimiento_licencia_d = '';
+      } else {
+        this.btnContinuar();
       }
     },
     'form.carnet_portuario': function () {
       if(this.form.carnet_portuario != 'SI'){
         this.form.carnet_portuario = 'NO'
         this.form.vencimiento_carnet_portuario = '';
+      } else {
+        this.btnContinuar();
       }
     },
     'form.credencial_vigilante': function () {
       if(this.form.credencial_vigilante != 'SI'){
         this.form.credencial_vigilante = 'NO'
         this.form.vencimiento_credencial_vigilante = '';
+      } else {
+        this.btnContinuar();
       }
     },
+    'form.vencimiento_credencial_vigilante' : function () {
+      if(this.form.vencimiento_credencial_vigilante === '' && this.form.credencial_vigilante === 'SI' ) {
+        this.continuar = true;
+      }  else {
+        this.continuar = false;
+      }
+    },
+    'form.vencimiento_carnet_portuario' : function () {
+      if(this.form.vencimiento_carnet_portuario === ''  && this.form.carnet_portuario === 'SI') {
+        this.continuar = true;
+      }  else {
+        this.continuar = false;
+      }
+    },
+    'form.vencimiento_licencia_d' : function () {
+      if(this.form.vencimiento_licencia_d === ''  && this.form.licencia_d === 'SI') {
+        this.continuar = true;
+      }  else {
+        this.continuar = false;
+      } 
+    },
+    'form.vencimiento_licencia_b' : function () {
+      if(this.form.vencimiento_licencia_b === '' && this.form.licencia_b === 'SI' ) {
+        this.continuar = true;
+      } else {
+        this.continuar = false;
+      }
+    }
   },
   computed: {
     ...mapState({
@@ -553,6 +484,17 @@ export default {
       getTags: 'tags/getTags',
       getVerify: 'colaboradores/getVerify',
     }),
+    btnContinuar(){
+      if(this.form.credencial_vigilante === 'SI' || this.form.licencia_b === 'SI' || this.form.licencia_d === 'SI' || this.form.carnet_portuario === 'SI'){
+        if(this.form.vencimiento_credencial_vigilante === '' || this.form.vencimiento_carnet_portuario === '' || this.form.vencimiento_licencia_d === '' || this.form.vencimiento_licencia_b === ''){
+          this.continuar = true;
+        } else {
+          this.continuar = false;
+        }
+      } else {
+        this.continuar = false;
+      }
+    },
     verifyRut() {
       this.getVerify({
         rut: this.form.rut,
