@@ -199,6 +199,14 @@
                   :disabled="form.licencia_b === 'NO'"
                   type="date"
                   max="9999-12-31"
+                  :error="!!formErrors.vencimiento_licencia_b"
+                  :error-messages="formErrors.vencimiento_licencia_b"
+                  @keyup="
+                      () => {
+                        formErrors.vencimiento_licencia_b = undefined;
+                        delete formErrors.vencimiento_licencia_b;
+                      }
+                    "
                 ></v-text-field>
               </v-flex>
               <v-flex sm6 xs12>
@@ -220,6 +228,14 @@
                   :disabled="form.licencia_d === 'NO'"
                   type="date"
                   max="9999-12-31"
+                  :error="!!formErrors.vencimiento_licencia_d"
+                  :error-messages="formErrors.vencimiento_licencia_d"
+                  @keyup="
+                      () => {
+                        formErrors.vencimiento_licencia_d = undefined;
+                        delete formErrors.vencimiento_licencia_d;
+                      }
+                    "
                 ></v-text-field>
               </v-flex>
 
@@ -242,6 +258,14 @@
                   :disabled="form.credencial_vigilante === 'NO'"
                   type="date"
                   max="9999-12-31"
+                  :error="!!formErrors.vencimiento_credencial_vigilante"
+                  :error-messages="formErrors.vencimiento_credencial_vigilante"
+                  @keyup="
+                      () => {
+                        formErrors.vencimiento_credencial_vigilante = undefined;
+                        delete formErrors.vencimiento_credencial_vigilante;
+                      }
+                    "
                 ></v-text-field>
               </v-flex>
 
@@ -264,6 +288,14 @@
                   :disabled="form.carnet_portuario === 'NO'"
                   type="date"
                   max="9999-12-31"
+                  :error="!!formErrors.vencimiento_carnet_portuario"
+                  :error-messages="formErrors.vencimiento_carnet_portuario"
+                  @keyup="
+                      () => {
+                        formErrors.vencimiento_carnet_portuario = undefined;
+                        delete formErrors.vencimiento_carnet_portuario;
+                      }
+                    "
                 ></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
@@ -363,6 +395,7 @@ export default {
       avatar: '',
       continuar: false,
       nombre_completo: '',
+      formErrors: { vencimiento_carnet_portuario:'', vencimiento_credencial_vigilante:'', vencimiento_licencia_b:'', vencimiento_licencia_d:''},
       form: {
         rut: '',
         usuario: '',
@@ -433,62 +466,38 @@ export default {
       if(this.form.licencia_b != 'SI'){
         this.form.licencia_b = 'NO'
         this.form.vencimiento_licencia_b = '';
+        this.formErrors.vencimiento_licencia_b = '';
       } else {
-        this.btnContinuar();
+        this.formErrors.vencimiento_licencia_b = 'Este campo es requerido!.';
       }
     },
     'form.licencia_d': function () {
       if(this.form.licencia_d != 'SI'){
         this.form.licencia_d = 'NO';
         this.form.vencimiento_licencia_d = '';
+        this.formErrors.vencimiento_licencia_d = '';
       } else {
-        this.btnContinuar();
+        this.formErrors.vencimiento_licencia_d = 'Este campo es requerido!.';
       }
     },
     'form.carnet_portuario': function () {
       if(this.form.carnet_portuario != 'SI'){
         this.form.carnet_portuario = 'NO'
         this.form.vencimiento_carnet_portuario = '';
+        this.formErrors.vencimiento_carnet_portuario = '';
       } else {
-        this.btnContinuar();
+        this.formErrors.vencimiento_carnet_portuario = 'Este campo es requerido!.';
       }
     },
     'form.credencial_vigilante': function () {
       if(this.form.credencial_vigilante != 'SI'){
         this.form.credencial_vigilante = 'NO'
         this.form.vencimiento_credencial_vigilante = '';
+        this.formErrors.vencimiento_credencial_vigilante = '';
       } else {
-        this.btnContinuar();
+        this.formErrors.vencimiento_credencial_vigilante = 'Este campo es requerido!.';
       }
     },
-    'form.vencimiento_credencial_vigilante' : function () {
-      if(this.form.vencimiento_credencial_vigilante === '' && this.form.credencial_vigilante === 'SI' ) {
-        this.continuar = true;
-      }  else {
-        this.continuar = false;
-      }
-    },
-    'form.vencimiento_carnet_portuario' : function () {
-      if(this.form.vencimiento_carnet_portuario === ''  && this.form.carnet_portuario === 'SI') {
-        this.continuar = true;
-      }  else {
-        this.continuar = false;
-      }
-    },
-    'form.vencimiento_licencia_d' : function () {
-      if(this.form.vencimiento_licencia_d === ''  && this.form.licencia_d === 'SI') {
-        this.continuar = true;
-      }  else {
-        this.continuar = false;
-      } 
-    },
-    'form.vencimiento_licencia_b' : function () {
-      if(this.form.vencimiento_licencia_b === '' && this.form.licencia_b === 'SI' ) {
-        this.continuar = true;
-      } else {
-        this.continuar = false;
-      }
-    }
   },
   computed: {
     ...mapState({
@@ -525,17 +534,6 @@ export default {
       getNivelesEducacion: 'nivelesEducacion/getNivelesEducacion',
       getTags: 'tags/getTags',
     }),
-    btnContinuar(){
-      if(this.form.credencial_vigilante === 'SI' || this.form.licencia_b === 'SI' || this.form.licencia_d === 'SI' || this.form.carnet_portuario === 'SI'){
-        if(this.form.vencimiento_credencial_vigilante === '' || this.form.vencimiento_carnet_portuario === '' || this.form.vencimiento_licencia_d === '' || this.form.vencimiento_licencia_b === ''){
-          this.continuar = true;
-        } else {
-          this.continuar = false;
-        }
-      } else {
-        this.continuar = false;
-      }
-    },
     deleteImage() {
       this.imageUrl = '';
     },
@@ -626,6 +624,19 @@ export default {
     },
     submitCreateColaborador(){
       this.processingForm = true
+
+      if(this.form.licencia_b === 'SI' && this.form.vencimiento_licencia_b === ''){
+        this.form.licencia_b = 'NO';
+      }
+      if(this.form.licencia_d === 'SI' && this.form.vencimiento_licencia_d === ''){
+        this.form.licencia_d = 'NO';
+      }
+      if(this.form.carnet_portuario === 'SI' && this.form.vencimiento_carnet_portuario === ''){
+        this.form.carnet_portuario = 'NO';
+      }
+      if(this.form.credencial_vigilante === 'SI' && this.form.vencimiento_credencial_vigilante === ''){
+        this.form.credencial_vigilante = 'NO';
+      }
       var tags = JSON.stringify(this.form.tags);
       var formData = new FormData();
       formData.append("_method", 'PATCH');

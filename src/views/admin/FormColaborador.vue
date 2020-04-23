@@ -557,16 +557,16 @@ export default {
     submitCreateColaborador(){
       this.processingForm = true
       if(this.form.licencia_b === 'SI' && this.form.vencimiento_licencia_b === ''){
-        this.form.licencia_b === 'NO';
+        this.form.licencia_b = 'NO';
       }
       if(this.form.licencia_d === 'SI' && this.form.vencimiento_licencia_d === ''){
-        this.form.licencia_d === 'NO';
+        this.form.licencia_d = 'NO';
       }
       if(this.form.carnet_portuario === 'SI' && this.form.vencimiento_carnet_portuario === ''){
-        this.form.carnet_portuario === 'NO';
+        this.form.carnet_portuario = 'NO';
       }
       if(this.form.credencial_vigilante === 'SI' && this.form.vencimiento_credencial_vigilante === ''){
-        this.form.credencial_vigilante === 'NO';
+        this.form.credencial_vigilante = 'NO';
       }
       var tags = JSON.stringify(this.form.tags);
       var formData = new FormData();
