@@ -9,9 +9,7 @@
     :mini-variant="primaryDrawer.mini"
     fixed
     app
-    dark
-    class="drawer"
-    style="background: #337ab7; color: white"
+    style="background-color: #337ab7 !important;"
   >
     <div
       style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;"
@@ -29,10 +27,10 @@
           :disabled="!item.to"
         >
           <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
+            <v-icon color="white">{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title style="color:white;">{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </template>
@@ -46,9 +44,9 @@
           @click="logout({ router: $router })"
         >
           <v-list-tile-action @click="logout({ router: $router })">
-            <v-icon>power_settings_new</v-icon>
+            <v-icon color="white">power_settings_new</v-icon>
           </v-list-tile-action>
-          <v-list-tile-content>Cerrar sesión</v-list-tile-content>
+          <v-list-tile-content style="color:white;">Cerrar sesión</v-list-tile-content>
         </v-list-tile>
       </template>
     </v-list>
