@@ -9,7 +9,7 @@
     :mini-variant="primaryDrawer.mini"
     fixed
     app
-    style="background-color: #337ab7 !important;"
+    class="blue darken-2"
   >
     <div
       style="background-color: white; color:#44b5ba; height: 60px; font-weight: 600; padding:25px; letter-spacing: 1px; font-size:16px;"
