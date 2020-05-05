@@ -120,7 +120,7 @@ export default {
 
 
   created() {
-    if (this.authenticated) this.$router.push({ name: "home" });
+    if (this.authenticated) this.$router.push({ name: "notificaciones" });
   },
 
   methods: {

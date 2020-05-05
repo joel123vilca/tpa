@@ -1,9 +1,11 @@
-export default [{
+export default [
+    {
         path: '/',
         name: 'login',
         component: () =>
             import ('@/components/Login.vue'),
     },
+    { path: '*', redirect: '/login' },
     {
         path: '/notificaciones',
         name: 'notificaciones',
@@ -334,5 +336,4 @@ export default [{
         component: () =>
             import ('@/views/encuestas/ListColaboradores.vue'),
     },
-    { path: '*', redirect: '/login' },
 ];
