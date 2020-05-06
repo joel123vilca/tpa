@@ -25,9 +25,9 @@
                   { text: 'detalle' },
                   { text: 'Platilla'},
                   { text: 'Encuestas'},
-                  { text: 'Resultados'},
+                  { text: 'Respuestas'},
                   { text: 'Promedios'},
-                  { text: 'Publicar'},
+                  { text: 'Publicar Promedios'},
                   { text: 'Acciones'}
                 ]"
               :items="periodos"
@@ -56,7 +56,7 @@
                     flat
                     :to="{ name: 'cargarResultado', params: { id: props.item.id } }"
                     color="info"
-                  >cargar resultados</v-btn>
+                  >cargar respuestas</v-btn>
                 </td>
                 <td>
                   <v-btn
