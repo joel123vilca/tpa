@@ -16,14 +16,49 @@
       </v-toolbar>
       <v-container fluid grid-list-lg>
         <v-layout row wrap>
+          <v-flex v-if="periodoEstadisticas.length" sm6 offset-sm6>
+            <v-text-field
+              v-model="search"
+              :disabled="loadingPeriodoEstadisticas"
+              box
+              append-icon="search"
+              label="Buscar "
+              clearable
+              hide-details
+            />
+          </v-flex>
           <v-flex xs12>
             <v-data-table
+              v-if="tipo === 'GED'"
               :headers="[
-                  { text: 'Nombre Area'},
-                  { text: 'Promedio'}
+                  { text: 'Nombre Periodo'},
+                  { text: 'Nombre Colaborador', value: 'colaborador.nombre_completo'},
+                  { text: 'Promedio', value:'resultado'}
                 ]"
               :items="periodoEstadisticas"
               :loading="loadingPeriodoEstadisticas"
+              :search="search"
+              :rows-per-page-items="[25,35,50]"
+              class="elevation-1"
+            >
+              <tr slot="items" slot-scope="props">
+                <td class="px-8" v-if="props.item.resultado !=null">{{ props.item.periodo.nombre }}</td>
+                <td
+                  class="px-8"
+                  v-if="props.item.resultado !=null"
+                >{{ props.item.colaborador.nombre_completo }}</td>
+                <td class="px-3" v-if="props.item.resultado !=null">{{ props.item.resultado +'%' }}</td>
+              </tr>
+            </v-data-table>
+            <v-data-table
+              v-else
+              :headers="[
+                  { text: 'Nombre Area', value:'area.nombre'},
+                  { text: 'Promedio', value:'resultado'}
+                ]"
+              :items="periodoEstadisticas"
+              :loading="loadingPeriodoEstadisticas"
+              :search="search"
               :rows-per-page-items="[25,35,50]"
               class="elevation-1"
             >
@@ -59,6 +94,8 @@ export default {
   data() {
     return {
       activeBtn: 5,
+      tipo: '',
+      search: '',
     };
   },
 
@@ -73,12 +110,20 @@ export default {
   },
   created() {
     this.getPeriodoEstadisticas({periodoId: this.$route.params.id});
+    this.getPeriodo({periodoId: this.$route.params.id}).then(response => {
+      const periodo = response.data.data;
+      this.setForm(periodo);
+    });
   },
 
   methods: {
     ...mapActions({
       getPeriodoEstadisticas: 'periodos/getPeriodoEstadisticas',
+      getPeriodo: 'periodos/getPeriodo',
     }),
+    setForm(periodo) {
+      this.tipo = periodo.encuestaPlantilla.nombre;
+    },
   },
 };
 </script>
