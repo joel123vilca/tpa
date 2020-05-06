@@ -18,7 +18,6 @@ export default {
   patch(payload = {}) {
     const consultaId = payload.consultaId;
     const data = payload.data || {};
-    console.log(consultaId);
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/consultas/${consultaId}/estado`,

@@ -141,7 +141,22 @@ export const actions = {
                 });
         });
     },
-
+    patchPeriodo({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            periodoAPI
+                .patch(payload)
+                .then(response => {
+                    this._vm.$notify.success({
+                        title: "Periodo",
+                        message: "El periodo ha sido publicado con éxito."
+                    });
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
     createPeriodo({ commit }, payload) {
         return new Promise((resolve, reject) => {
             periodoAPI

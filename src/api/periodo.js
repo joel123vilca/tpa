@@ -93,7 +93,19 @@ export default {
                 .catch(error => reject(error));
         });
     },
-
+    patch(payload = {}) {
+        const periodoId = payload.periodoId;
+        const data = payload.data || {};
+        return new Promise((resolve, reject) => {
+            axios({
+                    url: `${HOST}/periodos/${periodoId}/publicado`,
+                    method: "patch",
+                    data
+                })
+                .then(response => resolve(response))
+                .catch(error => reject(error));
+        });
+    },
     post(payload = {}) {
         const data = payload.data || {};
 

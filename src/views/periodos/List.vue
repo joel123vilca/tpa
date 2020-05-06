@@ -27,6 +27,7 @@
                   { text: 'Encuestas'},
                   { text: 'Resultados'},
                   { text: 'Promedios'},
+                  { text: 'Publicar'},
                   { text: 'Acciones'}
                 ]"
               :items="periodos"
@@ -40,6 +41,7 @@
                 <td class="px-3">{{ props.item.encuestaPlantilla.nombre }}</td>
                 <td>
                   <v-btn
+                    v-if="props.item.encuestaPlantilla.nombre != 'GED'"
                     class="ma-0"
                     small
                     flat
@@ -64,6 +66,16 @@
                     :to="{ name: 'periodoEstadisticas', params: { id: props.item.id } }"
                     color="info"
                   >ver promedios</v-btn>
+                </td>
+                <td class="px-3">
+                  <v-btn
+                    v-if="props.item.publicado === 1"
+                    small
+                    color="error"
+                    @click="openPublic(props.item)"
+                    dark
+                  >Desactivar</v-btn>
+                  <v-btn v-else small color="primary" @click="openPublic(props.item)" dark>Publicar</v-btn>
                 </td>
                 <td class="text-xs-center px-3">
                   <v-btn
@@ -125,6 +137,9 @@ export default {
   data() {
     return {
       activeBtn: 5,
+      form:{ 
+        publicado: ''
+      }
     };
   },
 
@@ -146,11 +161,25 @@ export default {
       getPeriodos: 'periodos/getPeriodos',
       replaceShowModalDeletePeriodo: 'periodos/replaceShowModalDeletePeriodo',
       replaceCurrentPeriodo: 'periodos/replaceCurrentPeriodo',
+      patchPeriodo: 'periodos/patchPeriodo'
     }),
     openModalDelete(periodo) {
       this.replaceCurrentPeriodo({ periodo });
       this.replaceShowModalDeletePeriodo({ status: true });
     },
+    openPublic(periodo){
+      //periodo.publicado = true ;
+      this.form.publicado = !periodo.publicado;
+      this.patchPeriodo({
+        periodoId:periodo.id,
+        data: this.form })
+        .then(response => {
+          this.getPeriodos();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   },
 };
 </script>
