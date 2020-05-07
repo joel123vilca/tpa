@@ -9,10 +9,20 @@
         ]"
     />
     <v-card style="border-radius:10px 10px 0 0;">
+      <v-toolbar card style="border-radius:10px 10px 0 0;" color="primary" dark>
+        <v-toolbar-title>{{tipo}}</v-toolbar-title>
+      </v-toolbar>
       <br />
       <v-toolbar color="grey darken-1" dark card>
         <v-toolbar-title>Listado de Resultados estadisticos</v-toolbar-title>
         <v-spacer />
+        <v-btn
+          class="ma-0"
+          small
+          flat
+          :to="{ name: 'periodoGraficos', params: { id: this.$route.params.id } }"
+          color="info"
+        >ver graficos</v-btn>
       </v-toolbar>
       <v-container fluid grid-list-lg>
         <v-layout row wrap>

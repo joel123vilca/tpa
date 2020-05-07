@@ -313,6 +313,12 @@ export default [
             import ('@/views/periodos/Estadistica.vue'),
     },
     {
+        path: '/periodo/:id/graficos',
+        name: 'periodoGraficos',
+        component: () =>
+            import ('@/views/periodos/Graficos.vue'),
+    },
+    {
         path: '/lista-encuesta',
         name: 'listaEncuesta',
         component: () =>

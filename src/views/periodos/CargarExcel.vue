@@ -12,6 +12,9 @@
       <v-layout row wrap>
         <v-flex md12 sm12 xs12>
           <v-card>
+            <v-toolbar card style="border-radius:10px 10px 0 0;" color="primary" dark>
+              <v-toolbar-title>{{nombre}}</v-toolbar-title>
+            </v-toolbar>
             <v-card-title primary-title>
               <span class="success--text font-weight-bold headline">Cargar Resultados</span>
             </v-card-title>
@@ -160,6 +163,7 @@ export default {
       form: {
         file: '',
       },
+      nombre: '',
       e1: 0,
       alert: false,
       aviso: true,
