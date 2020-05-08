@@ -178,10 +178,20 @@ export default {
       authenticated: 'auth/check'
     }),
   },
+  created() {
+    this.getPeriodo({periodoId: this.$route.params.id}).then(response => {
+      const periodo = response.data.data;
+      this.setForm(periodo);
+    });
+  },
   methods: {
     ...mapActions({
+      getPeriodo: 'periodos/getPeriodo',
       cargarExcel: 'periodos/cargarExcel',
     }),
+    setForm(periodo) {
+      this.nombre = periodo.nombre;
+    },
     deleteResultado() {
       this.resultadoUrl = null;
     },

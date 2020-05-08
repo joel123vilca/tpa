@@ -90,6 +90,23 @@
                     "
                   />
                   <v-text-field
+                    v-model="form.porcentaje_cumplimiento"
+                    :disabled="processingForm"
+                    label="Porcentaje Cumplimiento"
+                    outline
+                    suffix="%"
+                    type="number"
+                    :rules="rules.porcentaje_cumplimiento"
+                    :error="!!formErrors.porcentaje_cumplimiento"
+                    :error-messages="formErrors.porcentaje_cumplimiento"
+                    @keyup="
+                      () => {
+                        formErrors.porcentaje_cumplimiento = undefined;
+                        delete formErrors.porcentaje_cumplimiento;
+                      }
+                    "
+                  />
+                  <v-text-field
                     v-model="form.descripcion"
                     :disabled="processingForm"
                     label="descripcion"
@@ -104,7 +121,6 @@
                       }
                     "
                   />
-
                 </v-container>
                 <v-divider class="mb-3" />
                 <div class="text-xs-center pb-3">
@@ -113,12 +129,8 @@
                     color="success"
                     :disabled="!validForm || processingForm"
                     :loading="processingForm"
-                  >
-                    Guardar
-                  </v-btn>
-                  <v-btn @click="$router.push({ name: 'listaPeriodo' })">
-                    Cancelar
-                  </v-btn>
+                  >Guardar</v-btn>
+                  <v-btn @click="$router.push({ name: 'listaPeriodo' })">Cancelar</v-btn>
                 </div>
               </v-form>
             </v-card-text>
@@ -151,7 +163,8 @@ export default {
         year: '',
         detalle: '',
         descripcion: '',
-        encuesta_plantilla_id: ''
+        encuesta_plantilla_id: '',
+        porcentaje_cumplimiento: ''
       },
       encuestas:'',
       validForm: true,
@@ -196,6 +209,7 @@ export default {
       this.form.detalle = periodo.detalle;
       this.form.descripcion = periodo.descripcion;
       this.form.encuesta_plantilla_id = periodo.encuestaPlantilla.id;
+      this.form.porcentaje_cumplimiento = periodo.porcentaje_cumplimiento;
       this.encuestas = periodo.encuestas;
     },
     nombrePeriodo() {

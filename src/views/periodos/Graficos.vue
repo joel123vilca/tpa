@@ -1,15 +1,35 @@
-
 <template>
-  <v-container>
-    <v-layout justify-center wrap>
-      <v-flex md12 xs12>
-        <v-card color="#DFDFDF">
-          <v-container>
-            <BarChart v-if="loaded" :label="labels" :data="data" />
-          </v-container>
-        </v-card>
-      </v-flex>
-    </v-layout>
+  <v-container fluid grid-list-lg>
+    <Breadcrumbs
+      :routes="[
+          { name: 'Inicio'},
+          { name: 'Listado' },
+          { name: 'Grafico' }
+        ]"
+    />
+    <v-card style="border-radius:10px 10px 0 0;">
+      <v-toolbar card style="border-radius:10px 10px 0 0;" color="primary" dark>
+        <v-toolbar-title>{{nombre}}</v-toolbar-title>
+      </v-toolbar>
+      <v-toolbar color="grey darken-1" dark card>
+        <v-toolbar-title>Listado Grafico</v-toolbar-title>
+        <v-spacer />
+      </v-toolbar>
+      <v-container fluid grid-list-lg>
+        <v-layout row wrap>
+          <v-flex v-if="periodoEstadisticas.length" sm12>
+            <v-card color="#DFDFDF">
+              <v-container>
+                <BarChart v-if="loaded" :label="labels" :data="data" />
+              </v-container>
+            </v-card>
+          </v-flex>
+          <center>
+            <v-btn color="error" @click="$router.push({ name: 'listaPeriodo' })">Volver</v-btn>
+          </center>
+        </v-layout>
+      </v-container>
+    </v-card>
   </v-container>
 </template>
 
@@ -22,7 +42,8 @@ export default {
     return {
       loaded: false,
       labels: [],
-      data: []
+      data: [],
+      nombre: ''
     }
   },
   computed: {
@@ -40,22 +61,30 @@ export default {
   },
   methods: {
     ...mapActions({
-      getPeriodoEstadisticas: 'periodos/getPeriodoEstadisticas',
+      getPeriodo: 'periodos/getPeriodo',
+      getPeriodoEstadisticas: 'periodos/getPeriodoEstadisticas'
     }),
     async setear(){
       try {
+      let periodo = await this.getPeriodo({periodoId: this.$route.params.id})
       await this.getPeriodoEstadisticas({periodoId: this.$route.params.id})
       this.loaded = true;
+      this.nombre = periodo.data.data.nombre;
       let estadistica = this.periodoEstadisticas.filter(periodo => periodo.resultado != null);
-      let labels = estadistica.map(function(x) {
+      let label = periodo.data.data.encuestaPlantilla.nombre;
+      if(label === 'GED')
+      {
+        this.labels = estadistica.map(function(x) {
+                    return x.colaborador.rut;
+                  })
+      } else {
+        this.labels = estadistica.map(function(x) {
                       return x.area.nombre;
                   });
-      let resultados = estadistica.map(function(x) {
+      }
+      this.data = estadistica.map(function(x) {
                     return x.resultado;
                   });
-      this.data = resultados;
-      this.labels = labels;
-      console.log(this.labels, this.data);
       }
       catch (e) {
       console.error(e)

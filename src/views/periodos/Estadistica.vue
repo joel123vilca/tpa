@@ -10,7 +10,7 @@
     />
     <v-card style="border-radius:10px 10px 0 0;">
       <v-toolbar card style="border-radius:10px 10px 0 0;" color="primary" dark>
-        <v-toolbar-title>{{tipo}}</v-toolbar-title>
+        <v-toolbar-title>{{nombre}}</v-toolbar-title>
       </v-toolbar>
       <br />
       <v-toolbar color="grey darken-1" dark card>
@@ -105,6 +105,7 @@ export default {
     return {
       activeBtn: 5,
       tipo: '',
+      nombre: '',
       search: '',
     };
   },
@@ -132,6 +133,7 @@ export default {
       getPeriodo: 'periodos/getPeriodo',
     }),
     setForm(periodo) {
+      this.nombre = periodo.nombre;
       this.tipo = periodo.encuestaPlantilla.nombre;
     },
   },

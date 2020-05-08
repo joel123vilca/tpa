@@ -91,6 +91,23 @@
                     "
                   />
                   <v-text-field
+                    v-model="form.porcentaje_cumplimiento"
+                    :disabled="processingForm"
+                    label="Porcentaje Cumplimiento"
+                    outline
+                    suffix="%"
+                    type="number"
+                    :rules="rules.porcentaje_cumplimiento"
+                    :error="!!formErrors.porcentaje_cumplimiento"
+                    :error-messages="formErrors.porcentaje_cumplimiento"
+                    @keyup="
+                      () => {
+                        formErrors.porcentaje_cumplimiento = undefined;
+                        delete formErrors.porcentaje_cumplimiento;
+                      }
+                    "
+                  />
+                  <v-text-field
                     v-model="form.descripcion"
                     :disabled="processingForm"
                     label="descripcion"
@@ -147,7 +164,8 @@ export default {
         year: '',
         detalle: '',
         descripcion: '',
-        encuesta_plantilla_id: ''
+        encuesta_plantilla_id: '',
+        porcentaje_cumplimiento: '',
       },
       mask:'####',
       validForm: true,
